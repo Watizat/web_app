@@ -32,7 +32,7 @@ L'API servira à terme aussi bien au site desktop et mobile, qu'à l'application
 
 ### À qui s’adresse le site – Les cibles Notez ici le nombre de cibles différentes et les hiérarchiser. Pour chacune, merci de préciser
 
-caractéristiques de la cible (entreprise, particulier, étudiant, retraité…), importance de la cible (primaire, secondaire), centres d’intérêts de la cible (recherche d’informations, besoins de services…)
+Personnes exilées, et travailleu·r·se·s socia·ux·les
 
 ### Langues Préciser ici en quelles versions linguistiques le site sera disponible. Si le site est en plusieurs langues, s’agira-t-il de versions identiques ou de versions adaptées. Dans ce cas précisez. Indiquez également qui se chargera des éventuels besoins en traduction
 
