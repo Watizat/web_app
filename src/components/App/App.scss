@@ -1,1 +1,7 @@
 @use '../../styles/variables' as v;
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
