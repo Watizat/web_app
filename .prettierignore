@@ -7,7 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+build
+coverage
 dist
 dist-ssr
 *.local
@@ -15,7 +16,6 @@ dist-ssr
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-!.vscode/settings.json
 .idea
 .DS_Store
 *.suo
@@ -23,3 +23,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.eslintignore
+.gitignore
+.prettierignore
+
+# Prettier Messes up the comments.
+/tsconfig*.json
+
+package-lock.json
+yarn.lock
