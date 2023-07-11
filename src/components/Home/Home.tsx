@@ -30,16 +30,12 @@ function Home() {
           <div>
             <label>
               1. Sélectionner une région&nbsp;
-              <select onChange={handleChange}>
-                <option value="" disabled selected>
+              <select value={select} onChange={handleChange}>
+                <option value="" disabled>
                   Selectionner une ville...
                 </option>
-                <option value="toulouse" selected={select === 'toulouse'}>
-                  Toulouse
-                </option>
-                <option value="paris" selected={select === 'paris'}>
-                  Paris
-                </option>
+                <option value="toulouse">Toulouse</option>
+                <option value="paris">Paris</option>
               </select>
             </label>
             <div>
