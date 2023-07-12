@@ -1,4 +1,20 @@
+@use "../../styles/variables" as v;
+
+.container{
+  justify-content: space-between;
+  align-items: center;
+}
 .navbar {
   display: flex;
   gap: 30px;
+  
+}
+
+.navbar a {
+  color: v.$white;
+  font-weight: 600;
+}
+
+.navbar a:hover{
+  color: v.$quaternary;
 }

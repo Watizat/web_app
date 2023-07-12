@@ -20,9 +20,9 @@ function Home() {
     };
 
   return (
-    <div className="home">
-      <Container>
-        <main>
+    <section className="home">
+      <div className="bg-filter">
+        <Container>
           <h1>
             Trouvez toutes les informations nécessaires
             <span> pour les personnes exilées</span>
@@ -30,7 +30,7 @@ function Home() {
           <div>
             <label>
               1. Sélectionner une région&nbsp;
-              <select onChange={handleChange}>
+              <select value={select} onChange={handleChange}>
                 <option value="" disabled selected>
                   Selectionner une ville...
                 </option>
@@ -63,9 +63,9 @@ function Home() {
               </div>
             </div>
           </div>
-        </main>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </section>
   );
 }
 
