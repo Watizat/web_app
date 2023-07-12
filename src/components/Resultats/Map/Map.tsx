@@ -1,47 +1,36 @@
 import { useEffect, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import './Map.scss';
-import LocationMarker from './Marker/Marker';
-
-interface Position {
-  coords: {
-    latitude: number;
-    longitude: number;
-  };
-}
-
-interface ErrorMessage {
-  message: string;
-}
+// import Recenter from './Recenter/recenter';
+// import Recenter from './Marker/Marker';
 
 function Map() {
-  const [location, setLocation] = useState<number[]>([]);
-  const [error, setError] = useState<string>('');
+  const [position, setPosition] = useState({ lat: 43.6, lng: 1.433333 });
+  const [userPosition, setUserPosition] = useState({ lat: 0, lng: 0 });
 
   useEffect(() => {
-    if (!navigator.geolocation) {
-      setError('Geolocation is not supported by this browser.');
-      return;
-    }
-
-    function handleSuccess(position: Position) {
-      const { latitude, longitude } = position.coords;
-      setLocation([latitude, longitude]);
-    }
-
-    function handleError(errorMessage: ErrorMessage) {
-      setError(errorMessage.message);
-    }
-
-    navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const newUserPos = {
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+        };
+        setUserPosition(newUserPos);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }, []);
 
   return (
-    <MapContainer center={[43.6, 1.4333]} zoom={13} scrollWheelZoom={false}>
+    <MapContainer center={position} zoom={13}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      {/* <Recenter lat={position.lat} lng={position.lng} /> */}
+      <Marker position={userPosition} />
     </MapContainer>
   );
 }
