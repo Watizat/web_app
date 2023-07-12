@@ -1,9 +1,14 @@
+import { Outlet } from 'react-router-dom';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Watizat webguide</h1>
+    <div className="app">
+      <Header />
+      <Outlet />
+      <Footer />
     </div>
   );
 }
