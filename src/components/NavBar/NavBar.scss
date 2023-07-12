@@ -1,13 +1,8 @@
-@use "../../styles/variables" as v;
+@use '../../styles/variables' as v;
 
-.container{
-  justify-content: space-between;
-  align-items: center;
-}
 .navbar {
   display: flex;
   gap: 30px;
-  
 }
 
 .navbar a {
@@ -15,6 +10,6 @@
   font-weight: 600;
 }
 
-.navbar a:hover{
+.navbar a:hover {
   color: v.$quaternary;
 }

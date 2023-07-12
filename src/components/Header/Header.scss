@@ -1,4 +1,10 @@
 .header {
   background-color: #ba5092;
   padding: 20px 0;
+
+  & .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

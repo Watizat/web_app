@@ -1,23 +1,47 @@
-@use "../../styles/variables" as v;
+@use '../../styles/variables' as v;
 .home {
   flex-grow: 1;
-  background-image: url("../../../public/bghome-watizat.jpg");
+  background-image: url('./img/bghome-watizat.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
-.bg-filter{
+.hero {
   background-color: v.$bghome;
+
+  &-choice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &--left {
+      display: flex;
+      flex-direction: column;
+
+      & span {
+        text-align: center;
+      }
+    }
+
+    &--right {
+      display: flex;
+      flex-direction: column;
+
+      & span {
+        text-align: center;
+      }
+    }
+  }
 }
 
-h1{
+h1 {
   color: v.$white;
   text-align: center;
   font-weight: 500;
 }
 
-h1 span{
+h1 span {
   font-weight: 600;
   display: block;
 }

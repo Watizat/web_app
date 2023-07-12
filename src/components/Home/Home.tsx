@@ -20,29 +20,25 @@ function Home() {
     };
 
   return (
-    <section className="home">
-      <div className="bg-filter">
+    <main className="home">
+      <section className="hero">
         <Container>
           <h1>
             Trouvez toutes les informations nécessaires
             <span> pour les personnes exilées</span>
           </h1>
-          <div>
-            <label>
-              1. Sélectionner une région&nbsp;
+          <div className="hero-choice">
+            <div className="hero-choice--left">
+              <span>1. Sélectionner une région&nbsp;</span>
               <select value={select} onChange={handleChange}>
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Selectionner une ville...
                 </option>
-                <option value="toulouse" selected={select === 'toulouse'}>
-                  Toulouse
-                </option>
-                <option value="paris" selected={select === 'paris'}>
-                  Paris
-                </option>
+                <option value="toulouse">Toulouse</option>
+                <option value="paris">Paris</option>
               </select>
-            </label>
-            <div>
+            </div>
+            <div className="hero-choice--right">
               <span>2. Je choisis une catégorie</span>
               <div>
                 <button type="button" onClick={handleClick('manger')}>
@@ -64,8 +60,8 @@ function Home() {
             </div>
           </div>
         </Container>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 

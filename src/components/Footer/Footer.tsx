@@ -4,7 +4,7 @@ import './Footer.scss';
 
 function Footer() {
   return (
-    <div className="footer">
+    <footer className="footer">
       <Container>
         <span>Watizat 2023</span>
         <Link to="/mentions-legales">Mentions légales</Link>
@@ -12,7 +12,7 @@ function Footer() {
         <Link to="/admin">Membres Watizat</Link>
         <span>Liens réseaux sociaux</span>
       </Container>
-    </div>
+    </footer>
   );
 }
 
