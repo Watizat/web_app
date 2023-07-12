@@ -1,4 +1,5 @@
 import Header from './Header/Header';
+import Panel from './Panel/Panel';
 import './Resultats.scss';
 
 function Resultats() {
@@ -6,7 +7,7 @@ function Resultats() {
     <>
       <Header />
       <main className="results">
-        <div className="results-panel">Results Panel</div>
+        <Panel />
         <div>carte</div>
       </main>
     </>
