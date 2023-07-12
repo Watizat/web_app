@@ -23,6 +23,31 @@ function Map() {
     );
   }, []);
 
+  const organismes = [
+    {
+      lat: 43.5968,
+      lng: 1.424484,
+      title: `PÔLE D'ACCUEIL, D'INFORMATION, D'ORIENTATION (PAIO)`,
+    },
+    {
+      lat: 43.635534,
+      lng: 1.483051,
+      title: `ADELPHITÉ PAR CVH - SPADA`,
+    },
+    {
+      lat: 43.590159,
+      lng: 1.438838,
+      title: `ESPACE SOCIAL DU GRAND-RAMIER
+`,
+    },
+    {
+      lat: 43.576048,
+      lng: 1.455174,
+      title: `DROITS DU CŒUR
+`,
+    },
+  ];
+
   return (
     <MapContainer center={position} zoom={13}>
       <TileLayer
@@ -31,6 +56,15 @@ function Map() {
       />
       {/* <Recenter lat={position.lat} lng={position.lng} /> */}
       <Marker position={userPosition} />
+      {organismes.map((organisme) => {
+        return (
+          <Marker
+            key={organisme.title}
+            position={[organisme.lat, organisme.lng]}
+            title={organisme.title}
+          />
+        );
+      })}
     </MapContainer>
   );
 }
