@@ -11,6 +11,7 @@
 		"lint:fix": "eslint src/**/*.{js,jsx,ts,tsx} --fix"
 	},
 	"dependencies": {
+		"classnames": "^2.3.2",
 		"leaflet": "^1.9.4",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
