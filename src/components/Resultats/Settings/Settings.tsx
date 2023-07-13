@@ -1,15 +1,19 @@
+import axios from 'axios';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import Icon from '../../../ui/icon/icon';
 import './Settings.scss';
 
+interface Categories {
+  id: number;
+  name: string;
+  slug: string;
+}
+
 function Settings() {
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string>('10');
-  const [categories, setCategories] = useState([
-    { category: 'test', checked: false },
-  ]);
-
+  const [categories, setCategories] = useState<Categories[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   function handleDistanceValueChange(
@@ -22,7 +26,16 @@ function Settings() {
     setIsOpen(!isOpen);
   }
 
-  useEffect(() => {}, []);
+  const getCategories = async () => {
+    const { data } = await axios.get(
+      'https://watizat.lunalink.nl/items/categorie_translation'
+    );
+    setCategories(data.data);
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <div className="settings">
@@ -84,20 +97,19 @@ function Settings() {
         <div>
           <span>Filtrer par catégories</span>
           <div className="settings__filter-categories">
-            {/*             {organisms.map((organism) => {
+            {categories.map((category) => {
               return (
-                <>
+                <div key={category.id}>
                   <input
                     type="checkbox"
-                    name={organism.slug}
-                    id={organism.slug}
-                    onChange={(event) => handleServiceSelect(event)}
+                    name={category.slug}
+                    id={category.slug}
                   />
-                  <label htmlFor={organism.slug}>{organism.name}</label>
-                </>
+                  <label htmlFor={category.slug}>{category.name}</label>
+                </div>
               );
-            })} */}
-            <div>
+            })}
+            {/* <div>
               <input type="checkbox" name="acceuil" id="acceuil" />
               <label htmlFor="acceuil"> Accueil et orientation</label>
             </div>
@@ -206,7 +218,7 @@ function Settings() {
                 id="lieux-culturels"
               />
               <label htmlFor="lieux-culturels">Lieux culturels</label>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
