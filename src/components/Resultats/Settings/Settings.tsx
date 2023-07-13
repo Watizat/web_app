@@ -1,9 +1,15 @@
+import classNames from 'classnames';
 import { useState } from 'react';
 import './Settings.scss';
 
 function Settings() {
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string>('10');
+  const [categories, setCategories] = useState([
+    { category: 'test', checked: false },
+  ]);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   function handleDistanceValueChange(
     event: React.ChangeEvent<HTMLInputElement>
@@ -11,11 +17,26 @@ function Settings() {
     setDistanceValue(event.target.value);
   }
 
+  function handleOpenSettings() {
+    setIsOpen(!isOpen);
+  }
+
   return (
     <div className="settings">
       <label htmlFor="settings-panel">Trier et filtrer</label>
-      <input type="checkbox" name="checkbox" id="settings-panel" />
-      <div className="settings-content">
+      <input
+        type="checkbox"
+        className="settings-checkbox"
+        name="checkbox"
+        id="settings-panel"
+        onChange={handleOpenSettings}
+        checked={isOpen}
+      />
+      <div
+        className={classNames('settings-content', {
+          'settings-content--visible': isOpen,
+        })}
+      >
         <div>
           <label htmlFor="search-panel">Affiner la recherche</label>
           <input
@@ -27,9 +48,9 @@ function Settings() {
         <div>
           <span>Filtrer par accessibilité</span>
           <input type="checkbox" name="pmr" id="pmr" />
-          <label htmlFor="pmr"> Accessible PSH / PMR</label>
+          <label htmlFor="pmr">Accessible PSH / PMR</label>
           <input type="checkbox" name="animals" id="animals" />
-          <label htmlFor="animals"> Animaux acceptés</label>
+          <label htmlFor="animals">Animaux acceptés</label>
         </div>
         <div>
           <label htmlFor="distance"> Filtrer par distance</label>
@@ -46,7 +67,7 @@ function Settings() {
           <span> Jusqu&apos;à {distanceValue}km</span>
         </div>
         <div>
-          <span>Filtrer pa catégories</span>
+          <span>Filtrer par catégories</span>
           <div>
             <input type="checkbox" name="acceuil" id="acceuil" />
             <label htmlFor="acceuil"> Accueil et orientation</label>

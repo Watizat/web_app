@@ -1,0 +1,27 @@
+.settings {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  img {
+    filter: brightness(0) saturate(100%) invert(43%) sepia(20%) saturate(1942%)
+      hue-rotate(65deg) brightness(99%) contrast(87%);
+  }
+
+  & label {
+    cursor: pointer;
+  }
+
+  &-checkbox {
+    display: none;
+  }
+
+  &-content {
+    display: none;
+
+    &--visible {
+      display: block;
+    }
+  }
+}
