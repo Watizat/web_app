@@ -62,12 +62,16 @@ function Card() {
         </div>
       </div>
       <div className="card_container_right">
-        <button type="button" className="card_container_right_go">
+        <Link
+          to="geo:38.62464092991612,-90.18476128578186"
+          // to={`https://www.google.com/maps/search/?api=1&query=${47.5951518}%2C${-122.3316393}`}
+          className="card_container_right_go"
+        >
           <Icon icon="directions_walk" size="1.2rem" /> <p>J&apos;y vais !</p>
-        </button>
-        <button type="button" className="card_container_right_contact">
+        </Link>
+        <Link to="tel:+33534364095" className="card_container_right_contact">
           <Icon icon="phone" size="1.2rem" /> <p>05 34 36 40 95</p>
-        </button>
+        </Link>
       </div>
     </div>
   );
