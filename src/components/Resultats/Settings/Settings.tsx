@@ -43,6 +43,8 @@ function Settings() {
             type="text"
             placeholder="Exemple : Croix Rouge française (nord)"
             id="search-panel"
+            value={searchInputValue}
+            onChange={(event) => setSearchInputValue(event.target.value)}
           />
         </div>
         <div>

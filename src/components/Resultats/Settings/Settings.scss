@@ -4,20 +4,29 @@
   -ms-user-select: none;
   user-select: none;
 
-  img {
-    filter: brightness(0) saturate(100%) invert(43%) sepia(20%) saturate(1942%)
-      hue-rotate(65deg) brightness(99%) contrast(87%);
-  }
+  border: 1px solid #c6c6c6;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px;
 
   & label {
     cursor: pointer;
   }
 
   &-checkbox {
-    display: none;
+    /* Pour rendre invisible la checkox tout en maintenant l'accessibilité */
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 
   &-content {
+    margin-top: 10px;
+    border-top: 1px solid #c6c6c6;
     display: none;
 
     &--visible {
