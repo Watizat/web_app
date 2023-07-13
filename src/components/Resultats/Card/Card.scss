@@ -69,8 +69,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      // Change background when categories icons will be corrects
-      background-color: #c47cb6;
 
       &_more-infos-link {
         color: v.$secondary_var4;
@@ -79,9 +77,15 @@
       &_categories {
         display: flex;
         column-gap: 0.5rem;
-
+        &_item {
+          color: #a9a9a9;
+          &--check {
+            color: v.$primary_var4;
+          }
+        }
         & img {
           height: 2.5rem;
+          
         }
       }
     }
@@ -90,10 +94,15 @@
   &_right{
     display: flex;
     flex-direction: column;
+    justify-items: center;
     row-gap: 0.5rem;
     flex-shrink: 0;
     
     &_go, &_contact {
+      display: flex;
+      justify-content: center;
+      column-gap: 10px;
+      align-items: center;
       text-align: center;
       cursor: pointer;
       outline: none;

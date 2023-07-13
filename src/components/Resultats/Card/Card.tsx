@@ -1,6 +1,17 @@
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
+
 import './Card.scss';
+import Icon from '../../../ui/icon/icon';
+
+const categories = [
+  { id: 1, value: 'acceuil_de_jour', isCheck: false },
+  { id: 2, value: 'accueil_et_orientation', isCheck: false },
+  { id: 3, value: 'bagagerie', isCheck: false },
+  { id: 4, value: 'manger', isCheck: true },
+  { id: 5, value: 'permanences_sociales', isCheck: false },
+  { id: 6, value: 'retablissement_des_liens_familiaux', isCheck: false },
+];
 
 function Card() {
   return (
@@ -34,38 +45,28 @@ function Card() {
         <div className="card_container_left-lower">
           {/* link to à modifier */}
           <Link className="card_container_left-lower_more-infos-link" to="/">
-            + En savoir plus
+            <Icon icon="plus" size="14px" /> En savoir plus
           </Link>
           <div className="card_container_left-lower_categories">
-            <img
-              className="card_container_left-lower_categories_item"
-              src={logo}
-              alt="watizat logo"
-            />
-            <img
-              className="card_container_left-lower_categories_item"
-              src={logo}
-              alt="watizat logo"
-            />
-            <img
-              className="card_container_left-lower_categories_item"
-              src={logo}
-              alt="watizat logo"
-            />
-            <img
-              className="card_container_left-lower_categories_item"
-              src={logo}
-              alt="watizat logo"
-            />
+            {categories.map((e) => (
+              <Icon
+                key={e.id}
+                className={`card_container_left-lower_categories_item${
+                  e.isCheck ? '--check' : ''
+                }`}
+                icon={e.value}
+                size="30px"
+              />
+            ))}
           </div>
         </div>
       </div>
       <div className="card_container_right">
         <button type="button" className="card_container_right_go">
-          Logo J&apos;y vais !
+          <Icon icon="directions_walk" size="1.2rem" /> <p>J&apos;y vais !</p>
         </button>
         <button type="button" className="card_container_right_contact">
-          Logo 05 34 36 40 95
+          <Icon icon="phone" size="1.2rem" /> <p>05 34 36 40 95</p>
         </button>
       </div>
     </div>
