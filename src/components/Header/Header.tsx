@@ -8,7 +8,7 @@ function Header() {
   return (
     <header className="header">
       <Container>
-        <Link to="/">
+        <Link className="watizat-logo-topbar" to="/">
           <img src={logo} alt="watizat logo" />
         </Link>
         <NavBar />

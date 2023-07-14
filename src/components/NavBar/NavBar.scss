@@ -7,9 +7,10 @@
 
 .navbar a {
   color: v.$white;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .navbar a:hover {
+  font-weight: 500;
   color: v.$quaternary;
 }

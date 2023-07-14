@@ -9,8 +9,9 @@ function Footer() {
         <span>Watizat 2023</span>
         <Link to="/mentions-legales">Mentions légales</Link>
         <Link to="/contact">Nous contacter</Link>
-        <Link to="/admin">Membres Watizat</Link>
-        <span>Liens réseaux sociaux</span>
+        <Link className="important" to="/admin">
+          Membres Watizat
+        </Link>
       </Container>
     </footer>
   );

@@ -1,9 +1,38 @@
-.footer {
-  padding: 20px;
-  background-color: #ba5092;
+@use '../../styles/variables' as v;
+@use '../../styles/medias' as m;
 
+.footer {
+  display: none;
+  flex-direction: column;
+  min-height: 5vh;
+  background-color: v.$primary;
+  color: v.$white;
+  align-items: center;
+
+  @include m.desktop {
+    display: flex;
+  }
+  
   & .container {
     display: flex;
     justify-content: space-between;
+    margin: auto;
+  }
+
+  a {
+    color: v.$white;
+
+    &:hover {
+      font-weight: 500;
+      color: v.$quaternary;
+    }
+  }
+
+  .important{
+    font-weight: 800;
+
+    &:hover {
+      font-weight: 800;
+    }
   }
 }
