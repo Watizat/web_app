@@ -1,0 +1,98 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
+
+#dashboard {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  h1 {
+    margin-top: 5rem;
+    color: v.$primary;
+    font-size: 4rem;
+    font-weight: 400;
+    text-align: center;
+
+    @include m.fullhd {
+      margin-top: 10rem;
+    }
+  }
+  .panel {
+    margin: 0 auto;
+    margin-top: 5rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    column-gap: 3rem;
+    row-gap: 3rem;
+
+    @include m.desktop {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      margin-top: 5rem;
+      column-gap: 7.5rem;
+      row-gap: 5rem;
+    }
+
+    @include m.fullhd {
+      margin-top: 7.5rem;
+      column-gap: 15rem;
+      row-gap: 10rem;
+    }
+
+    &-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1/1;
+      max-width: 20vw;
+
+      border-radius: 20px;
+      border: 1.5px solid v.$primary;
+      
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: v.$primary;
+
+      list-style: none;
+      text-align: center;
+
+      @include m.desktop {
+        max-width: 15vw;
+        font-size: .9rem;
+      }
+
+      @include m.widescreen {
+        max-width: 13vw;
+      }
+
+      @include m.qhd {
+        max-width: 15vw;
+        font-size: 1.1rem;
+      }
+
+      &--logo {
+        font-size: 2rem;
+
+        @include m.desktop {
+          font-size: 3rem;
+        }
+      }
+
+      &--text {
+        margin-top: 1.5vh;
+        width: 75%;
+      }
+    }
+
+
+    .is-inactive {
+      background-color: v.$grey-100;
+      border: 1px solid v.$grey-400;
+      color: v.$grey-500;
+    }
+  }
+}

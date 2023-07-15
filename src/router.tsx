@@ -10,6 +10,10 @@ import Login from './components/Login/Login';
 import MentionsLegales from './components/MentionsLegales/MentionsLegales';
 import Orientation from './components/Orientation/Orientation';
 import Resultats from './components/Resultats/Resultats';
+import AdminApp from './components/Admin/App/App';
+import Dashboard from './components/Admin/Dashboard/Dashboard';
+import Users from './components/Admin/Users/Users';
+import Edition from './components/Admin/Edition/Edition';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,11 +21,16 @@ const router = createBrowserRouter(
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="/orientation" element={<Orientation />} />
-        <Route path="/admin" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
       </Route>
       <Route path="/resultats" element={<Resultats />} />
+      <Route path="/admin" element={<AdminApp />}>
+        <Route index element={<Dashboard />} />
+        <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/edition" element={<Edition />} />
+      </Route>
     </>
   )
 );

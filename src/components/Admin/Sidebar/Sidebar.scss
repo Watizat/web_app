@@ -1,0 +1,40 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
+
+.adminsidebar {
+  width: 25vw;
+  background-color: v.$primary;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+
+  @include m.desktop {
+    width: 20vw;
+  }
+
+  @include m.widescreen {
+    width: 17vw;
+  }
+
+  @include m.fullhd {
+    width: 15vw;
+  }
+
+  @include m.qhd {
+    width: 12vw;
+  }
+
+  &-logo {
+    background-color: rgba(v.$primary-var3, .3);
+    padding: .5rem 0;
+    &--img {
+      width: 100%;
+      img {
+        margin: auto;
+        width: 30%;
+      }
+    }
+  }
+}

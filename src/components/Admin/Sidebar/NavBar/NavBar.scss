@@ -1,0 +1,59 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/medias' as m;
+@use '../../../../styles/elements';
+
+.adminnav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  list-style: none;
+  margin-top: 5vh;
+  padding-left: 0;
+  text-decoration: none;
+
+  a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    color: v.$white;
+    padding: 1rem 0 1rem 1rem;
+    margin-right: 1.5rem;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-weight: 500;
+    font-size: 0.9em;
+
+    @include m.desktop {
+      font-size: 1em;
+    }
+  
+    @include m.fullhd {
+      font-size: 1.1em;
+    }
+
+    .las {
+      margin-right: 1em;
+      font-size: 1.3rem;
+
+      @include m.desktop {
+        font-size: 1.5rem;
+      }
+    }
+
+    .sidebar-directus-logo {
+      color: v.$white;
+      width: 1.5rem;
+    }
+
+    &:hover {
+    background-color: rgba(v.$primary-var3, 0.5);
+    }
+  }
+
+  .adminnav-isactive {
+    background-color: rgba(v.$primary-var4, 0.5);
+    font-weight: 800;
+  }
+}
