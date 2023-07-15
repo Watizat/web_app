@@ -2,32 +2,39 @@
 @use '../../../styles/medias' as m;
 @use '../../../styles/elements';
 
-.header {
-  display: none;
-  @include m.desktop {
-    display: flex;
-  }
+#header {
+  position: sticky;
+  top: 0;
   min-height: 6vh;
-  background-color: v.$primary;
-  color: v.$white;
-
-  & .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-    min-height: 100%;
-    font-size: .9rem;
-    font-weight: 200;
-  }
-  .watizat-logo-topbar {
-    display: none;
+  background-color: v.$white;
+  color: v.$grey-800;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px .1rem .5rem;
+  h2 {
+    margin-left: 2rem;
+    font-size: 1.2rem;
 
     @include m.desktop {
-      display: flex;
-      height: 5vh;
-      margin-top: auto;
-      margin-bottom: auto;
+      width: 20vw;
+    }
+  
+    @include m.widescreen {
+      width: 17vw;
+    }
+  
+    @include m.fullhd {
+      width: 15vw;
+    }
+  
+    @include m.qhd {
+      width: 12vw;
     }
   }
+  button {
+    margin-right: 2rem;
+  }
+
 }

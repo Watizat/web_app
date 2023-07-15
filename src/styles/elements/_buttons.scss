@@ -1,12 +1,21 @@
 @use '../variables' as v;
 @use '../medias' as m;
 
+// Pour annuler les styles par defaut
+button {
+  border: none;
+  background-color: inherit;
+  color: inherit;
+  transition: background 300ms;
+}
+
 .btn {
   border-radius: 12.5px;
-  padding: .5rem .8rem;
+  padding: 0.5rem 0.8rem;
   border: none;
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
+  transition: background 300ms;
 
   @include m.fullhd {
     padding: 0.75rem 1rem;
@@ -18,13 +27,23 @@
   border-radius: 25px;
 }
 
+.btn-flat {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+
+  @include m.fullhd {
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+  }
+}
+
 @mixin btn-color($color) {
   color: v.$white;
-  background-color: $color; 
+  background-color: $color;
   border: 1px solid $color;
   &:hover {
     background-color: v.$white;
-    color: $color;    
+    color: $color;
     box-shadow: 4px 4px 6px 2px rgba($color, 0.5);
   }
 }
@@ -40,6 +59,15 @@
 .btn-quaternary {
   @include btn-color(v.$quaternary);
 }
+.btn-info {
+  @include btn-color(v.$info);
+}
+.btn-warning {
+  @include btn-color(v.$warning);
+}
+.btn-sucess {
+  @include btn-color(v.$sucess);
+}
 
 @mixin btn-fill($color) {
   color: $color;
@@ -47,7 +75,7 @@
   border: 1px solid $color;
   &:hover {
     background-color: $color;
-    color: v.$white;    
+    color: v.$white;
     box-shadow: 4px 4px 6px 2px rgba($color, 0.5);
   }
 }
@@ -62,4 +90,13 @@
 }
 .btn-quaternary-fill {
   @include btn-fill(v.$quaternary);
+}
+.btn-info-fill {
+  @include btn-fill(v.$info);
+}
+.btn-warning-fill {
+  @include btn-fill(v.$warning);
+}
+.btn-sucess-fill {
+  @include btn-fill(v.$sucess);
 }

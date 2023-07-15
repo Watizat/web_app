@@ -24,10 +24,7 @@
     border-bottom-right-radius: 20px;
     font-weight: 500;
     font-size: 0.9em;
-
-    @include m.desktop {
-      font-size: 1em;
-    }
+    transition: background 300ms;
   
     @include m.fullhd {
       font-size: 1.1em;
@@ -48,12 +45,12 @@
     }
 
     &:hover {
-    background-color: rgba(v.$primary-var3, 0.5);
+    background-color: rgba(v.$primary-var3, 0.3);
     }
   }
 
   .adminnav-isactive {
-    background-color: rgba(v.$primary-var4, 0.5);
+    background-color: rgba(v.$primary-var4, 0.3);
     font-weight: 800;
   }
 }

@@ -4,7 +4,7 @@ import './App.scss';
 
 function App() {
   return (
-    <div className="app">
+    <div id="bo-app">
       <Sidebar />
       <Outlet />
     </div>

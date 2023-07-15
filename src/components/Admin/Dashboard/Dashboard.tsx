@@ -24,16 +24,6 @@ function Dashboard() {
               <p className="panel-card--text">Espace traduction</p>
             </li>
           </Link>
-          <Link to="/admin/users">
-            <li className="panel-card">
-              <div className="panel-card--logo">
-                <i className="las la-user-secret" />
-              </div>
-              <p className="panel-card--text">
-                Gestion des utilisateteur·ice·s
-              </p>
-            </li>
-          </Link>
           <Link to="#">
             <li className="panel-card is-inactive">
               <div className="panel-card--logo">
@@ -50,10 +40,20 @@ function Dashboard() {
               <p className="panel-card--text">Extraction des guides</p>
             </li>
           </Link>
-          <Link to="#">
+          <Link to="/admin/users">
             <li className="panel-card">
               <div className="panel-card--logo">
-                <i className="las la-dungeon" />
+                <i className="las la-user-secret" />
+              </div>
+              <p className="panel-card--text">
+                Gestion des utilisateteur·ice·s
+              </p>
+            </li>
+          </Link>
+          <Link to="https://watizat.lunalink.nl" target="_blank">
+            <li className="panel-card">
+              <div className="panel-card--logo">
+                <i className="las la-carrot" />
               </div>
               <p className="panel-card--text">Directus (backend)</p>
             </li>

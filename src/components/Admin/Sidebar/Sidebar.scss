@@ -27,13 +27,20 @@
   }
 
   &-logo {
+    height: 6vh;
     background-color: rgba(v.$primary-var3, .3);
-    padding: .5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: auto;
+    padding: auto;
     &--img {
-      width: 100%;
       img {
+        max-height: 5vh;
+        aspect-ratio: original;
         margin: auto;
-        width: 30%;
       }
     }
   }

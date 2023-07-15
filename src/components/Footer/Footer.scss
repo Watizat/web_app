@@ -20,19 +20,20 @@
   }
 
   a {
+    font-weight: 500;
     color: v.$white;
 
     &:hover {
       font-weight: 500;
-      color: v.$quaternary;
+      color: v.$warning;
     }
   }
 
   .important{
-    font-weight: 800;
+    font-weight: 900;
 
     &:hover {
-      font-weight: 800;
+      font-weight: 900;
     }
   }
 }

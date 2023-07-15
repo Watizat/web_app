@@ -10,9 +10,6 @@ function Edition() {
       <section className="hero">
         <Container> abc</Container>
       </section>
-      <section className="info">
-        <Container> abc</Container>
-      </section>
     </main>
   );
 }

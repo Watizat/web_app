@@ -21,7 +21,7 @@ function Home() {
     };
 
   return (
-    <main className="home">
+    <main id="homepage">
       <section className="hero">
         <Container>
           <div className="hero-header">
@@ -114,7 +114,7 @@ function Home() {
                 meilleure compréhension des services et des acteur·ice·s
                 présents sur le territoire.
               </p>
-              <button className="btn btn-secondary btn-rounded" type="button">
+              <button className="btn btn-sucess btn-rounded" type="button">
                 <span>En savoir plus sur Watizat</span>
               </button>
             </div>

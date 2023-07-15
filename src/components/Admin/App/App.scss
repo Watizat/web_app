@@ -2,10 +2,20 @@
 @use '../../../styles/medias' as m;
 @use '../../../styles/elements';
 
-.app {
+#bo-app {
+  flex: 2 1 auto;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  height: 100vh;
+  min-height: 100vh;
   font-family: 'Roboto', sans-serif;
+
+  #bo-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
 }
+
+

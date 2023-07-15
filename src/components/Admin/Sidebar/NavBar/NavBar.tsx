@@ -16,10 +16,6 @@ function NavBar() {
         <i className="las la-globe-africa" />
         <li>Espace traduction</li>
       </Link>
-      <Link to="/admin/users">
-        <i className="las la-user-secret" />
-        <li>Utilisateteur·ice·s</li>
-      </Link>
       <Link to="#">
         <i className="las la-mail-bulk" />
         <li>Actualisation</li>
@@ -28,9 +24,17 @@ function NavBar() {
         <i className="las la-drafting-compass" />
         <li>Extraction guides</li>
       </Link>
-      <Link to="/admin/backend">
-        <i className="las la-dungeon" />
+      <Link to="/admin/users">
+        <i className="las la-user-secret" />
+        <li>Utilisateteur·ice·s</li>
+      </Link>
+      <Link to="https://watizat.lunalink.nl" target="_blank">
+        <i className="las la-carrot" />
         <li>Directus (backend)</li>
+      </Link>
+      <Link to="#">
+        <i className="las la-space-shuttle" />
+        <li>Se déconnecter</li>
       </Link>
     </ul>
   );
