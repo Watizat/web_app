@@ -7,15 +7,16 @@
   top: 0;
   min-height: 6vh;
   background-color: v.$white;
-  color: v.$grey-800;
-  display: flex;
+  display: flex; 
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.15) 0px .1rem .5rem;
+  border-bottom: 1px solid v.$grey-200;
   h2 {
     margin-left: 2rem;
     font-size: 1.2rem;
+    color: v.$grey-800;
 
     @include m.desktop {
       width: 20vw;

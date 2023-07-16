@@ -1,0 +1,36 @@
+@use '../../../../../styles/variables' as v;
+@use '../../../../../styles/medias' as m;
+@use '../../../../../styles/elements';
+
+.orgaList {
+  &-card {
+    width: 100%;
+    height: 6vh;
+
+    background-color: v.$white;
+    border-bottom: 1px solid v.$grey-200;
+  }
+  &-orgaCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 2rem;
+    &__name {
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: v.$grey-800;
+    }
+    &__adress {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: v.$grey-500;
+    }
+
+    &:hover {
+      background-color: rgba(v.$sucess, 0.2);
+    }
+    &:active {
+      background-color: rgba(v.$sucess, 0.4);
+    }
+  }
+}

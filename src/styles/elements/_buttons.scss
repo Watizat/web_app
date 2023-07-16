@@ -3,9 +3,11 @@
 
 // Pour annuler les styles par defaut
 button {
+  font-family: 'Roboto', sans-serif;
   border: none;
   background-color: inherit;
   color: inherit;
+  font-weight: 500;
   transition: background 300ms;
 }
 

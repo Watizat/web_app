@@ -1,13 +1,6 @@
-@use '../../../styles/variables' as v;
-@use '../../../styles/medias' as m;
-@use '../../../styles/elements';
-
-#edition {
-  display: flex;
-  min-height: 94vh;
-
-  background-color: v.$bgadmin;
-  font-family: 'Roboto', sans-serif;
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/medias' as m;
+@use '../../../../styles/elements';
 
   .orgaList {
     display: flex;
@@ -87,52 +80,3 @@
       }
     }
   }
-
-  .orgaFiche {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 2.5rem;
-    gap: 2rem;
-
-    &-header,
-    &-card {
-      width: 100%;
-      background-color: v.$white;
-    }
-    &-header {
-      h1 {
-        padding: 1rem 0 1rem 0.75rem;
-        font-weight: 500;
-        font-size: 1.6rem;
-      }
-      &__infos {
-        display: flex;
-        justify-content: space-between;
-
-        .infos-case {
-          display: flex;
-          flex-direction: column;
-          gap: .3rem;
-          min-height: 7vh;
-          width: 100%;
-          padding: 0.75rem;
-          border-top: 1px solid v.$grey-400;
-          border-right: 1px solid v.$grey-300;
-          color: v.$grey-500;
-          text-transform: uppercase;
-          font-weight: 300;
-          font-size: 0.9rem;
-
-          &_txt {
-            text-transform: none;
-            font-weight: 500;
-            color: v.$grey-900;
-          }
-        }
-      }
-    }
-    &-card {
-    }
-  }
-}

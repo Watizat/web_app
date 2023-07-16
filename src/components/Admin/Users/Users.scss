@@ -4,49 +4,51 @@
 
 #users {
   min-height: 94vh;
+  font-family: 'Inter', sans-serif;
 
   table {
-    font-family: 'Poppins', sans-serif;
     min-width: 100%;
     text-align: left;
     font-size: 0.9rem;
-    thead {
-      font-weight: 600;
-      color: v.$grey-600;
-    }
-    tbody {
-      font-weight: 400;
-      color: v.$grey-700;
-    }
+
     tr {
-      height: 3rem;
-
-      &:nth-child(even) {
-        background-color: v.$grey-100;
-      }
-
-      &:hover {
-        background-color: rgba(v.$sucess, 0.2);
-      }
+      height: 3.5rem;
 
       th,
       td {
         padding-left: 0.75rem;
+        border-bottom: 1px solid v.$grey-200;
       }
+    }
 
-      th {
-        border-bottom: 2px solid v.$grey-300;
+    thead {
+      font-weight: 600;
+      color: v.$grey-700;
+      background-color: rgba(v.$grey-100, .6);
+    }
+
+    tbody {
+      font-weight: 400;
+      color: v.$grey-700; 
+
+      tr {
+        &:hover {
+          background-color: rgba(v.$sucess, .2);
+        }
+        &:active {
+          background-color: rgba(v.$sucess, .4);
+        }
       }
     }
   }
 
-  .tbl-left,
+  .txt-align-left,
   .userstable-name,
   .userstable-antenne {
     padding-left: 2rem;
   }
 
-  .tbl-center,
+  .txt-align-center,
   .userstable-checkbox,
   .userstable-email,
   .userstable-connexion,

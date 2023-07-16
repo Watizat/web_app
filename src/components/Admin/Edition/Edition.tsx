@@ -1,15 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { ChangeEvent, MouseEventHandler, useState } from 'react';
-import logo from '../../../assets/logo.svg';
-import Container from '../../Container/Container';
+import Header from '../Header/Header';
+import OrgaList from './OrgaList/OrgaList';
+import OrgaSheet from './OrgaSheet/OrgaSheet';
 import './Edition.scss';
 
 function Edition() {
   return (
-    <main className="home">
-      <section className="hero">
-        <Container> abc</Container>
-      </section>
+    <main id="bo-main">
+      <Header />
+      <div id="edition">
+        <OrgaList />
+        <OrgaSheet />
+      </div>
     </main>
   );
 }
