@@ -39,25 +39,22 @@ function Settings() {
 
   return (
     <div className="settings">
-      <div className="settings-dropdown">
-        <label htmlFor="settings-panel">Trier et filtrer</label>
-        <input
-          type="checkbox"
-          className="settings-checkbox"
-          name="checkbox"
-          id="settings-panel"
-          checked={isOpen}
-          onChange={handleOpenSettings}
-        />
+      <button
+        type="button"
+        className="settings__dropdown-btn"
+        onClick={handleOpenSettings}
+      >
+        <span>Trier et filtrer</span>
         <Icon icon={isOpen ? 'arrow_up' : 'arrow_down'} size="30px" />
-      </div>
+      </button>
+
       <div
-        className={classNames('settings-content', {
-          'settings-content--visible': isOpen,
+        className={classNames('settings__content', {
+          'settings__content--visible': isOpen,
         })}
       >
         <div>
-          <label htmlFor="search-panel">Affiner la recherche</label>
+          <span>Affiner la recherche</span>
           <input
             type="text"
             placeholder="Exemple : Croix Rouge française (nord)"
@@ -76,7 +73,7 @@ function Settings() {
           </div>
         </div>
         <div>
-          <label htmlFor="distance"> Filtrer par distance</label>
+          <span> Filtrer par distance</span>
           <div className="settings__filter-range">
             <input
               type="range"
@@ -89,7 +86,6 @@ function Settings() {
               onChange={(event) => handleDistanceValueChange(event)}
             />
             <span className="settings__filter-range--distance">
-              {' '}
               Jusqu&apos;à {distanceValue}km
             </span>
           </div>
