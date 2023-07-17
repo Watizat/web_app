@@ -20,10 +20,10 @@ function App() {
           <br /> Merci de bien vouloir le consulter à nouveau depuis un
           ordinateur ou une tablette
           <br />
-          <br /> Promis, ceci n'est pas un caprice de dévellopeur.se
+          <br /> Promis, ceci n'est pas un caprice de dévellopeur.se 🤪
         </p>
         <Link className="mobileout__returnToHome" to="/">
-          <p>Retourner vers la page d'acceuil</p>
+          <p>Retourner vers la page d'accueil</p>
         </Link>
       </div>
     </span>

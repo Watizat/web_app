@@ -6,7 +6,12 @@ function Data() {
       <h3>Informations génerales</h3>
       <ul className="orgaSheet-data__list">
         <li className="orgaSheet-case orgaSheet-data__access">
-          <h4>Accés</h4>
+          <span className="orgaSheet-case__header">
+            <h4>Accés</h4>
+            <button type="button" className="orgaSheet-edition__menu">
+              <i className="las la-ellipsis-h" />
+            </button>
+          </span>
           <div className="orgaSheet-data__accessDetails">
             <p className="orgaSheet-data__pmr">
               <input type="checkbox" />
@@ -19,7 +24,12 @@ function Data() {
           </div>
         </li>
         <li className="orgaSheet-case">
-          <h4>Description</h4>
+          <span className="orgaSheet-case__header">
+            <h4>Description</h4>
+            <button type="button" className="orgaSheet-edition__menu">
+              <i className="las la-ellipsis-h" />
+            </button>
+          </span>
           <p>
             Écoute, renseignement et orientation pour les personnes sans
             domicile fixe n’ayant pas de référent social. Service social public
@@ -29,7 +39,12 @@ function Data() {
           </p>
         </li>
         <li className="orgaSheet-case orgaSheet-data__hours">
-          <h4>Horaires</h4>
+          <span className="orgaSheet-case__header">
+            <h4>Horaires</h4>
+            <button type="button" className="orgaSheet-edition__menu">
+              <i className="las la-ellipsis-h" />
+            </button>
+          </span>
           <div className="orgaSheet-data__hoursDetails">
             <p>
               <span className="orgaSheet-data__daysOn">Lundi</span>9h-12h /
@@ -60,7 +75,12 @@ function Data() {
           </div>
         </li>
         <li className="orgaSheet-case">
-          <h4>Infos, alerte</h4>
+          <span className="orgaSheet-case__header">
+            <h4>Infos, alerte</h4>
+            <button type="button" className="orgaSheet-edition__menu">
+              <i className="las la-ellipsis-h" />
+            </button>
+          </span>
           <p>
             Fermeture le troisième dimanche de la quatrième année du calendrier
             maya postcolonial si y&apos;a pas grève à la SNCF

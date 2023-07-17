@@ -38,6 +38,10 @@
     border-right: 1px solid v.$grey-300;
     font-weight: 300;
     font-size: 0.9rem;
+    &__header {
+      display: flex;
+      justify-content: space-between;
+    }
     h4 {
       font-size: 1rem;
       color: v.$grey-500;
@@ -46,6 +50,10 @@
       font-weight: 500;
       color: v.$grey-900;
     }
+  }
+
+  .orgaSheet-edition__menu {
+    font-size: 1.2rem;
   }
 
   &-contact {

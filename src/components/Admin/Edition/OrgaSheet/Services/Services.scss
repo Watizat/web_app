@@ -30,13 +30,15 @@
     .serviceCard {
 
       &-header {
+        display: flex;
+        justify-content: space-between;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         background-color: rgba(v.$grey-100, .25);
 
         border: 1px solid v.$grey-100;
         color: v.$primary;
-        padding: 0.6rem;
+        padding: .6rem 1rem .6rem .6rem;
         font-size: 1rem;
       }
       &-data {

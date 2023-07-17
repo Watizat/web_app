@@ -6,7 +6,16 @@ function Services() {
       <h3>Services disponibles</h3>
       <ul className="orgaSheet-services__list">
         <li className="orgaSheet-services__serviceCard">
-          <h4 className="serviceCard-header">Acceuil de jour</h4>
+          <span className="serviceCard-header">
+            <h4 className="serviceCard-subheader">Acceuil de jour</h4>
+            <button
+              type="button"
+              className="orgaSheet-edition__menu"
+              className="orgaSheet-edition__menu"
+            >
+              <i className="las la-ellipsis-h" />
+            </button>
+          </span>
           <div className="serviceCard-data">
             <p className="serviceCard-data__info">
               Petits déjeuners, boissons chaudes
@@ -59,7 +68,7 @@ function Services() {
                     privé
                   </span>
                 </td>
-                <button type="button">
+                <button type="button" className="orgaSheet-edition__menu">
                   <i className="las la-ellipsis-h" />
                 </button>
               </div>
@@ -79,7 +88,12 @@ function Services() {
           </div>
         </li>
         <li className="orgaSheet-services__serviceCard">
-          <h1 className="serviceCard-header">Acceuil de jour</h1>
+          <span className="serviceCard-header">
+            <h4 className="serviceCard-subheader">Acceuil de jour</h4>
+            <button type="button" className="orgaSheet-edition__menu">
+              <i className="las la-ellipsis-h" />
+            </button>
+          </span>
           <div className="serviceCard-data">
             <p className="serviceCard-data__info">
               Petits déjeuners, boissons chaudes
@@ -129,7 +143,7 @@ function Services() {
                     actualisation
                   </span>
                 </td>
-                <button type="button">
+                <button type="button" className="orgaSheet-edition__menu">
                   <i className="las la-ellipsis-h" />
                 </button>
               </div>
@@ -149,7 +163,12 @@ function Services() {
           </div>
         </li>
         <li className="orgaSheet-services__serviceCard">
-          <h1 className="serviceCard-header">Acceuil de jour</h1>
+          <span className="serviceCard-header">
+            <h4 className="serviceCard-subheader">Acceuil de jour</h4>
+            <button type="button" className="orgaSheet-edition__menu">
+              <i className="las la-ellipsis-h" />
+            </button>
+          </span>
           <div className="serviceCard-data">
             <p className="serviceCard-data__info">
               Petits déjeuners, boissons chaudes
@@ -196,7 +215,7 @@ function Services() {
                     public
                   </span>
                 </td>{' '}
-                <button type="button">
+                <button type="button" className="orgaSheet-edition__menu">
                   <i className="las la-ellipsis-h" />
                 </button>
               </div>
@@ -224,7 +243,7 @@ function Services() {
                     privé
                   </span>
                 </td>
-                <button type="button">
+                <button type="button" className="orgaSheet-edition__menu">
                   <i className="las la-ellipsis-h" />
                 </button>
               </div>

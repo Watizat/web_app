@@ -18,7 +18,7 @@ function Contacts() {
                 </span>
               </div>
             </div>
-            <button type="button">
+            <button type="button" className="orgaSheet-edition__menu">
               <i className="las la-ellipsis-h" />
             </button>
           </div>
@@ -46,7 +46,7 @@ function Contacts() {
                 </span>
               </div>
             </div>
-            <button type="button">
+            <button type="button" className="orgaSheet-edition__menu">
               <i className="las la-ellipsis-h" />
             </button>
           </div>
@@ -74,7 +74,7 @@ function Contacts() {
                 </span>
               </div>
             </div>
-            <button type="button">
+            <button type="button" className="orgaSheet-edition__menu">
               <i className="las la-ellipsis-h" />
             </button>
           </div>
@@ -102,7 +102,7 @@ function Contacts() {
                 </span>
               </div>
             </div>
-            <button type="button">
+            <button type="button" className="orgaSheet-edition__menu">
               <i className="las la-ellipsis-h" />
             </button>
           </div>
