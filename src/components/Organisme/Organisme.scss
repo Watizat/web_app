@@ -1,14 +1,14 @@
-.leaflet-container {
-  max-width: 580px;
-  width: 50%;
-  height: 300px;
-}
-
-button {
-  margin: 30px 0 0;
-}
-
 .organisme {
+  &__container {
+    background-color: #f5f5f5;
+    padding: 30px 0;
+  }
+  & .leaflet-container {
+    max-width: 580px;
+    width: 50%;
+    height: 300px;
+  }
+
   background-color: white;
   border-radius: 15px;
   padding: 25px;

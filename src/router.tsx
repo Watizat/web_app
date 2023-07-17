@@ -8,6 +8,7 @@ import Contact from './components/Contact/Contact';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import MentionsLegales from './components/MentionsLegales/MentionsLegales';
+import Organisme from './components/Organisme/Organisme';
 import Orientation from './components/Orientation/Orientation';
 import Resultats from './components/Resultats/Resultats';
 
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
         <Route path="/admin" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route path="/organisme/:slug" element={<Organisme />} />
       </Route>
       <Route path="/resultats" element={<Resultats />} />
     </>
