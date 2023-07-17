@@ -1,4 +1,3 @@
-import Organisme from '../Organisme/Organisme';
 import Header from './Header/Header';
 import Map from './Map/Map';
 import Panel from './Panel/Panel';

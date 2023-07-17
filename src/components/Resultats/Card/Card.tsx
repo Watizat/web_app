@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
 
-import './Card.scss';
 import Icon from '../../../ui/icon/icon';
+import './Card.scss';
 
 const categories = [
   { id: 1, value: 'acceuil_de_jour', isCheck: false },
@@ -44,7 +44,10 @@ function Card() {
         </div>
         <div className="card_container_left-lower">
           {/* link to à modifier */}
-          <Link className="card_container_left-lower_more-infos-link" to="/">
+          <Link
+            className="card_container_left-lower_more-infos-link"
+            to="/organisme/slug"
+          >
             <Icon icon="plus" size="14px" /> En savoir plus
           </Link>
           <div className="card_container_left-lower_categories">
