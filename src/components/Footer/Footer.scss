@@ -9,7 +9,7 @@
   color: v.$white;
   align-items: center;
 
-  @include m.desktop {
+  @include m.tablet {
     display: flex;
   }
   

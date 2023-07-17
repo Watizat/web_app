@@ -11,23 +11,16 @@
   background-color: v.$white;
   box-shadow: rgba(0, 0, 0, 0.15) 0.2rem 0rem 0.5rem;
 
-  &-card {
-    width: 100%;
-    height: 6vh;
-
-    background-color: v.$white;
-    border-bottom: 1px solid v.$grey-200;
-  }
   &-searchCard {
     position: sticky;
     top: 6vh;
     display: flex;
     align-items: center;
-    padding-left: 2rem;
+    padding: 0 0.75rem;
     input[type='search'] {
-      margin-right: 1rem;
+      margin-right: 0.5rem;
       width: 70%;
-      padding: 0.5rem;
+      padding: 0.2rem;
       border-radius: 5px;
       color: v.$grey-700;
       border: 1px solid v.$grey-500;
@@ -48,11 +41,63 @@
       border: 1px solid v.$grey-500;
       border-radius: 5px;
       color: v.$grey-700;
-      padding: 0.5rem;
+      padding: 0.1rem;
       font-size: 1.5rem;
       &:hover {
         color: v.$sucess;
         border: 1.5px solid v.$sucess;
+      }
+    }
+
+    @include m.desktop {
+      padding: 0 0.75rem;
+      input[type='search'], &__logo  {
+        padding: 0.1rem;
+      }
+      input[type='search'] {
+        margin-right: .25rem;
+      }
+      &__logo {
+        font-size: 1.5rem;
+      }
+    }
+
+    @include m.widescreen {
+      padding: 0 0.75rem;
+      input[type='search'], &__logo  {
+        padding: 0.1rem;
+      }
+      input[type='search'] {
+        margin-right: 1rem;
+      }
+      &__logo {
+        font-size: 1.5rem;
+      }
+    }
+
+    @include m.fullhd {
+      padding: 0 0.75rem;
+      input[type='search'], &__logo  {
+        padding: 0.25rem;
+      }
+      input[type='search'] {
+        margin-right: 1rem;
+      }
+      &__logo {
+        font-size: 1.5rem;
+      }
+    }
+
+    @include m.qhd {
+      padding: 0 0.75rem;
+      input[type='search'], &__logo  {
+        padding: 0.35rem;
+      }
+      input[type='search'] {
+        margin-right: 1rem;
+      }
+      &__logo {
+        font-size: 1.5rem;
       }
     }
   }

@@ -2,81 +2,49 @@
 @use '../../../../styles/medias' as m;
 @use '../../../../styles/elements';
 
-  .orgaList {
-    display: flex;
-    flex-direction: column;
-    width: 20vw;
-    padding: 0;
+.orgaList {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+
+  background-color: v.$white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0.2rem 0rem 0.5rem;
+
+  width: 30vw;
+
+  &-card {
+    width: 100%;
+    min-height: 6vh;
 
     background-color: v.$white;
-    box-shadow: rgba(0, 0, 0, 0.15) 0.2rem 0rem 0.5rem;
-
-    &-card {
-      width: 100%;
-      height: 6vh;
-
-      background-color: v.$white;
-      border-bottom: 1px solid v.$grey-200;
-    }
-    &-searchCard {
-      position: sticky;
-      top: 6vh;
-      display: flex;
-      align-items: center;
-      padding-left: 2rem;
-      input[type='search'] {
-        margin-right: 1rem;
-        width: 70%;
-        padding: 0.5rem;
-        border-radius: 5px;
-        color: v.$grey-700;
-        border: 1px solid v.$grey-500;
-        box-shadow: none;
-        appearance: none;
-        &:hover {
-          color: v.$sucess;
-          border: 2px solid v.$sucess;
-        }
-        &:active,
-        &:focus-visible {
-          color: v.$sucess;
-          font-weight: 8500;
-          border: 2x solid v.$sucess;
-        }
-      }
-      &__logo {
-        border: 1px solid v.$grey-500;
-        border-radius: 5px;
-        color: v.$grey-700;
-        padding: 0.5rem;
-        font-size: 1.5rem;
-        &:hover {
-          color: v.$sucess;
-          border: 1.5px solid v.$sucess;
-        }
-      }
-    }
-    &-orgaCard {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 2rem;
-      &__name {
-        font-weight: 500;
-        font-size: 1.2rem;
-        color: v.$grey-800;
-      }
-      &__adress {
-        font-weight: 500;
-        font-size: 0.9rem;
-        color: v.$grey-500;
-      }
-
-      &:hover {
-        background-color: rgba(v.$sucess, 0.2);
-      }
-      &:active {
-        background-color: rgba(v.$sucess, 0.4);
-      }
-    }
+    border-bottom: 1px solid v.$grey-200;
   }
+
+  @include m.desktop {
+    &-card {
+      min-height: 6vh;
+    }
+    width: 20vw;
+  }
+
+  @include m.widescreen {
+    &-card {
+      min-height: 7vh;
+    }
+    width: 19vw;
+  }
+
+  @include m.fullhd {
+    &-card {
+      min-height: 8vh;
+    }
+    width: 17vw;
+  }
+
+  @include m.qhd {
+    &-card {
+      min-height: 6vh;
+    }
+    width: 14vw;
+  }
+}

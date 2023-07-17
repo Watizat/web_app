@@ -3,15 +3,17 @@
 @use '../../../styles/elements';
 
 .adminsidebar {
+  display: none;
+
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+
   position: sticky;
   top:0;
   width: 25vw;
   height: 100vh;
   background-color: v.$primary;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
 
   @include m.desktop {
     width: 20vw;
@@ -22,6 +24,7 @@
   }
 
   @include m.fullhd {
+    display: flex;
     width: 15vw;
   }
 
