@@ -1,14 +1,25 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import logo from '../../../assets/logo.svg';
 import './App.scss';
+import Header from '../Header/Header';
 
 function App() {
+  const { pathname } = useLocation();
+
   return (
     <>
       <div id="bo-app">
         <Sidebar />
-        <Outlet />
+
+        {pathname !== '/admin' && (
+          <main id="bo-main">
+            <Header />
+            <Outlet />
+          </main>
+        )}
+
+        {pathname === '/admin' && <Outlet />}
       </div>
       <div id="mobileout">
         <Link className="mobileout__logo" to="/">
