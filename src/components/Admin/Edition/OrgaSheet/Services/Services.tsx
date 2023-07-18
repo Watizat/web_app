@@ -8,11 +8,7 @@ function Services() {
         <li className="orgaSheet-services__serviceCard">
           <span className="serviceCard-header">
             <h4 className="serviceCard-subheader">Acceuil de jour</h4>
-            <button
-              type="button"
-              className="orgaSheet-edition__menu"
-              className="orgaSheet-edition__menu"
-            >
+            <button type="button" className="orgaSheet-edition__menu">
               <i className="las la-ellipsis-h" />
             </button>
           </span>
