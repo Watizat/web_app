@@ -13,14 +13,14 @@ function Data() {
             </button>
           </span>
           <div className="orgaSheet-data__accessDetails">
-            <p className="orgaSheet-data__pmr">
+            <label className="orgaSheet-data__pmr">
               <input type="checkbox" />
               Accessible PSH /PMR
-            </p>
-            <p className="orgaSheet-data__animals">
+            </label>
+            <label className="orgaSheet-data__animals">
               <input type="checkbox" />
               Animaux admis
-            </p>
+            </label>
           </div>
         </li>
         <li className="orgaSheet-case">

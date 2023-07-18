@@ -5,35 +5,24 @@
 #header {
   position: sticky;
   top: 0;
-  min-height: 6vh;
-  background-color: v.$white;
+
   display: flex; 
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  min-height: 6vh;
+
+  background-color: v.$white;
   box-shadow: rgba(0, 0, 0, 0.15) 0px .1rem .5rem;
   border-bottom: 1px solid v.$grey-200;
+
   h2 {
     margin-left: 2rem;
     font-size: 1.2rem;
     color: v.$grey-800;
-
-    @include m.desktop {
-      width: 20vw;
-    }
-  
-    @include m.widescreen {
-      width: 17vw;
-    }
-  
-    @include m.fullhd {
-      width: 15vw;
-    }
-  
-    @include m.qhd {
-      width: 12vw;
-    }
   }
+
   button {
     margin-right: 2rem;
   }

@@ -20,7 +20,7 @@
   }
 }
 
-#mobileout {
+#mobileOut {
   min-height: 100vh;
   padding: 0 10vw;
   display: flex;
@@ -34,7 +34,7 @@
   text-align: center;
   font-size: 1.35rem;
 
-  .mobileout__logo {
+  .mobileOut__logo {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -47,7 +47,7 @@
     }
   }
 
-  .mobileout__returnToHome {
+  .mobileOut__returnToHome {
     margin-top: 5vh;
     color: v.$white;
     border: 1px solid v.$white;

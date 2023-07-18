@@ -2,7 +2,7 @@
 @use '../../../../styles/medias' as m;
 @use '../../../../styles/elements';
 
-.adminnav {
+.adminNav {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,6 @@
 
   a {
     display: flex;
-    flex-direction: row;
     align-items: center;
     text-decoration: none;
     color: v.$white;
@@ -38,17 +37,12 @@
       }
     }
 
-    .sidebar-directus-logo {
-      color: v.$white;
-      width: 1.5rem;
-    }
-
     &:hover {
     background-color: rgba(v.$primary-var3, 0.3);
     }
   }
 
-  .adminnav-isactive {
+  &-isActive {
     background-color: rgba(v.$primary-var4, 0.3);
     font-weight: 800;
   }

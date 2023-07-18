@@ -9,7 +9,7 @@ function Footer() {
         <span>Watizat 2023</span>
         <Link to="/mentions-legales">Mentions légales</Link>
         <Link to="/contact">Nous contacter</Link>
-        <Link className="important" to="/admin">
+        <Link className="important" to="/admin/">
           Membres Watizat
         </Link>
       </Container>

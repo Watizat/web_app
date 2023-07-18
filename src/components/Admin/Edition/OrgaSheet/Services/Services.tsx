@@ -1,3 +1,4 @@
+import ContactCard from '../ContactCard/ContactCard';
 import './Services.scss';
 
 function Services() {
@@ -50,37 +51,7 @@ function Services() {
               Fermeture le troisième dimanche de la quatrième année du
               calendrier maya postcolonial si y&apos;a pas grève à la SNCF
             </p>
-            <div className="orgaSheet-contact serviceCard-data__contacts">
-              <div className="orgaSheet-contact__header">
-                <h5>Contact 1</h5>
-                <td className="contacts-roles">
-                  <span className="contacts-roles__role contacts-roles__public">
-                    public
-                  </span>
-                  <span className="contacts-roles__role contacts-roles__actualisation">
-                    actualisation
-                  </span>
-                  <span className="contacts-roles__role contacts-roles__prive">
-                    privé
-                  </span>
-                </td>
-                <button type="button" className="orgaSheet-edition__menu">
-                  <i className="las la-ellipsis-h" />
-                </button>
-              </div>
-              <div className="orgaSheet-contact__details">
-                <div className="orgaSheet-contact__infos">
-                  <p className="orgaSheet-contact__nom">Michel Larem</p>
-                  <p className="orgaSheet-contact__fonction">
-                    Assistant social
-                  </p>
-                </div>
-                <div className="orgaSheet-contact__name">
-                  <p className="orgaSheet-contact__mail">06 25 65 45 78</p>
-                  <p className="orgaSheet-contact__tel">laprem@gmail.com</p>
-                </div>
-              </div>
-            </div>
+            <ContactCard />
           </div>
         </li>
         <li className="orgaSheet-services__serviceCard">
@@ -128,34 +99,7 @@ function Services() {
               Fermeture le troisième dimanche de la quatrième année du
               calendrier maya postcolonial si y&apos;a pas grève à la SNCF
             </p>
-            <div className="orgaSheet-contact serviceCard-data__contacts">
-              <div className="orgaSheet-contact__header">
-                <h5>Contact 1</h5>
-                <td className="contacts-roles">
-                  <span className="contacts-roles__role contacts-roles__public">
-                    public
-                  </span>
-                  <span className="contacts-roles__role contacts-roles__actualisation">
-                    actualisation
-                  </span>
-                </td>
-                <button type="button" className="orgaSheet-edition__menu">
-                  <i className="las la-ellipsis-h" />
-                </button>
-              </div>
-              <div className="orgaSheet-contact__details">
-                <div className="orgaSheet-contact__infos">
-                  <p className="orgaSheet-contact__nom">Michel Larem</p>
-                  <p className="orgaSheet-contact__fonction">
-                    Assistant social
-                  </p>
-                </div>
-                <div className="orgaSheet-contact__name">
-                  <p className="orgaSheet-contact__mail">06 25 65 45 78</p>
-                  <p className="orgaSheet-contact__tel">laprem@gmail.com</p>
-                </div>
-              </div>
-            </div>
+            <ContactCard />
           </div>
         </li>
         <li className="orgaSheet-services__serviceCard">
@@ -203,59 +147,8 @@ function Services() {
               Fermeture le troisième dimanche de la quatrième année du
               calendrier maya postcolonial si y&apos;a pas grève à la SNCF
             </p>
-            <div className="orgaSheet-contact serviceCard-data__contacts">
-              <div className="orgaSheet-contact__header">
-                <h5>Contact 1</h5>
-                <td className="contacts-roles">
-                  <span className="contacts-roles__role contacts-roles__public">
-                    public
-                  </span>
-                </td>{' '}
-                <button type="button" className="orgaSheet-edition__menu">
-                  <i className="las la-ellipsis-h" />
-                </button>
-              </div>
-              <div className="orgaSheet-contact__details">
-                <div className="orgaSheet-contact__infos">
-                  <p className="orgaSheet-contact__nom">Michel Larem</p>
-                  <p className="orgaSheet-contact__fonction">
-                    Assistant social
-                  </p>
-                </div>
-                <div className="orgaSheet-contact__name">
-                  <p className="orgaSheet-contact__mail">06 25 65 45 78</p>
-                  <p className="orgaSheet-contact__tel">laprem@gmail.com</p>
-                </div>
-              </div>
-            </div>
-            <div className="orgaSheet-contact serviceCard-data__contacts">
-              <div className="orgaSheet-contact__header">
-                <h5>Contact 2</h5>
-                <td className="contacts-roles">
-                  <span className="contacts-roles__role contacts-roles__actualisation">
-                    actualisation
-                  </span>
-                  <span className="contacts-roles__role contacts-roles__prive">
-                    privé
-                  </span>
-                </td>
-                <button type="button" className="orgaSheet-edition__menu">
-                  <i className="las la-ellipsis-h" />
-                </button>
-              </div>
-              <div className="orgaSheet-contact__details">
-                <div className="orgaSheet-contact__infos">
-                  <p className="orgaSheet-contact__nom">Michel Larem</p>
-                  <p className="orgaSheet-contact__fonction">
-                    Assistant social
-                  </p>
-                </div>
-                <div className="orgaSheet-contact__name">
-                  <p className="orgaSheet-contact__mail">06 25 65 45 78</p>
-                  <p className="orgaSheet-contact__tel">laprem@gmail.com</p>
-                </div>
-              </div>
-            </div>
+            <ContactCard />
+            <ContactCard />
           </div>
         </li>
       </ul>
