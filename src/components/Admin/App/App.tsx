@@ -5,7 +5,7 @@ import './App.scss';
 
 function App() {
   return (
-    <span>
+    <>
       <div id="bo-app">
         <Sidebar />
         <Outlet />
@@ -20,13 +20,13 @@ function App() {
           <br /> Merci de bien vouloir le consulter à nouveau depuis un
           ordinateur ou une tablette
           <br />
-          <br /> Promis, ceci n'est pas un caprice de dévellopeur.se 🤪
+          <br /> Promis, ceci n&apos;est pas un caprice de dévellopeur.se 🤪
         </p>
         <Link className="mobileout__returnToHome" to="/">
-          <p>Retourner vers la page d'accueil</p>
+          <p>Retourner vers la page d&apos;accueil</p>
         </Link>
       </div>
-    </span>
+    </>
   );
 }
 

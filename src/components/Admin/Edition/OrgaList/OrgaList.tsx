@@ -4,9 +4,9 @@ import './OrgaList.scss';
 
 function OrgaList() {
   return (
-    <section>
-      <ul className="orgaList">
-        <OrgaListSearch />
+    <section className="orgaList">
+      <OrgaListSearch />
+      <ul className="orgaList-list">
         <OrgaListCard />
       </ul>
     </section>

@@ -12,6 +12,11 @@
 
   width: 30vw;
 
+  &-list {
+  overflow-y: auto;
+  padding: 0;
+  }
+
   &-card {
     width: 100%;
     min-height: 6vh;

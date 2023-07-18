@@ -2,7 +2,7 @@ import './OrgaListCard.scss';
 
 function OrgaListCard() {
   return (
-    <span>
+    <>
       <li className="orgaList-card orgaList-orgaCard">
         <div className="orgaList-orgaCard__name">
           Croix Rouge (antenne nord)
@@ -191,7 +191,7 @@ function OrgaListCard() {
           864 Strawberry Street, City 10, State 10
         </div>
       </li>
-    </span>
+    </>
   );
 }
 
