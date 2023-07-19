@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import logo from '../../../assets/logo.svg';
 
 import { Organism } from '../../../@types/organism';
 import Icon from '../../../ui/icon/icon';
@@ -19,6 +18,13 @@ const categories = [
 ];
 
 function Card({ organism, map_id }: OrganismProps) {
+  const { services } = organism;
+  const tags = [
+    ...new Set(services.map((service) => service.categorie_id.tag)),
+  ].sort();
+
+  console.log(tags);
+
   return (
     <div className="card_container">
       <div className="card_container_left">

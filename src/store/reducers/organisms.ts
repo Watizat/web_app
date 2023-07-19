@@ -42,6 +42,7 @@ export const fetchOrganisms = createAsyncThunk(
             'translations.id',
             'translations.description',
             'translations.infos_alerte',
+            'services.categorie_id.tag',
             'services.categorie_id.translations.name',
             'services.categorie_id.translations.slug',
             'services.categorie_id.translations.description',
@@ -78,7 +79,7 @@ const organismReducer = createReducer(initialState, (builder) => {
     .addCase(fetchOrganisms.fulfilled, (state, action) => {
       state.organisms = action.payload;
       state.isLoading = false;
-      console.log(state.organisms);
+      // console.log(state.organisms);
     });
 });
 

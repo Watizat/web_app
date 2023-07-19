@@ -45,7 +45,7 @@ export interface Service {
   status: string;
   translations: ServiceTranslation[];
   schedules: Schedule[];
-  categorie_id: number;
+  categorie_id: Categorie;
 }
 
 export interface ServiceTranslation {
@@ -57,6 +57,7 @@ export interface ServiceTranslation {
 }
 
 export interface Categorie {
+  tag: string;
   translations: CategorieTranslation[];
 }
 
