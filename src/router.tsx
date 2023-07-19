@@ -11,6 +11,7 @@ import ForgottenPassword from './components/ForgottenPassword/ForgottenPassword'
 import RecoverPassword from './components/RecoverPassword/RecoverPassword';
 import AccountRequest from './components/AccountRequest/AccountRequest';
 import MentionsLegales from './components/MentionsLegales/MentionsLegales';
+import Organisme from './components/Organisme/Organisme';
 import Orientation from './components/Orientation/Orientation';
 import Resultats from './components/Resultats/Resultats';
 import AdminApp from './components/Admin/App/App';
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
         <Route path="/account-request" element={<AccountRequest />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route path="/organisme/:slug" element={<Organisme />} />
       </Route>
       <Route path="/resultats" element={<Resultats />} />
       <Route path="/admin" element={<AdminApp />}>

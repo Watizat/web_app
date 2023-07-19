@@ -1,4 +1,4 @@
-.resultats {
-  flex-grow: 1
-  ;
+.results {
+  display: flex;
+  height: calc(100vh - 85px);
 }

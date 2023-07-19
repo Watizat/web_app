@@ -1,0 +1,123 @@
+@use '../../../styles/variables' as v;
+
+.card_container {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #777;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  column-gap: 3rem;
+
+  &_left {
+
+    &-upper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      column-gap: 0.5rem;
+
+      &_top {
+        display: flex;
+        column-gap: 0.25rem;
+      }
+
+      &_position-id {
+      text-align: center;
+      color: v.$white;
+      font-weight: bold;
+      border-radius: 50%;
+      min-width: 2rem;
+      height: 2rem;
+      background-color: v.$primary_var4;
+      
+        & p {
+          position: relative;
+          top: 50%;
+          transform: perspective(1px) translateY(-50%);
+        }
+      }
+
+      &_organization-infos {
+        flex-grow: 1; 
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      &_title {
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      &_address {
+        font-weight: bold;
+        position: relative;
+        top: -5px;
+        color: v.$secondary_var4;
+        font-size: 0.8rem;
+      }
+
+      &_description {
+        color: #555;
+        text-align: justify;
+      }
+    
+    }
+
+    &-lower {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &_more-infos-link {
+        color: v.$secondary_var4;
+      }font-weight: bold;
+
+      &_categories {
+        display: flex;
+        column-gap: 0.5rem;
+        &_item {
+          color: #a9a9a9;
+          &--check {
+            color: v.$primary_var4;
+          }
+        }
+        & img {
+          height: 2.5rem;
+          
+        }
+      }
+    }
+  }
+
+  &_right{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    row-gap: 0.5rem;
+    flex-shrink: 0;
+    
+    &_go, &_contact {
+      display: flex;
+      justify-content: center;
+      column-gap: 10px;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+      border: solid 1px v.$secondary_var4;
+      border-radius: 5px;
+      padding: 5px;
+      font-weight: bold;
+      color: v.$white;
+      background-color: v.$secondary_var4;
+    }
+
+    &_contact {
+      color: v.$secondary_var4;
+      background-color: v.$white;
+
+    }
+  }
+}

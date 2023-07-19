@@ -1,0 +1,50 @@
+.organisme {
+  &__container {
+    background-color: #f5f5f5;
+    padding: 30px 0;
+  }
+  & .leaflet-container {
+    max-width: 580px;
+    width: 50%;
+    height: 300px;
+  }
+
+  background-color: white;
+  border-radius: 15px;
+  padding: 25px;
+  margin: 30px 0;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__details {
+    width: 50%;
+  }
+
+  &__infos {
+    display: flex;
+    justify-content: space-between;
+
+    & article {
+      width: 33%;
+      flex: 0 0 auto;
+    }
+  }
+
+  &__services {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    & article {
+      width: 33%;
+      flex: 0 0 auto;
+    }
+  }
+}
+
+h3 {
+  border-bottom: 1px solid black;
+}
