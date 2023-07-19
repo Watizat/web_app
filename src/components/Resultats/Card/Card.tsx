@@ -8,14 +8,6 @@ interface OrganismProps {
   organism: Organism;
   map_id: number;
 }
-const categories = [
-  { id: 1, value: 'acceuil-de-jour', isCheck: false },
-  { id: 2, value: 'accueil-et-orientation', isCheck: false },
-  { id: 3, value: 'bagagerie', isCheck: false },
-  { id: 4, value: 'manger', isCheck: true },
-  { id: 5, value: 'permanences-sociales', isCheck: false },
-  { id: 6, value: 'retablissement-des-liens', isCheck: false },
-];
 
 function Card({ organism, map_id }: OrganismProps) {
   const { services } = organism;
@@ -23,7 +15,13 @@ function Card({ organism, map_id }: OrganismProps) {
     ...new Set(services.map((service) => service.categorie_id.tag)),
   ].sort();
 
-  console.log(tags);
+  const filteredCategories = ['manger'];
+
+  const categories = tags.map((tag, index) => ({
+    id: index + 1,
+    value: tag,
+    isCheck: filteredCategories.includes(tag),
+  }));
 
   return (
     <div className="card_container">
@@ -47,7 +45,6 @@ function Card({ organism, map_id }: OrganismProps) {
           {organism.translations[0].description}
         </div>
         <div className="card_container_left-lower">
-          {/* link to à modifier */}
           <Link
             className="card_container_left-lower_more-infos-link"
             to={`/organisme/${organism.slug}`}
@@ -55,13 +52,13 @@ function Card({ organism, map_id }: OrganismProps) {
             <Icon icon="plus" size="14px" /> En savoir plus
           </Link>
           <div className="card_container_left-lower_categories">
-            {categories.map((e) => (
+            {categories.map((categorie) => (
               <Icon
-                key={e.id}
+                key={categorie.id}
                 className={`card_container_left-lower_categories_item${
-                  e.isCheck ? '--check' : ''
+                  categorie.isCheck ? '--check' : ''
                 }`}
-                icon={e.value}
+                icon={categorie.value}
                 size="30px"
               />
             ))}
