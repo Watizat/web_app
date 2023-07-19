@@ -1,17 +1,27 @@
+import { useState } from 'react';
+import Modal from '../Modal/ModalData';
 import './Data.scss';
 
 function Data() {
+  const [isActive, setIsActive] = useState(false);
   return (
     <article className="orgaSheet-card orgaSheet-data">
-      <h3>Informations génerales</h3>
+      {isActive && <Modal setIsActive={setIsActive} />}
+
+      <span className="orgaSheet-card__titleBar">
+        <h3 className="orgaSheet-card__title">Informations génerales</h3>
+        <button
+          type="button"
+          className="orgaSheet-card__menu"
+          onClick={() => setIsActive(true)}
+        >
+          <i className="las la-ellipsis-h" />
+        </button>
+      </span>
+
       <ul className="orgaSheet-data__list">
         <li className="orgaSheet-case orgaSheet-data__access">
-          <span className="orgaSheet-case__header">
-            <h4>Accés</h4>
-            <button type="button" className="orgaSheet-edition__menu">
-              <i className="las la-ellipsis-h" />
-            </button>
-          </span>
+          <h4>Accés</h4>
           <div className="orgaSheet-data__accessDetails">
             <label className="orgaSheet-data__pmr">
               <input type="checkbox" />
@@ -24,12 +34,7 @@ function Data() {
           </div>
         </li>
         <li className="orgaSheet-case">
-          <span className="orgaSheet-case__header">
-            <h4>Description</h4>
-            <button type="button" className="orgaSheet-edition__menu">
-              <i className="las la-ellipsis-h" />
-            </button>
-          </span>
+          <h4>Description</h4>
           <p>
             Écoute, renseignement et orientation pour les personnes sans
             domicile fixe n’ayant pas de référent social. Service social public
@@ -39,12 +44,7 @@ function Data() {
           </p>
         </li>
         <li className="orgaSheet-case orgaSheet-data__hours">
-          <span className="orgaSheet-case__header">
-            <h4>Horaires</h4>
-            <button type="button" className="orgaSheet-edition__menu">
-              <i className="las la-ellipsis-h" />
-            </button>
-          </span>
+          <h4>Horaires</h4>
           <div className="orgaSheet-data__hoursDetails">
             <p>
               <span className="orgaSheet-data__daysOn">Lundi</span>9h-12h /
@@ -75,12 +75,7 @@ function Data() {
           </div>
         </li>
         <li className="orgaSheet-case">
-          <span className="orgaSheet-case__header">
-            <h4>Infos, alerte</h4>
-            <button type="button" className="orgaSheet-edition__menu">
-              <i className="las la-ellipsis-h" />
-            </button>
-          </span>
+          <h4>Infos, alerte</h4>
           <p>
             Fermeture le troisième dimanche de la quatrième année du calendrier
             maya postcolonial si y&apos;a pas grève à la SNCF

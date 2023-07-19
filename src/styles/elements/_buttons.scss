@@ -14,7 +14,6 @@ button {
 .btn {
   border-radius: 12.5px;
   padding: 0.5rem 0.8rem;
-  border: none;
   font-weight: 600;
   font-size: 0.9rem;
   transition: background 300ms;
@@ -67,6 +66,9 @@ button {
 .btn-warning {
   @include btn-color(v.$warning);
 }
+.btn-danger {
+  @include btn-color(v.$danger);
+}
 .btn-sucess {
   @include btn-color(v.$sucess);
 }
@@ -98,6 +100,9 @@ button {
 }
 .btn-warning-fill {
   @include btn-fill(v.$warning);
+}
+.btn-danger-fill {
+  @include btn-fill(v.$danger);
 }
 .btn-sucess-fill {
   @include btn-fill(v.$sucess);
