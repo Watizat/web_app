@@ -1,11 +1,24 @@
+import { useState } from 'react';
 import ContactCard from '../ContactCard/ContactCard';
+import Modal from '../Modal/ModalService';
 import './Services.scss';
 
 function Services() {
+  const [isActive, setIsActive] = useState(false);
+
   return (
     <article className="orgaSheet-card orgaSheet-services">
+      {isActive && <Modal setIsActive={setIsActive} />}
+
       <span className="orgaSheet-card__titleBar">
         <h3 className="orgaSheet-card__title">Services disponibles</h3>
+        <button
+          type="button"
+          className="orgaSheet-card__menu"
+          onClick={() => setIsActive(true)}
+        >
+          <i className="las la-plus-circle" />
+        </button>
       </span>
 
       <ul className="orgaSheet-services__list">

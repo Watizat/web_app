@@ -15,7 +15,7 @@ function Data() {
           className="orgaSheet-card__menu"
           onClick={() => setIsActive(true)}
         >
-          <i className="las la-ellipsis-h" />
+          <i className="las la-bars" />
         </button>
       </span>
 

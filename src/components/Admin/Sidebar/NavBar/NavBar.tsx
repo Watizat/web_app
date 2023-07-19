@@ -38,7 +38,7 @@ function NavBar() {
     {
       name: 'Se déconnecter',
       to: '/admin/exit',
-      icon: 'las la-space-shuttle',
+      icon: 'las la-sign-out-alt',
     },
   ];
   return (

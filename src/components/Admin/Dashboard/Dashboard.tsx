@@ -1,66 +1,63 @@
 import { Link } from 'react-router-dom';
-import Container from '../../Container/Container';
 import './Dashboard.scss';
 
 function Dashboard() {
+  const links = [
+    {
+      name: 'Edition des données',
+      to: '/admin/edition',
+      icon: 'las la-pen-fancy',
+      state: '',
+    },
+    {
+      name: 'Espace traduction',
+      to: '/admin/translate',
+      icon: 'las la-globe-africa',
+      state: 'is-inactive',
+    },
+    {
+      name: 'Actualisation',
+      to: '/admin/actualisation',
+      icon: 'las la-mail-bulk',
+      state: 'is-inactive',
+    },
+    {
+      name: 'Extraction guides',
+      to: '/admin/guides',
+      icon: 'las la-drafting-compass',
+      state: 'is-inactive',
+    },
+    {
+      name: 'Utilisateteur·ice·s',
+      to: '/admin/users',
+      icon: 'las la-user-secret',
+      state: '',
+    },
+    {
+      name: 'Directus (backend)',
+      to: 'https://watizat.lunalink.nl',
+      target: '_blank',
+      icon: 'las la-carrot',
+      state: '',
+    },
+  ];
+
   return (
-    <main id="dashboard">
-      <Container>
-        <h1>Dashboard</h1>
-        <ul className="panel">
-          <Link to="/admin/edition">
-            <li className="panel-card">
-              <div className="panel-card--logo">
-                <i className="las la-pen-fancy" />
+    <>
+      <h1>Dashboard</h1>
+      <ul className="dashboardLinks">
+        {links.map((e) => (
+          <Link key={e.name} to={e.to} target={e.target}>
+            <li className={`dashboardLinks-card ${e.state}`}>
+              <div className="dashboardLinks-card__logo">
+                <i className={e.icon} />
               </div>
-              <p className="panel-card--text">Edition de données</p>
+              <p className="dashboardLinks-card__text">{e.name}</p>
             </li>
           </Link>
-          <Link to="#">
-            <li className="panel-card is-inactive">
-              <div className="panel-card--logo">
-                <i className="las la-globe-africa" />
-              </div>
-              <p className="panel-card--text">Espace traduction</p>
-            </li>
-          </Link>
-          <Link to="#">
-            <li className="panel-card is-inactive">
-              <div className="panel-card--logo">
-                <i className="las la-mail-bulk" />
-              </div>
-              <p className="panel-card--text">Demande d&apos;actualisation</p>
-            </li>
-          </Link>
-          <Link to="#">
-            <li className="panel-card is-inactive">
-              <div className="panel-card--logo">
-                <i className="las la-drafting-compass" />
-              </div>
-              <p className="panel-card--text">Extraction des guides</p>
-            </li>
-          </Link>
-          <Link to="/admin/users">
-            <li className="panel-card">
-              <div className="panel-card--logo">
-                <i className="las la-user-secret" />
-              </div>
-              <p className="panel-card--text">
-                Gestion des utilisateteur·ice·s
-              </p>
-            </li>
-          </Link>
-          <Link to="https://watizat.lunalink.nl" target="_blank">
-            <li className="panel-card">
-              <div className="panel-card--logo">
-                <i className="las la-carrot" />
-              </div>
-              <p className="panel-card--text">Directus (backend)</p>
-            </li>
-          </Link>
-        </ul>
-      </Container>
-    </main>
+        ))}
+      </ul>
+    </>
   );
 }
 

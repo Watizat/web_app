@@ -94,7 +94,7 @@ function ModalData({ setIsActive }: ModalProps) {
               {hours.map((e) => (
                 <tr key={e.name} className="modal-data__hoursLine">
                   <td className="modal-data__hoursDay">
-                    <span className={`modal-data__${e.dayType}`}>{e.name}</span>
+                    <span>{e.name}</span>
                   </td>
                   <td className="modal-data__hoursHour">
                     <input
