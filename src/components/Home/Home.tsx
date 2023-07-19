@@ -44,7 +44,7 @@ function Home() {
                 <button type="button" onClick={handleClick('manger')}>
                   Manger
                 </button>
-                <button type="button" onClick={handleClick('se laver')}>
+                <button type="button" onClick={handleClick('se-laver')}>
                   Se laver
                 </button>
                 <button type="button">Manger</button>
