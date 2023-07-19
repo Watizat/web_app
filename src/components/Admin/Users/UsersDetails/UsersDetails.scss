@@ -1,0 +1,123 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/medias' as m;
+@use '../../../../styles/elements';
+
+#users {
+  min-height: 94vh;
+  font-family: 'Inter', sans-serif;
+
+  table {
+    min-width: 100%;
+    text-align: left;
+    font-size: 0.9rem;
+
+    tr {
+      height: 3.5rem;
+
+      th,
+      td {
+        border-bottom: 1px solid v.$grey-200;
+        padding-left: 0.25rem;
+
+        @include m.widescreen {
+          padding-left: 0.5rem;
+        }
+
+        @include m.fullhd {
+          padding-left: 0.75rem;
+        }
+      }
+    }
+
+    thead {
+      font-weight: 600;
+      color: v.$grey-700;
+      background-color: rgba(v.$grey-100, 0.6);
+    }
+
+    tbody {
+      font-weight: 400;
+      color: v.$grey-700;
+
+      tr {
+        &:hover {
+          background-color: rgba(v.$sucess, 0.2);
+        }
+        &:active {
+          background-color: rgba(v.$sucess, 0.4);
+        }
+      }
+    }
+  }
+
+  .txt-align-left,
+  .userstable-name,
+  .userstable-antenne {
+    padding-left: 2rem;
+  }
+
+  .txt-align-center,
+  .userstable-checkbox,
+  .userstable-email,
+  .userstable-connexion,
+  .userstable-roles,
+  .userstable-action {
+    text-align: center;
+  }
+
+  .userstable-checkbox {
+    [type='checkbox'] {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    @include m.widescreen {
+      [type='checkbox'] {
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+    }
+
+    @include m.fullhd {
+      [type='checkbox'] {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+
+  .userstable-roles {
+    @include m.tablet-only {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 100%;
+    }
+
+    .role {
+      margin: 0 0.5rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      color: v.$white;
+      @include m.tablet-only {
+        padding: 0.05rem 0.35rem;
+        font-size: 0.85rem;
+      }
+    }
+    .editor {
+      background-color: v.$info;
+    }
+    .localref {
+      background-color: v.$sucess;
+    }
+    .admin {
+      background-color: v.$danger;
+    }
+  }
+  .userstable-action {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: v.$grey-900;
+  }
+}
