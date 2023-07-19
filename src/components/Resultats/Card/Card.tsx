@@ -9,12 +9,12 @@ interface OrganismProps {
   map_id: number;
 }
 const categories = [
-  { id: 1, value: 'acceuil_de_jour', isCheck: false },
-  { id: 2, value: 'accueil_et_orientation', isCheck: false },
+  { id: 1, value: 'acceuil-de-jour', isCheck: false },
+  { id: 2, value: 'accueil-et-orientation', isCheck: false },
   { id: 3, value: 'bagagerie', isCheck: false },
   { id: 4, value: 'manger', isCheck: true },
-  { id: 5, value: 'permanences_sociales', isCheck: false },
-  { id: 6, value: 'retablissement_des_liens_familiaux', isCheck: false },
+  { id: 5, value: 'permanences-sociales', isCheck: false },
+  { id: 6, value: 'retablissement-des-liens', isCheck: false },
 ];
 
 function Card({ organism, map_id }: OrganismProps) {
