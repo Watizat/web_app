@@ -1,6 +1,8 @@
 import axios from 'axios';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '../../../hooks/redux';
 import Icon from '../../../ui/icon/icon';
 import './Settings.scss';
 
@@ -16,6 +18,21 @@ function Settings() {
   const [categories, setCategories] = useState<Categories[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const [searchParams] = useSearchParams();
+  const categ = searchParams.get('category');
+
+  const organisms = useAppSelector((state) => state.organisms);
+  // Récupération de toutes les catégories présentes dans les organismes recherchés
+  const organismsCagtegories = organisms
+    .map((organism) =>
+      organism.services.flatMap((service) => service.categorie_id.translations)
+    )
+    .flat();
+  // Suppression des catégories en doublon
+  const presentCategories = [
+    ...new Set(organismsCagtegories.map((plop) => plop.name)),
+  ];
+
   function handleDistanceValueChange(
     event: React.ChangeEvent<HTMLInputElement>
   ) {
@@ -28,9 +45,14 @@ function Settings() {
 
   const getCategories = async () => {
     const { data } = await axios.get(
-      'https://watizat.lunalink.nl/items/categorie_translation'
+      'https://watizat.lunalink.nl/items/categorie_translation?fields=id,name'
     );
-    setCategories(data.data);
+
+    setCategories(
+      data.data.sort((a: { name: string }, b: { name: string }) =>
+        a.name.localeCompare(b.name)
+      )
+    );
   };
 
   useEffect(() => {
@@ -100,6 +122,10 @@ function Settings() {
                     type="checkbox"
                     name={category.slug}
                     id={category.slug}
+                    disabled={
+                      !presentCategories.includes(category.name) ||
+                      category.slug === categ
+                    }
                   />
                   <label htmlFor={category.slug}>{category.name}</label>
                 </div>

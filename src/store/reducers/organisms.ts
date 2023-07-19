@@ -1,17 +1,19 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 import AxiosInstance from 'axios';
-import { Organism } from '../../@types/organism';
+import { Categories, Organism } from '../../@types/organism';
 
 interface OrganismsState {
   organisms: Organism[];
   categoryFilter: string;
   isLoading: boolean;
+  categories: Categories[];
 }
 
 export const initialState: OrganismsState = {
   organisms: [],
   categoryFilter: '',
   isLoading: false,
+  categories: [],
 };
 
 export const fetchOrganisms = createAsyncThunk(
@@ -71,6 +73,16 @@ export const fetchOrganisms = createAsyncThunk(
   }
 );
 
+export const fetchCategories = createAsyncThunk(
+  'categories/fetch-categories',
+  async () => {
+    const { data } = await AxiosInstance.get<{ data: Categories[] }>(
+      'https://watizat.lunalink.nl/items/categorie?fields=translations.name,translations.slug'
+    );
+    return data.data;
+  }
+);
+
 const organismReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchOrganisms.pending, (state) => {
@@ -79,7 +91,9 @@ const organismReducer = createReducer(initialState, (builder) => {
     .addCase(fetchOrganisms.fulfilled, (state, action) => {
       state.organisms = action.payload;
       state.isLoading = false;
-      // console.log(state.organisms);
+    })
+    .addCase(fetchCategories.fulfilled, (state, action) => {
+      state.categories = action.payload;
     });
 });
 

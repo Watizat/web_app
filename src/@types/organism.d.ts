@@ -68,3 +68,10 @@ export interface CategorieTranslation {
   slug: string;
   langue_id: number;
 }
+
+export interface Categories {
+  translations: {
+    name: string;
+    slug: string;
+  }[];
+}

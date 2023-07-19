@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { Organism } from '../../../@types/organism';
 import Icon from '../../../ui/icon/icon';
@@ -10,12 +10,14 @@ interface OrganismProps {
 }
 
 function Card({ organism, map_id }: OrganismProps) {
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get('category');
   const { services } = organism;
   const tags = [
     ...new Set(services.map((service) => service.categorie_id.tag)),
   ].sort();
 
-  const filteredCategories = ['manger'];
+  const filteredCategories = [category];
 
   const categories = tags.map((tag, index) => ({
     id: index + 1,
