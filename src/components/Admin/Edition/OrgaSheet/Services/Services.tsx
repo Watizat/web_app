@@ -4,7 +4,10 @@ import './Services.scss';
 function Services() {
   return (
     <article className="orgaSheet-card orgaSheet-services">
-      <h3>Services disponibles</h3>
+      <span className="orgaSheet-card__titleBar">
+        <h3 className="orgaSheet-card__title">Services disponibles</h3>
+      </span>
+
       <ul className="orgaSheet-services__list">
         <li className="orgaSheet-services__serviceCard">
           <span className="serviceCard-header">

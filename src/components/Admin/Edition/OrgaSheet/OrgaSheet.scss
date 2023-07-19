@@ -18,12 +18,23 @@
     width: 100%;
     background-color: v.$white;
     box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.1);
-    h3 {
-      padding: 0.75rem;
+
+    &__titleBar {
+      display: flex;
+      justify-content: space-between;
+      background-color: v.$sucess;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
-      background-color: v.$sucess;
+    }
+
+    &__title {
+      padding: 0.75rem;
       color: v.$white;
+    }
+    
+    &__menu {
+      color: v.$white;
+      margin-right: 2rem;
     }
   }
 
@@ -38,22 +49,21 @@
     border-right: 1px solid v.$grey-300;
     font-weight: 300;
     font-size: 0.9rem;
+
     &__header {
       display: flex;
       justify-content: space-between;
     }
+
     h4 {
       font-size: 1rem;
       color: v.$grey-500;
     }
+
     p {
       font-weight: 500;
       color: v.$grey-900;
     }
-  }
-
-  .orgaSheet-edition__menu {
-    font-size: 1.2rem;
   }
 
   &-contact {

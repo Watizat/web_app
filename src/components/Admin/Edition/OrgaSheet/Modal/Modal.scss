@@ -1,0 +1,162 @@
+@use '../../../../../styles/variables' as v;
+@use '../../../../../styles/medias' as m;
+@use '../../../../../styles/elements';
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(v.$grey-900, .85);
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+
+  &-main {
+    width: 50vw;
+    background-color: v.$white;
+    border-radius: 20px;
+    padding: 3rem 5rem;
+  }
+
+  &-title {
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+    color: v.$primary;
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  &-case {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &__title {
+      color: v.$sucess;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    input,
+    textarea {
+      border: none;
+      border-bottom: 1px solid v.$grey-500;
+    }
+
+    &__inputTxt,
+    textarea {
+      padding: .2rem;
+
+      &:focus {
+        outline: none;
+        background-color: rgba(v.$sucess, .05);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+
+      &[type=number] {
+        appearance: textfield;
+        /* Firefox */
+        -moz-appearance: textfield;
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    &__textarea {
+      resize: vertical;
+      min-height: 5vh;
+    }
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: end;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  // Entrées spécifiques
+
+  &-data {
+
+    &__accessDetails {
+      display: flex;
+      gap: 2rem;
+
+      [type='checkbox'] {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-right: 1rem;
+      }
+    }
+
+    &__hours {
+      input {
+        border: none;
+      }
+    }
+
+    &__hoursHead {
+      text-align: center;
+      font-weight: 500;
+      background-color: rgba(v.$sucess, .4);
+      color: v.$grey-800;
+    }
+
+    &__hoursLine {
+      border-bottom: 1px solid v.$grey-800;
+
+      &:hover {
+        background-color: rgba(v.$sucess, .2);
+      }
+    }
+
+    &__hoursDay {
+      width: 10%;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    &__hoursSeparater {
+      text-align: center;
+      width: 2%;
+    }
+
+    &__hoursHour {
+      width: 15%;
+      text-align: center;
+      border: none;
+    }
+
+    &__hoursInput {
+      width: 100%;
+      text-align: center;
+      border: none;
+      background-color: rgba(v.$sucess, .02);
+
+      &:focus {
+        outline: none;
+        background-color: v.$white;
+      }
+    }
+  }
+}

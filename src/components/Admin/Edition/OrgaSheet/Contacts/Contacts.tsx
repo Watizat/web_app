@@ -4,7 +4,9 @@ import './Contacts.scss';
 function Contacts() {
   return (
     <article className="orgaSheet-card orgaSheet-contacts">
-      <h3>Contacts</h3>
+      <span className="orgaSheet-card__titleBar">
+        <h3 className="orgaSheet-card__title">Contacts</h3>
+      </span>
       <div className="orgaSheet-contacts__list">
         <ContactCard />
         <ContactCard />
