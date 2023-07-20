@@ -70,6 +70,7 @@ export interface CategorieTranslation {
 }
 
 export interface Categories {
+  tag: string;
   translations: {
     name: string;
     slug: string;

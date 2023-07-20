@@ -6,13 +6,19 @@
         "paths": [
           "M418 380l-120 602h90l78-342 88 86v256h86v-320l-90-86 26-128q92 106 234 106v-84q-124 0-182-104l-44-68q-30-42-72-42-6 0-17 2t-17 2l-222 94v200h86v-144l76-30zM576 234q-34 0-60-25t-26-59 26-60 60-26 60 26 26 60-26 59-60 25z"
         ],
-        "attrs": [{}],
+        "attrs": [
+          {}
+        ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "tags": ["directions_walk"],
+        "tags": [
+          "directions_walk"
+        ],
         "grid": 24
       },
-      "attrs": [{}],
+      "attrs": [
+        {}
+      ],
       "properties": {
         "order": 1,
         "id": 0,
@@ -111,7 +117,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["lgbtqia-not"],
+        "tags": [
+          "lgbtqia"
+        ],
         "colorPermutations": {}
       },
       "attrs": [
@@ -185,7 +193,7 @@
       "properties": {
         "order": 30,
         "id": 0,
-        "name": "lgbtqia-not",
+        "name": "lgbtqia",
         "prevSize": 32,
         "code": 59679
       },
@@ -207,7 +215,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["accueil-de-jour"],
+        "tags": [
+          "accueil-de-jour"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -232,7 +242,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["accueil-et-orientation"],
+        "tags": [
+          "accueil-et-orientation"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -261,7 +273,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["activites"],
+        "tags": [
+          "activites"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -296,7 +310,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["apprendre-francais"],
+        "tags": [
+          "apprendre-francais"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -321,7 +337,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["bagagerie"],
+        "tags": [
+          "bagagerie"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -346,7 +364,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["covid19"],
+        "tags": [
+          "covid19"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -371,7 +391,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["enfance"],
+        "tags": [
+          "enfance"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -397,7 +419,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["femmes"],
+        "tags": [
+          "femmes"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -426,7 +450,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["informatique-numerique"],
+        "tags": [
+          "informatique-numerique"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -495,7 +521,9 @@
         "isMulticolor": true,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["lgbtqia-colored"],
+        "tags": [
+          "lgbtqia-colored"
+        ],
         "colorPermutations": {
           "124204231113830130122945301233764112451762001250220371251250246129292714577157160751551771746019556201": [
             {
@@ -576,7 +604,16 @@
         "prevSize": 32,
         "code": 59658,
         "codes": [
-          59658, 59659, 59660, 59661, 59662, 59663, 59664, 59665, 59666, 59667,
+          59658,
+          59659,
+          59660,
+          59661,
+          59662,
+          59663,
+          59664,
+          59665,
+          59666,
+          59667,
           59668
         ]
       },
@@ -595,14 +632,16 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["lieux-cultes"],
+        "tags": [
+          "lieux-culturels"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
       "properties": {
         "order": 12,
         "id": 9,
-        "name": "lieux-cultes",
+        "name": "lieux-culturels",
         "prevSize": 32,
         "code": 59669
       },
@@ -623,7 +662,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["manger"],
+        "tags": [
+          "manger"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -648,14 +689,16 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["aides-juridiques"],
+        "tags": [
+          "aide-juridique"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
       "properties": {
         "order": 14,
         "id": 7,
-        "name": "aides-juridiques",
+        "name": "aide-juridique",
         "prevSize": 32,
         "code": 59671
       },
@@ -674,7 +717,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["permanences-sociales"],
+        "tags": [
+          "permanences-sociales"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -696,12 +741,18 @@
           "M320.503 287.533c0.411 0.019 0.893 0.030 1.378 0.030 9.119 0 17.342-3.836 23.144-9.982l0.014-0.015c5.923-5.959 9.585-14.173 9.585-23.241 0-0.051-0-0.102-0-0.153l0 0.008v-220.825c-0.026-9.231-3.674-17.605-9.596-23.782l0.012 0.012c-6.188-5.941-14.608-9.6-23.881-9.6-0.365 0-0.729 0.006-1.091 0.017l0.053-0.001h-79.742v287.533z",
           "M172.903 682.794c-17.215-45.519-27.181-98.141-27.181-153.092 0-6.159 0.125-12.288 0.373-18.386l-0.028 0.875c0-144.15 38.338-214.691 76.675-223.509v-288.683h-27.603c-55.206 0-104.662 51.373-140.316 143.766-34.963 102.019-55.149 219.56-55.149 341.816 0 9.357 0.118 18.686 0.353 27.986l-0.028-1.376c0 220.442 46.005 403.313 119.614 476.921l6.517 5.751c17.915 17.573 42.316 28.589 69.287 29.135l0.105 0.002h27.603v-288.3c-24.009-9.086-42.361-28.317-50.060-52.32l-0.162-0.586z"
         ],
-        "attrs": [{}, {}, {}],
+        "attrs": [
+          {},
+          {},
+          {}
+        ],
         "width": 354,
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["permanences-telephoniques"],
+        "tags": [
+          "permanences-telephoniques"
+        ],
         "colorPermutations": {
           "124204231113830130122945301233764112451762001250220371251250246129292714577157160751551771746019556201": [
             {},
@@ -710,7 +761,11 @@
           ]
         }
       },
-      "attrs": [{}, {}, {}],
+      "attrs": [
+        {},
+        {},
+        {}
+      ],
       "properties": {
         "order": 16,
         "id": 5,
@@ -742,7 +797,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["retablissement-des-liens"],
+        "tags": [
+          "retablissement-des-liens"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -767,7 +824,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["sante"],
+        "tags": [
+          "sante"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -809,7 +868,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["se-laver-laverie"],
+        "tags": [
+          "se-laver-laverie"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -836,7 +897,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["s-habiller"],
+        "tags": [
+          "s-habiller"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -861,7 +924,9 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "grid": 0,
-        "tags": ["travail-du-sexe"],
+        "tags": [
+          "travail-du-sexe"
+        ],
         "colorPermutations": {}
       },
       "attrs": [],
@@ -881,13 +946,19 @@
         "paths": [
           "M422 826l-298-58 16-86 210 42 68-346-78 30v146h-84v-200l222-94q6 0 17-2t17-2q42 0 72 42l42 68q58 102 184 102v86q-142 0-234-106l-26 128 90 84v320h-86v-256l-90-84zM576 234q-34 0-60-26t-26-60 26-59 60-25 59 25 25 59-25 60-59 26z"
         ],
-        "attrs": [{}],
+        "attrs": [
+          {}
+        ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "tags": ["directions_run"],
+        "tags": [
+          "directions_run"
+        ],
         "grid": 24
       },
-      "attrs": [{}],
+      "attrs": [
+        {}
+      ],
       "properties": {
         "order": 1,
         "id": 0,
@@ -904,7 +975,13 @@
         "paths": [
           "M704 640c-64 64-64 128-128 128s-128-64-192-128-128-128-128-192 64-64 128-128-128-256-192-256-192 192-192 192c0 128 131.5 387.5 256 512s384 256 512 256c0 0 192-128 192-192s-192-256-256-192z"
         ],
-        "tags": ["phone", "telephone", "contact", "support", "call"],
+        "tags": [
+          "phone",
+          "telephone",
+          "contact",
+          "support",
+          "call"
+        ],
         "defaultCode": 59714,
         "grid": 16,
         "attrs": []
@@ -927,7 +1004,11 @@
         "paths": [
           "M992 384h-352v-352c0-17.672-14.328-32-32-32h-192c-17.672 0-32 14.328-32 32v352h-352c-17.672 0-32 14.328-32 32v192c0 17.672 14.328 32 32 32h352v352c0 17.672 14.328 32 32 32h192c17.672 0 32-14.328 32-32v-352h352c17.672 0 32-14.328 32-32v-192c0-17.672-14.328-32-32-32z"
         ],
-        "tags": ["plus", "add", "sum"],
+        "tags": [
+          "plus",
+          "add",
+          "sum"
+        ],
         "defaultCode": 59914,
         "grid": 16,
         "attrs": []
@@ -947,14 +1028,22 @@
     },
     {
       "icon": {
-        "paths": ["M316 658l-60-60 256-256 256 256-60 60-196-196z"],
-        "attrs": [{}],
+        "paths": [
+          "M316 658l-60-60 256-256 256 256-60 60-196-196z"
+        ],
+        "attrs": [
+          {}
+        ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "tags": ["keyboard_arrow_up"],
+        "tags": [
+          "keyboard_arrow_up"
+        ],
         "grid": 24
       },
-      "attrs": [{}],
+      "attrs": [
+        {}
+      ],
       "properties": {
         "order": 1,
         "id": 1,
@@ -968,14 +1057,22 @@
     },
     {
       "icon": {
-        "paths": ["M316 366l196 196 196-196 60 60-256 256-256-256z"],
-        "attrs": [{}],
+        "paths": [
+          "M316 366l196 196 196-196 60 60-256 256-256-256z"
+        ],
+        "attrs": [
+          {}
+        ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "tags": ["keyboard_arrow_down"],
+        "tags": [
+          "keyboard_arrow_down"
+        ],
         "grid": 24
       },
-      "attrs": [{}],
+      "attrs": [
+        {}
+      ],
       "properties": {
         "order": 2,
         "id": 0,
