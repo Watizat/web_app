@@ -1,17 +1,21 @@
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from '@reduxjs/toolkit';
 import AxiosInstance from 'axios';
 import { Categories, Organism } from '../../@types/organism';
 
 interface OrganismsState {
   organisms: Organism[];
-  categoryFilter: string;
+  categoryFilter: string[];
   isLoading: boolean;
   categories: Categories[];
 }
 
 export const initialState: OrganismsState = {
   organisms: [],
-  categoryFilter: '',
+  categoryFilter: [],
   isLoading: false,
   categories: [],
 };
@@ -83,6 +87,14 @@ export const fetchCategories = createAsyncThunk(
   }
 );
 
+export const filterCategories = createAction<string[]>(
+  'categories/filter-categories'
+);
+
+export const setOrganisms = createAction<Organism[]>(
+  'organims/filter-organims'
+);
+
 const organismReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchOrganisms.pending, (state) => {
@@ -92,8 +104,14 @@ const organismReducer = createReducer(initialState, (builder) => {
       state.organisms = action.payload;
       state.isLoading = false;
     })
+    .addCase(setOrganisms, (state, action) => {
+      state.organisms = action.payload;
+    })
     .addCase(fetchCategories.fulfilled, (state, action) => {
       state.categories = action.payload;
+    })
+    .addCase(filterCategories, (state, action) => {
+      state.categoryFilter = action.payload;
     });
 });
 

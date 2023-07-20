@@ -2,7 +2,11 @@ import axios from 'axios';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import {
+  filterCategories,
+  setOrganisms,
+} from '../../../store/reducers/organisms';
 import Icon from '../../../ui/icon/icon';
 import './Settings.scss';
 
@@ -13,15 +17,40 @@ interface Categories {
 }
 
 function Settings() {
+  const dispatch = useAppDispatch();
+  const [searchParams] = useSearchParams();
+  const categ = searchParams.get('category');
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string>('10');
   const [categories, setCategories] = useState<Categories[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const [searchParams] = useSearchParams();
-  const categ = searchParams.get('category');
-
+  const filteredCategories = useAppSelector((state) => state.categoryFilter);
   const organisms = useAppSelector((state) => state.organisms);
+
+  const handleCategoryChange = (category: string) => {
+    if (filteredCategories.includes(category)) {
+      dispatch(
+        filterCategories(
+          filteredCategories.filter(
+            (selectedCategory) => selectedCategory !== category
+          )
+        )
+      );
+    } else {
+      dispatch(filterCategories([...filteredCategories, category]));
+    }
+    /*     const organizationsWithTargetCategories = organisms.filter(
+      (organization) => {
+        return organization.services.some((service) => {
+          return service.categorie_id.translations.some((ele) =>
+            filteredCategories.includes(ele.name)
+          );
+        });
+      }
+    );
+    dispatch(setOrganisms(organizationsWithTargetCategories)); */
+  };
+
   // Récupération de toutes les catégories présentes dans les organismes recherchés
   const organismsCagtegories = organisms
     .map((organism) =>
@@ -30,7 +59,7 @@ function Settings() {
     .flat();
   // Suppression des catégories en doublon
   const presentCategories = [
-    ...new Set(organismsCagtegories.map((plop) => plop.name)),
+    ...new Set(organismsCagtegories.map((cat) => cat.name)),
   ];
 
   function handleDistanceValueChange(
@@ -45,7 +74,7 @@ function Settings() {
 
   const getCategories = async () => {
     const { data } = await axios.get(
-      'https://watizat.lunalink.nl/items/categorie_translation?fields=id,name'
+      'https://watizat.lunalink.nl/items/categorie_translation?fields=id,name,slug'
     );
 
     setCategories(
@@ -57,7 +86,7 @@ function Settings() {
 
   useEffect(() => {
     getCategories();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="settings">
@@ -122,6 +151,7 @@ function Settings() {
                     type="checkbox"
                     name={category.slug}
                     id={category.slug}
+                    onChange={() => handleCategoryChange(category.name)}
                     disabled={
                       !presentCategories.includes(category.name) ||
                       category.slug === categ
