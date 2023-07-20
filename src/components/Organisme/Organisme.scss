@@ -2,6 +2,39 @@
 @use '../../styles/medias' as m;
 @use '../../styles/elements';
 
+
+.breadcrumb{
+  display: flex;
+
+  & ul{
+    display: flex;
+    list-style: none;
+    flex-grow: 1;
+    justify-content: center;
+    
+    & a{
+      color: v.$grey-600;
+    }
+
+    & .link-active{
+      color: v.$watigreen;
+    }
+
+    & li{
+      font-size: 0.8em;
+      margin: 0.5rem;
+      font-weight: 600;
+    }
+
+    & las{
+      line-height: 2 ;
+    }
+
+    
+  }
+
+}
+
 .organisme {
   &-container {
     background-color: #f5f5f5;
@@ -13,7 +46,7 @@
     height: 300px;
   }
 
-  background-color: white;
+  background-color: v.$white;
   border-radius: 15px;
   padding: 25px;
   margin: 30px 0;
@@ -21,10 +54,22 @@
   &-header {
     display: flex;
     justify-content: space-between;
+    gap:5em;
+    margin-bottom: 1em;
   }
 
   &-details {
     width: 50%;
+
+    & h2{
+      color: v.$grey-800;
+      font-size: 1.2em;
+    }
+
+    & p{
+      font-size: 0.9em;
+      text-align: justify;
+    }
   }
 
   &-infos {
@@ -37,44 +82,64 @@
     }
   }
 
-  &-services--cards {
+ &-services{
+
+  &-contentcards{
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.3rem;
 
-    &-header{
-      width: 100%;
-      background-color: v.$grey-100;
-      padding: 0.4rem;
-      color: v.$watigreen;
-      border-radius: 10px;
-
-      & h4{
+      &--cards {
         display: flex;
-        flex-wrap: nowrap;
         justify-content: space-between;
-        align-content: center;
+        flex-basis: 32%;
+        flex-wrap: wrap;
+        margin-bottom: 0.8rem;
+       
+
+      &-header{
+        width: 100%;
+        background-color: v.$grey-100;
+        padding: 0.4rem;
+        color: v.$watigreen;
+        border-radius: 10px;
+
+        & h4{
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          align-content: center;
+        }
+  
       }
- 
-    }
 
-    &-content{
-      display: none;
+      &-content{
+        display: none;
 
-      &--visible{
-        display: block;
+        &--visible{
+          display: block;
+        }
       }
-    }
 
-    & article {
-      width: 33%;
-      flex: 0 0 auto;
+      & article {
+        width: 100%;
+        flex: 0 0 auto;
+      }
     }
   }
+
+
+ }
+ 
+
 
  
 }
 
 h3 {
-  border-bottom: 1px solid black;
+  color:v.$primary;
+  border-bottom: 0.5px solid v.$grey-500;
+  margin: 0.5em 0;
 }
