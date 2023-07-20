@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Organism } from '../../../@types/organism';
 import Icon from '../../../ui/icon/icon';
 import './Card.scss';
+import { useAppSelector } from '../../../hooks/redux';
 
 interface OrganismProps {
   organism: Organism;
@@ -18,6 +19,9 @@ function Card({ organism, map_id }: OrganismProps) {
   ].sort();
 
   const filteredCategories = [category];
+
+  const test = useAppSelector((state) => state.categoryFilter);
+  console.log([...test, category]);
 
   const categories = tags.map((tag, index) => ({
     id: index + 1,

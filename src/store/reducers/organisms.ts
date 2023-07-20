@@ -81,7 +81,7 @@ export const fetchCategories = createAsyncThunk(
   'categories/fetch-categories',
   async () => {
     const { data } = await AxiosInstance.get<{ data: Categories[] }>(
-      'https://watizat.lunalink.nl/items/categorie?fields=translations.name,translations.slug'
+      'https://watizat.lunalink.nl/items/categorie?fields=tag,translations.name,translations.slug'
     );
     return data.data;
   }

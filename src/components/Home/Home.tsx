@@ -56,7 +56,7 @@ function Home() {
                     key={categorie.translations[0].slug}
                     onClick={handleClick(categorie.translations[0].slug)}
                   >
-                    <Icon icon={categorie.translations[0].slug} size="40px" />
+                    <Icon icon={categorie.tag} size="40px" />
                     <span className="text-button">
                       {categorie.translations[0].name}
                     </span>
