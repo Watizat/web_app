@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Organism } from '../../../@types/organism';
 import { useAppSelector } from '../../../hooks/redux';
 import Card from '../Card/Card';
 import Settings from '../Settings/Settings';
 import './Panel.scss';
-import { Organism } from '../../../@types/organism';
 
 function Panel() {
   const organisms = useAppSelector((state) => state.organisms);
@@ -26,7 +26,7 @@ function Panel() {
 
   return (
     <section className="panel">
-      <Settings />
+      <Settings organismsFiltered={organismsFiltered} />
       {isLoading && <div>Loading...</div>}
       {!isLoading &&
         (organismsFiltered.length > 0 ? (

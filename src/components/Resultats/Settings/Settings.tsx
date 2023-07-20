@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Organism } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
   fetchCategories,
@@ -9,49 +10,20 @@ import {
 import Icon from '../../../ui/icon/icon';
 import './Settings.scss';
 
-interface Categorie {
-  id: number;
-  name: string;
-  slug: string;
-}
-
-function Settings() {
+function Settings({ organismsFiltered }: { organismsFiltered: Organism[] }) {
   const dispatch = useAppDispatch();
-  const [searchParams] = useSearchParams();
-  const categoryParams = searchParams.get('category');
+  // const [searchParams] = useSearchParams();
+  // const categoryParams = searchParams.get('category');
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string>('10');
   // const [categories, setCategories] = useState<Categorie[]>([]);
   const categories = useAppSelector((state) => state.categories);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const selected = useAppSelector((state) => state.categoryFilter);
-  const organisms = useAppSelector((state) => state.organisms);
+  const organisms = organismsFiltered;
   const [presentCategories, setPresentCategories] = useState<string[]>([]);
 
-  useEffect(() => {
-    // Récupération de toutes les catégories présentes dans les organismes recherchés
-    const organismsCagtegories = organisms
-      .map((organism) =>
-        organism.services.flatMap((service) => service.categorie_id)
-      )
-      .flat();
-    // Suppression des catégories en doublon
-    setPresentCategories([
-      ...new Set(organismsCagtegories.map((cat) => cat.tag)),
-    ]);
-  }, [organisms]);
-
   const handleCategoryChange = (tag: string) => {
-    // Récupération de toutes les catégories présentes dans les organismes recherchés
-    const organismsCagtegories = organisms
-      .map((organism) =>
-        organism.services.flatMap((service) => service.categorie_id)
-      )
-      .flat();
-    // Suppression des catégories en doublon
-    setPresentCategories([
-      ...new Set(organismsCagtegories.map((cat) => cat.tag)),
-    ]);
     if (selected.includes(tag)) {
       dispatch(
         filterCategories(
@@ -73,21 +45,18 @@ function Settings() {
     setIsOpen(!isOpen);
   }
 
-  /*  const getCategories = async () => {
-    const { data } = await axios.get(
-      'https://watizat.lunalink.nl/items/categorie_translation?fields=id,name,slug'
-    );
-
-    setCategories(
-      data.data.sort((a: { name: string }, b: { name: string }) =>
-        a.name.localeCompare(b.name)
+  useEffect(() => {
+    // Récupération de toutes les catégories présentes dans les organismes recherchés
+    const organismsCagtegories = organisms
+      .map((organism) =>
+        organism.services.flatMap((service) => service.categorie_id)
       )
-    );
-  }; */
-
-  /*   useEffect(() => {
-    getCategories();
-  }, []); */
+      .flat();
+    // Suppression des catégories en doublon
+    setPresentCategories([
+      ...new Set(organismsCagtegories.map((cat) => cat.tag)),
+    ]);
+  }, [organisms]);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -164,116 +133,6 @@ function Settings() {
                 </div>
               );
             })}
-            {/* <div>
-              <input type="checkbox" name="acceuil" id="acceuil" />
-              <label htmlFor="acceuil"> Accueil et orientation</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="permanences-sociales"
-                id="permanences-sociales"
-              />
-              <label htmlFor="permanences-sociales">Permanences sociales</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="Accueils-de-jour"
-                id="Accueils-de-jour"
-              />
-              <label htmlFor="Accueils-de-jour">Accueils de jour</label>
-            </div>
-            <div>
-              <input type="checkbox" name="bagagerie" id="bagagerie" />
-              <label htmlFor="bagagerie">Bagagerie</label>
-            </div>
-            <div>
-              <input type="checkbox" name="manger" id="manger" />
-              <label htmlFor="manger">Manger</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="aide-juridique"
-                id="aide-juridique"
-              />
-              <label htmlFor="aide-juridique">Aide juridique</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="permanences-telephoniques"
-                id="permanences-telephoniques"
-              />
-              <label htmlFor="permanences-telephoniques">
-                Permanences téléphoniques
-              </label>
-            </div>
-            <div>
-              <input type="checkbox" name="femmes" id="femmes" />
-              <label htmlFor="femmes">Femmes</label>
-            </div>
-            <div>
-              <input type="checkbox" name="enfance" id="enfance" />
-              <label htmlFor="enfance">Enfance</label>
-            </div>
-            <div>
-              <input type="checkbox" name="lgbtqia" id="lgbtqia" />
-              <label htmlFor="lgbtqia">LGBTQIA+</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="retablissement-des-liens"
-                id="retablissement-des-liens"
-              />
-              <label htmlFor="retablissement-des-liens">
-                Rétablissement des liens
-              </label>
-            </div>
-            <div>
-              <input type="checkbox" name="sante" id="sante" />
-              <label htmlFor="sante">Santé</label>
-            </div>
-            <div>
-              <input type="checkbox" name="covid19" id="covid19" />
-              <label htmlFor="covid19">COVID 19</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="travail-du-sexe"
-                id="travail-du-sexe"
-              />
-              <label htmlFor="travail-du-sexe">Travail du sexe</label>
-            </div>
-            <div>
-              <input type="checkbox" name="selaver" id="selaver" />
-              <label htmlFor="selaver">Se laver / Laverie</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="apprendre-le-francais"
-                id="apprendre-le-francais"
-              />
-              <label htmlFor="apprendre-le-francais">
-                Apprendre le français
-              </label>
-            </div>
-            <div>
-              <input type="checkbox" name="informatique" id="informatique" />
-              <label htmlFor="informatique">Informatique & numérique</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="lieux-culturels"
-                id="lieux-culturels"
-              />
-              <label htmlFor="lieux-culturels">Lieux culturels</label>
-            </div> */}
           </div>
         </div>
       </div>
