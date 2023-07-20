@@ -3,10 +3,7 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import {
-  filterCategories,
-  setOrganisms,
-} from '../../../store/reducers/organisms';
+import { filterCategories } from '../../../store/reducers/organisms';
 import Icon from '../../../ui/icon/icon';
 import './Settings.scss';
 
