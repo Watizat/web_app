@@ -4,13 +4,13 @@ import {
   createReducer,
 } from '@reduxjs/toolkit';
 import AxiosInstance from 'axios';
-import { Categories, Organism } from '../../@types/organism';
+import { Categorie, Organism } from '../../@types/organism';
 
 interface OrganismsState {
   organisms: Organism[];
   categoryFilter: string[];
   isLoading: boolean;
-  categories: Categories[];
+  categories: Categorie[];
 }
 
 export const initialState: OrganismsState = {
@@ -80,7 +80,7 @@ export const fetchOrganisms = createAsyncThunk(
 export const fetchCategories = createAsyncThunk(
   'categories/fetch-categories',
   async () => {
-    const { data } = await AxiosInstance.get<{ data: Categories[] }>(
+    const { data } = await AxiosInstance.get<{ data: Categorie[] }>(
       'https://watizat.lunalink.nl/items/categorie?fields=tag,translations.name,translations.slug'
     );
     return data.data;

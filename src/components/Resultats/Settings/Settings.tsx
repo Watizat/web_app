@@ -1,13 +1,15 @@
-import axios from 'axios';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { filterCategories } from '../../../store/reducers/organisms';
+import {
+  fetchCategories,
+  filterCategories,
+} from '../../../store/reducers/organisms';
 import Icon from '../../../ui/icon/icon';
 import './Settings.scss';
 
-interface Categories {
+interface Categorie {
   id: number;
   name: string;
   slug: string;
@@ -16,38 +18,50 @@ interface Categories {
 function Settings() {
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
-  const categ = searchParams.get('category');
+  const categoryParams = searchParams.get('category');
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string>('10');
-  const [categories, setCategories] = useState<Categories[]>([]);
+  // const [categories, setCategories] = useState<Categorie[]>([]);
+  const categories = useAppSelector((state) => state.categories);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const filteredCategories = useAppSelector((state) => state.categoryFilter);
+  const selected = useAppSelector((state) => state.categoryFilter);
   const organisms = useAppSelector((state) => state.organisms);
+  const [presentCategories, setPresentCategories] = useState<string[]>([]);
 
-  const handleCategoryChange = (category: string) => {
-    if (filteredCategories.includes(category)) {
+  useEffect(() => {
+    // Récupération de toutes les catégories présentes dans les organismes recherchés
+    const organismsCagtegories = organisms
+      .map((organism) =>
+        organism.services.flatMap((service) => service.categorie_id)
+      )
+      .flat();
+    // Suppression des catégories en doublon
+    setPresentCategories([
+      ...new Set(organismsCagtegories.map((cat) => cat.tag)),
+    ]);
+  }, [organisms]);
+
+  const handleCategoryChange = (tag: string) => {
+    // Récupération de toutes les catégories présentes dans les organismes recherchés
+    const organismsCagtegories = organisms
+      .map((organism) =>
+        organism.services.flatMap((service) => service.categorie_id)
+      )
+      .flat();
+    // Suppression des catégories en doublon
+    setPresentCategories([
+      ...new Set(organismsCagtegories.map((cat) => cat.tag)),
+    ]);
+    if (selected.includes(tag)) {
       dispatch(
         filterCategories(
-          filteredCategories.filter(
-            (selectedCategory) => selectedCategory !== category
-          )
+          selected.filter((selectedCategory) => selectedCategory !== tag)
         )
       );
     } else {
-      dispatch(filterCategories([...filteredCategories, category]));
+      dispatch(filterCategories([...selected, tag]));
     }
   };
-
-  // Récupération de toutes les catégories présentes dans les organismes recherchés
-  const organismsCagtegories = organisms
-    .map((organism) =>
-      organism.services.flatMap((service) => service.categorie_id.translations)
-    )
-    .flat();
-  // Suppression des catégories en doublon
-  const presentCategories = [
-    ...new Set(organismsCagtegories.map((cat) => cat.slug)),
-  ];
 
   function handleDistanceValueChange(
     event: React.ChangeEvent<HTMLInputElement>
@@ -59,7 +73,7 @@ function Settings() {
     setIsOpen(!isOpen);
   }
 
-  const getCategories = async () => {
+  /*  const getCategories = async () => {
     const { data } = await axios.get(
       'https://watizat.lunalink.nl/items/categorie_translation?fields=id,name,slug'
     );
@@ -69,10 +83,14 @@ function Settings() {
         a.name.localeCompare(b.name)
       )
     );
-  };
+  }; */
+
+  /*   useEffect(() => {
+    getCategories();
+  }, []); */
 
   useEffect(() => {
-    getCategories();
+    dispatch(fetchCategories());
   }, [dispatch]);
 
   return (
@@ -133,18 +151,16 @@ function Settings() {
           <div className="settings__filter-categories">
             {categories.map((category) => {
               return (
-                <div key={category.id}>
-                  <input
-                    type="checkbox"
-                    name={category.slug}
-                    id={category.slug}
-                    onChange={() => handleCategoryChange(category.slug)}
-                    disabled={
-                      !presentCategories.includes(category.slug) ||
-                      category.slug === categ
-                    }
-                  />
-                  <label htmlFor={category.slug}>{category.name}</label>
+                <div key={category.tag}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name={category.translations[0].slug}
+                      onChange={() => handleCategoryChange(category.tag)}
+                      disabled={!presentCategories.includes(category.tag)}
+                    />
+                    {category.translations[0].name}
+                  </label>
                 </div>
               );
             })}

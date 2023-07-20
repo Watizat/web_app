@@ -1,43 +1,36 @@
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../hooks/redux';
 import Card from '../Card/Card';
 import Settings from '../Settings/Settings';
 import './Panel.scss';
+import { Organism } from '../../../@types/organism';
 
 function Panel() {
   const organisms = useAppSelector((state) => state.organisms);
   const isLoading = useAppSelector((state) => state.isLoading);
   const selected = useAppSelector((state) => state.categoryFilter);
+  const [organismsFiltered, setOrganismsFiltered] = useState<Organism[] | []>(
+    []
+  );
 
-  // const filteredOrganizations = organisms.filter((organization) => {
-  //   const { services } = organization;
-  //   if (!services || !Array.isArray(services)) return false;
-
-  //   const organizationServiceSlugs = services.map(
-  //     (service) => service.categorie_id.tag
-  //   );
-  //   return serviceSlugs.every((slug) =>
-  //     organizationServiceSlugs.includes(slug)
-  //   );
-  // });
-  // console.log(filteredOrganizations);
-  const checkMatchCategories = organisms.filter((organism) => {
-    return organism.services.map((e) => e.categorie_id.tag);
-    /* .map((e) => selected.includes(e)).length === selected.length */
-  });
-
-  /*     .map((e) => [...e.map((f) => f.categorie_id.tag)])
-    .map((e) => e.filter((f) => selected.includes(f))) */
-
-  console.log('yeah', checkMatchCategories);
-  console.log(selected);
+  useEffect(() => {
+    const setFilter = organisms.filter((organism) => {
+      return (
+        [...new Set(organism.services.map((e) => e.categorie_id.tag))].filter(
+          (tag) => selected.includes(tag)
+        ).length >= selected.length
+      );
+    });
+    setOrganismsFiltered(setFilter);
+  }, [organisms, selected]);
 
   return (
     <section className="panel">
       <Settings />
       {isLoading && <div>Loading...</div>}
       {!isLoading &&
-        (organisms.length > 0 ? (
-          organisms.map((organism, index) => (
+        (organismsFiltered.length > 0 ? (
+          organismsFiltered.map((organism, index) => (
             <Card
               key={organism.id}
               organism={organism}

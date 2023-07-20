@@ -69,10 +69,10 @@ export interface CategorieTranslation {
   langue_id: number;
 }
 
-export interface Categories {
-  tag: string;
-  translations: {
-    name: string;
-    slug: string;
-  }[];
-}
+// export interface Categories {
+//   tag: string;
+//   translations: {
+//     name: string;
+//     slug: string;
+//   }[];
+// }
