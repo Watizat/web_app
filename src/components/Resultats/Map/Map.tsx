@@ -18,6 +18,7 @@ function Map() {
         setUserPosition(newUserPos);
       },
       (err) => {
+        // eslint-disable-next-line no-console
         console.log(err);
       }
     );
@@ -54,7 +55,7 @@ function Map() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* <Recenter lat={position.lat} lng={position.lng} /> */}
+      {/* <Recenter lat={userPosition.lat} lng={userPosition.lng} /> */}
       <Marker position={userPosition} />
       {organismes.map((organisme) => {
         return (
