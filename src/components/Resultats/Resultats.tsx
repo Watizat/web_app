@@ -13,7 +13,7 @@ function Resultats() {
   const category = searchParams.get('category');
 
   useEffect(() => {
-    dispatch(fetchOrganisms(category as string));
+    dispatch(fetchOrganisms(/* category as string */));
   }, [dispatch, category]);
   return (
     <>

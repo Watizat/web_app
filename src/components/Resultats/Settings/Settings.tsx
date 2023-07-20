@@ -12,8 +12,8 @@ import './Settings.scss';
 
 function Settings({ organismsFiltered }: { organismsFiltered: Organism[] }) {
   const dispatch = useAppDispatch();
-  // const [searchParams] = useSearchParams();
-  // const categoryParams = searchParams.get('category');
+  const [searchParams] = useSearchParams();
+  const categoryParams = searchParams.get('category') as string;
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string>('10');
   // const [categories, setCategories] = useState<Categorie[]>([]);
@@ -44,6 +44,10 @@ function Settings({ organismsFiltered }: { organismsFiltered: Organism[] }) {
   function handleOpenSettings() {
     setIsOpen(!isOpen);
   }
+
+  useEffect(() => {
+    dispatch(filterCategories([categoryParams]));
+  }, [dispatch, categoryParams]);
 
   useEffect(() => {
     // Récupération de toutes les catégories présentes dans les organismes recherchés
@@ -124,6 +128,7 @@ function Settings({ organismsFiltered }: { organismsFiltered: Organism[] }) {
                   <label>
                     <input
                       type="checkbox"
+                      defaultChecked={categoryParams === category.tag}
                       name={category.translations[0].slug}
                       onChange={() => handleCategoryChange(category.tag)}
                       disabled={!presentCategories.includes(category.tag)}

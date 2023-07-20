@@ -22,7 +22,7 @@ export const initialState: OrganismsState = {
 
 export const fetchOrganisms = createAsyncThunk(
   'organisms/fetch-organisms',
-  async (category: string) => {
+  async (/* category: string */) => {
     const { data } = await AxiosInstance.get<{ data: Organism[] }>(
       'https://watizat.lunalink.nl/items/organisme',
       {
@@ -62,13 +62,13 @@ export const fetchOrganisms = createAsyncThunk(
             zone_id: {
               name: 'Toulouse',
             },
-            services: {
+            /* services: {
               categorie_id: {
                 translations: {
                   slug: `${category}`,
                 },
               },
-            },
+            }, */
           },
         },
       }
