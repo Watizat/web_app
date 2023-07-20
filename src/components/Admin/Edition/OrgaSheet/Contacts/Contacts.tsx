@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import ContactCard from '../ContactCard/ContactCard';
-import Modal from '../Modal/ModalContact';
+import Modal from '../../../Modal/ModalContact';
 import './Contacts.scss';
 
-function Contacts() {
+function Contacts({ contacts }) {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -22,10 +22,17 @@ function Contacts() {
       </span>
 
       <div className="orgaSheet-contacts__list">
-        <ContactCard />
-        <ContactCard />
-        <ContactCard />
-        <ContactCard />
+        {contacts.map((e) => (
+          <ContactCard
+            key={e.id}
+            name={e.name}
+            fonction={e.fonction}
+            phone={e.phone}
+            mail={e.mail}
+            visibility={e.visibility}
+            actualisation={e.actualisation}
+          />
+        ))}
       </div>
     </article>
   );

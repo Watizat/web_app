@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Modal from '../Modal/ModalInfos';
+import Modal from '../../../Modal/ModalInfos';
 import './Infos.scss';
 
-function Infos() {
+function Infos({ name, address, city, zipcode }) {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -16,29 +16,26 @@ function Infos() {
           className="orgaSheet-infos__menu"
           onClick={() => setIsActive(true)}
         >
-          <i className="las la-bars" />
+          <i className="las la-edit" />
         </button>
       </span>
 
       <ul className="orgaSheet-infos__list">
         <li className="orgaSheet-case">
           <h4>Organisme</h4>
-          <p>
-            Croix rouge française de l&apos;apostolque de machin truc (antenne
-            sud)
-          </p>
+          <p>{name}</p>
         </li>
         <li className="orgaSheet-case">
           <h4>Adresse</h4>
-          <p>66 rue de l&apos;ambassadeur de la petite provence</p>
+          <p>{address}</p>
         </li>
         <li className="orgaSheet-case">
           <h4>Ville</h4>
-          <p>Toulouse</p>
+          <p>{city}</p>
         </li>
         <li className="orgaSheet-case">
           <h4>Code postal</h4>
-          <p>31500</p>
+          <p>{zipcode}</p>
         </li>
       </ul>
     </article>

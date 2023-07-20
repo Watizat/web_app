@@ -5,7 +5,7 @@ import './Header.scss';
 
 function Header() {
   return (
-    <header className="header">
+    <header className="headerResults">
       <Link to="/">
         <img src={logo} alt="watizat logo" />
       </Link>

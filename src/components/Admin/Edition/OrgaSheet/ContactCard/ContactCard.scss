@@ -27,6 +27,11 @@
         width: 25%;
       }
     }
-
   }
+  &-services {
+    .orgaSheet-case {
+      border: 1px solid v.$grey-300;
+      border-radius: 5px;
+  }
+}
 }

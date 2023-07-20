@@ -1,172 +1,38 @@
 import { useState } from 'react';
+import ServiceCard from './ServiceCard/ServiceCard';
 import ContactCard from '../ContactCard/ContactCard';
-import Modal from '../Modal/ModalService';
+import ModalService from '../../../Modal/ModalService';
+import ModalContact from '../../../Modal/ModalContact';
 import './Services.scss';
 
-function Services() {
-  const [isActive, setIsActive] = useState(false);
-
+function Services({ services }) {
+  const [isActiveService, setIsActiveService] = useState(false);
   return (
     <article className="orgaSheet-card orgaSheet-services">
-      {isActive && <Modal setIsActive={setIsActive} />}
+      {isActiveService && <ModalService setIsActive={setIsActiveService} />}
 
       <span className="orgaSheet-card__titleBar">
         <h3 className="orgaSheet-card__title">Services disponibles</h3>
         <button
           type="button"
           className="orgaSheet-card__menu"
-          onClick={() => setIsActive(true)}
+          onClick={() => setIsActiveService(true)}
         >
           <i className="las la-plus-circle" />
         </button>
       </span>
 
       <ul className="orgaSheet-services__list">
-        <li className="orgaSheet-services__serviceCard">
-          <span className="serviceCard-header">
-            <h4 className="serviceCard-subheader">Acceuil de jour</h4>
-            <button type="button" className="orgaSheet-edition__menu">
-              <i className="las la-ellipsis-h" />
-            </button>
-          </span>
-          <div className="serviceCard-data">
-            <p className="serviceCard-data__info">
-              Petits déjeuners, boissons chaudes
-            </p>
-            <table className="serviceCard-data__hoursDetails">
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Lundi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Mardi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Mercredi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Jeudi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Vendredi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOff">Samedi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOff">Dimanche</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-            </table>
-            <p className="serviceCard-data__alerts">
-              Fermeture le troisième dimanche de la quatrième année du
-              calendrier maya postcolonial si y&apos;a pas grève à la SNCF
-            </p>
-            <ContactCard />
-          </div>
-        </li>
-        <li className="orgaSheet-services__serviceCard">
-          <span className="serviceCard-header">
-            <h4 className="serviceCard-subheader">Acceuil de jour</h4>
-            <button type="button" className="orgaSheet-edition__menu">
-              <i className="las la-ellipsis-h" />
-            </button>
-          </span>
-          <div className="serviceCard-data">
-            <p className="serviceCard-data__info">
-              Petits déjeuners, boissons chaudes
-            </p>
-            <table className="serviceCard-data__hoursDetails">
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Lundi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Mardi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Mercredi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Jeudi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Vendredi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOff">Samedi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOff">Dimanche</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-            </table>
-            <p className="serviceCard-data__alerts">
-              Fermeture le troisième dimanche de la quatrième année du
-              calendrier maya postcolonial si y&apos;a pas grève à la SNCF
-            </p>
-            <ContactCard />
-          </div>
-        </li>
-        <li className="orgaSheet-services__serviceCard">
-          <span className="serviceCard-header">
-            <h4 className="serviceCard-subheader">Acceuil de jour</h4>
-            <button type="button" className="orgaSheet-edition__menu">
-              <i className="las la-ellipsis-h" />
-            </button>
-          </span>
-          <div className="serviceCard-data">
-            <p className="serviceCard-data__info">
-              Petits déjeuners, boissons chaudes
-            </p>
-            <table className="serviceCard-data__hoursDetails">
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Lundi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Mardi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Mercredi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Jeudi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOn">Vendredi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOff">Samedi</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-              <tr className="serviceCard-data__days">
-                <td className="serviceCard-data__daysOff">Dimanche</td>
-                <td className="serviceCard-data__hours">9h-12h / 14h-16h</td>
-              </tr>
-            </table>
-            <p className="serviceCard-data__alerts">
-              Fermeture le troisième dimanche de la quatrième année du
-              calendrier maya postcolonial si y&apos;a pas grève à la SNCF
-            </p>
-            <ContactCard />
-            <ContactCard />
-          </div>
-        </li>
+        {services.map((e) => (
+          <ServiceCard
+            key={`services${e.id}`}
+            name={e.name}
+            description={e.description}
+            hours={e.hours}
+            infos_alerte={e.infos_alerte}
+            contacts={e.contacts}
+          />
+        ))}
       </ul>
     </article>
   );

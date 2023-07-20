@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Modal from '../Modal/ModalData';
+import Modal from '../../../Modal/ModalData';
 import './Data.scss';
 
-function Data() {
+function Data({ pmr, animals, description, hours, infos_alertes }) {
   const [isActive, setIsActive] = useState(false);
   return (
     <article className="orgaSheet-card orgaSheet-data">
@@ -15,7 +15,7 @@ function Data() {
           className="orgaSheet-card__menu"
           onClick={() => setIsActive(true)}
         >
-          <i className="las la-bars" />
+          <i className="las la-edit" />
         </button>
       </span>
 
@@ -24,62 +24,49 @@ function Data() {
           <h4>Accés</h4>
           <div className="orgaSheet-data__accessDetails">
             <label className="orgaSheet-data__pmr">
-              <input type="checkbox" />
+              {pmr ? (
+                <input type="checkbox" disabled checked />
+              ) : (
+                <input type="checkbox" disabled />
+              )}
               Accessible PSH /PMR
             </label>
-            <label className="orgaSheet-data__animals">
-              <input type="checkbox" />
+            <label className="orgaSheet-data__pmr">
+              {animals ? (
+                <input type="checkbox" disabled checked />
+              ) : (
+                <input type="checkbox" disabled />
+              )}
               Animaux admis
             </label>
           </div>
         </li>
         <li className="orgaSheet-case">
           <h4>Description</h4>
-          <p>
-            Écoute, renseignement et orientation pour les personnes sans
-            domicile fixe n’ayant pas de référent social. Service social public
-            qui apporte une aide ponctuelle sur les besoins de première
-            nécessité et l&apos;accès aux droits. Pour assurer un suivi, une
-            orientation vers un référent social aura lieu.
-          </p>
+          <p>{description}</p>
         </li>
         <li className="orgaSheet-case orgaSheet-data__hours">
           <h4>Horaires</h4>
           <div className="orgaSheet-data__hoursDetails">
-            <p>
-              <span className="orgaSheet-data__daysOn">Lundi</span>9h-12h /
-              14h-16h
-            </p>
-            <p>
-              <span className="orgaSheet-data__daysOn">Mardi</span>9h-12h /
-              14h-16h
-            </p>
-            <p>
-              <span className="orgaSheet-data__daysOn">Mercredi</span>9h-12h /
-              14h-16h
-            </p>
-            <p>
-              <span className="orgaSheet-data__daysOn">Jeudi</span>9h-12h /
-              14h-16h
-            </p>
-            <p>
-              <span className="orgaSheet-data__daysOn">Vendredi</span>9h-12h /
-              14h-16h
-            </p>
-            <p>
-              <span className="orgaSheet-data__daysOff">Samedi</span>Fermé
-            </p>
-            <p>
-              <span className="orgaSheet-data__daysOff">Dimanche</span>Fermé
-            </p>
+            {hours.map((e) => (
+              <p key={e.name}>
+                <span
+                  className={
+                    e.day === 6 || e.day === 7
+                      ? 'orgaSheet-data__daysOff'
+                      : 'orgaSheet-data__daysOn'
+                  }
+                >
+                  {e.name}
+                </span>
+                {`${e.open_am} - ${e.close_am} / ${e.open_pm} - ${e.close_pm}`}
+              </p>
+            ))}
           </div>
         </li>
         <li className="orgaSheet-case">
           <h4>Infos, alerte</h4>
-          <p>
-            Fermeture le troisième dimanche de la quatrième année du calendrier
-            maya postcolonial si y&apos;a pas grève à la SNCF
-          </p>
+          <p>{infos_alertes}</p>
         </li>
       </ul>
     </article>

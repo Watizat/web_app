@@ -96,7 +96,7 @@
       justify-content: flex-end;
       align-items: flex-start;
       align-content: flex-start;
-      margin: 5rem auto auto auto;
+      margin: 3rem auto auto auto;
       gap: 3rem;
       @include m.widescreen {
         margin: 0;
@@ -168,7 +168,12 @@
               font-size: 1.8rem;
             }
 
+            @include m.mobile {
+              padding: 2.3rem;
+            }
+
             @include m.tablet-only {
+              padding: 2.3rem;
               width: 3rem;
               span {
                 font-size: 0.7em;
@@ -178,6 +183,7 @@
               }
             }
             @include m.desktop {
+              padding: auto;
               width: 5rem;
               span {
                 font-size: 0.8rem;

@@ -1,3 +1,4 @@
+import { orga } from './organismes';
 import Infos from './Infos/Infos';
 import Contacts from './Contacts/Contacts';
 import Data from './Data/Data';
@@ -7,10 +8,27 @@ import './OrgaSheet.scss';
 function OrgaSheet() {
   return (
     <section className="orgaSheet">
-      <Infos />
-      <Contacts />
-      <Data />
-      <Services />
+      <p />
+      <Infos
+        key={`infos${orga.id}`}
+        name={orga.name}
+        address={orga.address}
+        city={orga.city}
+        zipcode={orga.zipcode}
+      />
+
+      <Contacts key={`contacts-${orga.id}`} contacts={orga.contacts} />
+
+      <Data
+        key={`data-${orga.id}`}
+        pmr={orga.pmr}
+        animals={orga.animals}
+        description={orga.description}
+        hours={orga.hours}
+        infos_alertes={orga.infos_alertes}
+      />
+
+      <Services key={`services-${orga.id}`} services={orga.services} />
     </section>
   );
 }
