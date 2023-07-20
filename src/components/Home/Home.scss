@@ -53,14 +53,14 @@
         rgba(v.$bghome, 0.8),
         rgba(v.$bghome, 0.5)
       ),
-      url('./img/bghome-portrait.webp');
+      url('./img/bghome-portrait.jpg');
     min-height: 100vh;
     @include m.desktop {
       background-image: linear-gradient(
           rgba(v.$bghome, 0.8),
           rgba(v.$bghome, 0.5)
         ),
-        url('./img/bghome-landscape.webp');
+        url('./img/bghome-landscape.jpg');
       min-height: 40vh;
     }
     @include m.fullhd {
