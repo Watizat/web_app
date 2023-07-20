@@ -36,16 +36,6 @@ function Settings() {
     } else {
       dispatch(filterCategories([...filteredCategories, category]));
     }
-    /*     const organizationsWithTargetCategories = organisms.filter(
-      (organization) => {
-        return organization.services.some((service) => {
-          return service.categorie_id.translations.some((ele) =>
-            filteredCategories.includes(ele.name)
-          );
-        });
-      }
-    );
-    dispatch(setOrganisms(organizationsWithTargetCategories)); */
   };
 
   // Récupération de toutes les catégories présentes dans les organismes recherchés
@@ -56,7 +46,7 @@ function Settings() {
     .flat();
   // Suppression des catégories en doublon
   const presentCategories = [
-    ...new Set(organismsCagtegories.map((cat) => cat.name)),
+    ...new Set(organismsCagtegories.map((cat) => cat.slug)),
   ];
 
   function handleDistanceValueChange(
@@ -148,9 +138,9 @@ function Settings() {
                     type="checkbox"
                     name={category.slug}
                     id={category.slug}
-                    onChange={() => handleCategoryChange(category.name)}
+                    onChange={() => handleCategoryChange(category.slug)}
                     disabled={
-                      !presentCategories.includes(category.name) ||
+                      !presentCategories.includes(category.slug) ||
                       category.slug === categ
                     }
                   />

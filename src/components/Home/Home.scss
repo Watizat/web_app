@@ -158,7 +158,7 @@
             color: v.$primary;
             white-space: nowrap;
             width: 10%;
-            padding: 2.3rem;
+            //padding: 2.3rem;
             gap: 0.5rem;
 
             span {
@@ -171,7 +171,7 @@
             }
 
             @include m.tablet-only {
-              width: 3rem;
+              //width: 3rem;
               span {
                 font-size: 0.7em;
               }
@@ -180,7 +180,7 @@
               }
             }
             @include m.desktop {
-              width: 5rem;
+              //width: 5rem;
               span {
                 font-size: 0.8rem;
               }
@@ -189,7 +189,7 @@
               }
             }
             @include m.fullhd {
-              width: 6rem;
+              //width: 6rem;
               span {
                 font-size: 0.9rem;
               }
