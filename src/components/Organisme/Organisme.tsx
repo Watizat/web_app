@@ -69,48 +69,59 @@ function Organisme() {
           <div className="organisme-infos">
             <article>
               <h3>Contact</h3>
+              <div className="organisme-infos--maincontact">
+                <p>66 bis avenue Étienne-Billières - 31100 Toulouse</p>
+                <a href="#">00 00 00 00 00</a>
+                <a href="#">mail@mail.com</a>
+              </div>
+              <div className="organisme-infos--othercontact">
+                <p>Direction</p>
+                <p>Jean-Claude Tartempion</p>
+                <a href="#">00 00 00 00 00</a>
+                <a href="#">mail@mail.com</a>
+              </div>
             </article>
             <article>
               <h3>Horaires</h3>
-              <table>
+              <table className="organisme-infos--schedule">
                 <tr>
-                  <td>Lundi</td>
+                  <td className="organisme-infos--schedule-day">Lundi</td>
                   <td>
                     <span>9h-12h</span>/<span>14h-16h</span>
                   </td>
                 </tr>
                 <tr>
-                  <td>Mardi</td>
+                  <td className="organisme-infos--schedule-day">Mardi</td>
                   <td>
                     <span>9h-12h</span>/<span>14h-16h</span>
                   </td>
                 </tr>
                 <tr>
-                  <td>Mercredi</td>
+                  <td className="organisme-infos--schedule-day">Mercredi</td>
                   <td>
                     <span>9h-12h</span>/<span>14h-16h</span>
                   </td>
                 </tr>
                 <tr>
-                  <td>Jeudi</td>
+                  <td className="organisme-infos--schedule-day">Jeudi</td>
                   <td>
                     <span>9h-12h</span>/<span>14h-16h</span>
                   </td>
                 </tr>
                 <tr>
-                  <td>Vendredi</td>
+                  <td className="organisme-infos--schedule-day">Vendredi</td>
                   <td>
                     <span>9h-12h</span>/<span>14h-16h</span>
                   </td>
                 </tr>
                 <tr>
-                  <td>Samedi</td>
+                  <td className="organisme-infos--schedule-day">Samedi</td>
                   <td>
                     <span>Fermé</span>
                   </td>
                 </tr>
                 <tr>
-                  <td>Dimanche</td>
+                  <td className="organisme-infos--schedule-day">Dimanche</td>
                   <td>
                     <span>Fermé</span>
                   </td>
@@ -127,6 +138,96 @@ function Organisme() {
               <div className="organisme-services-contentcards--cards">
                 <article>
                   <button
+                    className={classNames(
+                      'organisme-services-contentcards--cards-header',
+                      {
+                        'organisme-services-contentcards--cards-header--open':
+                          isOpen,
+                      }
+                    )}
+                    type="button"
+                    onClick={handleOpenSettings}
+                  >
+                    <h4>
+                      <i className="las la-utensils" /> Repas{' '}
+                      <i
+                        className={
+                          isOpen ? 'las la-minus-circle' : 'las la-plus-circle'
+                        }
+                      />
+                    </h4>
+                  </button>
+
+                  <div
+                    className={classNames(
+                      'organisme-services-contentcards--cards-content',
+                      { 'is-visible': isOpen }
+                    )}
+                  >
+                    <table>
+                      <tr>
+                        <td className="organisme-services-contentcards--cards-content-scheduleday">
+                          Lundi
+                        </td>
+                        <td>
+                          <span>9h-12h</span>/<span>14h-16h</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="organisme-services-contentcards--cards-content-scheduleday">
+                          Mardi
+                        </td>
+                        <td>
+                          <span>9h-12h</span>/<span>14h-16h</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="organisme-services-contentcards--cards-content-scheduleday">
+                          Mercredi
+                        </td>
+                        <td>
+                          <span>9h-12h</span>/<span>14h-16h</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="organisme-services-contentcards--cards-content-scheduleday">
+                          Jeudi
+                        </td>
+                        <td>
+                          <span>9h-12h</span>/<span>14h-16h</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="organisme-services-contentcards--cards-content-scheduleday">
+                          Vendredi
+                        </td>
+                        <td>
+                          <span>9h-12h</span>/<span>14h-16h</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="organisme-services-contentcards--cards-content-scheduleday">
+                          Samedi
+                        </td>
+                        <td>
+                          <span>Fermé</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="organisme-services-contentcards--cards-content-scheduleday">
+                          Dimanche
+                        </td>
+                        <td>
+                          <span>Fermé</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </article>
+              </div>
+              <div className="organisme-services-contentcards--cards">
+                <article>
+                  <button
                     className="organisme-services-contentcards--cards-header"
                     type="button"
                     onClick={handleOpenSettings}
@@ -145,8 +246,7 @@ function Organisme() {
                     className={classNames(
                       'organisme-services-contentcards--cards-content',
                       {
-                        'organisme-services-contentcards--cards-content--visible':
-                          isOpen,
+                        'is-visible': isOpen,
                       }
                     )}
                   >
@@ -218,8 +318,7 @@ function Organisme() {
                     className={classNames(
                       'organisme-services-contentcards--cards-content',
                       {
-                        'organisme-services-contentcards--cards-content--visible':
-                          isOpen,
+                        'is-visible': isOpen,
                       }
                     )}
                   >
@@ -291,373 +390,7 @@ function Organisme() {
                     className={classNames(
                       'organisme-services-contentcards--cards-content',
                       {
-                        'organisme-services-contentcards--cards-content--visible':
-                          isOpen,
-                      }
-                    )}
-                  >
-                    <table>
-                      <tr>
-                        <td>Lundi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mardi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mercredi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Jeudi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Vendredi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Samedi</td>
-                        <td>
-                          <span>Fermé</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Dimanche</td>
-                        <td>
-                          <span>Fermé</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </article>
-              </div>
-              <div className="organisme-services-contentcards--cards">
-                <article>
-                  <button
-                    className="organisme-services-contentcards--cards-header"
-                    type="button"
-                    onClick={handleOpenSettings}
-                  >
-                    <h4>
-                      <i className="las la-utensils" /> Repas{' '}
-                      <i
-                        className={
-                          isOpen ? 'las la-minus-circle' : 'las la-plus-circle'
-                        }
-                      />
-                    </h4>
-                  </button>
-
-                  <div
-                    className={classNames(
-                      'organisme-services-contentcards--cards-content',
-                      {
-                        'organisme-services-contentcards--cards-content--visible':
-                          isOpen,
-                      }
-                    )}
-                  >
-                    <table>
-                      <tr>
-                        <td>Lundi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mardi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mercredi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Jeudi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Vendredi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Samedi</td>
-                        <td>
-                          <span>Fermé</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Dimanche</td>
-                        <td>
-                          <span>Fermé</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </article>
-              </div>
-              <div className="organisme-services-contentcards--cards">
-                <article>
-                  <button
-                    className="organisme-services-contentcards--cards-header"
-                    type="button"
-                    onClick={handleOpenSettings}
-                  >
-                    <h4>
-                      <i className="las la-utensils" /> Repas{' '}
-                      <i
-                        className={
-                          isOpen ? 'las la-minus-circle' : 'las la-plus-circle'
-                        }
-                      />
-                    </h4>
-                  </button>
-
-                  <div
-                    className={classNames(
-                      'organisme-services-contentcards--cards-content',
-                      {
-                        'organisme-services-contentcards--cards-content--visible':
-                          isOpen,
-                      }
-                    )}
-                  >
-                    <table>
-                      <tr>
-                        <td>Lundi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mardi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mercredi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Jeudi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Vendredi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Samedi</td>
-                        <td>
-                          <span>Fermé</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Dimanche</td>
-                        <td>
-                          <span>Fermé</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </article>
-              </div>
-              <div className="organisme-services-contentcards--cards">
-                <article>
-                  <button
-                    className="organisme-services-contentcards--cards-header"
-                    type="button"
-                    onClick={handleOpenSettings}
-                  >
-                    <h4>
-                      <i className="las la-utensils" /> Repas{' '}
-                      <i
-                        className={
-                          isOpen ? 'las la-minus-circle' : 'las la-plus-circle'
-                        }
-                      />
-                    </h4>
-                  </button>
-
-                  <div
-                    className={classNames(
-                      'organisme-services-contentcards--cards-content',
-                      {
-                        'organisme-services-contentcards--cards-content--visible':
-                          isOpen,
-                      }
-                    )}
-                  >
-                    <table>
-                      <tr>
-                        <td>Lundi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mardi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mercredi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Jeudi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Vendredi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Samedi</td>
-                        <td>
-                          <span>Fermé</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Dimanche</td>
-                        <td>
-                          <span>Fermé</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </article>
-              </div>
-              <div className="organisme-services-contentcards--cards">
-                <article>
-                  <button
-                    className="organisme-services-contentcards--cards-header"
-                    type="button"
-                    onClick={handleOpenSettings}
-                  >
-                    <h4>
-                      <i className="las la-utensils" /> Repas{' '}
-                      <i
-                        className={
-                          isOpen ? 'las la-minus-circle' : 'las la-plus-circle'
-                        }
-                      />
-                    </h4>
-                  </button>
-
-                  <div
-                    className={classNames(
-                      'organisme-services-contentcards--cards-content',
-                      {
-                        'organisme-services-contentcards--cards-content--visible':
-                          isOpen,
-                      }
-                    )}
-                  >
-                    <table>
-                      <tr>
-                        <td>Lundi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mardi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mercredi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Jeudi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Vendredi</td>
-                        <td>
-                          <span>9h-12h</span>/<span>14h-16h</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Samedi</td>
-                        <td>
-                          <span>Fermé</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Dimanche</td>
-                        <td>
-                          <span>Fermé</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </article>
-              </div>
-              <div className="organisme-services-contentcards--cards">
-                <article>
-                  <button
-                    className="organisme-services-contentcards--cards-header"
-                    type="button"
-                    onClick={handleOpenSettings}
-                  >
-                    <h4>
-                      <i className="las la-utensils" /> Repas{' '}
-                      <i
-                        className={
-                          isOpen ? 'las la-minus-circle' : 'las la-plus-circle'
-                        }
-                      />
-                    </h4>
-                  </button>
-
-                  <div
-                    className={classNames(
-                      'organisme-services-contentcards--cards-content',
-                      {
-                        'organisme-services-contentcards--cards-content--visible':
-                          isOpen,
+                        'is-visible': isOpen,
                       }
                     )}
                   >

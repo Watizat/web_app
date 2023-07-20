@@ -26,7 +26,7 @@
       font-weight: 600;
     }
 
-    & las{
+    & .las{
       line-height: 2 ;
     }
 
@@ -75,10 +75,46 @@
   &-infos {
     display: flex;
     justify-content: space-between;
+   
 
     & article {
       width: 33%;
       flex: 0 0 auto;
+    }
+
+    &--maincontact{
+      font-size: 0.8em;
+      padding-left: 1em;
+
+      & a{
+        display: block;
+        color: v.$grey-700
+      }
+    }
+
+    &--othercontact{
+      padding-left: 1em;
+      font-size: 0.8em;
+
+      & p:first-of-type{
+        color: v.$watigreen;
+        font-weight: 600;
+        margin-top: 1em;
+      }
+
+      & a{
+        display: block;
+        color: v.$grey-700
+      }
+    }
+
+    &--schedule{
+      font-size: 0.8em;
+
+      &-day{
+        color: v.$watigreen;
+        font-weight: 600;
+      }
     }
   }
 
@@ -112,20 +148,38 @@
           justify-content: space-between;
           align-content: center;
         }
+
+        &--open{
+          background-color: v.$watigreen;
+          transition: background color 800ms;
+          cursor: pointer;
+
+          & h4{
+            color: v.$white;
+          }
+        }
   
       }
 
       &-content{
         display: none;
 
-        &--visible{
-          display: block;
-        }
       }
 
       & article {
         width: 100%;
         flex: 0 0 auto;
+      }
+
+      &-content{
+        background-color: v.$grey-100;
+        padding: 2em;
+        font-size: 0.9em;
+
+        &-scheduleday{
+          color: v.$watigreen;
+          font-weight: 600;
+        }
       }
     }
   }
@@ -142,4 +196,8 @@ h3 {
   color:v.$primary;
   border-bottom: 0.5px solid v.$grey-500;
   margin: 0.5em 0;
+}
+
+.is-visible{
+  display: block;
 }
