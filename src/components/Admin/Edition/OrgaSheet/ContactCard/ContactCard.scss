@@ -13,11 +13,14 @@
       padding: 0;
     }
     .orgaSheet-case {
+      flex: 1 2 auto;
       min-height: 9vh;
       width: 50%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
+      align-content: flex-start;
+      border: 1px solid v.$grey-300;
 
       @include m.desktop {
         width: 50%;
@@ -27,6 +30,11 @@
         width: 25%;
       }
     }
-
   }
+  &-services {
+    .orgaSheet-case {
+      border: 1px solid v.$grey-300;
+      border-radius: 5px;
+  }
+}
 }

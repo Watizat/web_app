@@ -1,14 +1,14 @@
-@use '../../../../../styles/variables' as v;
-@use '../../../../../styles/medias' as m;
-@use '../../../../../styles/elements';
+@use '../../../../../../styles/variables' as v;
+@use '../../../../../../styles/medias' as m;
+@use '../../../../../../styles/elements';
 
 .orgaSheet {
   &-services {
     &__list {
       display: flex;
       flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 2rem 2rem;
+      justify-content: space-between;
+      padding: 1rem; 
     }
     &__serviceCard {
       display: flex;

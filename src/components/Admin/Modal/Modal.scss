@@ -1,8 +1,9 @@
-@use '../../../../../styles/variables' as v;
-@use '../../../../../styles/medias' as m;
-@use '../../../../../styles/elements';
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
 
 .modal {
+  z-index: 100;
   position: absolute;
   top: 0;
   left: 0;
@@ -157,6 +158,35 @@
         outline: none;
         background-color: v.$white;
       }
+    }
+  }
+
+  &-contact {
+    &__modes, &__roles {
+      display: flex;
+      gap: 25%;
+    }
+    &__modes {
+      gap: 25%;
+    }
+    &__roles {
+      gap: 10%;
+    }
+
+&__private, &__actu {
+  font-weight: 400;
+  select {
+    font-weight: 300;
+  margin-left: 1rem;
+  background-color: v.$white;
+  border: 1px solid v.$grey-300;
+  border-radius: 10px;
+  padding: .2rem .4rem;
+}
+}
+
+    &__mail {
+      width: 200%;
     }
   }
 }

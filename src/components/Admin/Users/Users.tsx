@@ -31,7 +31,9 @@ function Users() {
           </tr>
         </thead>
         <tbody>
-          <UsersDetails />
+          {Array.from({ length: 30 }, (_, i) => (
+            <UsersDetails key={i} />
+          ))}
         </tbody>
       </table>
     </div>

@@ -45,7 +45,7 @@
     /* Disabled */
 
     [type='checkbox']:disabled {
-      background-color: #ccd3d8;
+      background-color: v.$grey-200;
       opacity: 0.84;
       cursor: not-allowed;
     }

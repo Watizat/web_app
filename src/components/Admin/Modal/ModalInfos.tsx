@@ -2,20 +2,32 @@ import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  name?: string;
+  address?: string;
+  city?: string;
+  zipcode?: number;
+  website?: string;
 }
 
-function ModalContact({ setIsActive }: ModalProps) {
+function ModalInfos({
+  setIsActive,
+  name,
+  address,
+  city,
+  zipcode,
+  website,
+}: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
-        <h1 className="modal-title">Ajouter un contact</h1>
+        <h1 className="modal-title">Informations organisme</h1>
         <form className="modal-list">
           <div className="modal-case">
             <h4 className="modal-case__title">Organisme</h4>
             <input
               className="modal-case__inputTxt"
               type="text"
-              value="Croix rouge française de l'apostolque de machin truc (antenne sud)"
+              defaultValue={name}
             />
           </div>
           <div className="modal-case">
@@ -23,7 +35,7 @@ function ModalContact({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
-              value="66 rue de l'ambassadeur de la petite provence"
+              defaultValue={address}
             />
           </div>
           <div className="modal-case">
@@ -31,7 +43,7 @@ function ModalContact({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
-              value="Toulouse"
+              defaultValue={city}
             />
           </div>
           <div className="modal-case">
@@ -39,7 +51,15 @@ function ModalContact({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="number"
-              value="31500"
+              defaultValue={zipcode}
+            />
+          </div>
+          <div className="modal-case">
+            <h4 className="modal-case__title">Site web</h4>
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              defaultValue={website}
             />
           </div>
         </form>
@@ -62,5 +82,12 @@ function ModalContact({ setIsActive }: ModalProps) {
     </div>
   );
 }
+ModalInfos.defaultProps = {
+  name: '',
+  address: '',
+  city: '',
+  zipcode: '',
+  website: '',
+};
 
-export default ModalContact;
+export default ModalInfos;
