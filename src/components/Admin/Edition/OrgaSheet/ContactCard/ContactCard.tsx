@@ -14,7 +14,17 @@ function ContactCard({
 
   return (
     <div className="orgaSheet-case orgaSheet-contact">
-      {isActive && <Modal setIsActive={setIsActive} />}
+      {isActive && (
+        <Modal
+          setIsActive={setIsActive}
+          name={name}
+          fonction={fonction}
+          phone={phone}
+          mail={mail}
+          visibility={visibility}
+          actualisation={actualisation}
+        />
+      )}
       <div className="orgaSheet-contact__header">
         <div className="orgaSheet-contact__subheader">
           <h5>Contact</h5>

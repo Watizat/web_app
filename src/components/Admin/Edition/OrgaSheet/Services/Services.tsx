@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import ServiceCard from './ServiceCard/ServiceCard';
-import ContactCard from '../ContactCard/ContactCard';
 import ModalService from '../../../Modal/ModalService';
-import ModalContact from '../../../Modal/ModalContact';
 import './Services.scss';
 
 function Services({ services }) {
@@ -27,6 +25,7 @@ function Services({ services }) {
           <ServiceCard
             key={`services${e.id}`}
             name={e.name}
+            categories={e.categories}
             description={e.description}
             hours={e.hours}
             infos_alerte={e.infos_alerte}

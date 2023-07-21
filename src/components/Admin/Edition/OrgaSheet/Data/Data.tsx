@@ -6,7 +6,16 @@ function Data({ pmr, animals, description, hours, infos_alertes }) {
   const [isActive, setIsActive] = useState(false);
   return (
     <article className="orgaSheet-card orgaSheet-data">
-      {isActive && <Modal setIsActive={setIsActive} />}
+      {isActive && (
+        <Modal
+          setIsActive={setIsActive}
+          pmr={pmr}
+          animals={animals}
+          description={description}
+          hours={hours}
+          infos_alertes={infos_alertes}
+        />
+      )}
 
       <span className="orgaSheet-card__titleBar">
         <h3 className="orgaSheet-card__title">Informations génerales</h3>

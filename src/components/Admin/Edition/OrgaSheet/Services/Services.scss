@@ -7,8 +7,8 @@
     &__list {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 1rem; 
+      justify-content: flex-start;
+      gap: 2rem 2rem;
     }
     &__serviceCard {
       display: flex;

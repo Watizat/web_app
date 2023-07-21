@@ -1,121 +1,18 @@
+import { categoriesList } from '../../../data/categories';
 import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalService({ setIsActive }: ModalProps) {
-  const categories = [
-    {
-      tag: 'accueil-et-orientation',
-    },
-    {
-      tag: 'permanences-sociales',
-    },
-    {
-      tag: 'accueil-de-jour',
-    },
-    {
-      tag: 'bagagerie',
-    },
-    {
-      tag: 'manger',
-    },
-    {
-      tag: 'aide-juridique',
-    },
-    {
-      tag: 'permanences-telephoniques',
-    },
-    {
-      tag: 'femmes',
-    },
-    {
-      tag: 'enfance',
-    },
-    {
-      tag: 'lgbtqia',
-    },
-    {
-      tag: 'retablissement-des-liens',
-    },
-    {
-      tag: 'sante',
-    },
-    {
-      tag: 'covid19',
-    },
-    {
-      tag: 'travail-du-sexe',
-    },
-    {
-      tag: 'se-laver-laverie',
-    },
-    {
-      tag: 'apprendre-francais',
-    },
-    {
-      tag: 'informatique-numerique',
-    },
-    {
-      tag: 'lieux-culturels',
-    },
-    {
-      tag: 'activites',
-    },
-  ];
-
-  const hours = [
-    {
-      name: 'Lundi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Mardi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Mercredi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Jeudi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Vendredi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Samedi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Dimanche',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-  ];
+function ModalService({
+  setIsActive,
+  name,
+  categories,
+  description,
+  hours,
+  infos_alerte,
+}: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
@@ -126,11 +23,8 @@ function ModalService({ setIsActive }: ModalProps) {
 
             <label className="modal-contact__actu">
               Catégorie du service
-              <select
-                name="actualisation"
-                defaultValue="accueil-et-orientation"
-              >
-                {categories.map((i) => (
+              <select name="actualisation" defaultdefaultValue={categories}>
+                {categoriesList.map((i) => (
                   <option key={i.tag} value={i.tag}>
                     {i.tag}
                   </option>
@@ -143,7 +37,7 @@ function ModalService({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
-              value="Petits déjeuners, boissons chaudes"
+              defaultValue={description}
             />
           </div>
           <div className="modal-case">
@@ -162,28 +56,28 @@ function ModalService({ setIsActive }: ModalProps) {
                   </td>
                   <td className="modal-data__hoursHour">
                     <input
-                      value={e.open_am}
+                      defaultValue={e.open_am}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">-</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      value={e.close_am}
+                      defaultValue={e.close_am}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">/</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      value={e.open_pm}
+                      defaultValue={e.open_pm}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">-</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      value={e.close_pm}
+                      defaultValue={e.close_pm}
                       className="modal-data__hoursInput"
                     />
                   </td>
@@ -192,10 +86,10 @@ function ModalService({ setIsActive }: ModalProps) {
             </table>
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Description</h4>
+            <h4 className="modal-case__title">Info s & alertes</h4>
             <textarea
               className="modal-case__textarea"
-              value="Fermeture le troisième dimanche de la quatrième année du calendrier maya postcolonial si y'a pas grève à la SNCF"
+              defaultdefaultValue={infos_alerte}
             />
           </div>
         </form>

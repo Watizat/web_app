@@ -1,12 +1,12 @@
 export const orga = {
   id: 1,
-  name: "PÔLE D'ACCUEIL, D'INFORMATION, D'ORIENTATION (PAIO)",
+  name: 'Secours Catholique (antenne sud)',
   address: '66 bis avenue Étienne-Billières',
   city: 'Toulouse',
   zipcode: '31000',
   phone: null,
   mail: null,
-  website: null,
+  website: 'chasse_et_peche.com',
   pmr: true,
   animals: false,
   description:
@@ -113,10 +113,9 @@ export const orga = {
     {
       id: 1,
       name: 'Permanence sociale',
-      description:
-        "Possibilité de rendez-vous avec un travailleur social en semaine l'après-midi.\nPermanence sociale du PAIO (par ordre d'arrivée) ",
+      description: 'Ecoute et accompagnement psycho-social',
       infos_alerte: 'Fermé le huitième dimanche du quizinème mois',
-      categories: 'Manger',
+      categories: 'aide-juridique',
       contacts: [
         {
           id: 5,
@@ -190,8 +189,7 @@ export const orga = {
     {
       id: 2,
       name: 'Accueil de jour',
-      description:
-        "Possibilité de rendez-vous avec un travailleur social en semaine l'après-midi.\nPermanence sociale du PAIO (par ordre d'arrivée) ",
+      description: 'Repas du soir ',
       infos_alerte: 'Fermé le huitième dimanche du quizinème mois',
       categories: 'Manger',
       contacts: [

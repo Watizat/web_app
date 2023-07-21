@@ -1,4 +1,4 @@
-import { orga } from './organismes';
+import { orga } from '../../../../data/organismes';
 import Infos from './Infos/Infos';
 import Contacts from './Contacts/Contacts';
 import Data from './Data/Data';
@@ -15,6 +15,7 @@ function OrgaSheet() {
         address={orga.address}
         city={orga.city}
         zipcode={orga.zipcode}
+        website={orga.website}
       />
 
       <Contacts key={`contacts-${orga.id}`} contacts={orga.contacts} />

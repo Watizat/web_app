@@ -4,16 +4,15 @@ interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalContact({ setIsActive }: ModalProps) {
-  const contact = {
-    name: 'Jean-Michel Tranquil',
-    fonction: 'Mec important du haut de la pîle',
-    mail: 'jean-michel@lerelou@gmail.com',
-    tel: '0645786598',
-    role: 'prive',
-    actu: 'true',
-  };
-
+function ModalContact({
+  setIsActive,
+  name,
+  fonction,
+  mail,
+  phone,
+  visibility,
+  actualisation,
+}: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
@@ -24,7 +23,7 @@ function ModalContact({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
-              value={contact.name}
+              defaultValue={name}
             />
           </div>
           <div className="modal-case">
@@ -32,7 +31,7 @@ function ModalContact({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
-              value={contact.fonction}
+              defaultValue={fonction}
             />
           </div>
           <div className="modal-contact__modes">
@@ -41,7 +40,7 @@ function ModalContact({ setIsActive }: ModalProps) {
               <input
                 className="modal-case__inputTxt modal-contact__mail"
                 type="text"
-                value={contact.mail}
+                defaultValue={mail}
               />
             </div>
             <div className="modal-case">
@@ -49,7 +48,7 @@ function ModalContact({ setIsActive }: ModalProps) {
               <input
                 className="modal-case__inputTxt"
                 type="number"
-                value={contact.tel}
+                defaultValue={phone}
               />
             </div>
           </div>
@@ -58,14 +57,14 @@ function ModalContact({ setIsActive }: ModalProps) {
             <div className=" modal-contact__roles">
               <label className="modal-contact__private">
                 Publicité du contact
-                <select name="role" defaultValue={contact.role}>
-                  <option value="prive">Privé</option>
+                <select name="role" defaultValue={visibility}>
+                  <option value="private">Privé</option>
                   <option value="public">Public</option>
                 </select>
               </label>
               <label className="modal-contact__actu">
                 Contact pour actualisation
-                <select name="actualisation" defaultValue={contact.actu}>
+                <select name="actualisation" defaultValue={actualisation}>
                   <option value="false">Non</option>
                   <option value="true">Oui</option>
                 </select>

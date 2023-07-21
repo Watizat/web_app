@@ -4,11 +4,40 @@ import ModalService from '../../../../Modal/ModalService';
 import ModalContact from '../../../../Modal/ModalContact';
 import './ServiceCard.scss';
 
-function ServiceCard({ name, description, hours, infos_alerte, contacts }) {
+function ServiceCard({
+  name,
+  categories,
+  description,
+  hours,
+  infos_alerte,
+  contacts,
+}) {
   const [isActiveService, setIsActiveService] = useState(false);
   const [isActiveContact, setIsActiveContact] = useState(false);
   return (
     <li className="orgaSheet-services__serviceCard">
+      {isActiveContact && (
+        <ModalContact
+          setIsActive={setIsActiveContact}
+          name={name}
+          fonction={fonction}
+          phone={phone}
+          mail={mail}
+          visibility={visibility}
+          actualisation={actualisation}
+        />
+      )}
+      {isActiveService && (
+        <ModalService
+          setIsActive={setIsActiveService}
+          name={name}
+          categories={categories}
+          description={description}
+          hours={hours}
+          infos_alerte={infos_alerte}
+          contacts={contacts}
+        />
+      )}
       <span className="serviceCard-header">
         <h4 className="serviceCard-subheader">{name}</h4>
         <span className="serviceCard-actions">

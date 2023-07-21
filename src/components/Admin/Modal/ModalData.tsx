@@ -4,59 +4,14 @@ interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalData({ setIsActive }: ModalProps) {
-  const hours = [
-    {
-      name: 'Lundi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Mardi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Mercredi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Jeudi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Vendredi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Samedi',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-    {
-      name: 'Dimanche',
-      open_am: '09h00',
-      close_am: '12h00',
-      open_pm: '14h00',
-      close_pm: '17h00',
-    },
-  ];
-
+function ModalData({
+  setIsActive,
+  pmr,
+  animals,
+  description,
+  hours,
+  infos_alertes,
+}: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
@@ -66,11 +21,19 @@ function ModalData({ setIsActive }: ModalProps) {
             <h4 className="modal-case__title">Accés</h4>
             <div className="modal-data__accessDetails">
               <label className="modal-data__pmr">
-                <input type="checkbox" />
+                {pmr ? (
+                  <input type="checkbox" checked />
+                ) : (
+                  <input type="checkbox" />
+                )}
                 Accessible PSH /PMR
               </label>
-              <label className="modal-data__animals">
-                <input type="checkbox" />
+              <label className="modal-data__pmr">
+                {animals ? (
+                  <input type="checkbox" checked />
+                ) : (
+                  <input type="checkbox" />
+                )}
                 Animaux admis
               </label>
             </div>
@@ -79,7 +42,7 @@ function ModalData({ setIsActive }: ModalProps) {
             <h4 className="modal-case__title">Description</h4>
             <textarea
               className="modal-case__textarea"
-              value="Écoute, renseignement et orientation pour les personnes sans domicile fixe n’ayant pas de référent social. Service social public qui apporte une aide ponctuelle sur les besoins de première nécessité et l'accès aux droits. Pour assurer un suivi, une orientation vers un référent social aura lieu."
+              defaultValue={description}
             />
           </div>
           <div className="modal-case">
@@ -98,28 +61,28 @@ function ModalData({ setIsActive }: ModalProps) {
                   </td>
                   <td className="modal-data__hoursHour">
                     <input
-                      value={e.open_am}
+                      defaultValue={e.open_am}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">-</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      value={e.close_am}
+                      defaultValue={e.close_am}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">/</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      value={e.open_pm}
+                      defaultValue={e.open_pm}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">-</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      value={e.close_pm}
+                      defaultValue={e.close_pm}
                       className="modal-data__hoursInput"
                     />
                   </td>
@@ -131,7 +94,7 @@ function ModalData({ setIsActive }: ModalProps) {
             <h4 className="modal-case__title">Infos, alerte</h4>
             <textarea
               className="modal-case__textarea"
-              value="Fermeture le troisième dimanche de la quatrième année du calendrier maya postcolonial si y'a pas grève à la SNCF"
+              defaultValue={infos_alertes}
             />
           </div>
         </form>
