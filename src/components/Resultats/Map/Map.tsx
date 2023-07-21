@@ -1,10 +1,9 @@
+import L from 'leaflet';
 import { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import { Link } from 'react-router-dom';
+import pin from '../../../assets/pin.svg';
 import { useAppSelector } from '../../../hooks/redux';
 import './Map.scss';
-// import Recenter from './Recenter/recenter';
-// import Recenter from './Marker/Marker';
 
 function Map() {
   const [position, setPosition] = useState({ lat: 43.6, lng: 1.433333 });
@@ -28,6 +27,16 @@ function Map() {
       }
     );
   }, []);
+  const me = new L.DivIcon({
+    className: 'custom-me',
+    html: `<div></div>`,
+    iconSize: [34, 34],
+  });
+
+  const me2 = new L.Icon({
+    iconUrl: pin,
+    iconSize: [40, 40],
+  });
 
   return (
     <MapContainer center={position} zoom={13}>
@@ -35,8 +44,25 @@ function Map() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {navigatorGps && <Marker position={userPosition} />}
-      {organisms.map((organism) => (
+
+      {navigatorGps && <Marker position={position} icon={me} />}
+
+      {organisms.map((organism, index) => {
+        const customIcon = new L.DivIcon({
+          className: 'custom-icon',
+          html: `<div>${index + 1}</div>`,
+          iconSize: [34, 34],
+          iconAnchor: [14, 37],
+        });
+        return (
+          <Marker
+            key={organism.id}
+            position={[organism.latitude, organism.longitude]}
+            icon={customIcon}
+          />
+        );
+      })}
+      {/*       {organisms.map((organism) => (
         <Marker
           key={organism.id}
           position={[organism.latitude, organism.longitude]}
@@ -45,7 +71,7 @@ function Map() {
             <Link to={`/organisme/${organism.slug}`}>{organism.name}</Link>
           </Popup>
         </Marker>
-      ))}
+      ))} */}
     </MapContainer>
   );
 }
