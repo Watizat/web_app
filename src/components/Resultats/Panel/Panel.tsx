@@ -17,9 +17,12 @@ function Panel() {
   useEffect(() => {
     const setFilter = organisms.filter((organism) => {
       const matchesCategoryFilter =
-        [...new Set(organism.services.map((e) => e.categorie_id.tag))].filter(
-          (tag) => categoryFilter.includes(tag)
-        ).length >= categoryFilter.length;
+        [
+          ...new Set(
+            organism.services.map((service) => service.categorie_id.tag)
+          ),
+        ].filter((tag) => categoryFilter.includes(tag)).length >=
+        categoryFilter.length;
 
       const matchesPmrFilter = isPmr ? organism.pmr : true;
       const matchesAnimalsFilter = isAnimals ? organism.animals : true;
