@@ -16,14 +16,19 @@ function Panel() {
 
   useEffect(() => {
     const setFilter = organisms.filter((organism) => {
-      return (
+      const matchesCategoryFilter =
         [...new Set(organism.services.map((e) => e.categorie_id.tag))].filter(
           (tag) => categoryFilter.includes(tag)
-        ).length >= categoryFilter.length
-      );
+        ).length >= categoryFilter.length;
+
+      const matchesPmrFilter = isPmr ? organism.pmr : true;
+      const matchesAnimalsFilter = isAnimals ? organism.animals : true;
+
+      return matchesCategoryFilter && matchesPmrFilter && matchesAnimalsFilter;
     });
+
     dispatch(setFilteredOrganisms(setFilter));
-  }, [organisms, categoryFilter, isPmr, dispatch]);
+  }, [organisms, categoryFilter, isPmr, isAnimals, dispatch]);
 
   return (
     <section className="panel">
