@@ -13,6 +13,7 @@ function Panel() {
   const categoryFilter = useAppSelector((state) => state.categoryFilter);
   const [isPmr, setIsPmr] = useState<boolean>(false);
   const [isAnimals, setIsAnimals] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>('');
 
   useEffect(() => {
     const setFilter = organisms.filter((organism) => {
@@ -26,16 +27,33 @@ function Panel() {
 
       const matchesPmrFilter = isPmr ? organism.pmr : true;
       const matchesAnimalsFilter = isAnimals ? organism.animals : true;
+      const matchesNameFilter = organism.name
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .includes(search.toLowerCase());
+      const matchesNameFilterWithAccents = organism.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
 
-      return matchesCategoryFilter && matchesPmrFilter && matchesAnimalsFilter;
+      return (
+        matchesCategoryFilter &&
+        matchesPmrFilter &&
+        matchesAnimalsFilter &&
+        (matchesNameFilter || matchesNameFilterWithAccents)
+      );
     });
 
     dispatch(setFilteredOrganisms(setFilter));
-  }, [organisms, categoryFilter, isPmr, isAnimals, dispatch]);
+  }, [organisms, categoryFilter, isPmr, isAnimals, search, dispatch]);
 
   return (
     <section className="panel">
-      <Settings setIsPmr={setIsPmr} setIsAnimals={setIsAnimals} />
+      <Settings
+        setIsPmr={setIsPmr}
+        setIsAnimals={setIsAnimals}
+        setSearch={setSearch}
+      />
       {isLoading && <div>Loading...</div>}
       {!isLoading &&
         (filteredOrganisms.length > 0 ? (

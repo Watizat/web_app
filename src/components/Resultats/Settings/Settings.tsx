@@ -12,9 +12,10 @@ import './Settings.scss';
 interface SettingsProps {
   setIsPmr: React.Dispatch<React.SetStateAction<boolean>>;
   setIsAnimals: React.Dispatch<React.SetStateAction<boolean>>;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Settings({ setIsPmr, setIsAnimals }: SettingsProps) {
+function Settings({ setIsPmr, setIsAnimals, setSearch }: SettingsProps) {
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const categoryParams = searchParams.get('category') as string;
@@ -39,6 +40,14 @@ function Settings({ setIsPmr, setIsAnimals }: SettingsProps) {
       dispatch(filterCategories([...categoryFilter, tag]));
     }
   };
+
+  function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
+    if (event.target.value.trim() === '') {
+      setSearch('');
+    }
+    setSearch(event.target.value);
+    setSearchInputValue(event.target.value);
+  }
 
   function handlePmr(event: React.ChangeEvent<HTMLInputElement>) {
     setIsPmr(event.target.checked);
@@ -96,13 +105,15 @@ function Settings({ setIsPmr, setIsAnimals }: SettingsProps) {
       >
         <div>
           <span>Affiner la recherche</span>
-          <input
-            type="text"
-            placeholder="Exemple : Croix Rouge française (nord)"
-            id="search-panel"
-            value={searchInputValue}
-            onChange={(event) => setSearchInputValue(event.target.value)}
-          />
+          <form>
+            <input
+              type="text"
+              placeholder="Exemple : Croix Rouge française (nord)"
+              id="search-panel"
+              value={searchInputValue}
+              onChange={handleSearch}
+            />
+          </form>
         </div>
         <div>
           <span>Filtrer par accessibilité</span>
