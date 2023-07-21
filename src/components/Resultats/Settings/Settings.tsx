@@ -9,7 +9,12 @@ import {
 import Icon from '../../../ui/icon/icon';
 import './Settings.scss';
 
-function Settings() {
+interface SettingsProps {
+  setIsPmr: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAnimals: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Settings({ setIsPmr, setIsAnimals }: SettingsProps) {
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const categoryParams = searchParams.get('category') as string;
@@ -34,6 +39,14 @@ function Settings() {
       dispatch(filterCategories([...categoryFilter, tag]));
     }
   };
+
+  function handlePmr(event: React.ChangeEvent<HTMLInputElement>) {
+    setIsPmr(event.target.checked);
+  }
+
+  function handleAnimals(event: React.ChangeEvent<HTMLInputElement>) {
+    setIsAnimals(event.target.checked);
+  }
 
   function handleDistanceValueChange(
     event: React.ChangeEvent<HTMLInputElement>
@@ -94,9 +107,19 @@ function Settings() {
         <div>
           <span>Filtrer par accessibilité</span>
           <div>
-            <input type="checkbox" name="pmr" id="pmr" />
+            <input
+              type="checkbox"
+              name="pmr"
+              id="pmr"
+              onChange={(event) => handlePmr(event)}
+            />
             <label htmlFor="pmr">Accessible PSH / PMR</label>
-            <input type="checkbox" name="animals" id="animals" />
+            <input
+              type="checkbox"
+              name="animals"
+              id="animals"
+              onChange={(event) => handleAnimals(event)}
+            />
             <label htmlFor="animals">Animaux acceptés</label>
           </div>
         </div>

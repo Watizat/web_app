@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../store/reducers/organisms';
 import Card from '../Card/Card';
@@ -11,6 +11,8 @@ function Panel() {
   const filteredOrganisms = useAppSelector((state) => state.filteredOrganisms);
   const isLoading = useAppSelector((state) => state.isLoading);
   const categoryFilter = useAppSelector((state) => state.categoryFilter);
+  const [isPmr, setIsPmr] = useState<boolean>(false);
+  const [isAnimals, setIsAnimals] = useState<boolean>(false);
 
   useEffect(() => {
     const setFilter = organisms.filter((organism) => {
@@ -21,11 +23,11 @@ function Panel() {
       );
     });
     dispatch(setFilteredOrganisms(setFilter));
-  }, [organisms, categoryFilter, dispatch]);
+  }, [organisms, categoryFilter, isPmr, dispatch]);
 
   return (
     <section className="panel">
-      <Settings />
+      <Settings setIsPmr={setIsPmr} setIsAnimals={setIsAnimals} />
       {isLoading && <div>Loading...</div>}
       {!isLoading &&
         (filteredOrganisms.length > 0 ? (
