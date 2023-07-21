@@ -1,8 +1,16 @@
 import { useState } from 'react';
 import Modal from '../../../Modal/ModalContact';
 import './ContactCard.scss';
+import { Contact } from '../../../../../@types/organism';
 
-function ContactCard({ name, job, phone, mail, visibility, actualisation }) {
+function ContactCard({
+  name,
+  job,
+  phone,
+  mail,
+  visibility,
+  actualisation,
+}: Contact) {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -27,7 +35,7 @@ function ContactCard({ name, job, phone, mail, visibility, actualisation }) {
                 actualisation
               </span>
             ) : null}
-            {visibility === 'private' ? (
+            {visibility === false ? (
               <span className="contacts-roles__role contacts-roles__prive">
                 prive
               </span>

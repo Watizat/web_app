@@ -6,7 +6,7 @@ interface ModalProps {
   job?: string;
   mail?: string;
   phone?: string;
-  visibility?: string;
+  visibility?: boolean;
   actualisation?: boolean;
 }
 
