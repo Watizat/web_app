@@ -10,10 +10,19 @@
     gap:5em;
     margin-bottom: 1em;
 
+    @include m.mobile{
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+
   }
 
   &-details {
     width: 50%;
+
+    @include m.mobile{
+      width: 100%;
+    }
 
     & h2{
       color: v.$grey-800;
@@ -30,6 +39,10 @@
     max-width: 580px;
     width: 50%;
     height: 300px;
+
+    @include m.mobile{
+      width: 100%;
+    }
   }
 
 

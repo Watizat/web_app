@@ -7,11 +7,19 @@
   &-infos {
     display: flex;
     justify-content: space-between;
+
+    @include m.mobile{
+      flex-wrap: wrap;
+    }
    
 
     & article {
       width: 33%;
       flex: 0 0 auto;
+
+      @include m.mobile{
+        width: 100%;
+      }
     }
 
   }

@@ -15,6 +15,10 @@
   padding: 25px;
   margin: 30px 0;
 
+  @include m.mobile{
+    margin: 10px 0;
+  }
+
 
 }
 

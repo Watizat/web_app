@@ -17,6 +17,10 @@
         flex-basis: 32%;
         flex-wrap: wrap;
         margin-bottom: 0.8rem;
+
+        @include m.mobile{
+          flex-basis: 100%;
+        }
        
 
       &-header{
@@ -31,6 +35,10 @@
           flex-wrap: nowrap;
           justify-content: space-between;
           align-content: center;
+        }
+
+        & i{
+          font-size: 1.5em;
         }
 
         &--open{
