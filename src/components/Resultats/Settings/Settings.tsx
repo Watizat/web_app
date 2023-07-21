@@ -17,9 +17,9 @@ function Settings({ organismsFiltered }: { organismsFiltered: Organism[] }) {
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string>('10');
   // const [categories, setCategories] = useState<Categorie[]>([]);
-  const categories = useAppSelector((state) => state.categories);
+  const categories = useAppSelector((state) => state.organism.categories);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const selected = useAppSelector((state) => state.categoryFilter);
+  const selected = useAppSelector((state) => state.organism.categoryFilter);
   const organisms = organismsFiltered;
   const [presentCategories, setPresentCategories] = useState<string[]>([]);
 

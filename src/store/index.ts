@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import organismReducer from './reducers/organisms';
-import settingsReducer from './reducers/settings';
+import userReducer from './reducers/user';
 
 const store = configureStore({
   reducer: {
     organism: organismReducer,
-    settings: settingsReducer,
+    user: userReducer,
   },
 });
 

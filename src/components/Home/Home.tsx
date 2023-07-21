@@ -8,7 +8,7 @@ import './Home.scss';
 
 function Home() {
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
-  const categories = useAppSelector((state) => state.categories);
+  const categories = useAppSelector((state) => state.organism.categories);
 
   const navigate = useNavigate();
 

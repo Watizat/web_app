@@ -3,8 +3,8 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
-import AxiosInstance from 'axios';
 import { Categorie, Organism } from '../../@types/organism';
+import { axiosInstance } from '../../utils/axios';
 
 interface OrganismsState {
   organisms: Organism[];
@@ -23,8 +23,8 @@ export const initialState: OrganismsState = {
 export const fetchOrganisms = createAsyncThunk(
   'organisms/fetch-organisms',
   async (/* category: string */) => {
-    const { data } = await AxiosInstance.get<{ data: Organism[] }>(
-      'https://watizat.lunalink.nl/items/organisme',
+    const { data } = await axiosInstance.get<{ data: Organism[] }>(
+      '/items/organisme',
       {
         params: {
           fields: [
@@ -80,7 +80,7 @@ export const fetchOrganisms = createAsyncThunk(
 export const fetchCategories = createAsyncThunk(
   'categories/fetch-categories',
   async () => {
-    const { data } = await AxiosInstance.get<{ data: Categorie[] }>(
+    const { data } = await axiosInstance.get<{ data: Categorie[] }>(
       'https://watizat.lunalink.nl/items/categorie?fields=tag,translations.name,translations.slug'
     );
     return data.data;
