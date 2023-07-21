@@ -63,6 +63,7 @@ function Card({ organism, map_id, selected }: OrganismProps) {
             ))}
           </div>
         </div>
+        <span>{organism.translations[0]?.infos_alerte}</span>
       </div>
       <div className="card_container_right">
         <Link
