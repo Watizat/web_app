@@ -3,6 +3,10 @@ import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  name?: string;
+  categories?: string;
+  description?: string;
+  infos_alerte?: string;
 }
 
 function ModalService({
@@ -23,7 +27,7 @@ function ModalService({
 
             <label className="modal-contact__actu">
               Catégorie du service
-              <select name="actualisation" defaultdefaultValue={categories}>
+              <select name="actualisation" defaultValue={categories}>
                 {categoriesList.map((i) => (
                   <option key={i.tag} value={i.tag}>
                     {i.tag}
@@ -89,7 +93,7 @@ function ModalService({
             <h4 className="modal-case__title">Info s & alertes</h4>
             <textarea
               className="modal-case__textarea"
-              defaultdefaultValue={infos_alerte}
+              defaultValue={infos_alerte}
             />
           </div>
         </form>
@@ -118,5 +122,11 @@ function ModalService({
     </div>
   );
 }
+ModalService.defaultProps = {
+  name: '',
+  categories: ',',
+  description: '',
+  infos_alerte: '',
+};
 
 export default ModalService;

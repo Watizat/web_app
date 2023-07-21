@@ -2,14 +2,7 @@ import { useState } from 'react';
 import Modal from '../../../Modal/ModalContact';
 import './ContactCard.scss';
 
-function ContactCard({
-  name,
-  fonction,
-  phone,
-  mail,
-  visibility,
-  actualisation,
-}) {
+function ContactCard({ name, job, phone, mail, visibility, actualisation }) {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -18,7 +11,7 @@ function ContactCard({
         <Modal
           setIsActive={setIsActive}
           name={name}
-          fonction={fonction}
+          job={job}
           phone={phone}
           mail={mail}
           visibility={visibility}
@@ -56,7 +49,7 @@ function ContactCard({
       <div className="orgaSheet-contact__details">
         <div className="orgaSheet-contact__infos">
           <p className="orgaSheet-contact__nom">{name}</p>
-          <p className="orgaSheet-contact__fonction">{fonction}</p>
+          <p className="orgaSheet-contact__fonction">{job}</p>
         </div>
         <div className="orgaSheet-contact__name">
           <p className="orgaSheet-contact__mail">{phone}</p>

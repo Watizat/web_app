@@ -7,7 +7,7 @@ interface ModalProps {
 function ModalContact({ setIsActive }: ModalProps) {
   const contact = {
     name: 'Jean-Michel Tranquil',
-    fonction: 'Mec important du haut de la pîle',
+    job: 'Mec important du haut de la pîle',
     mail: 'jean-michel@lerelou@gmail.com',
     tel: '0645786598',
     role: 'prive',
@@ -32,7 +32,7 @@ function ModalContact({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
-              value={contact.fonction}
+              value={contact.job}
             />
           </div>
           <div className="modal-contact__modes">

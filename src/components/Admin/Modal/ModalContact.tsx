@@ -2,12 +2,18 @@ import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  name?: string;
+  job?: string;
+  mail?: string;
+  phone?: string;
+  visibility?: string;
+  actualisation?: boolean;
 }
 
 function ModalContact({
   setIsActive,
   name,
-  fonction,
+  job,
   mail,
   phone,
   visibility,
@@ -31,7 +37,7 @@ function ModalContact({
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={fonction}
+              defaultValue={job}
             />
           </div>
           <div className="modal-contact__modes">
@@ -64,7 +70,7 @@ function ModalContact({
               </label>
               <label className="modal-contact__actu">
                 Contact pour actualisation
-                <select name="actualisation" defaultValue={actualisation}>
+                <select name="actualisation" defaultValue={`${actualisation}`}>
                   <option value="false">Non</option>
                   <option value="true">Oui</option>
                 </select>
@@ -97,5 +103,12 @@ function ModalContact({
     </div>
   );
 }
-
+ModalContact.defaultProps = {
+  name: '',
+  job: '',
+  mail: '',
+  phone: '',
+  visibility: 'private',
+  actualisation: false,
+};
 export default ModalContact;

@@ -8,6 +8,7 @@ import { Categorie, Organism } from '../../@types/organism';
 
 interface OrganismsState {
   organisms: Organism[];
+  editOrganism: Organism[];
   categoryFilter: string[];
   isLoading: boolean;
   categories: Categorie[];
@@ -15,6 +16,7 @@ interface OrganismsState {
 
 export const initialState: OrganismsState = {
   organisms: [],
+  editOrganism: [],
   categoryFilter: [],
   isLoading: false,
   categories: [],
@@ -44,7 +46,16 @@ export const fetchOrganisms = createAsyncThunk(
             'mail',
             'website',
             'zone_id.name',
-            'schedules',
+            'contacts.name',
+            'schedules.day',
+            'schedules.opentime_am',
+            'schedules.closetime_am',
+            'schedules.opentime_pm',
+            'schedules.closetime_pm',
+            'schedules.closed',
+            'contacts.job',
+            'contacts.phone',
+            'contacts.visibility',
             'translations.id',
             'translations.description',
             'translations.infos_alerte',
@@ -95,6 +106,10 @@ export const setOrganisms = createAction<Organism[]>(
   'organims/filter-organims'
 );
 
+export const setEditOrganism = createAction<Organism>(
+  'organisms/edit-organism'
+);
+
 const organismReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchOrganisms.pending, (state) => {
@@ -106,6 +121,9 @@ const organismReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOrganisms, (state, action) => {
       state.organisms = action.payload;
+    })
+    .addCase(setEditOrganism, (state, action) => {
+      state.editOrganism = [action.payload];
     })
     .addCase(fetchCategories.fulfilled, (state, action) => {
       state.categories = action.payload;

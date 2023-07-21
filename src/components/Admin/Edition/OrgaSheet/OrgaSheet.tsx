@@ -4,28 +4,38 @@ import Contacts from './Contacts/Contacts';
 import Data from './Data/Data';
 import Services from './Services/Services';
 import './OrgaSheet.scss';
+import { useAppSelector } from '../../../../hooks/redux';
 
 function OrgaSheet() {
+  const organism = useAppSelector((state) => state.editOrganism);
+  if (organism.length === 0) {
+    return <div> Veuillez sélectionner un organisme </div>;
+  }
+  console.log(organism);
+
   return (
     <section className="orgaSheet">
       <p />
       <Infos
-        key={`infos${orga.id}`}
-        name={orga.name}
-        address={orga.address}
-        city={orga.city}
-        zipcode={orga.zipcode}
-        website={orga.website}
+        key={`infos${organism[0].id}`}
+        name={organism[0].name}
+        address={organism[0].address}
+        city={organism[0].city}
+        zipcode={organism[0].zipcode}
+        website={organism[0].website}
       />
 
-      <Contacts key={`contacts-${orga.id}`} contacts={orga.contacts} />
+      <Contacts
+        key={`contacts-${organism[0].id}`}
+        contacts={organism[0].contacts}
+      />
 
       <Data
-        key={`data-${orga.id}`}
-        pmr={orga.pmr}
-        animals={orga.animals}
-        description={orga.description}
-        hours={orga.hours}
+        key={`data-${organism[0].id}`}
+        pmr={organism[0].pmr}
+        animals={organism[0].animals}
+        description={organism[0].translations[0].description}
+        hours={organism[0].schedules}
         infos_alertes={orga.infos_alertes}
       />
 

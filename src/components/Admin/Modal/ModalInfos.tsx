@@ -2,6 +2,11 @@ import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  name?: string;
+  address?: string;
+  city?: string;
+  zipcode?: number;
+  website?: string;
 }
 
 function ModalInfos({
@@ -77,5 +82,12 @@ function ModalInfos({
     </div>
   );
 }
+ModalInfos.defaultProps = {
+  name: '',
+  address: '',
+  city: '',
+  zipcode: '',
+  website: '',
+};
 
 export default ModalInfos;

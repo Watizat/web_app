@@ -4,6 +4,7 @@ export interface Organism {
   address: string | null;
   zipcode: string | null;
   slug: string;
+  contacts: Contact[];
   latitude: number;
   longitude: number;
   city: string;
@@ -18,6 +19,15 @@ export interface Organism {
   translations: OrganismTranslation[];
   schedules: Schedule[];
   services: Service[];
+}
+
+export interface Contact {
+  name: string;
+  job: string;
+  phone: string;
+  mail: string;
+  visibilty: string;
+  actualisation: boolean;
 }
 
 export interface OrganismTranslation {

@@ -31,7 +31,7 @@ function NavBar() {
     },
     {
       name: 'Directus (backend)',
-      to: 'https://watizat.lunapnk.nl',
+      to: 'https://watizat.lunalink.nl',
       target: '_blank',
       icon: 'las la-carrot',
     },

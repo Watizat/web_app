@@ -20,7 +20,7 @@ function ServiceCard({
         <ModalContact
           setIsActive={setIsActiveContact}
           name={name}
-          fonction={fonction}
+          job={job}
           phone={phone}
           mail={mail}
           visibility={visibility}
@@ -80,7 +80,7 @@ function ServiceCard({
           <ContactCard
             key={e.id}
             name={e.name}
-            fonction={e.fonction}
+            job={e.job}
             phone={e.phone}
             mail={e.mail}
             visibility={e.visibility}

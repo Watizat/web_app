@@ -2,6 +2,10 @@ import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  pmr?: boolean;
+  animals?: boolean;
+  description?: string;
+  infos_alertes?: string;
 }
 
 function ModalData({
@@ -22,7 +26,7 @@ function ModalData({
             <div className="modal-data__accessDetails">
               <label className="modal-data__pmr">
                 {pmr ? (
-                  <input type="checkbox" checked />
+                  <input type="checkbox" defaultChecked />
                 ) : (
                   <input type="checkbox" />
                 )}
@@ -30,7 +34,7 @@ function ModalData({
               </label>
               <label className="modal-data__pmr">
                 {animals ? (
-                  <input type="checkbox" checked />
+                  <input type="checkbox" defaultChecked />
                 ) : (
                   <input type="checkbox" />
                 )}
@@ -117,5 +121,11 @@ function ModalData({
     </div>
   );
 }
+ModalData.defaultProps = {
+  pmr: false,
+  animals: false,
+  description: '',
+  infos_alertes: '',
+};
 
 export default ModalData;

@@ -26,7 +26,7 @@ function Contacts({ contacts }) {
           <ContactCard
             key={e.id}
             name={e.name}
-            fonction={e.fonction}
+            job={e.job}
             phone={e.phone}
             mail={e.mail}
             visibility={e.visibility}
