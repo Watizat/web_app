@@ -68,7 +68,7 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
       <div className="card_container_right">
         <Link
           // to="geo:38.62464092991612,-90.18476128578186"
-          to={`https://www.google.com/maps/search/?api=1&query=${47.5951518}%2C${-122.3316393}`}
+          to={`https://www.google.com/maps/search/?api=1&query=${organism.latitude}%2C${organism.longitude}`}
           target="_blank"
           className="card_container_right_go"
         >

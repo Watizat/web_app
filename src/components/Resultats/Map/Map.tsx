@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux';
 import './Map.scss';
 // import Recenter from './Recenter/recenter';
@@ -34,18 +35,17 @@ function Map() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* <Recenter lat={userPosition.lat} lng={userPosition.lng} /> */}
       {navigatorGps && <Marker position={userPosition} />}
-
-      {/* {organismes.map((organisme) => {
-        return (
-          <Marker
-            key={organisme.title}
-            position={[organisme.lat, organisme.lng]}
-            title={organisme.title}
-          />
-        );
-      })} */}
+      {organisms.map((organism) => (
+        <Marker
+          key={organism.id}
+          position={[organism.latitude, organism.longitude]}
+        >
+          <Popup>
+            <Link to={`/organisme/${organism.slug}`}>{organism.name}</Link>
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
   );
 }
