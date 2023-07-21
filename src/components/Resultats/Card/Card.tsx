@@ -7,20 +7,19 @@ import './Card.scss';
 interface OrganismProps {
   organism: Organism;
   map_id: number;
+  categoryFilter: string[];
 }
 
-function Card({ organism, map_id }: OrganismProps) {
+function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   const { services } = organism;
   const tags = [
     ...new Set(services.map((service) => service.categorie_id.tag)),
   ].sort();
 
-  const filteredCategories = ['manger'];
-
   const categories = tags.map((tag, index) => ({
     id: index + 1,
     value: tag,
-    isCheck: filteredCategories.includes(tag),
+    isCheck: categoryFilter.includes(tag),
   }));
 
   return (
@@ -42,7 +41,7 @@ function Card({ organism, map_id }: OrganismProps) {
           </div>
         </div>
         <div className="card_container_left-upper_description">
-          {organism.translations[0].description}
+          {organism.translations[0]?.description}
         </div>
         <div className="card_container_left-lower">
           <Link
@@ -64,11 +63,12 @@ function Card({ organism, map_id }: OrganismProps) {
             ))}
           </div>
         </div>
+        <span>{organism.translations[0]?.infos_alerte}</span>
       </div>
       <div className="card_container_right">
         <Link
           // to="geo:38.62464092991612,-90.18476128578186"
-          to={`https://www.google.com/maps/search/?api=1&query=${47.5951518}%2C${-122.3316393}`}
+          to={`https://www.google.com/maps/search/?api=1&query=${organism.latitude}%2C${organism.longitude}`}
           target="_blank"
           className="card_container_right_go"
         >

@@ -1,12 +1,15 @@
+import L from 'leaflet';
 import { useEffect, useState } from 'react';
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import pin from '../../../assets/pin.svg';
+import { useAppSelector } from '../../../hooks/redux';
 import './Map.scss';
-// import Recenter from './Recenter/recenter';
-// import Recenter from './Marker/Marker';
 
 function Map() {
   const [position, setPosition] = useState({ lat: 43.6, lng: 1.433333 });
   const [userPosition, setUserPosition] = useState({ lat: 0, lng: 0 });
+  const [navigatorGps, setNavigatorGps] = useState(false);
+  const organisms = useAppSelector((state) => state.filteredOrganisms);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -16,37 +19,24 @@ function Map() {
           lng: pos.coords.longitude,
         };
         setUserPosition(newUserPos);
+        setNavigatorGps(true);
       },
       (err) => {
+        // eslint-disable-next-line no-console
         console.log(err);
       }
     );
   }, []);
+  const me = new L.DivIcon({
+    className: 'custom-me',
+    html: `<div></div>`,
+    iconSize: [34, 34],
+  });
 
-  const organismes = [
-    {
-      lat: 43.5968,
-      lng: 1.424484,
-      title: `PÔLE D'ACCUEIL, D'INFORMATION, D'ORIENTATION (PAIO)`,
-    },
-    {
-      lat: 43.635534,
-      lng: 1.483051,
-      title: `ADELPHITÉ PAR CVH - SPADA`,
-    },
-    {
-      lat: 43.590159,
-      lng: 1.438838,
-      title: `ESPACE SOCIAL DU GRAND-RAMIER
-`,
-    },
-    {
-      lat: 43.576048,
-      lng: 1.455174,
-      title: `DROITS DU CŒUR
-`,
-    },
-  ];
+  const me2 = new L.Icon({
+    iconUrl: pin,
+    iconSize: [40, 40],
+  });
 
   return (
     <MapContainer center={position} zoom={13}>
@@ -54,17 +44,34 @@ function Map() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* <Recenter lat={position.lat} lng={position.lng} /> */}
-      <Marker position={userPosition} />
-      {organismes.map((organisme) => {
+
+      {navigatorGps && <Marker position={position} icon={me} />}
+
+      {organisms.map((organism, index) => {
+        const customIcon = new L.DivIcon({
+          className: 'custom-icon',
+          html: `<div>${index + 1}</div>`,
+          iconSize: [34, 34],
+          iconAnchor: [14, 37],
+        });
         return (
           <Marker
-            key={organisme.title}
-            position={[organisme.lat, organisme.lng]}
-            title={organisme.title}
+            key={organism.id}
+            position={[organism.latitude, organism.longitude]}
+            icon={customIcon}
           />
         );
       })}
+      {/*       {organisms.map((organism) => (
+        <Marker
+          key={organism.id}
+          position={[organism.latitude, organism.longitude]}
+        >
+          <Popup>
+            <Link to={`/organisme/${organism.slug}`}>{organism.name}</Link>
+          </Popup>
+        </Marker>
+      ))} */}
     </MapContainer>
   );
 }

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux';
 import { fetchOrganisms } from '../../store/reducers/organisms';
 import Header from './Header/Header';
@@ -9,12 +8,10 @@ import './Resultats.scss';
 
 function Resultats() {
   const dispatch = useAppDispatch();
-  const [searchParams] = useSearchParams();
-  const category = searchParams.get('category');
 
   useEffect(() => {
-    dispatch(fetchOrganisms(category as string));
-  }, [dispatch, category]);
+    dispatch(fetchOrganisms(/* category as string */));
+  }, [dispatch]);
   return (
     <>
       <Header />

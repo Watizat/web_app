@@ -1,22 +1,30 @@
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from '@reduxjs/toolkit';
 import AxiosInstance from 'axios';
-import { Organism } from '../../@types/organism';
+import { Categorie, Organism } from '../../@types/organism';
 
 interface OrganismsState {
   organisms: Organism[];
-  categoryFilter: string;
+  filteredOrganisms: Organism[];
+  categoryFilter: string[];
   isLoading: boolean;
+  categories: Categorie[];
 }
 
 export const initialState: OrganismsState = {
   organisms: [],
-  categoryFilter: '',
+  filteredOrganisms: [],
+  categoryFilter: [],
   isLoading: false,
+  categories: [],
 };
 
 export const fetchOrganisms = createAsyncThunk(
   'organisms/fetch-organisms',
-  async (category: string) => {
+  async (/* category: string */) => {
     const { data } = await AxiosInstance.get<{ data: Organism[] }>(
       'https://watizat.lunalink.nl/items/organisme',
       {
@@ -56,19 +64,41 @@ export const fetchOrganisms = createAsyncThunk(
             zone_id: {
               name: 'Toulouse',
             },
-            services: {
+            /* services: {
               categorie_id: {
                 translations: {
                   slug: `${category}`,
                 },
               },
-            },
+            }, */
           },
         },
       }
     );
     return data.data;
   }
+);
+
+export const fetchCategories = createAsyncThunk(
+  'categories/fetch-categories',
+  async () => {
+    const { data } = await AxiosInstance.get<{ data: Categorie[] }>(
+      'https://watizat.lunalink.nl/items/categorie?fields=tag,translations.name,translations.slug'
+    );
+    return data.data;
+  }
+);
+
+export const filterCategories = createAction<string[]>(
+  'categories/filter-categories'
+);
+
+export const setOrganisms = createAction<Organism[]>(
+  'organims/filter-organims'
+);
+
+export const setFilteredOrganisms = createAction<Organism[]>(
+  'organims/filtered-organims'
 );
 
 const organismReducer = createReducer(initialState, (builder) => {
@@ -79,7 +109,18 @@ const organismReducer = createReducer(initialState, (builder) => {
     .addCase(fetchOrganisms.fulfilled, (state, action) => {
       state.organisms = action.payload;
       state.isLoading = false;
-      // console.log(state.organisms);
+    })
+    .addCase(setOrganisms, (state, action) => {
+      state.organisms = action.payload;
+    })
+    .addCase(setFilteredOrganisms, (state, action) => {
+      state.filteredOrganisms = action.payload;
+    })
+    .addCase(fetchCategories.fulfilled, (state, action) => {
+      state.categories = action.payload;
+    })
+    .addCase(filterCategories, (state, action) => {
+      state.categoryFilter = action.payload;
     });
 });
 
