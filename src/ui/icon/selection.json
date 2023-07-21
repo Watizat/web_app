@@ -118,7 +118,7 @@
         "isMulticolor2": false,
         "grid": 0,
         "tags": [
-          "lgbtqia-not"
+          "lgbtqia"
         ],
         "colorPermutations": {}
       },
@@ -193,7 +193,7 @@
       "properties": {
         "order": 30,
         "id": 0,
-        "name": "lgbtqia-not",
+        "name": "lgbtqia",
         "prevSize": 32,
         "code": 59679
       },
@@ -365,7 +365,7 @@
         "isMulticolor2": false,
         "grid": 0,
         "tags": [
-          "covid"
+          "covid19"
         ],
         "colorPermutations": {}
       },
@@ -373,7 +373,7 @@
       "properties": {
         "order": 8,
         "id": 14,
-        "name": "covid",
+        "name": "covid19",
         "prevSize": 32,
         "code": 59654
       },
@@ -633,7 +633,7 @@
         "isMulticolor2": false,
         "grid": 0,
         "tags": [
-          "lieux-cultes"
+          "lieux-culturels"
         ],
         "colorPermutations": {}
       },
@@ -641,7 +641,7 @@
       "properties": {
         "order": 12,
         "id": 9,
-        "name": "lieux-cultes",
+        "name": "lieux-culturels",
         "prevSize": 32,
         "code": 59669
       },
@@ -690,7 +690,7 @@
         "isMulticolor2": false,
         "grid": 0,
         "tags": [
-          "aides-juridiques"
+          "aide-juridique"
         ],
         "colorPermutations": {}
       },
@@ -698,7 +698,7 @@
       "properties": {
         "order": 14,
         "id": 7,
-        "name": "aides-juridiques",
+        "name": "aide-juridique",
         "prevSize": 32,
         "code": 59671
       },

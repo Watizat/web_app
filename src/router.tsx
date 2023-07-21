@@ -3,21 +3,21 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
+import AccountRequest from './components/AccountRequest/AccountRequest';
+import AdminApp from './components/Admin/App/App';
+import Dashboard from './components/Admin/Dashboard/Dashboard';
+import Edition from './components/Admin/Edition/Edition';
+import Users from './components/Admin/Users/Users';
 import App from './components/App/App';
 import Contact from './components/Contact/Contact';
+import ForgottenPassword from './components/ForgottenPassword/ForgottenPassword';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
-import ForgottenPassword from './components/ForgottenPassword/ForgottenPassword';
-import RecoverPassword from './components/RecoverPassword/RecoverPassword';
-import AccountRequest from './components/AccountRequest/AccountRequest';
 import MentionsLegales from './components/MentionsLegales/MentionsLegales';
 import Organisme from './components/Organisme/Organisme';
 import Orientation from './components/Orientation/Orientation';
+import RecoverPassword from './components/RecoverPassword/RecoverPassword';
 import Resultats from './components/Resultats/Resultats';
-import AdminApp from './components/Admin/App/App';
-import Dashboard from './components/Admin/Dashboard/Dashboard';
-import Users from './components/Admin/Users/Users';
-import Edition from './components/Admin/Edition/Edition';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

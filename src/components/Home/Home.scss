@@ -151,11 +151,12 @@
             justify-content: center;
             align-items: center;
             align-content: center;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 1 ;
             border: 1px solid grey;
             border-radius: 25px;
             background-color: v.$white;
             color: v.$primary;
+            white-space: pre-wrap;
             width: 10%;
             gap: 0.5rem;
 
@@ -193,7 +194,7 @@
               }
             }
             @include m.fullhd {
-              width: 6rem;
+              //width: 6rem;
               span {
                 font-size: 0.9rem;
               }

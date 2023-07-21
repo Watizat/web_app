@@ -1,11 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom';
 import { ChangeEvent, MouseEventHandler, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
+import { useAppSelector } from '../../hooks/redux';
+import Icon from '../../ui/icon/icon';
 import Container from '../Container/Container';
 import './Home.scss';
 
 function Home() {
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
+  const categories = useAppSelector((state) => state.categories);
 
   const navigate = useNavigate();
 
@@ -47,7 +50,20 @@ function Home() {
             <article className="hero-choice--right">
               <h2>2. Selectionner une catégorie</h2>
               <div className="categories-choice">
-                <button type="button" onClick={handleClick('manger')}>
+                {categories.map((categorie) => (
+                  <button
+                    type="button"
+                    key={categorie.translations[0].slug}
+                    onClick={handleClick(categorie.translations[0].slug)}
+                  >
+                    <Icon icon={categorie.tag} size="40px" />
+                    <span className="text-button">
+                      {categorie.translations[0].name}
+                    </span>
+                  </button>
+                ))}
+
+                {/* <button type="button" onClick={handleClick('manger')}>
                   <i className="las la-podcast" />
                   <span className="text-button">Manger</span>
                 </button>
@@ -86,7 +102,7 @@ function Home() {
                 <button type="button">
                   <i className="las la-taxi" />
                   <span>Manger</span>
-                </button>
+                </button> */}
               </div>
             </article>
           </div>
