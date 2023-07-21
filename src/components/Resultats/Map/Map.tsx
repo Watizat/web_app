@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { useAppSelector } from '../../../hooks/redux';
 import './Map.scss';
 // import Recenter from './Recenter/recenter';
 // import Recenter from './Marker/Marker';
@@ -7,6 +8,8 @@ import './Map.scss';
 function Map() {
   const [position, setPosition] = useState({ lat: 43.6, lng: 1.433333 });
   const [userPosition, setUserPosition] = useState({ lat: 0, lng: 0 });
+  const [navigatorGps, setNavigatorGps] = useState(false);
+  const organisms = useAppSelector((state) => state.filteredOrganisms);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -16,6 +19,7 @@ function Map() {
           lng: pos.coords.longitude,
         };
         setUserPosition(newUserPos);
+        setNavigatorGps(true);
       },
       (err) => {
         // eslint-disable-next-line no-console
@@ -24,31 +28,6 @@ function Map() {
     );
   }, []);
 
-  const organismes = [
-    {
-      lat: 43.5968,
-      lng: 1.424484,
-      title: `PÔLE D'ACCUEIL, D'INFORMATION, D'ORIENTATION (PAIO)`,
-    },
-    {
-      lat: 43.635534,
-      lng: 1.483051,
-      title: `ADELPHITÉ PAR CVH - SPADA`,
-    },
-    {
-      lat: 43.590159,
-      lng: 1.438838,
-      title: `ESPACE SOCIAL DU GRAND-RAMIER
-`,
-    },
-    {
-      lat: 43.576048,
-      lng: 1.455174,
-      title: `DROITS DU CŒUR
-`,
-    },
-  ];
-
   return (
     <MapContainer center={position} zoom={13}>
       <TileLayer
@@ -56,8 +35,9 @@ function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {/* <Recenter lat={userPosition.lat} lng={userPosition.lng} /> */}
-      <Marker position={userPosition} />
-      {organismes.map((organisme) => {
+      {navigatorGps && <Marker position={userPosition} />}
+
+      {/* {organismes.map((organisme) => {
         return (
           <Marker
             key={organisme.title}
@@ -65,7 +45,7 @@ function Map() {
             title={organisme.title}
           />
         );
-      })}
+      })} */}
     </MapContainer>
   );
 }

@@ -7,10 +7,10 @@ import './Card.scss';
 interface OrganismProps {
   organism: Organism;
   map_id: number;
-  selected: string[];
+  categoryFilter: string[];
 }
 
-function Card({ organism, map_id, selected }: OrganismProps) {
+function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   const { services } = organism;
   const tags = [
     ...new Set(services.map((service) => service.categorie_id.tag)),
@@ -19,7 +19,7 @@ function Card({ organism, map_id, selected }: OrganismProps) {
   const categories = tags.map((tag, index) => ({
     id: index + 1,
     value: tag,
-    isCheck: selected.includes(tag),
+    isCheck: categoryFilter.includes(tag),
   }));
 
   return (

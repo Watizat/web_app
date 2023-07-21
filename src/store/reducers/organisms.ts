@@ -8,6 +8,7 @@ import { Categorie, Organism } from '../../@types/organism';
 
 interface OrganismsState {
   organisms: Organism[];
+  filteredOrganisms: Organism[];
   categoryFilter: string[];
   isLoading: boolean;
   categories: Categorie[];
@@ -15,6 +16,7 @@ interface OrganismsState {
 
 export const initialState: OrganismsState = {
   organisms: [],
+  filteredOrganisms: [],
   categoryFilter: [],
   isLoading: false,
   categories: [],
@@ -95,6 +97,10 @@ export const setOrganisms = createAction<Organism[]>(
   'organims/filter-organims'
 );
 
+export const setFilteredOrganisms = createAction<Organism[]>(
+  'organims/filtered-organims'
+);
+
 const organismReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchOrganisms.pending, (state) => {
@@ -106,6 +112,9 @@ const organismReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOrganisms, (state, action) => {
       state.organisms = action.payload;
+    })
+    .addCase(setFilteredOrganisms, (state, action) => {
+      state.filteredOrganisms = action.payload;
     })
     .addCase(fetchCategories.fulfilled, (state, action) => {
       state.categories = action.payload;

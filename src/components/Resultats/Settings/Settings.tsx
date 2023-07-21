@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Organism } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
   fetchCategories,
@@ -10,28 +9,29 @@ import {
 import Icon from '../../../ui/icon/icon';
 import './Settings.scss';
 
-function Settings({ organismsFiltered }: { organismsFiltered: Organism[] }) {
+function Settings() {
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const categoryParams = searchParams.get('category') as string;
+
+  const categories = useAppSelector((state) => state.categories);
+  const categoryFilter = useAppSelector((state) => state.categoryFilter);
+  const organisms = useAppSelector((state) => state.filteredOrganisms);
+
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string>('10');
-  // const [categories, setCategories] = useState<Categorie[]>([]);
-  const categories = useAppSelector((state) => state.categories);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const selected = useAppSelector((state) => state.categoryFilter);
-  const organisms = organismsFiltered;
-  const [presentCategories, setPresentCategories] = useState<string[]>([]);
+  const [activeCategories, setActiveCategories] = useState<string[]>([]);
 
   const handleCategoryChange = (tag: string) => {
-    if (selected.includes(tag)) {
+    if (categoryFilter.includes(tag)) {
       dispatch(
         filterCategories(
-          selected.filter((selectedCategory) => selectedCategory !== tag)
+          categoryFilter.filter((selectedCategory) => selectedCategory !== tag)
         )
       );
     } else {
-      dispatch(filterCategories([...selected, tag]));
+      dispatch(filterCategories([...categoryFilter, tag]));
     }
   };
 
@@ -46,10 +46,6 @@ function Settings({ organismsFiltered }: { organismsFiltered: Organism[] }) {
   }
 
   useEffect(() => {
-    dispatch(filterCategories([categoryParams]));
-  }, [dispatch, categoryParams]);
-
-  useEffect(() => {
     // Récupération de toutes les catégories présentes dans les organismes recherchés
     const organismsCagtegories = organisms
       .map((organism) =>
@@ -57,7 +53,7 @@ function Settings({ organismsFiltered }: { organismsFiltered: Organism[] }) {
       )
       .flat();
     // Suppression des catégories en doublon
-    setPresentCategories([
+    setActiveCategories([
       ...new Set(organismsCagtegories.map((cat) => cat.tag)),
     ]);
   }, [organisms]);
@@ -66,6 +62,9 @@ function Settings({ organismsFiltered }: { organismsFiltered: Organism[] }) {
     dispatch(fetchCategories());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(filterCategories([categoryParams]));
+  }, [dispatch, categoryParams]);
   return (
     <div className="settings">
       <button
@@ -131,7 +130,7 @@ function Settings({ organismsFiltered }: { organismsFiltered: Organism[] }) {
                       defaultChecked={categoryParams === category.tag}
                       name={category.translations[0].slug}
                       onChange={() => handleCategoryChange(category.tag)}
-                      disabled={!presentCategories.includes(category.tag)}
+                      disabled={!activeCategories.includes(category.tag)}
                     />
                     {category.translations[0].name}
                   </label>
