@@ -1,13 +1,13 @@
 import { orga } from '../../../../data/organismes';
-import Infos from './Infos/Infos';
+import { useAppSelector } from '../../../../hooks/redux';
 import Contacts from './Contacts/Contacts';
 import Data from './Data/Data';
-import Services from './Services/Services';
+import Infos from './Infos/Infos';
 import './OrgaSheet.scss';
-import { useAppSelector } from '../../../../hooks/redux';
+import Services from './Services/Services';
 
 function OrgaSheet() {
-  const organism = useAppSelector((state) => state.editOrganism);
+  const organism = useAppSelector((state) => state.filteredOrganisms);
   if (organism.length === 0) {
     return <div> Veuillez sélectionner un organisme </div>;
   }
@@ -34,7 +34,7 @@ function OrgaSheet() {
         key={`data-${organism[0].id}`}
         pmr={organism[0].pmr}
         animals={organism[0].animals}
-        description={organism[0].translations[0].description}
+        description={organism[0].translations[0]?.description}
         hours={organism[0].schedules}
         infos_alertes={orga.infos_alertes}
       />
