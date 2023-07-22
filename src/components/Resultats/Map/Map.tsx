@@ -33,7 +33,7 @@ function Map() {
     className: 'custom-me',
     html: `<div></div>`,
     iconSize: [30, 30],
-    iconAnchor: [15, 36],
+    iconAnchor: [15, 30],
   });
 
   return (
