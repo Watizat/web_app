@@ -12,6 +12,7 @@ interface OrganismsState {
   categoryFilter: string[];
   isLoading: boolean;
   categories: Categorie[];
+  userPosition: { lat: number; lng: number };
 }
 
 export const initialState: OrganismsState = {
@@ -20,6 +21,7 @@ export const initialState: OrganismsState = {
   categoryFilter: [],
   isLoading: false,
   categories: [],
+  userPosition: { lat: 0, lng: 0 },
 };
 
 export const fetchOrganisms = createAsyncThunk(
@@ -110,6 +112,10 @@ export const setFilteredOrganisms = createAction<Organism[]>(
   'organims/filtered-organims'
 );
 
+export const setUserPosition = createAction<{ lat: number; lng: number }>(
+  'position/user-position'
+);
+
 const organismReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchOrganisms.pending, (state) => {
@@ -130,6 +136,9 @@ const organismReducer = createReducer(initialState, (builder) => {
     })
     .addCase(filterCategories, (state, action) => {
       state.categoryFilter = action.payload;
+    })
+    .addCase(setUserPosition, (state, action) => {
+      state.userPosition = action.payload;
     });
 });
 

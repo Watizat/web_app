@@ -12,7 +12,7 @@ function Panel() {
   const isLoading = useAppSelector((state) => state.isLoading);
   const categoryFilter = useAppSelector((state) => state.categoryFilter);
   const [isPmr, setIsPmr] = useState<boolean>(false);
-  const [isAnimals, setIsAnimals] = useState<boolean>(false);
+  const [isAnimalsAccepted, setIsAnimalsAccepted] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function Panel() {
         categoryFilter.length;
 
       const matchesPmrFilter = isPmr ? organism.pmr : true;
-      const matchesAnimalsFilter = isAnimals ? organism.animals : true;
+      const matchesAnimalsFilter = isAnimalsAccepted ? organism.animals : true;
       const matchesNameFilter = organism.name
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
@@ -45,13 +45,13 @@ function Panel() {
     });
 
     dispatch(setFilteredOrganisms(setFilter));
-  }, [organisms, categoryFilter, isPmr, isAnimals, search, dispatch]);
+  }, [organisms, categoryFilter, isPmr, isAnimalsAccepted, search, dispatch]);
 
   return (
     <section className="panel">
       <Settings
         setIsPmr={setIsPmr}
-        setIsAnimals={setIsAnimals}
+        setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
       />
       {isLoading && <div>Loading...</div>}
@@ -66,7 +66,7 @@ function Panel() {
             />
           ))
         ) : (
-          <span>Aucun résultat pour cette catégorie.</span>
+          <span>Il n&apos;y a aucun résultat.</span>
         ))}
     </section>
   );

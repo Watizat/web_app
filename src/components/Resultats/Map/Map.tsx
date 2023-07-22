@@ -2,14 +2,16 @@ import L from 'leaflet';
 import { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import pin from '../../../assets/pin.svg';
-import { useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { setUserPosition } from '../../../store/reducers/organisms';
 import './Map.scss';
 
 function Map() {
   const [position, setPosition] = useState({ lat: 43.6, lng: 1.433333 });
-  const [userPosition, setUserPosition] = useState({ lat: 0, lng: 0 });
   const [navigatorGps, setNavigatorGps] = useState(false);
   const organisms = useAppSelector((state) => state.filteredOrganisms);
+  const userPosition = useAppSelector((state) => state.userPosition);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -18,7 +20,7 @@ function Map() {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude,
         };
-        setUserPosition(newUserPos);
+        dispatch(setUserPosition(newUserPos));
         setNavigatorGps(true);
       },
       (err) => {
@@ -26,7 +28,7 @@ function Map() {
         console.log(err);
       }
     );
-  }, []);
+  }, [dispatch]);
   const me = new L.DivIcon({
     className: 'custom-me',
     html: `<div></div>`,
@@ -45,7 +47,7 @@ function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {navigatorGps && <Marker position={position} icon={me} />}
+      {navigatorGps && <Marker position={userPosition} icon={me} />}
 
       {organisms.map((organism, index) => {
         const customIcon = new L.DivIcon({

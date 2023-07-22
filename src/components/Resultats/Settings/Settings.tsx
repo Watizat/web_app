@@ -11,11 +11,15 @@ import './Settings.scss';
 
 interface SettingsProps {
   setIsPmr: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsAnimals: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAnimalsAccepted: React.Dispatch<React.SetStateAction<boolean>>;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Settings({ setIsPmr, setIsAnimals, setSearch }: SettingsProps) {
+function Settings({
+  setIsPmr,
+  setIsAnimalsAccepted,
+  setSearch,
+}: SettingsProps) {
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const categoryParams = searchParams.get('category') as string;
@@ -54,7 +58,7 @@ function Settings({ setIsPmr, setIsAnimals, setSearch }: SettingsProps) {
   }
 
   function handleAnimals(event: React.ChangeEvent<HTMLInputElement>) {
-    setIsAnimals(event.target.checked);
+    setIsAnimalsAccepted(event.target.checked);
   }
 
   function handleDistanceValueChange(
