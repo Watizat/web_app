@@ -30,6 +30,8 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   useEffect(() => {
     if (userPosition.lat !== 0 && userPosition.lng !== 0) {
       const distanceKm = getDistanceFromGPS(
+        /*      43.6,
+        1.433333, */
         userPosition.lat,
         userPosition.lng,
         organism.latitude,
@@ -38,7 +40,7 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
       setDistance(
         distanceKm < 1
           ? `${Number(distanceKm.toFixed(2)) * 1000}m`
-          : `${Math.floor(distanceKm)}km`
+          : `${distanceKm.toFixed(2)}km`
       );
     }
   }, [organism, userPosition]);
