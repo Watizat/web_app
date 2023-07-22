@@ -6,24 +6,25 @@
 
   border: 1px solid #c6c6c6;
   border-radius: 10px;
-  padding: 10px;
+  padding: 10px 0 10px 10px;
   margin: 20px;
 
-  &__dropdown-btn {
+  &__top-bar {
     display: flex;
+
+    & form {
+      width: 80%;
+    }
+  }
+
+  &__dropdown-btn {
+    margin: auto;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
     border: none;
     background-color: white;
     cursor: pointer;
     font-size: 1.3rem;
     font-weight: bold;
-
-    & label {
-      font-size: 20px;
-      font-weight: bold;
-    }
   }
 
   & label {

@@ -93,32 +93,32 @@ function Settings({
   }, [dispatch, categoryParams]);
   return (
     <div className="settings">
-      <button
-        type="button"
-        className="settings__dropdown-btn"
-        onClick={handleOpenSettings}
-      >
-        <span>Trier et filtrer</span>
-        <Icon icon={isOpen ? 'arrow_up' : 'arrow_down'} size="30px" />
-      </button>
+      <div className="settings__top-bar">
+        <form>
+          <input
+            type="text"
+            placeholder="Exemple : Croix Rouge française (nord)"
+            id="search-panel"
+            value={searchInputValue}
+            onChange={handleSearch}
+          />
+        </form>
+        {/*         <Icon icon={isOpen ? 'arrow_up' : 'arrow_down'} size="30px" />
+         */}{' '}
+        <button
+          type="button"
+          className="settings__dropdown-btn"
+          onClick={handleOpenSettings}
+        >
+          Filtres
+        </button>
+      </div>
 
       <div
         className={classNames('settings__content', {
           'settings__content--visible': isOpen,
         })}
       >
-        <div>
-          <span>Affiner la recherche</span>
-          <form>
-            <input
-              type="text"
-              placeholder="Exemple : Croix Rouge française (nord)"
-              id="search-panel"
-              value={searchInputValue}
-              onChange={handleSearch}
-            />
-          </form>
-        </div>
         <div>
           <span>Filtrer par accessibilité</span>
           <div>
@@ -138,7 +138,7 @@ function Settings({
             <label htmlFor="animals">Animaux acceptés</label>
           </div>
         </div>
-        <div>
+        {/*         <div>
           <span> Filtrer par distance</span>
           <div className="settings__filter-range">
             <input
@@ -155,7 +155,7 @@ function Settings({
               Jusqu&apos;à {distanceValue}km
             </span>
           </div>
-        </div>
+        </div> */}
         <div>
           <span>Filtrer par catégories</span>
           <div className="settings__filter-categories">
