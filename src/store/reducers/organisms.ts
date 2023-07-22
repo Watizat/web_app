@@ -132,7 +132,9 @@ const organismReducer = createReducer(initialState, (builder) => {
       state.filteredOrganisms = action.payload;
     })
     .addCase(fetchCategories.fulfilled, (state, action) => {
-      state.categories = action.payload;
+      state.categories = action.payload.sort((a, b) =>
+        a.tag.localeCompare(b.tag)
+      );
     })
     .addCase(filterCategories, (state, action) => {
       state.categoryFilter = action.payload;
