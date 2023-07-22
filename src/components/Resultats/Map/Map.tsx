@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import pin from '../../../assets/pin.svg';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setUserPosition } from '../../../store/reducers/organisms';
 import './Map.scss';
@@ -32,12 +32,8 @@ function Map() {
   const me = new L.DivIcon({
     className: 'custom-me',
     html: `<div></div>`,
-    iconSize: [34, 34],
-  });
-
-  const me2 = new L.Icon({
-    iconUrl: pin,
-    iconSize: [40, 40],
+    iconSize: [30, 30],
+    iconAnchor: [15, 36],
   });
 
   return (
@@ -53,15 +49,21 @@ function Map() {
         const customIcon = new L.DivIcon({
           className: 'custom-icon',
           html: `<div>${index + 1}</div>`,
-          iconSize: [34, 34],
-          iconAnchor: [14, 37],
+          iconSize: [30, 30],
+          iconAnchor: [15, 33.5],
+          popupAnchor: [0, -30],
         });
         return (
           <Marker
             key={organism.id}
             position={[organism.latitude, organism.longitude]}
             icon={customIcon}
-          />
+          >
+            {' '}
+            <Popup>
+              <Link to={`/organisme/${organism.slug}`}>{organism.name}</Link>
+            </Popup>
+          </Marker>
         );
       })}
       {/*       {organisms.map((organism) => (
