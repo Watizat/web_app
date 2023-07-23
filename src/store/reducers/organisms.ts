@@ -29,6 +29,7 @@ export const fetchOrganisms = createAsyncThunk(
       'https://watizat.lunalink.nl/items/organisme',
       {
         params: {
+          // IMPOSSIBLE D'AJOUTER PLUS DE PARAMETRES
           fields: [
             'id',
             'name',
@@ -46,16 +47,18 @@ export const fetchOrganisms = createAsyncThunk(
             'mail',
             'website',
             'zone_id.name',
-            'contacts.name',
             'schedules.day',
             'schedules.opentime_am',
             'schedules.closetime_am',
             'schedules.opentime_pm',
             'schedules.closetime_pm',
             'schedules.closed',
+            'contacts.name',
             'contacts.job',
             'contacts.phone',
+            'contacts.mail',
             'contacts.visibility',
+            'contacts.actualisation',
             'translations.id',
             'translations.description',
             'translations.infos_alerte',
@@ -68,6 +71,17 @@ export const fetchOrganisms = createAsyncThunk(
             'services.translations.slug',
             'services.translations.infos_alerte',
             'services.translations.description',
+            'services.schedules.day',
+            'services.schedules.opentime_am',
+            'services.schedules.closetime_am',
+            'services.schedules.opentime_pm',
+            'services.schedules.closetime_pm',
+            // 'services.contacts.name',
+            // 'services.contacts.job',
+            // 'services.contacts.mail',
+            // 'services.contacts.phone',
+            // 'services.contacts.visibility',
+            // 'services.contacts.actualisation',
           ],
           filter: {
             zone_id: {

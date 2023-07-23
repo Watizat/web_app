@@ -21,6 +21,7 @@ function OrgaList() {
             type="button"
             key={organism.id}
             onClick={() => handleClick(organism)}
+            className="orgaList-button"
           >
             <OrgaListCard name={organism.name} adress={organism.address} />
           </button>

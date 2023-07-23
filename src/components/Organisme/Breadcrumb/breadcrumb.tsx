@@ -7,7 +7,7 @@ function Breadcrumb() {
   return (
     <div className="breadcrumb">
       <button
-        className="btn-flat btn-primary"
+        className="btn-flat btn-primary btn-slowRounded "
         type="button"
         onClick={() => navigate(-1)}
       >

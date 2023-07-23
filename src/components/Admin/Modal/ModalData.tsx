@@ -6,6 +6,13 @@ interface ModalProps {
   animals?: boolean;
   description?: string;
   infos_alertes?: string;
+  schedules?: {
+    day?: number;
+    opentime_am?: string;
+    closetime_am?: string;
+    opentime_pm?: string;
+    closetime_pm?: string;
+  };
 }
 
 function ModalData({
@@ -13,7 +20,7 @@ function ModalData({
   pmr,
   animals,
   description,
-  hours,
+  schedules,
   infos_alertes,
 }: ModalProps) {
   return (
@@ -58,35 +65,35 @@ function ModalData({
                 <td />
                 <td colSpan={3}>Aprés-midi</td>
               </thead>
-              {hours.map((e) => (
-                <tr key={e.name} className="modal-data__hoursLine">
+              {schedules.map((day) => (
+                <tr key={day.day} className="modal-data__hoursLine">
                   <td className="modal-data__hoursDay">
-                    <span>{e.name}</span>
+                    <span>{day.day}</span>
                   </td>
                   <td className="modal-data__hoursHour">
                     <input
-                      defaultValue={e.open_am}
+                      defaultValue={day.opentime_am}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">-</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      defaultValue={e.close_am}
+                      defaultValue={day.closetime_am}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">/</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      defaultValue={e.open_pm}
+                      defaultValue={day.opentime_pm}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">-</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      defaultValue={e.close_pm}
+                      defaultValue={day.closetime_pm}
                       className="modal-data__hoursInput"
                     />
                   </td>
@@ -105,7 +112,7 @@ function ModalData({
         <div className="modal-actions">
           <button
             type="button"
-            className="btn btn-danger-fill btn-flat modal-actions__close"
+            className="btn btn-info-fill btn-flat modal-actions__close"
             onClick={() => setIsActive(false)}
           >
             Annuler
@@ -126,6 +133,13 @@ ModalData.defaultProps = {
   animals: false,
   description: '',
   infos_alertes: '',
+  schedules: {
+    day: 0,
+    opentime_am: '',
+    closetime_am: '',
+    opentime_pm: '',
+    closetime_pm: '',
+  },
 };
 
 export default ModalData;

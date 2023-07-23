@@ -8,7 +8,7 @@ function ServiceCard({
   name,
   categories,
   description,
-  hours,
+  schedules,
   infos_alerte,
   contacts,
 }) {
@@ -33,7 +33,7 @@ function ServiceCard({
           name={name}
           categories={categories}
           description={description}
-          hours={hours}
+          schedules={schedules}
           infos_alerte={infos_alerte}
           contacts={contacts}
         />
@@ -58,35 +58,86 @@ function ServiceCard({
         </span>
       </span>
       <div className="serviceCard-data">
+        <p className="serviceCard-data__info">Categorie : {categories}</p>
         <p className="serviceCard-data__info">{description}</p>
         <table className="serviceCard-data__hoursDetails">
-          {hours.map((e) => (
-            <tr key={e.name} className="serviceCard-data__days">
+          {schedules.map((day) => (
+            <tr key={day.day} className="serviceCard-data__days">
               <td
                 className={
-                  e.day === 6 || e.day === 7
+                  day.day === 6 || day.day === 7
                     ? 'serviceCard-data__daysOff'
                     : 'serviceCard-data__daysOn'
                 }
               >
-                {e.name}
+                {day.day}
               </td>
-              <td className="serviceCard-data__hours">{`${e.open_am} - ${e.close_am} / ${e.open_pm} - ${e.close_pm}`}</td>
+              <td className="serviceCard-data__hours">
+                {(() => {
+                  if (!day.opentime_am && !day.opentime_pm) {
+                    return 'Fermé';
+                  }
+                  if (
+                    day.opentime_am &&
+                    !day.opentime_pm &&
+                    !day.closetime_pm
+                  ) {
+                    return `${day.opentime_am.slice(
+                      0,
+                      -3
+                    )} - ${day.closetime_am.slice(0, -3)}`;
+                  }
+                  if (!day.opentime_am && day.opentime_pm && day.closetime_pm) {
+                    return `${day.opentime_pm.slice(
+                      0,
+                      -3
+                    )} - ${day.closetime_pm.slice(0, -3)}`;
+                  }
+                  if (
+                    day.opentime_am &&
+                    day.closetime_am &&
+                    day.opentime_pm &&
+                    day.closetime_pm
+                  ) {
+                    return `${day.opentime_am.slice(
+                      0,
+                      -3
+                    )} - ${day.closetime_am.slice(
+                      0,
+                      -3
+                    )} / ${day.opentime_pm.slice(
+                      0,
+                      -3
+                    )} - ${day.closetime_pm.slice(0, -3)}`;
+                  }
+                  if (
+                    day.opentime_am &&
+                    !day.closetime_am &&
+                    !day.opentime_pm &&
+                    day.closetime_pm
+                  ) {
+                    return `${day.opentime_am.slice(
+                      0,
+                      -3
+                    )} - ${day.closetime_pm.slice(0, -3)}`;
+                  }
+                })()}
+              </td>
             </tr>
           ))}
         </table>
         <p className="serviceCard-data__alerts">{infos_alerte}</p>
-        {contacts.map((e) => (
+        {/* {contacts.map((contact) => (
           <ContactCard
-            key={e.id}
-            name={e.name}
-            job={e.job}
-            phone={e.phone}
-            mail={e.mail}
-            visibility={e.visibility}
-            actualisation={e.actualisation}
+            key={contact.id}
+            name={contact.name}
+            job={contact.job}
+            phone={contact.phone}
+            mail={contact.mail}
+            visibility={contact.visibility}
+            actualisation={contact.actualisation}
           />
-        ))}
+        ))} */}
       </div>
     </li>
   );
