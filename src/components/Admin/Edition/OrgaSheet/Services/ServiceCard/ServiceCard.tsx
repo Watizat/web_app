@@ -2,16 +2,16 @@ import { useState } from 'react';
 import ContactCard from '../../ContactCard/ContactCard';
 import ModalService from '../../../../Modal/ModalService';
 import ModalContact from '../../../../Modal/ModalContact';
+import { ServiceTranslation, Contact } from '../../../../../../@types/organism';
 import './ServiceCard.scss';
 
-function ServiceCard({
-  name,
-  categories,
-  description,
-  schedules,
-  infos_alerte,
-  contacts,
-}) {
+function ServiceCard(
+  //! WARNING : Je ne sais pas typer categorie, car il correspond à name dans la table categorie
+  //! WARNING : Lorsque j'essai de typer schedule, j'ai une erreur
+  { categories, schedules },
+  { name, description, infos_alerte }: ServiceTranslation,
+  contacts: Contact[]
+) {
   const [isActiveService, setIsActiveService] = useState(false);
   const [isActiveContact, setIsActiveContact] = useState(false);
   return (

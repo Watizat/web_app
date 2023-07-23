@@ -39,11 +39,11 @@ function OrgaSheet() {
         animals={organism[0].animals}
         description={organism[0].translations[0]?.description}
         schedules={organism[0].schedules}
-        infos_alertes={organism[0].translations[0]?.infos_alertes}
+        infos_alertes={organism[0].translations[0]?.infos_alerte}
       />
 
       <Services
-        key={`services-${organism.id}`}
+        key={`services-${organism[0].id}`}
         services={organism[0].services}
       />
     </section>
