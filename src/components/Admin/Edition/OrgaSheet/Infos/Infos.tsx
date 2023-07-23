@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Modal from '../../../Modal/ModalInfos';
 import './Infos.scss';
+import { Organism } from '../../../../../@types/organism';
 
-function Infos({ name, address, city, zipcode, website }) {
+function Infos({ name, address, city, zipcode, website }: Organism) {
   const [isActive, setIsActive] = useState(false);
 
   return (

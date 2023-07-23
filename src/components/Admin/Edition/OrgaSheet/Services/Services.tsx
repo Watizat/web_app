@@ -3,7 +3,7 @@ import ServiceCard from './ServiceCard/ServiceCard';
 import ModalService from '../../../Modal/ModalService';
 import './Services.scss';
 
-function Services({ services }) {
+function Services({ services }: any) {
   const [isActiveService, setIsActiveService] = useState(false);
   return (
     console.log(services),
@@ -23,15 +23,15 @@ function Services({ services }) {
         </span>
 
         <ul className="orgaSheet-services__list">
-          {services.map((e) => (
+          {services.map((service: any) => (
             <ServiceCard
-              key={`services${e.id}`}
-              name={e.translations[0].name}
-              categories={e.categorie_id.translations[0].name}
-              description={e.translations[0].description}
-              schedules={e.schedules}
-              infos_alerte={e.translations[0].infos_alerte}
-              contacts={e.contacts}
+              key={`services${service.id}`}
+              name={service.translations[0].name}
+              categories={service.categorie_id.translations[0].name}
+              description={service.translations[0].description}
+              schedules={service.schedules}
+              infos_alerte={service.translations[0].infos_alerte}
+              contacts={service.contacts}
             />
           ))}
         </ul>

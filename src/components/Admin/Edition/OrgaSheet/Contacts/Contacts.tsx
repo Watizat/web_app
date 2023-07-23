@@ -3,7 +3,7 @@ import ContactCard from '../ContactCard/ContactCard';
 import Modal from '../../../Modal/ModalContact';
 import './Contacts.scss';
 
-function Contacts({ contacts }) {
+function Contacts({ contacts }: any) {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -22,15 +22,15 @@ function Contacts({ contacts }) {
       </span>
 
       <div className="orgaSheet-contacts__list">
-        {contacts.map((e) => (
+        {contacts.map((contact) => (
           <ContactCard
-            key={e.id}
-            name={e.name}
-            job={e.job}
-            phone={e.phone}
-            mail={e.mail}
-            visibility={e.visibility}
-            actualisation={e.actualisation}
+            key={contact.id}
+            name={contact.name}
+            job={contact.job}
+            phone={contact.phone}
+            mail={contact.mail}
+            visibility={contact.visibility}
+            actualisation={contact.actualisation}
           />
         ))}
       </div>

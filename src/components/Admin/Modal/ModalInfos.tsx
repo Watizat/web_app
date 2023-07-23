@@ -5,7 +5,7 @@ interface ModalProps {
   name?: string;
   address?: string;
   city?: string;
-  zipcode?: number;
+  zipcode?: string;
   website?: string;
 }
 
