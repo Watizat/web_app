@@ -7,6 +7,13 @@ interface ModalProps {
   categories?: string;
   description?: string;
   infos_alerte?: string;
+  schedules?: {
+    day?: number;
+    opentime_am?: string;
+    closetime_am?: string;
+    opentime_pm?: string;
+    closetime_pm?: string;
+  };
 }
 
 function ModalService({
@@ -14,7 +21,7 @@ function ModalService({
   name,
   categories,
   description,
-  hours,
+  schedules,
   infos_alerte,
 }: ModalProps) {
   return (
@@ -37,6 +44,14 @@ function ModalService({
             </label>
           </div>
           <div className="modal-case">
+            <h4 className="modal-case__title">Nom du service</h4>
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              defaultValue={name}
+            />
+          </div>
+          <div className="modal-case">
             <h4 className="modal-case__title">Type de service·s proposé·s</h4>
             <input
               className="modal-case__inputTxt"
@@ -53,35 +68,36 @@ function ModalService({
                 <td />
                 <td colSpan={3}>Aprés-midi</td>
               </thead>
-              {hours.map((e) => (
-                <tr key={e.name} className="modal-data__hoursLine">
+
+              {schedules.map((day) => (
+                <tr key={day.day} className="modal-data__hoursLine">
                   <td className="modal-data__hoursDay">
-                    <span>{e.name}</span>
+                    <span>{day.day}</span>
                   </td>
                   <td className="modal-data__hoursHour">
                     <input
-                      defaultValue={e.open_am}
+                      defaultValue={day.opentime_am}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">-</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      defaultValue={e.close_am}
+                      defaultValue={day.closetime_am}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">/</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      defaultValue={e.open_pm}
+                      defaultValue={day.opentime_pm}
                       className="modal-data__hoursInput"
                     />
                   </td>
                   <td className="modal-data__hoursSeparater">-</td>
                   <td className="modal-data__hoursTd">
                     <input
-                      defaultValue={e.close_pm}
+                      defaultValue={day.closetime_pm}
                       className="modal-data__hoursInput"
                     />
                   </td>
@@ -100,20 +116,20 @@ function ModalService({
         <div className="modal-actions">
           <button
             type="button"
-            className="btn btn-danger btn-flat modal-actions__close"
+            className="btn btn-danger-fill btn-flat modal-actions__close"
           >
             Supprimer
           </button>
           <button
             type="button"
-            className="btn btn-warning btn-flat modal-actions__close"
+            className="btn btn-info-fill btn-flat modal-actions__close"
             onClick={() => setIsActive(false)}
           >
             Annuler
           </button>
           <button
             type="button"
-            className="btn btn-sucess btn-flat modal-actions__save"
+            className="btn btn-sucess-fill btn-flat modal-actions__save"
           >
             Sauvegarder
           </button>
@@ -127,6 +143,13 @@ ModalService.defaultProps = {
   categories: ',',
   description: '',
   infos_alerte: '',
+  schedules: {
+    day: 0,
+    opentime_am: '     ',
+    closetime_am: '     ',
+    opentime_pm: '     ',
+    closetime_pm: '     ',
+  },
 };
 
 export default ModalService;

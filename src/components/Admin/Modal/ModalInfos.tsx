@@ -5,7 +5,7 @@ interface ModalProps {
   name?: string;
   address?: string;
   city?: string;
-  zipcode?: number;
+  zipcode?: string;
   website?: string;
 }
 
@@ -66,7 +66,7 @@ function ModalInfos({
         <div className="modal-actions">
           <button
             type="button"
-            className="btn btn-danger-fill btn-flat modal-actions__close"
+            className="btn btn-info-fill btn-flat modal-actions__close"
             onClick={() => setIsActive(false)}
           >
             Annuler

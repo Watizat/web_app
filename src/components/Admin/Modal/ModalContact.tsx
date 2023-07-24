@@ -63,9 +63,9 @@ function ModalContact({
             <div className=" modal-contact__roles">
               <label className="modal-contact__private">
                 Publicité du contact
-                <select name="role" defaultValue={visibility}>
-                  <option value="private">Privé</option>
-                  <option value="public">Public</option>
+                <select name="role" defaultValue={`${visibility}`}>
+                  <option value="false">Privé</option>
+                  <option value="true">Public</option>
                 </select>
               </label>
               <label className="modal-contact__actu">
@@ -81,20 +81,20 @@ function ModalContact({
         <div className="modal-actions">
           <button
             type="button"
-            className="btn btn-danger btn-flat modal-actions__close"
+            className="btn btn-danger-fill btn-flat modal-actions__close"
           >
             Supprimer
           </button>
           <button
             type="button"
-            className="btn btn-warning btn-flat modal-actions__close"
+            className="btn btn-info-fill btn-flat modal-actions__close"
             onClick={() => setIsActive(false)}
           >
             Annuler
           </button>
           <button
             type="button"
-            className="btn btn-sucess btn-flat modal-actions__save"
+            className="btn btn-sucess-fill btn-flat modal-actions__save"
           >
             Sauvegarder
           </button>

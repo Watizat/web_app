@@ -31,6 +31,7 @@ export const fetchOrganisms = createAsyncThunk(
       'https://watizat.lunalink.nl/items/organisme',
       {
         params: {
+          // IMPOSSIBLE D'AJOUTER PLUS DE PARAMETRES
           fields: [
             'id',
             'name',

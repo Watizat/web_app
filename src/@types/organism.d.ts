@@ -1,21 +1,21 @@
 export interface Organism {
   id: number;
   name: string;
-  address: string | null;
-  zipcode: string | null;
+  address: string | undefined;
+  zipcode: string | undefined;
   slug: string;
   contacts: Contact[];
   latitude: number;
   longitude: number;
   city: string;
-  comment: string | null;
+  comment: string | undefined;
   visible: boolean;
   pmr: boolean;
   animals: boolean;
   zone_id: Zone;
-  phone: string | null;
-  mail: string | null;
-  website: string | null;
+  phone: string | undefined;
+  mail: string | undefined;
+  website: string | undefined;
   translations: OrganismTranslation[];
   schedules: Schedule[];
   services: Service[];
@@ -32,8 +32,8 @@ export interface Contact {
 
 export interface OrganismTranslation {
   id: number;
-  infos_alerte: string | null;
-  description: string | null;
+  infos_alerte: string | undefined;
+  description: string | undefined;
 }
 
 export interface Zone {
@@ -43,10 +43,10 @@ export interface Zone {
 export interface Schedule {
   id: number;
   day: number;
-  opentime_am: string | null;
-  closetime_am: string | null;
-  opentime_pm: string | null;
-  closetime_pm: string | null;
+  opentime_am: string | undefined;
+  closetime_am: string | undefined;
+  opentime_pm: string | undefined;
+  closetime_pm: string | undefined;
   closed: boolean;
 }
 
@@ -61,9 +61,9 @@ export interface Service {
 export interface ServiceTranslation {
   id: number;
   name: string;
-  infos_alerte: string | null;
+  infos_alerte: string | undefined;
   slug: string;
-  description: string | null;
+  description: string | undefined;
 }
 
 export interface Categorie {
@@ -74,7 +74,7 @@ export interface Categorie {
 export interface CategorieTranslation {
   id: number;
   name: string;
-  description: string;
+  description: string | undefined;
   slug: string;
   langue_id: number;
 }
