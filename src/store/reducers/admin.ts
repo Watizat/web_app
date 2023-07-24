@@ -1,13 +1,19 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 import AxiosInstance from 'axios';
-import { Categorie, Organism } from '../../@types/organism';
+import { Organism } from '../../@types/organism';
 
-interface AdminState {}
+interface AdminState {
+  organisms: Organism[];
+  isLoading: boolean;
+}
 
-export const initialState: AdminState = {};
+export const initialState: AdminState = {
+  organisms: [],
+  isLoading: false,
+};
 
-export const fetchOrganisms = createAsyncThunk(
-  'organisms/fetch-organisms',
+export const fetchAdminOrganisms = createAsyncThunk(
+  'admin-organisms/fetch-organisms',
   async (/* category: string */) => {
     const { data } = await AxiosInstance.get<{ data: Organism[] }>(
       'https://watizat.lunalink.nl/items/organisme',
@@ -86,6 +92,15 @@ export const fetchOrganisms = createAsyncThunk(
   }
 );
 
-const adminReducer = createReducer(initialState, (builder) => {});
+const adminReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(fetchAdminOrganisms.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(fetchAdminOrganisms.fulfilled, (state, action) => {
+      state.organisms = action.payload;
+      state.isLoading = false;
+    });
+});
 
 export default adminReducer;

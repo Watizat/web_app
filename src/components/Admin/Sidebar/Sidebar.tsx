@@ -1,5 +1,5 @@
+import { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import logo from '../../../assets/logo.svg';
 import Container from '../../Container/Container';
 import NavBar from './NavBar/NavBar';
@@ -7,6 +7,11 @@ import './Sidebar.scss';
 
 function Sidebar() {
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
+
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    localStorage.setItem('city', event.target.value);
+    setSelect(event.target.value);
+  };
 
   return (
     <header className="adminsidebar">
@@ -17,7 +22,7 @@ function Sidebar() {
           </Link>
         </div>
         <div className="adminsidebar-area">
-          <select value={select}>
+          <select value={select} onChange={handleChange}>
             <option value="" disabled>
               Selectionner une ville
             </option>

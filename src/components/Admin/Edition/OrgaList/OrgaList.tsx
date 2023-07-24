@@ -2,7 +2,6 @@ import { Organism } from '../../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../../store/reducers/organisms';
 import './OrgaList.scss';
-import OrgaListCard from './OrgaListCard/OrgaListCard';
 import OrgaListSearch from './OrgaListSearch/OrgaListSearch';
 
 function OrgaList() {
@@ -17,14 +16,17 @@ function OrgaList() {
       <OrgaListSearch />
       <ul className="orgaList-list">
         {organisms.map((organism) => (
-          <button
-            type="button"
-            key={organism.id}
-            onClick={() => handleClick(organism)}
-            className="orgaList-button"
-          >
-            <OrgaListCard name={organism.name} address={organism.address} />
-          </button>
+          <li key={organism.id} className="orgaList-card">
+            <button
+              type="button"
+              key={organism.id}
+              onClick={() => handleClick(organism)}
+              className="orgaList-button"
+            >
+              <div className="orgaList-card__name">{organism.name}</div>
+              <div className="orgaList-card__adress">{organism.address}</div>
+            </button>
+          </li>
         ))}
       </ul>
     </section>
