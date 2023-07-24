@@ -13,6 +13,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
   return (
     <div className="app">
       <Header />

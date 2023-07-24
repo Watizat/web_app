@@ -6,7 +6,7 @@ import NavBar from './NavBar/NavBar';
 import './Sidebar.scss';
 
 function Sidebar() {
-  const [select, setSelect] = useState(localStorage.getItem('city') || '');
+  const [select] = useState(localStorage.getItem('city') || '');
 
   return (
     <header className="adminsidebar">

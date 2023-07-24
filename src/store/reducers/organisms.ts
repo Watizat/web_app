@@ -104,11 +104,17 @@ const organismReducer = createReducer(initialState, (builder) => {
       state.organisms = action.payload;
       state.isLoading = false;
     })
+    .addCase(fetchOrganisms.rejected, (state, action) => {
+      console.log(action.payload);
+    })
     .addCase(setOrganisms, (state, action) => {
       state.organisms = action.payload;
     })
     .addCase(fetchCategories.fulfilled, (state, action) => {
       state.categories = action.payload;
+    })
+    .addCase(fetchCategories.rejected, (state, action) => {
+      console.log(action);
     })
     .addCase(filterCategories, (state, action) => {
       state.categoryFilter = action.payload;

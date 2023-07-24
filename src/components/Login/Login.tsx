@@ -17,8 +17,7 @@ function Login() {
   );
   const isLoading = useAppSelector((state) => state.user.isLoading);
   const isLogged = useAppSelector((state) => state.user.isLogged);
-
-  const user = useAppSelector((state) => state.user.user);
+  const error = useAppSelector((state) => state.user.error);
 
   const handleChangeField =
     (field: KeyOfloginCredentials) =>
@@ -32,10 +31,7 @@ function Login() {
     event.preventDefault();
     await dispatch(login({ email, password }));
     await dispatch(fetchUser());
-    console.log(user);
   };
-
-  console.log(user);
 
   if (isLoading) {
     return <div>isLoading...</div>;
@@ -48,6 +44,7 @@ function Login() {
   return (
     <div className="login">
       <h1>Login</h1>
+      {error && <p className="login-error">{error}</p>}
       <form className="login-form" onSubmit={handleSubmit}>
         <input
           type="email"

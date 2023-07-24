@@ -4,7 +4,7 @@ export interface UserState {
     password: string;
   };
   isLogged: boolean;
-  access_token: string;
+  token: LoginData;
   isLoading: boolean;
   error: string | null;
   user: UserData;
@@ -16,6 +16,7 @@ export interface LoginData {
   access_token: string;
   expires: number;
   refresh_token: string;
+  time_out: number | null;
 }
 
 export interface UserData {

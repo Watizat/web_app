@@ -1,7 +1,11 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './NavBar.scss';
+import { useAppDispatch } from '../../../../hooks/redux';
+import { logout } from '../../../../store/reducers/user';
 
 function NavBar() {
+  const dispatch = useAppDispatch();
+
   const links = [
     { name: 'Dashboard', to: '/admin/dashboard', icon: 'las la-igloo' },
     {
@@ -35,12 +39,17 @@ function NavBar() {
       target: '_blank',
       icon: 'las la-carrot',
     },
-    {
-      name: 'Se déconnecter',
-      to: '/admin/exit',
-      icon: 'las la-sign-out-alt',
-    },
+    // {
+    //   name: 'Se déconnecter',
+    //   to: '/auth/logout',
+    //   icon: 'las la-sign-out-alt',
+    // },
   ];
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <div className="adminNav">
       {links.map((e) => (
@@ -53,6 +62,10 @@ function NavBar() {
           <li>{e.name}</li>
         </NavLink>
       ))}
+      <Link to="/" onClick={handleLogout}>
+        <i className="las la-sign-out-alt" />
+        <li>Se déconnecter</li>
+      </Link>
     </div>
   );
 }

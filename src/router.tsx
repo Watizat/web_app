@@ -25,7 +25,6 @@ const router = createBrowserRouter(
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="/orientation" element={<Orientation />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/forgotten-password" element={<ForgottenPassword />} />
         <Route path="/recover-password" element={<RecoverPassword />} />
         <Route path="/account-request" element={<AccountRequest />} />
@@ -34,7 +33,8 @@ const router = createBrowserRouter(
         <Route path="/organisme/:slug" element={<Organisme />} />
       </Route>
       <Route path="/resultats" element={<Resultats />} />
-      <Route path="/admin" element={<AdminApp />}>
+      <Route path="/admin" element={<AdminApp />} errorElement={<App />}>
+        <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/edition" element={<Edition />} />
