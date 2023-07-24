@@ -1,3 +1,7 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchOrganism } from '../../store/reducers/organisms';
 import Container from '../Container/Container';
 import Icon from '../../ui/icon/icon';
 import './Organisme.scss';
@@ -7,12 +11,21 @@ import Infos from './Infos/Infos';
 import Services from './Services/Services';
 
 function Organisme() {
+  const { slug } = useParams();
+  const dispatch = useAppDispatch();
+  const { organisms } = useAppSelector((state) => state.organism);
+  const organism = organisms[0];
+
+  useEffect(() => {
+    dispatch(fetchOrganism(slug as string));
+  }, [dispatch, slug]);
+
   return (
     <main className="organisme-container">
       <Container>
         <Breadcrumb />
         <section className="organisme">
-          <Header />
+          <Header name={organism.name} />
           <Infos />
           <Services />
         </section>
