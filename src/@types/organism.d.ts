@@ -79,10 +79,14 @@ export interface CategorieTranslation {
   langue_id: number;
 }
 
-// export interface Categories {
-//   tag: string;
-//   translations: {
-//     name: string;
-//     slug: string;
-//   }[];
-// }
+export interface User {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  last_connected: string;
+  role: {
+    id: number;
+    name: string;
+  };
+}

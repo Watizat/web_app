@@ -1,15 +1,19 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 import AxiosInstance from 'axios';
-import { Organism } from '../../@types/organism';
+import { Organism, User } from '../../@types/organism';
 
 interface AdminState {
   organisms: Organism[];
   isLoading: boolean;
+  users: User[];
+  user: User | null;
 }
 
 export const initialState: AdminState = {
   organisms: [],
   isLoading: false,
+  users: [],
+  user: null,
 };
 
 export const fetchAdminOrganisms = createAsyncThunk(
@@ -92,6 +96,27 @@ export const fetchAdminOrganisms = createAsyncThunk(
   }
 );
 
+export const fetchUsers = createAsyncThunk('users/fetch-users', async () => {
+  const { data } = await AxiosInstance.get<{ data: User[] }>(
+    'https://watizat.lunalink.nl/items/user',
+    {
+      params: {
+        fields: [
+          'id',
+          'firstname',
+          'lastname',
+          'last_connected',
+          'email',
+          'role_id.id',
+          'role_id.name',
+          'zone_id.name',
+        ].join(','),
+      },
+    }
+  );
+  return data.data;
+});
+
 const adminReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchAdminOrganisms.pending, (state) => {
@@ -100,6 +125,10 @@ const adminReducer = createReducer(initialState, (builder) => {
     .addCase(fetchAdminOrganisms.fulfilled, (state, action) => {
       state.organisms = action.payload;
       state.isLoading = false;
+    })
+    .addCase(fetchUsers.fulfilled, (state, action) => {
+      state.users = action.payload;
+      console.log(action.payload);
     });
 });
 

@@ -1,7 +1,29 @@
-import UsersDetails from './UsersDetails/UsersDetails';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { fetchUsers } from '../../../store/reducers/admin';
 import './Users.scss';
+import UsersDetails from './UsersDetails/UsersDetails';
+
+/* const userss = {
+  email: 'louise.michel@gmail.com',
+  firstname: 'Louiss',
+  id: 2,
+  last_connected: '2023-07-24T09:18:37',
+  lastname: 'Michel',
+  role_id: {
+    id: 2,
+    name: 'editor',
+  },
+}; */
 
 function Users() {
+  const dispatch = useAppDispatch();
+  const users = useAppSelector((state) => state.admin.users);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
   return (
     <div id="users">
       <table className="userstable">
@@ -31,8 +53,8 @@ function Users() {
           </tr>
         </thead>
         <tbody>
-          {Array.from({ length: 30 }, (_, i) => (
-            <UsersDetails key={i} />
+          {users.map((user) => (
+            <UsersDetails key={user.id} {...user} />
           ))}
         </tbody>
       </table>
