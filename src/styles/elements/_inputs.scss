@@ -1,0 +1,13 @@
+@use '../variables' as v;
+@use '../medias' as m;
+
+    /* Basic styling */
+    select {
+      background-color: v.$white;
+      border: none;
+      border: 1px solid v.$grey-300;
+      padding: .5rem 1rem;
+      border-radius: 5px;
+    }
+
+   

@@ -1,7 +1,9 @@
-import { ChangeEvent, MouseEventHandler, useState } from 'react';
+import { useEffect, ChangeEvent, MouseEventHandler, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchZones } from '../../store/reducers/admin';
+
 import logo from '../../assets/logo.svg';
-import { useAppSelector } from '../../hooks/redux';
 import Icon from '../../ui/icon/icon';
 import Container from '../Container/Container';
 import './Home.scss';
@@ -23,6 +25,13 @@ function Home() {
       navigate(`resultats/?city=${select}&category=${category}`);
     };
 
+  const dispatch = useAppDispatch();
+  const zones = useAppSelector((state) => state.admin.zones);
+
+  useEffect(() => {
+    dispatch(fetchZones());
+  }, [dispatch]);
+
   return (
     <main id="homepage">
       <section className="hero">
@@ -43,8 +52,11 @@ function Home() {
                 <option value="" disabled>
                   Selectionner une ville...
                 </option>
-                <option value="toulouse">Toulouse</option>
-                <option value="paris">Paris</option>
+                {zones.map((zone) => (
+                  <option key={zone.id} value={zone.name}>
+                    {zone.name}
+                  </option>
+                ))}
               </select>
             </article>
             <article className="hero-choice--right">

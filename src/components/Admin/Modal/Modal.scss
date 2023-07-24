@@ -34,6 +34,14 @@
     gap: 3rem;
   }
 
+  &-double {
+    display: flex;
+    justify-content: space-around;
+    &__case {
+      width: 25rem;
+    }
+  }
+
   &-case {
     list-style: none;
     display: flex;
