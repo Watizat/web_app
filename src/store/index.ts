@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import adminReducer from './reducers/admin';
 import organismReducer from './reducers/organisms';
 
 const store = configureStore({
   reducer: {
     organism: organismReducer,
+    admin: adminReducer,
   },
 });
 

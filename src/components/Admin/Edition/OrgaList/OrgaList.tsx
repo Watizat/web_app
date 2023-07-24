@@ -6,7 +6,7 @@ import OrgaListCard from './OrgaListCard/OrgaListCard';
 import OrgaListSearch from './OrgaListSearch/OrgaListSearch';
 
 function OrgaList() {
-  const organisms = useAppSelector((state) => state.organisms);
+  const organisms = useAppSelector((state) => state.organism.organisms);
   const dispatch = useAppDispatch();
 
   function handleClick(organism: Organism) {

@@ -7,7 +7,7 @@ import './OrgaSheet.scss';
 import Services from './Services/Services';
 
 function OrgaSheet() {
-  const organism = useAppSelector((state) => state.filteredOrganisms);
+  const organism = useAppSelector((state) => state.organism.filteredOrganisms);
   if (organism.length === 0) {
     return <div> Veuillez sélectionner un organisme </div>;
   }
