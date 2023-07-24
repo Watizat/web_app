@@ -1,0 +1,32 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/medias' as m;
+@use '../../../../styles/elements';
+
+.organisme-infos{
+
+  &--maincontact{
+    font-size: 0.8em;
+    padding-left: 1em;
+  }
+
+  &--link{
+    display: block;
+    color: v.$grey-700
+  }
+
+  &--othercontact{
+    padding-left: 1em;
+    font-size: 0.8em;
+
+    &-job{
+      color: v.$watigreen;
+      font-weight: 600;
+      margin-top: 1em;
+    }
+
+    & a{
+      display: block;
+      color: v.$grey-700
+    }
+  }
+}

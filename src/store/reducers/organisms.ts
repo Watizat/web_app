@@ -8,18 +8,20 @@ import { Categorie, Organism } from '../../@types/organism';
 
 interface OrganismsState {
   organisms: Organism[];
-  editOrganism: Organism[];
+  filteredOrganisms: Organism[];
   categoryFilter: string[];
   isLoading: boolean;
   categories: Categorie[];
+  userPosition: { lat: number; lng: number };
 }
 
 export const initialState: OrganismsState = {
   organisms: [],
-  editOrganism: [],
+  filteredOrganisms: [],
   categoryFilter: [],
   isLoading: false,
   categories: [],
+  userPosition: { lat: 0, lng: 0 },
 };
 
 export const fetchOrganisms = createAsyncThunk(
@@ -46,16 +48,18 @@ export const fetchOrganisms = createAsyncThunk(
             'mail',
             'website',
             'zone_id.name',
-            'contacts.name',
             'schedules.day',
             'schedules.opentime_am',
             'schedules.closetime_am',
             'schedules.opentime_pm',
             'schedules.closetime_pm',
             'schedules.closed',
+            'contacts.name',
             'contacts.job',
             'contacts.phone',
+            'contacts.mail',
             'contacts.visibility',
+            'contacts.actualisation',
             'translations.id',
             'translations.description',
             'translations.infos_alerte',
@@ -68,7 +72,19 @@ export const fetchOrganisms = createAsyncThunk(
             'services.translations.slug',
             'services.translations.infos_alerte',
             'services.translations.description',
-          ],
+            'services.schedules.day',
+            'services.schedules.opentime_am',
+            'services.schedules.closetime_am',
+            'services.schedules.opentime_pm',
+            'services.schedules.closetime_pm',
+            'services.schedules.closetime_pm',
+            'services.contacts.name',
+            'services.contacts.job',
+            'services.contacts.mail',
+            'services.contacts.phone',
+            'services.contacts.visibility',
+            'services.contacts.actualisation',
+          ].join(','),
           filter: {
             zone_id: {
               name: 'Toulouse',
@@ -106,8 +122,12 @@ export const setOrganisms = createAction<Organism[]>(
   'organims/filter-organims'
 );
 
-export const setEditOrganism = createAction<Organism>(
-  'organisms/edit-organism'
+export const setFilteredOrganisms = createAction<Organism[]>(
+  'organims/filtered-organims'
+);
+
+export const setUserPosition = createAction<{ lat: number; lng: number }>(
+  'position/user-position'
 );
 
 const organismReducer = createReducer(initialState, (builder) => {
@@ -122,14 +142,19 @@ const organismReducer = createReducer(initialState, (builder) => {
     .addCase(setOrganisms, (state, action) => {
       state.organisms = action.payload;
     })
-    .addCase(setEditOrganism, (state, action) => {
-      state.editOrganism = [action.payload];
+    .addCase(setFilteredOrganisms, (state, action) => {
+      state.filteredOrganisms = action.payload;
     })
     .addCase(fetchCategories.fulfilled, (state, action) => {
-      state.categories = action.payload;
+      state.categories = action.payload.sort((a, b) =>
+        a.tag.localeCompare(b.tag)
+      );
     })
     .addCase(filterCategories, (state, action) => {
       state.categoryFilter = action.payload;
+    })
+    .addCase(setUserPosition, (state, action) => {
+      state.userPosition = action.payload;
     });
 });
 

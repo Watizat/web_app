@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import { Organism } from '../../../@types/organism';
 import Icon from '../../../ui/icon/icon';
 import './Card.scss';
@@ -7,10 +6,10 @@ import './Card.scss';
 interface OrganismProps {
   organism: Organism;
   map_id: number;
-  selected: string[];
+  categoryFilter: string[];
 }
 
-function Card({ organism, map_id, selected }: OrganismProps) {
+function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   const { services } = organism;
   const tags = [
     ...new Set(services.map((service) => service.categorie_id.tag)),
@@ -19,7 +18,7 @@ function Card({ organism, map_id, selected }: OrganismProps) {
   const categories = tags.map((tag, index) => ({
     id: index + 1,
     value: tag,
-    isCheck: selected.includes(tag),
+    isCheck: categoryFilter.includes(tag),
   }));
 
   return (
@@ -68,7 +67,7 @@ function Card({ organism, map_id, selected }: OrganismProps) {
       <div className="card_container_right">
         <Link
           // to="geo:38.62464092991612,-90.18476128578186"
-          to={`https://www.google.com/maps/search/?api=1&query=${47.5951518}%2C${-122.3316393}`}
+          to={`https://www.google.com/maps/search/?api=1&query=${organism.latitude}%2C${organism.longitude}`}
           target="_blank"
           className="card_container_right_go"
         >

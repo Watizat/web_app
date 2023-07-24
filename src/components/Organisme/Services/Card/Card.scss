@@ -1,0 +1,84 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/medias' as m;
+@use '../../../../styles/elements';
+
+.organisme-services{
+
+  &-contentcards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.3rem;
+
+      &--cards {
+        display: flex;
+        justify-content: space-between;
+        flex-basis: 32%;
+        flex-wrap: wrap;
+        margin-bottom: 0.8rem;
+
+        @include m.mobile{
+          flex-basis: 100%;
+        }
+       
+
+      &-header{
+        width: 100%;
+        background-color: v.$grey-100;
+        padding: 0.4rem;
+        color: v.$watigreen;
+        border-radius: 10px;
+
+        & h4{
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          align-content: center;
+        }
+
+        & i{
+          font-size: 1.5em;
+        }
+
+        &--open{
+          background-color: v.$watigreen;
+          transition: background color 800ms;
+          cursor: pointer;
+
+          & h4{
+            color: v.$white;
+          }
+        }
+  
+      }
+
+      &-content{
+        display: none;
+
+      }
+
+      & article {
+        width: 100%;
+        flex: 0 0 auto;
+      }
+
+      &-content{
+        background-color: v.$grey-100;
+        padding: 2em;
+        font-size: 0.9em;
+
+        &-scheduleday{
+          color: v.$watigreen;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+
+ }
+
+ .is-visible{
+  display: block;
+}

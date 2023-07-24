@@ -1,0 +1,27 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
+
+.organisme{
+
+  &-infos {
+    display: flex;
+    justify-content: space-between;
+
+    @include m.mobile{
+      flex-wrap: wrap;
+    }
+   
+
+    & article {
+      width: 33%;
+      flex: 0 0 auto;
+
+      @include m.mobile{
+        width: 100%;
+      }
+    }
+
+  }
+
+}

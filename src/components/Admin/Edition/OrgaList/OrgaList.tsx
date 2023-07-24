@@ -1,16 +1,16 @@
-import OrgaListSearch from './OrgaListSearch/OrgaListSearch';
-import OrgaListCard from './OrgaListCard/OrgaListCard';
-import './OrgaList.scss';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { setEditOrganism } from '../../../../store/reducers/organisms';
 import { Organism } from '../../../../@types/organism';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { setFilteredOrganisms } from '../../../../store/reducers/organisms';
+import './OrgaList.scss';
+import OrgaListCard from './OrgaListCard/OrgaListCard';
+import OrgaListSearch from './OrgaListSearch/OrgaListSearch';
 
 function OrgaList() {
   const organisms = useAppSelector((state) => state.organisms);
   const dispatch = useAppDispatch();
 
   function handleClick(organism: Organism) {
-    dispatch(setEditOrganism(organism));
+    dispatch(setFilteredOrganisms([organism]));
   }
   return (
     <section className="orgaList">

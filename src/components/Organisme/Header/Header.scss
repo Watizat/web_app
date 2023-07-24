@@ -1,0 +1,49 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
+
+.organisme{
+  
+    &-header {
+    display: flex;
+    justify-content: space-between;
+    gap:5em;
+    margin-bottom: 1em;
+
+    @include m.mobile{
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+
+  }
+
+  &-details {
+    width: 50%;
+
+    @include m.mobile{
+      width: 100%;
+    }
+
+    & h2{
+      color: v.$grey-800;
+      font-size: 1.2em;
+    }
+
+    & p{
+      font-size: 0.9em;
+      text-align: justify;
+    }
+  }
+  
+  & .leaflet-container {
+    max-width: 580px;
+    width: 50%;
+    height: 300px;
+
+    @include m.mobile{
+      width: 100%;
+    }
+  }
+
+
+}
