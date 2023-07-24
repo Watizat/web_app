@@ -1,3 +1,5 @@
+import jwt_decode from 'jwt-decode';
+
 import {
   createReducer,
   createAsyncThunk,
@@ -21,7 +23,15 @@ const initialState: UserState = {
     email: '',
     password: '',
   },
-  user: { first_name: '', last_name: '', email: '', role: '' },
+  user: {
+    id: '',
+    role: '',
+    app_access: false,
+    admin_access: false,
+    iat: null,
+    exp: null,
+    iss: '',
+  },
   isLogged: false,
   token: {
     access_token: '',
@@ -61,7 +71,7 @@ export const logout = createAsyncThunk('user/logout', async () => {
 
 export const fetchUser = createAsyncThunk('settings/fetchUser', async () => {
   const { data: user } = await axiosInstance.get<{ data: UserData }>(
-    '/users/me?fields'
+    '/users/me'
   );
   return user.data;
 });
@@ -81,7 +91,11 @@ export default createReducer(initialState, (builder) => {
     })
     .addCase(login.fulfilled, (state, action) => {
       const { access_token: token } = action.payload;
+      const jwtDecode = jwt_decode<UserData>(token);
+
+      state.user = { ...jwtDecode };
       state.error = null;
+      console.log(state.user);
       state.token.access_token = token;
       state.isLogged = true;
 
@@ -100,5 +114,6 @@ export default createReducer(initialState, (builder) => {
     })
     .addCase(fetchUser.fulfilled, (state, action) => {
       state.user = { ...action.payload };
+      console.log(action.payload);
     });
 });

@@ -20,8 +20,11 @@ export interface LoginData {
 }
 
 export interface UserData {
-  first_name: string;
-  last_name: string;
-  email: string;
+  id: string;
   role: string;
+  app_access: boolean;
+  admin_access: boolean;
+  iat: null;
+  exp: null;
+  iss: string;
 }
