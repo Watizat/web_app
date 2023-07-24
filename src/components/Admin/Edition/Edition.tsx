@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../../hooks/redux';
-import { fetchOrganisms } from '../../../store/reducers/organisms';
+import { fetchAdminOrganisms } from '../../../store/reducers/admin';
 import './Edition.scss';
 import OrgaList from './OrgaList/OrgaList';
 import OrgaSheet from './OrgaSheet/OrgaSheet';
@@ -9,7 +9,7 @@ function Edition() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchOrganisms());
+    dispatch(fetchAdminOrganisms());
   });
   return (
     <div id="edition">

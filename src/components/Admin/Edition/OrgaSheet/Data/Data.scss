@@ -3,14 +3,13 @@
 @use '../../../../../styles/elements';
 
 .orgaSheet {
-
   &-data {
     &__list {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 1rem;
-      padding: .75rem;
+      padding: 0.75rem;
     }
 
     .orgaSheet-case {
@@ -45,11 +44,12 @@
 
     &__hoursDetails {
       display: flex;
+      flex-direction: column;
       flex-wrap: wrap;
       gap: 1rem 2.5rem;
 
       @include m.fullhd {
-      gap: 1rem 2.5rem;
+        gap: 1rem 2.5rem;
       }
 
       @include m.qhd {
@@ -70,5 +70,4 @@
       color: v.$danger;
     }
   }
-
 }

@@ -1,20 +1,22 @@
 import { Organism } from '../../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { setFilteredOrganisms } from '../../../../store/reducers/organisms';
+import { setAdminOrganism } from '../../../../store/reducers/admin';
 import './OrgaList.scss';
 import OrgaListSearch from './OrgaListSearch/OrgaListSearch';
 
 function OrgaList() {
-  const organisms = useAppSelector((state) => state.organism.organisms);
+  const organisms = useAppSelector((state) => state.admin.organisms);
+  const isLoading = useAppSelector((state) => state.admin.isLoading);
   const dispatch = useAppDispatch();
 
   function handleClick(organism: Organism) {
-    dispatch(setFilteredOrganisms([organism]));
+    dispatch(setAdminOrganism(organism));
   }
   return (
     <section className="orgaList">
       <OrgaListSearch />
       <ul className="orgaList-list">
+        {isLoading && <span>Is loading...</span>}
         {organisms.map((organism) => (
           <li key={organism.id} className="orgaList-card">
             <button

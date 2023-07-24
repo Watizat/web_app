@@ -1,22 +1,20 @@
 import { useState } from 'react';
-import { Organism } from '../../../../../@types/organism';
+import { useAppSelector } from '../../../../../hooks/redux';
 import Modal from '../../../Modal/ModalData';
+import Schedules from '../Schedules/Schedules';
 import './Data.scss';
 
-function Data({ pmr, animals, description, schedules, infos_alertes }) {
+function Data() {
+  const organism = useAppSelector((state) => state.admin.organism);
+  console.log(organism);
   const [isActive, setIsActive] = useState(false);
+  if (organism === null) {
+    return <span>Erreur</span>;
+  }
+
   return (
     <article className="orgaSheet-card orgaSheet-data">
-      {isActive && (
-        <Modal
-          setIsActive={setIsActive}
-          pmr={pmr}
-          animals={animals}
-          description={description}
-          schedules={schedules}
-          infos_alertes={infos_alertes}
-        />
-      )}
+      {isActive && <Modal setIsActive={setIsActive} />}
 
       <span className="orgaSheet-card__titleBar">
         <h3 className="orgaSheet-card__title">Informations génerales</h3>
@@ -34,36 +32,34 @@ function Data({ pmr, animals, description, schedules, infos_alertes }) {
           <h4>Accés</h4>
           <div className="orgaSheet-data__accessDetails">
             <label className="orgaSheet-data__pmr">
-              {pmr ? (
-                <input type="checkbox" disabled checked />
-              ) : (
-                <input type="checkbox" disabled />
-              )}
+              <input type="checkbox" disabled checked={organism.pmr} />
               Accessible PSH /PMR
             </label>
             <label className="orgaSheet-data__pmr">
-              {animals ? (
-                <input type="checkbox" disabled checked />
-              ) : (
-                <input type="checkbox" disabled />
-              )}
+              <input type="checkbox" disabled checked={organism.animals} />
               Animaux admis
             </label>
           </div>
         </li>
         <li className="orgaSheet-case">
           <h4>Description</h4>
-          <p>{description}</p>
+          <p>{organism.translations[0].description}</p>
         </li>
         <li className="orgaSheet-case orgaSheet-data__hours">
           <h4>Horaires</h4>
           <div className="orgaSheet-data__hoursDetails">
-            {schedules.map((day) => console.log(day))}
+            {organism.schedules && organism.schedules.length > 0 ? (
+              <Schedules schedule={organism.schedules} />
+            ) : (
+              <p style={{ color: 'red' }}>
+                Il n&apos;y a pas d&apos;horaires enregistrés.
+              </p>
+            )}
           </div>
         </li>
         <li className="orgaSheet-case">
           <h4>Infos, alerte</h4>
-          <p>{infos_alertes}</p>
+          <p>{organism.translations[0].infos_alerte}</p>
         </li>
       </ul>
     </article>

@@ -1,9 +1,14 @@
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from '@reduxjs/toolkit';
 import AxiosInstance from 'axios';
 import { Organism, User } from '../../@types/organism';
 
 interface AdminState {
   organisms: Organism[];
+  organism: Organism | null;
   isLoading: boolean;
   users: User[];
   user: User | null;
@@ -11,6 +16,7 @@ interface AdminState {
 
 export const initialState: AdminState = {
   organisms: [],
+  organism: null,
   isLoading: false,
   users: [],
   user: null,
@@ -18,7 +24,7 @@ export const initialState: AdminState = {
 
 export const fetchAdminOrganisms = createAsyncThunk(
   'admin-organisms/fetch-organisms',
-  async (/* category: string */) => {
+  async () => {
     const { data } = await AxiosInstance.get<{ data: Organism[] }>(
       'https://watizat.lunalink.nl/items/organisme',
       {
@@ -46,6 +52,7 @@ export const fetchAdminOrganisms = createAsyncThunk(
             'schedules.opentime_pm',
             'schedules.closetime_pm',
             'schedules.closed',
+            'contacts.id',
             'contacts.name',
             'contacts.job',
             'contacts.phone',
@@ -70,6 +77,7 @@ export const fetchAdminOrganisms = createAsyncThunk(
             'services.schedules.opentime_pm',
             'services.schedules.closetime_pm',
             'services.schedules.closetime_pm',
+            'services.contacts.id',
             'services.contacts.name',
             'services.contacts.job',
             'services.contacts.mail',
@@ -117,6 +125,10 @@ export const fetchUsers = createAsyncThunk('users/fetch-users', async () => {
   return data.data;
 });
 
+export const setAdminOrganism = createAction<Organism>(
+  'admin-organisms/set-organism'
+);
+
 const adminReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchAdminOrganisms.pending, (state) => {
@@ -128,7 +140,9 @@ const adminReducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchUsers.fulfilled, (state, action) => {
       state.users = action.payload;
-      console.log(action.payload);
+    })
+    .addCase(setAdminOrganism, (state, action) => {
+      state.organism = action.payload;
     });
 });
 

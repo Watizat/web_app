@@ -22,12 +22,13 @@ export interface Organism {
 }
 
 export interface Contact {
-  name?: string;
-  job?: string;
-  phone?: string;
-  mail?: string;
-  visibility?: boolean;
-  actualisation?: boolean;
+  id: number;
+  name: string;
+  job: string;
+  phone: string;
+  mail: string;
+  visibility: boolean;
+  actualisation: boolean;
 }
 
 export interface OrganismTranslation {

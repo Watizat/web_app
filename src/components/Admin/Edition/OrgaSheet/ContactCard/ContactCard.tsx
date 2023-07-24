@@ -1,16 +1,9 @@
 import { useState } from 'react';
+import { Contact } from '../../../../../@types/organism';
 import Modal from '../../../Modal/ModalContact';
 import './ContactCard.scss';
-import { Contact } from '../../../../../@types/organism';
 
-function ContactCard({
-  name,
-  job,
-  phone,
-  mail,
-  visibility,
-  actualisation,
-}: Contact) {
+function ContactCard({ ...contact }: Contact) {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -18,30 +11,30 @@ function ContactCard({
       {isActive && (
         <Modal
           setIsActive={setIsActive}
-          name={name}
-          job={job}
-          phone={phone}
-          mail={mail}
-          visibility={visibility}
-          actualisation={actualisation}
+          name={contact.name}
+          job={contact.job}
+          phone={contact.phone}
+          mail={contact.mail}
+          visibility={contact.visibility}
+          actualisation={contact.actualisation}
         />
       )}
       <div className="orgaSheet-contact__header">
         <div className="orgaSheet-contact__subheader">
           <h5>Contact</h5>
           <div className="contacts-roles">
-            {actualisation ? (
+            {contact.actualisation ? (
               <span className="contacts-roles__role contacts-roles__actualisation">
-                actualisation
+                Actualisation
               </span>
             ) : null}
-            {visibility === false ? (
+            {contact.visibility === false ? (
               <span className="contacts-roles__role contacts-roles__prive">
-                prive
+                Privé
               </span>
             ) : (
               <span className="contacts-roles__role contacts-roles__public">
-                public
+                Public
               </span>
             )}
           </div>
@@ -56,12 +49,12 @@ function ContactCard({
       </div>
       <div className="orgaSheet-contact__details">
         <div className="orgaSheet-contact__infos">
-          <p className="orgaSheet-contact__nom">{name}</p>
-          <p className="orgaSheet-contact__fonction">{job}</p>
+          <p className="orgaSheet-contact__nom">{contact.name}</p>
+          <p className="orgaSheet-contact__fonction">{contact.job}</p>
         </div>
         <div className="orgaSheet-contact__name">
-          <p className="orgaSheet-contact__mail">{phone}</p>
-          <p className="orgaSheet-contact__tel">{mail}</p>
+          <p className="orgaSheet-contact__mail">{contact.phone}</p>
+          <p className="orgaSheet-contact__tel">{contact.mail}</p>
         </div>
       </div>
     </div>

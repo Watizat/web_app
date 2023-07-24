@@ -1,26 +1,31 @@
 import { useState } from 'react';
+import { useAppSelector } from '../../../../../hooks/redux';
 import Modal from '../../../Modal/ModalInfos';
 import './Infos.scss';
-import { Organism } from '../../../../../@types/organism';
 
-function Infos({ name, address, city, zipcode, website }: Organism) {
+function Infos() {
   const [isActive, setIsActive] = useState(false);
+  const organism = useAppSelector((state) => state.admin.organism);
+
+  if (organism === null) {
+    return <span>Une erreur s&apos;est produite.</span>;
+  }
 
   return (
     <article className="orgaSheet-card orgaSheet-infos">
       {isActive && (
         <Modal
           setIsActive={setIsActive}
-          name={name}
-          address={address}
-          city={city}
-          zipcode={zipcode}
-          website={website}
+          name={organism.name}
+          address={organism.address}
+          city={organism.city}
+          zipcode={organism.zipcode}
+          website={organism.website}
         />
       )}
 
       <span className="orgaSheet-infos__titleBar">
-        <h1>{name}</h1>
+        <h1>{organism.name}</h1>
         <button
           type="button"
           className="orgaSheet-infos__menu"
@@ -33,19 +38,19 @@ function Infos({ name, address, city, zipcode, website }: Organism) {
       <ul className="orgaSheet-infos__list">
         <li className="orgaSheet-case">
           <h4>Adresse</h4>
-          <p>{address}</p>
+          <p>{organism.address}</p>
         </li>
         <li className="orgaSheet-case">
           <h4>Ville</h4>
-          <p>{city}</p>
+          <p>{organism.city}</p>
         </li>
         <li className="orgaSheet-case">
           <h4>Code postal</h4>
-          <p>{zipcode}</p>
+          <p>{organism.zipcode}</p>
         </li>
         <li className="orgaSheet-case">
           <h4>Site web</h4>
-          <p>{website}</p>
+          <p>{organism.website}</p>
         </li>
       </ul>
     </article>
