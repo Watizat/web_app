@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom';
-
-import { useEffect, useState } from 'react';
 import { Organism } from '../../../@types/organism';
-import { useAppSelector } from '../../../hooks/redux';
 import Icon from '../../../ui/icon/icon';
-import getDistanceFromGPS from '../../../utils/distance';
 import './Card.scss';
 
 interface OrganismProps {
@@ -14,9 +10,7 @@ interface OrganismProps {
 }
 
 function Card({ organism, map_id, categoryFilter }: OrganismProps) {
-  const userPosition = useAppSelector((state) => state.userPosition);
   const { services } = organism;
-  const [distance, setDistance] = useState<string | null>(null);
   const tags = [
     ...new Set(services.map((service) => service.categorie_id.tag)),
   ].sort();
@@ -26,24 +20,6 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
     value: tag,
     isCheck: categoryFilter.includes(tag),
   }));
-
-  useEffect(() => {
-    if (userPosition.lat !== 0 && userPosition.lng !== 0) {
-      const distanceKm = getDistanceFromGPS(
-        /*      43.6,
-        1.433333, */
-        userPosition.lat,
-        userPosition.lng,
-        organism.latitude,
-        organism.longitude
-      );
-      setDistance(
-        distanceKm < 1
-          ? `${Number(distanceKm.toFixed(2)) * 1000}m`
-          : `${distanceKm.toFixed(2)}km`
-      );
-    }
-  }, [organism, userPosition]);
 
   return (
     <div className="card_container">
@@ -100,7 +76,6 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
         <Link to="tel:+33534364095" className="card_container_right_contact">
           <Icon icon="phone" size="1.2rem" /> <p>{organism.phone}</p>
         </Link>
-        <div>{distance && <span>Distance : {distance}</span>}</div>
       </div>
     </div>
   );
