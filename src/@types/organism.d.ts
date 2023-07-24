@@ -85,8 +85,9 @@ export interface User {
   lastname: string;
   email: string;
   last_connected: string;
-  role: {
+  role_id: {
     id: number;
     name: string;
   };
+  zone: Zone;
 }

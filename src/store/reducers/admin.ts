@@ -109,7 +109,7 @@ export const fetchUsers = createAsyncThunk('users/fetch-users', async () => {
           'email',
           'role_id.id',
           'role_id.name',
-          'zone_id.name',
+          'zone.name',
         ].join(','),
       },
     }

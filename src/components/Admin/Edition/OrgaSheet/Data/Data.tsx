@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Modal from '../../../Modal/ModalData';
 import { Organism } from '../../../../../@types/organism';
+import Modal from '../../../Modal/ModalData';
 import './Data.scss';
 
 function Data({ pmr, animals, description, schedules, infos_alertes }) {
@@ -58,68 +58,7 @@ function Data({ pmr, animals, description, schedules, infos_alertes }) {
         <li className="orgaSheet-case orgaSheet-data__hours">
           <h4>Horaires</h4>
           <div className="orgaSheet-data__hoursDetails">
-            {schedules.map((day) => (
-              <p key={day.day}>
-                <span
-                  className={
-                    day.day === 6 || day.day === 7
-                      ? 'orgaSheet-data__daysOff'
-                      : 'orgaSheet-data__daysOn'
-                  }
-                >
-                  {day.day}
-                </span>
-                {(() => {
-                  if (!day.opentime_am && !day.opentime_pm) {
-                    return 'Fermé';
-                  }
-                  if (
-                    day.opentime_am &&
-                    !day.opentime_pm &&
-                    !day.closetime_pm
-                  ) {
-                    return `${day.opentime_am.slice(
-                      0,
-                      -3
-                    )} - ${day.closetime_am.slice(0, -3)}`;
-                  }
-                  if (!day.opentime_am && day.opentime_pm && day.closetime_pm) {
-                    return `${day.opentime_pm.slice(
-                      0,
-                      -3
-                    )} - ${day.closetime_pm.slice(0, -3)}`;
-                  }
-                  if (
-                    day.opentime_am &&
-                    day.closetime_am &&
-                    day.opentime_pm &&
-                    day.closetime_pm
-                  ) {
-                    return `${day.opentime_am.slice(
-                      0,
-                      -3
-                    )} - ${day.closetime_am.slice(
-                      0,
-                      -3
-                    )} / ${day.opentime_pm.slice(
-                      0,
-                      -3
-                    )} - ${day.closetime_pm.slice(0, -3)}`;
-                  }
-                  if (
-                    day.opentime_am &&
-                    !day.closetime_am &&
-                    !day.opentime_pm &&
-                    day.closetime_pm
-                  ) {
-                    return `${day.opentime_am.slice(
-                      0,
-                      -3
-                    )} - ${day.closetime_pm.slice(0, -3)}`;
-                  }
-                })()}
-              </p>
-            ))}
+            {schedules.map((day) => console.log(day))}
           </div>
         </li>
         <li className="orgaSheet-case">

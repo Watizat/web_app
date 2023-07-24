@@ -29,9 +29,8 @@ function Users() {
       <table className="userstable">
         <thead>
           <tr>
-            <th scope="col" className="userstable-checkbox txt-align-center">
-              <input type="checkbox" className="checkbox" />{' '}
-            </th>
+            {/*             <th scope="col" className="userstable-checkbox txt-align-center" />
+             */}
             <th scope="col" className="txt-align-left hideForMenu">
               Prénom & nom
             </th>
