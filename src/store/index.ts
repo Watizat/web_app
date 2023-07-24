@@ -2,7 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import organismReducer from './reducers/organisms';
 
 const store = configureStore({
-  reducer: organismReducer,
+  reducer: {
+    organism: organismReducer,
+  },
 });
 
 export default store;

@@ -6,9 +6,9 @@ import Settings from '../Settings/Settings';
 import './Panel.scss';
 
 function Panel() {
-  const organisms = useAppSelector((state) => state.organisms);
-  const isLoading = useAppSelector((state) => state.isLoading);
-  const selected = useAppSelector((state) => state.categoryFilter);
+  const organisms = useAppSelector((state) => state.organism.organisms);
+  const isLoading = useAppSelector((state) => state.organism.isLoading);
+  const selected = useAppSelector((state) => state.organism.categoryFilter);
   const [organismsFiltered, setOrganismsFiltered] = useState<Organism[] | []>(
     []
   );
