@@ -3,11 +3,7 @@ import { ChangeEvent, FormEvent } from 'react';
 import './Login.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { KeyOfloginCredentials } from '../../@types/user';
-import {
-  changeLoginCredentialsField,
-  fetchUser,
-  login,
-} from '../../store/reducers/user';
+import { changeLoginCredentialsField, login } from '../../store/reducers/user';
 
 function Login() {
   const dispatch = useAppDispatch();
@@ -30,7 +26,7 @@ function Login() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await dispatch(login({ email, password }));
-    await dispatch(fetchUser());
+    // await dispatch(fetchUser());
   };
 
   if (isLoading) {

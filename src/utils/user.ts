@@ -1,8 +1,14 @@
-import { LoginData } from '../@types/user';
+import { AuthResponse, UserSession } from '../@types/user';
 
 export const getUserDataFromLocalStorage = () => {
   const userDataStr = localStorage.getItem('user');
-  const userData = userDataStr ? (JSON.parse(userDataStr) as LoginData) : null;
+  const userData = userDataStr
+    ? (JSON.parse(userDataStr) as {
+        isLogged: boolean;
+        session: UserSession;
+        token: AuthResponse;
+      })
+    : null;
   return userData;
 };
 
