@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import './Header.scss';
+import { Organism } from '../../../@types/organism';
 
-function Header() {
+function Header({ name, translations }: Organism) {
   const [position, setPosition] = useState({ lat: 43.6, lng: 1.433333 });
   return (
     <div className="organisme-header">
       <div className="organisme-details">
-        <h2 />
-        <span>icons</span>
-        <p> </p>
+        <h2>{name}</h2>/<span>icons</span>
+        <p>{translations[0].description}</p>
       </div>
       <MapContainer center={position} zoom={13}>
         <TileLayer

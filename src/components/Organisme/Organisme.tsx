@@ -15,7 +15,7 @@ function Organisme() {
   const dispatch = useAppDispatch();
   const { organisms } = useAppSelector((state) => state.organism);
   const organism = organisms[0];
-
+  console.log(organisms[0]);
   useEffect(() => {
     dispatch(fetchOrganism(slug as string));
   }, [dispatch, slug]);
@@ -25,8 +25,15 @@ function Organisme() {
       <Container>
         <Breadcrumb />
         <section className="organisme">
-          <Header name={organism.name} />
-          <Infos />
+          <Header name={organism.name} translations={organism.translations} />
+          <Infos
+            address={organism.address}
+            city={organism.city}
+            zipcode={organism.zipcode}
+            phone={organism.phone}
+            contacts={organism.contacts}
+            schedules={organism.schedules}
+          />
           <Services />
         </section>
       </Container>
