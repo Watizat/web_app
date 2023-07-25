@@ -1,13 +1,40 @@
 import { Link } from 'react-router-dom';
 import './ForgottenPassword.scss';
+import { ChangeEvent, FormEvent } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import {
+  askPassword,
+  changeLoginCredentialsField,
+} from '../../store/reducers/user';
 
 function ForgottenPassword() {
+  const dispatch = useAppDispatch();
+  const email = useAppSelector((state) => state.user.loginCredentials.email);
+  const message = useAppSelector((state) => state.user.message);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      changeLoginCredentialsField({ field: 'email', value: event.target.value })
+    );
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(askPassword(email));
+  };
+
   return (
     <div className="forgottenPassword">
       <h1>Mot de passé oublié</h1>
-      <form className="forgottenPassword-form">
-        <input type="text" placeholder="Email" />
-        <button type="button">Demander la réinitialisation</button>
+      {message && <p className="forgottenPassword-succes">{message}</p>}
+      <form onSubmit={handleSubmit} className="forgottenPassword-form">
+        <input
+          type="email"
+          onChange={handleChange}
+          value={email}
+          placeholder="Email"
+        />
+        <button type="submit">Demander la réinitialisation</button>
       </form>
       <div className="forgottenPassword-newAccount">
         Pas encore de compte ?
