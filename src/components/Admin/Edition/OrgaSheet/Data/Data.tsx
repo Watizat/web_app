@@ -43,7 +43,7 @@ function Data() {
         </li>
         <li className="orgaSheet-case">
           <h4>Description</h4>
-          <p>{organism.translations[0].description}</p>
+          <p>{organism.translations[0]?.description}</p>
         </li>
         <li className="orgaSheet-case orgaSheet-data__hours">
           <h4>Horaires</h4>
@@ -59,7 +59,7 @@ function Data() {
         </li>
         <li className="orgaSheet-case">
           <h4>Infos, alerte</h4>
-          <p>{organism.translations[0].infos_alerte}</p>
+          <p>{organism.translations[0]?.infos_alerte}</p>
         </li>
       </ul>
     </article>
