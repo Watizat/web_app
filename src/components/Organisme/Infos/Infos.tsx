@@ -16,9 +16,12 @@ function Infos() {
       {organism.schedules && organism.schedules.length > 0 ? (
         <Schedule schedule={organism.schedules} />
       ) : (
-        <p style={{ color: 'red' }}>
-          Il n&apos;y a pas d&apos;horaires enregistrés.
-        </p>
+        <article>
+          <h3>Horaires</h3>
+          <p style={{ color: 'red' }}>
+            Il n&apos;y a pas d&apos;horaires enregistrés.
+          </p>
+        </article>
       )}
       <Transport />
     </div>
