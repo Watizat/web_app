@@ -17,10 +17,10 @@ function Schedules({ schedule }: SchedulesProps) {
   };
 
   function getOpeningHours(day: Schedule) {
-    const openAm = day.opentime_am?.slice(0, -3);
-    const closeAm = day.closetime_am?.slice(0, -3);
-    const openPm = day.opentime_pm?.slice(0, -3);
-    const closePm = day.closetime_pm?.slice(0, -3);
+    const openAm = day.opentime_am?.slice(0, -3).replace(':', 'h');
+    const closeAm = day.closetime_am?.slice(0, -3).replace(':', 'h');
+    const openPm = day.opentime_pm?.slice(0, -3).replace(':', 'h');
+    const closePm = day.closetime_pm?.slice(0, -3).replace(':', 'h');
 
     const openMorning = openAm && closeAm;
     const openAfternoon = openPm && closePm;
@@ -49,21 +49,20 @@ function Schedules({ schedule }: SchedulesProps) {
   }
 
   return (
-    <article>
-      <h3>Horaires</h3>
-      <table className="organisme-infos--schedule">
-        <tbody>
-          {schedule.map((currentDay) => (
-            <tr key={currentDay.day}>
-              <td>
-                <div>{daysOfWeek[currentDay.day]}</div>
-              </td>
-              <td>{getOpeningHours(currentDay)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </article>
+    <table className="organisme-infos--schedule">
+      <tbody>
+        {schedule.map((currentDay) => (
+          <tr key={currentDay.day}>
+            <td>
+              <div className="organisme-infos--schedule-day">
+                {daysOfWeek[currentDay.day]}
+              </div>
+            </td>
+            <td>{getOpeningHours(currentDay)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
