@@ -3,7 +3,6 @@ import './Contact.scss';
 import { Organism } from '../../../../@types/organism';
 
 function Contact({ address, city, zipcode, phone, contacts }: Organism) {
-  console.log(contacts);
   return (
     <article>
       <h3>Contact</h3>
