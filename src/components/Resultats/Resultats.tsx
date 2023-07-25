@@ -4,6 +4,7 @@ import { fetchOrganisms } from '../../store/reducers/organisms';
 import Header from './Header/Header';
 import Map from './Map/Map';
 import Panel from './Panel/Panel';
+import Menu from './Menu/Menu';
 import './Resultats.scss';
 
 function Resultats() {
@@ -18,6 +19,7 @@ function Resultats() {
       <main className="results">
         <Panel />
         <Map />
+        <Menu />
       </main>
     </>
   );

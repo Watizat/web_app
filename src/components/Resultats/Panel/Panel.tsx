@@ -52,7 +52,7 @@ function Panel() {
   }, [organisms, categoryFilter, isPmr, isAnimalsAccepted, search, dispatch]);
 
   return (
-    <section className="panel">
+    <section id="resultsPanel">
       <Settings
         setIsPmr={setIsPmr}
         setIsAnimalsAccepted={setIsAnimalsAccepted}

@@ -1,0 +1,47 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+
+#resultsMenu {
+  z-index: 100;
+
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .25rem;
+
+  position: fixed;
+  bottom: 3rem;
+  left: 33%;
+
+  width: 33%;
+
+  padding: .5rem 1rem;
+
+  border-radius: 20px;
+  border: 1px solid v.$white;
+  color: v.$white;
+  background-color: rgba(v.$black, .9);
+
+  font-size: .9rem;
+  font-weight: 800;
+
+  @include m.desktop {
+    display: none
+  }
+
+  .resultsMenu-group {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    &__icon {
+      font-size: 1.2rem;
+    }
+  }
+
+  &-left,
+  &-right {
+    background-color: transparent;
+  }
+
+}

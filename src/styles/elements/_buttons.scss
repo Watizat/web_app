@@ -12,6 +12,9 @@ button {
 }
 
 .btn {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
   border-radius: 12.5px;
   padding: 0.5rem 0.8rem;
   font-weight: 600;

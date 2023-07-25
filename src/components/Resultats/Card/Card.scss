@@ -1,28 +1,38 @@
 @use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
 
-.card_container {
-  margin: 20px;
+#resultsCard {
+  margin: 0 1.5rem;
   display: flex;
   justify-content: space-between;
-  border: 1px solid #777;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  column-gap: 3rem;
+  border-radius: 10px;
+  padding: 1.5rem 1rem .5rem;
+  column-gap: 1.5rem;
+  background-color: v.$white;
 
-  &_left {
+  @include m.desktop {
+    flex-direction: column;
+    }
+
+    @include m.fullhd {
+      flex-direction: row;
+      }
+
+  &:hover {
+    box-shadow: 0 6px 10px 1px rgba(v.$sucess, .1);
+  }
+
+  .Left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 
     &-upper {
       display: flex;
-      flex-wrap: wrap;
       align-items: baseline;
       column-gap: 0.5rem;
 
-      &_top {
-        display: flex;
-        column-gap: 0.25rem;
-      }
-
-      &_position-id {
+      &__position-id {
       text-align: center;
       color: v.$white;
       font-weight: bold;
@@ -38,49 +48,51 @@
         }
       }
 
-      &_organization-infos {
+      &__organizationInfos {
         flex-grow: 1; 
         margin: 0;
         display: flex;
         flex-direction: column;
+
+        &___title {
+          font-weight: bold;
+          font-size: 1rem;
+          overflow-wrap: break-word; 
+        }
+  
+        &___address {
+          font-weight: bold;
+          position: relative;
+          color: v.$sucess;
+          font-size: 0.85rem;
+        }
       }
 
-      &_title {
-        font-weight: bold;
-        font-size: 1.1rem;
-      }
-
-      &_address {
-        font-weight: bold;
-        position: relative;
-        top: -5px;
-        color: v.$secondary_var4;
-        font-size: 0.8rem;
-      }
-
-      &_description {
+      &__description {
         color: #555;
         text-align: justify;
+        font-size: 0.9rem;
       }
-    
     }
 
     &-lower {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-weight: bold;
 
-      &_more-infos-link {
-        color: v.$secondary_var4;
-      }font-weight: bold;
+      &__moreInfos {
+        font-size: 1rem;
+        color: v.$sucess;
+      }
 
-      &_categories {
+      &__categories {
         display: flex;
         column-gap: 0.5rem;
-        &_item {
+        &___item {
           color: #a9a9a9;
           &--check {
-            color: v.$primary_var4;
+            color: v.$primary;
           }
         }
         & img {
@@ -91,33 +103,48 @@
     }
   }
 
-  &_right{
+  .Right{
     display: flex;
     flex-direction: column;
     justify-items: center;
-    row-gap: 0.5rem;
     flex-shrink: 0;
+    gap: 1rem;
+
+    @include m.desktop {
+      flex-direction: row;
+      justify-content: space-between;
+      }
+  
+      @include m.fullhd {
+        flex-direction: column;
+        justify-content: flex-start;
+        }
     
-    &_go, &_contact {
+    &-btn {
       display: flex;
       justify-content: center;
-      column-gap: 10px;
       align-items: center;
       text-align: center;
+      gap: .5rem;
       cursor: pointer;
       outline: none;
-      border: solid 1px v.$secondary_var4;
       border-radius: 5px;
-      padding: 5px;
-      font-weight: bold;
-      color: v.$white;
-      background-color: v.$secondary_var4;
+      padding: .3rem .5rem;
+      font-size: .9rem;
+      font-weight: 800;
+
+      @include m.desktop {
+        width: 50%;
+        }
+
+      @include m.widescreen {
+        width: 40%;
+        }
+    
+        @include m.fullhd {
+          width: auto;
+          }
     }
 
-    &_contact {
-      color: v.$secondary_var4;
-      background-color: v.$white;
-
-    }
   }
 }

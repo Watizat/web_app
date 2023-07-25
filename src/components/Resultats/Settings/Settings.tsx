@@ -87,22 +87,23 @@ function Settings({
     dispatch(filterCategories([categoryParams]));
   }, [dispatch, categoryParams]);
   return (
-    <div className="settings">
-      <div className="settings__top-bar">
-        <form>
+    <div id="resultsSettings">
+      <div className="settingsTopBar">
+        <form className="settingsTopBar-form">
           <input
             type="text"
             placeholder="Exemple : Croix Rouge française (nord)"
             id="search-panel"
             value={searchInputValue}
             onChange={handleSearch}
+            className="settingsTopBar-form__input"
           />
         </form>
         {/*         <Icon icon={isOpen ? 'arrow_up' : 'arrow_down'} size="30px" />
          */}
         <button
           type="button"
-          className="settings__dropdown-btn"
+          className="settingsTopBar-dropdownBtn"
           onClick={handleOpenSettings}
         >
           Filtres
@@ -110,42 +111,55 @@ function Settings({
       </div>
 
       <div
-        className={classNames('settings__content', {
-          'settings__content--visible': isOpen,
+        className={classNames('settingsContent', {
+          'settingsContent-visible': isOpen,
         })}
       >
-        <div>
-          <span>Filtrer par accessibilité</span>
-          <div>
-            <input
-              type="checkbox"
-              name="pmr"
-              id="pmr"
-              onChange={(event) => handlePmr(event)}
-            />
-            <label htmlFor="pmr">Accessible PSH / PMR</label>
-            <input
-              type="checkbox"
-              name="animals"
-              id="animals"
-              onChange={(event) => handleAnimals(event)}
-            />
-            <label htmlFor="animals">Animaux acceptés</label>
+        <div className="settingsContent-filter">
+          <span className="settingsContent-filter__title">
+            Filtrer par accessibilité
+          </span>
+          <div className="settingsContent-filter__list settingsContent-filter__listAccess">
+            <label
+              htmlFor="pmr"
+              className="settingsContent-filter__list__label"
+            >
+              <input
+                type="checkbox"
+                name="pmr"
+                id="pmr"
+                onChange={(event) => handlePmr(event)}
+              />
+              Accessible PSH / PMR
+            </label>
+            <label htmlFor="animals">
+              <input
+                type="checkbox"
+                name="animals"
+                id="animals"
+                onChange={(event) => handleAnimals(event)}
+              />
+              Animaux acceptés
+            </label>
           </div>
         </div>
-        <div>
-          <span>Filtrer par catégories</span>
-          <div className="settings__filter-categories">
+
+        <div className="settingsContent-filter">
+          <span className="settingsContent-filter__title">
+            Affiner par catégories
+          </span>
+          <div className="settingsContent-filter__list">
             {categories.map((category) => {
               return (
                 <div key={category.tag}>
-                  <label>
+                  <label className="settingsContent-filter__catList__label">
                     <input
                       type="checkbox"
                       defaultChecked={categoryParams === category.tag}
                       name={category.translations[0].slug}
                       onChange={() => handleCategoryChange(category.tag)}
                       disabled={!activeCategories.includes(category.tag)}
+                      className="settingsContent-catFilter__catList__input"
                     />
                     {category.translations[0].name}
                   </label>

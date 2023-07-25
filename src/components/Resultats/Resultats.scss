@@ -1,4 +1,10 @@
+@use '../../styles/medias' as m;
+
 .results {
   display: flex;
-  height: calc(100vh - 85px);
+    height: calc(100vh - 75px); 
+
+    @include m.touch {
+    height: calc(100vh - 50px); 
+    }
 }

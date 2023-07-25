@@ -6,7 +6,7 @@ import './Header.scss';
 
 function Header() {
   return (
-    <header className="header">
+    <header id="header">
       <Container>
         <Link className="watizat-logo-topbar" to="/">
           <img src={logo} alt="watizat logo" />
