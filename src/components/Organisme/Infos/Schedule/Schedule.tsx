@@ -1,55 +1,70 @@
+import { Schedule } from '../../../../@types/organism';
 import './Schedule.scss';
 
-function Schedule() {
+interface SchedulesProps {
+  schedule: Schedule[];
+}
+
+function Schedules({ schedule }: SchedulesProps) {
+  const daysOfWeek: { [key: number]: string } = {
+    1: 'Lundi',
+    2: 'Mardi',
+    3: 'Mercredi',
+    4: 'Jeudi',
+    5: 'Vendredi',
+    6: 'Samedi',
+    7: 'Dimanche',
+  };
+
+  function getOpeningHours(day: Schedule) {
+    const openAm = day.opentime_am?.slice(0, -3);
+    const closeAm = day.closetime_am?.slice(0, -3);
+    const openPm = day.opentime_pm?.slice(0, -3);
+    const closePm = day.closetime_pm?.slice(0, -3);
+
+    const openMorning = openAm && closeAm;
+    const openAfternoon = openPm && closePm;
+    const closeAllDay = !openAm && !closeAm && !openPm && !closePm;
+    const noLunchBreak = openAm && !closeAm && !openPm && closePm;
+
+    if (openMorning && openAfternoon) {
+      return `${openAm}/${closeAm} - ${openPm}/${closePm}`;
+    }
+    if (noLunchBreak) {
+      return `${openAm}/${closePm}`;
+    }
+
+    if (!openMorning && openAfternoon) {
+      return `Fermé - ${openPm}/${closePm}`;
+    }
+
+    if (openMorning && !openAfternoon) {
+      return `${openAm}/${closeAm} - Fermé`;
+    }
+
+    if (closeAllDay) {
+      return `${openAm}/${closeAm} - ${openPm}/${closePm}`;
+    }
+    return 'Fermé';
+  }
+
   return (
     <article>
       <h3>Horaires</h3>
       <table className="organisme-infos--schedule">
-        <tr>
-          <td className="organisme-infos--schedule-day">Lundi</td>
-          <td>
-            <span>9h-12h</span>/<span>14h-16h</span>
-          </td>
-        </tr>
-        <tr>
-          <td className="organisme-infos--schedule-day">Mardi</td>
-          <td>
-            <span>9h-12h</span>/<span>14h-16h</span>
-          </td>
-        </tr>
-        <tr>
-          <td className="organisme-infos--schedule-day">Mercredi</td>
-          <td>
-            <span>9h-12h</span>/<span>14h-16h</span>
-          </td>
-        </tr>
-        <tr>
-          <td className="organisme-infos--schedule-day">Jeudi</td>
-          <td>
-            <span>9h-12h</span>/<span>14h-16h</span>
-          </td>
-        </tr>
-        <tr>
-          <td className="organisme-infos--schedule-day">Vendredi</td>
-          <td>
-            <span>9h-12h</span>/<span>14h-16h</span>
-          </td>
-        </tr>
-        <tr>
-          <td className="organisme-infos--schedule-day">Samedi</td>
-          <td>
-            <span>Fermé</span>
-          </td>
-        </tr>
-        <tr>
-          <td className="organisme-infos--schedule-day">Dimanche</td>
-          <td>
-            <span>Fermé</span>
-          </td>
-        </tr>
+        <tbody>
+          {schedule.map((currentDay) => (
+            <tr key={currentDay.day}>
+              <td>
+                <div>{daysOfWeek[currentDay.day]}</div>
+              </td>
+              <td>{getOpeningHours(currentDay)}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </article>
   );
 }
 
-export default Schedule;
+export default Schedules;

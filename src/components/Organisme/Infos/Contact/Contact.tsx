@@ -1,27 +1,39 @@
 import { Link } from 'react-router-dom';
+import { Organism } from '../../../../@types/organism';
+import { useAppSelector } from '../../../../hooks/redux';
 import './Contact.scss';
 
 function Contact() {
+  const organism = useAppSelector((state) => state.organism.organism);
+
+  if (organism === null) {
+    return <span>Erreur</span>;
+  }
   return (
     <article>
       <h3>Contact</h3>
       <div className="organisme-infos--maincontact">
-        <p>66 bis avenue Étienne-Billières - 31100 Toulouse</p>
+        <p>
+          {organism.address} - <span>{organism.zipcode}</span>{' '}
+          <span>{organism.city}</span>
+        </p>
         <Link to="tel:+3300" className="organisme-infos--link">
-          <p>00 00 00 00 00</p>
+          <p>{organism.phone}</p>
         </Link>
         <Link to="tel:+3300" className="organisme-infos--link">
           <p>mail@mail.com</p>
         </Link>
       </div>
       <div className="organisme-infos--othercontact">
-        <p className="organisme-infos--othercontact-job">Direction</p>
-        <p>Jean-Claude Tartempion</p>
+        <p className="organisme-infos--othercontact-job">
+          {organism.contacts[0].job}
+        </p>
+        <p>{organism.contacts[0].name}</p>
         <Link to="tel:+3300" className="organisme-infos--link">
-          <p>00 00 00 00 00</p>
+          <p>{organism.contacts[0].phone}</p>
         </Link>
         <Link to="tel:+3300" className="organisme-infos--link">
-          <p>mail@mail.com</p>
+          <p>{organism.contacts[0].mail}</p>
         </Link>
       </div>
     </article>
