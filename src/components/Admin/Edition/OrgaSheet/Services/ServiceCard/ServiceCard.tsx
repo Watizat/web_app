@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Service } from '../../../../../../@types/organism';
-import ModalContact from '../../../../Modal/ModalContact';
 import ModalService from '../../../../Modal/ModalService';
 import Schedules from '../../../../Schedules/Schedules';
 import ContactCard from '../../ContactCard/ContactCard';
@@ -8,9 +7,8 @@ import './ServiceCard.scss';
 
 function ServiceCard({ ...service }: Service) {
   const [isActiveService, setIsActiveService] = useState(false);
-  const [isActiveContact, setIsActiveContact] = useState(false);
+  // const [isActiveContact, setIsActiveContact] = useState(false);
 
-  console.log(service);
   return (
     <li className="orgaSheet-services__serviceCard">
       {isActiveService && (
