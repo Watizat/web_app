@@ -1,4 +1,7 @@
 import { Contact } from '../../../@types/organism';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { setAdminOrganism } from '../../../store/reducers/admin';
+import { axiosInstance } from '../../../utils/axios';
 import './Modal.scss';
 
 interface ModalProps {
@@ -7,17 +10,56 @@ interface ModalProps {
 }
 
 function ModalContact({ contact, setIsActive }: ModalProps) {
+  const id = useAppSelector((state) => state.admin.organism?.id);
+  const dispatch = useAppDispatch();
+
+  async function handleDelete() {
+    const response = await axiosInstance.delete(`/items/contact/${contact.id}`);
+    dispatch(setAdminOrganism(id as number));
+    setIsActive(false);
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const data = Object.fromEntries(form);
+    console.log(data);
+    try {
+      const response = await axiosInstance.patch(
+        `/items/contact/${contact.id}`,
+        {
+          ...data,
+          service: null,
+        }
+      );
+      if (response.status === 200) {
+        dispatch(setAdminOrganism(id as number));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsActive(false);
+  }
+
   return (
     <div className="modal">
       <div className="modal-main">
         <h1 className="modal-title">Ajouter un contact</h1>
-        <form className="modal-list">
+        <form className="modal-list" onSubmit={handleSubmit}>
+          <div className="modal-case">
+            <h4 className="modal-case__title">Prénom</h4>
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              defaultValue={contact.firstname}
+            />
+          </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Nom</h4>
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={contact.name}
+              defaultValue={contact.lastname}
             />
           </div>
           <div className="modal-case">
@@ -68,28 +110,29 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
               </label>
             </div>
           </div>
+          <div className="modal-actions">
+            <button
+              type="button"
+              className="btn btn-danger-fill btn-flat modal-actions__close"
+              onClick={handleDelete}
+            >
+              Supprimer
+            </button>
+            <button
+              type="button"
+              className="btn btn-info-fill btn-flat modal-actions__close"
+              onClick={() => setIsActive(false)}
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              className="btn btn-sucess-fill btn-flat modal-actions__save"
+            >
+              Sauvegarder
+            </button>
+          </div>
         </form>
-        <div className="modal-actions">
-          <button
-            type="button"
-            className="btn btn-danger-fill btn-flat modal-actions__close"
-          >
-            Supprimer
-          </button>
-          <button
-            type="button"
-            className="btn btn-info-fill btn-flat modal-actions__close"
-            onClick={() => setIsActive(false)}
-          >
-            Annuler
-          </button>
-          <button
-            type="button"
-            className="btn btn-sucess-fill btn-flat modal-actions__save"
-          >
-            Sauvegarder
-          </button>
-        </div>
       </div>
     </div>
   );

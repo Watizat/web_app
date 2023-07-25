@@ -1,16 +1,16 @@
 import jwt_decode from 'jwt-decode';
 
 import {
-  createReducer,
-  createAsyncThunk,
   createAction,
+  createAsyncThunk,
+  createReducer,
 } from '@reduxjs/toolkit';
 
 import {
-  UserState,
+  AuthResponse,
   KeyOfloginCredentials,
   UserSession,
-  AuthResponse,
+  UserState,
 } from '../../@types/user';
 import { axiosInstance } from '../../utils/axios';
 import {
@@ -43,7 +43,6 @@ export const login = createAsyncThunk(
     const { data: response } = await axiosInstance.post<{
       data: AuthResponse;
     }>('/auth/login', loginCredentials);
-
     return response.data;
   }
 );
@@ -76,7 +75,6 @@ export default createReducer(initialState, (builder) => {
     .addCase(login.fulfilled, (state, action) => {
       const { access_token: token } = action.payload;
       const jwtDecode = jwt_decode<UserSession>(token);
-
       state.session = { ...jwtDecode };
       state.token = { ...action.payload };
       state.error = null;

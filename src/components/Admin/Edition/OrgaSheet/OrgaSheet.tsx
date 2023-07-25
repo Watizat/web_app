@@ -7,6 +7,7 @@ import Services from './Services/Services';
 
 function OrgaSheet() {
   const organism = useAppSelector((state) => state.admin.organism);
+
   if (organism === null) {
     return (
       <div className="orgaSheet-empty">

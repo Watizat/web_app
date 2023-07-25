@@ -10,7 +10,7 @@ function OrgaList() {
   const dispatch = useAppDispatch();
 
   function handleClick(organism: Organism) {
-    dispatch(setAdminOrganism(organism));
+    dispatch(setAdminOrganism(organism.id));
   }
   return (
     <section className="orgaList">

@@ -35,7 +35,7 @@ export const fetchAdminOrganisms = createAsyncThunk(
   'admin-organisms/fetch-organisms',
   async () => {
     const { data } = await axiosInstance.get<{ data: Organism[] }>(
-      '/items/organisme',
+      'https://watizat.lunalink.nl/items/organisme',
       {
         params: {
           fields: [
@@ -135,8 +135,80 @@ export const fetchUsers = createAsyncThunk('users/fetch-users', async () => {
   return data.data;
 });
 
-export const setAdminOrganism = createAction<Organism>(
-  'admin-organisms/set-organism'
+export const setAdminOrganism = createAsyncThunk(
+  'admin-organisms/set-organism',
+  async (id: number) => {
+    const { data } = await axiosInstance.get<{ data: Organism[] }>(
+      '/items/organisme',
+      {
+        params: {
+          fields: [
+            'id',
+            'name',
+            'slug',
+            'address',
+            'city',
+            'zipcode',
+            'latitude',
+            'longitude',
+            'comment',
+            'visible',
+            'pmr',
+            'animals',
+            'phone',
+            'mail',
+            'website',
+            'zone_id.name',
+            'schedules.day',
+            'schedules.opentime_am',
+            'schedules.closetime_am',
+            'schedules.opentime_pm',
+            'schedules.closetime_pm',
+            'schedules.closed',
+            'contacts.id',
+            'contacts.name',
+            'contacts.firstname',
+            'contacts.lastname',
+            'contacts.job',
+            'contacts.phone',
+            'contacts.mail',
+            'contacts.visibility',
+            'contacts.actualisation',
+            'translations.id',
+            'translations.description',
+            'translations.infos_alerte',
+            'services.id',
+            'services.categorie_id.tag',
+            'services.categorie_id.translations.name',
+            'services.categorie_id.translations.slug',
+            'services.categorie_id.translations.description',
+            'services.categorie_id.translations.',
+            'services.translations.name',
+            'services.translations.slug',
+            'services.translations.infos_alerte',
+            'services.translations.description',
+            'services.schedules.day',
+            'services.schedules.opentime_am',
+            'services.schedules.closetime_am',
+            'services.schedules.opentime_pm',
+            'services.schedules.closetime_pm',
+            'services.schedules.closetime_pm',
+            'services.contacts.id',
+            'services.contacts.name',
+            'services.contacts.job',
+            'services.contacts.mail',
+            'services.contacts.phone',
+            'services.contacts.visibility',
+            'services.contacts.actualisation',
+          ].join(','),
+          filter: {
+            id,
+          },
+        },
+      }
+    );
+    return data.data[0];
+  }
 );
 
 export const fetchZones = createAsyncThunk('zones', async () => {
@@ -171,7 +243,7 @@ const adminReducer = createReducer(initialState, (builder) => {
     .addCase(fetchRoles.fulfilled, (state, action) => {
       state.roles = action.payload;
     })
-    .addCase(setAdminOrganism, (state, action) => {
+    .addCase(setAdminOrganism.fulfilled, (state, action) => {
       state.organism = action.payload;
     });
 });

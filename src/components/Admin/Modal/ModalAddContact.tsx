@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { useEffect } from 'react';
-import { useAppSelector } from '../../../hooks/redux';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 import './Modal.scss';
 
@@ -9,29 +10,49 @@ interface ModalProps {
 }
 
 function ModalAddContact({ setIsActive }: ModalProps) {
+  const dispatch = useAppDispatch();
   const id = useAppSelector((state) => state.admin.organism?.id);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    console.log(Object.fromEntries(form));
+    const data = Object.fromEntries(form);
+    try {
+      const response = await axiosInstance.post('/items/contact', {
+        ...data,
+        service: null,
+      });
+      if (response.status === 200) {
+        console.log(response);
+        setIsActive(false);
+        dispatch(setAdminOrganism(id as number));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  /*   async function createContact() {
-    const response = await axiosInstance.get('/items/organisme');
-    console.log(response.data);
-    setIsActive(false);
-  } */
 
   return (
     <div className="modal">
       <div className="modal-main">
         <h1 className="modal-title">Ajouter un contact</h1>
         <form className="modal-list" onSubmit={handleSubmit}>
-          <input type="number" value={id} hidden name="organisme" />
+          <input type="number" defaultValue={id} hidden name="organisme" />
+          <div className="modal-case">
+            <h4 className="modal-case__title">Prénom</h4>
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              name="firstname"
+            />
+          </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Nom</h4>
-            <input className="modal-case__inputTxt" type="text" name="name" />
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              name="lastname"
+            />
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Fonction</h4>
