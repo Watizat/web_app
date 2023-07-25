@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchZones, fetchRoles } from '../../../store/reducers/admin';
 import './Modal.scss';
-import { User, Zone, Role } from '../../../@types/organism';
+import { User } from '../../../@types/organism';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  user?: User;
 }
 
-function ModalUsers({ setIsActive, ...user }: ModalProps) {
+function ModalUsers({ setIsActive, user: { ...user } }: ModalProps) {
   const dispatch = useAppDispatch();
   const zones = useAppSelector((state) => state.admin.zones);
   const roles = useAppSelector((state) => state.admin.roles);
@@ -104,6 +105,14 @@ function ModalUsers({ setIsActive, ...user }: ModalProps) {
     </div>
   );
 }
-ModalUsers.defaultProps = {};
+ModalUsers.defaultProps = {
+  user: {
+    firstname: '',
+    lastname: '',
+    role_id: { name: '' },
+    email: '',
+    last_connected: '',
+  },
+};
 
 export default ModalUsers;
