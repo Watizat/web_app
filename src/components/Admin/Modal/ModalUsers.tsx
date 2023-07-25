@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { fetchZones, fetchRoles } from '../../../store/reducers/admin';
-import './Modal.scss';
 import { User } from '../../../@types/organism';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { fetchRoles, fetchZones } from '../../../store/reducers/admin';
+import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;

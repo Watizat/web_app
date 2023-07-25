@@ -6,7 +6,7 @@ interface ModalProps {
   organism: Organism;
 }
 
-function ModalInfos({ organism, setIsActive }: ModalProps) {
+function ModalInfos({ setIsActive, organism }: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
