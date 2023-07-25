@@ -13,6 +13,7 @@ interface OrganismsState {
   isLoading: boolean;
   categories: Categorie[];
   userPosition: { lat: number; lng: number };
+  organism: Organism | null;
 }
 
 export const initialState: OrganismsState = {
@@ -22,6 +23,7 @@ export const initialState: OrganismsState = {
   isLoading: false,
   categories: [],
   userPosition: { lat: 0, lng: 0 },
+  organism: null,
 };
 
 export const fetchOrganisms = createAsyncThunk(
@@ -176,7 +178,7 @@ export const fetchOrganism = createAsyncThunk(
         },
       }
     );
-    return data.data;
+    return data.data[0];
   }
 );
 
@@ -219,7 +221,7 @@ const organismReducer = createReducer(initialState, (builder) => {
       state.isLoading = true;
     })
     .addCase(fetchOrganism.fulfilled, (state, action) => {
-      state.organisms = action.payload;
+      state.organism = action.payload;
       state.isLoading = false;
     })
     .addCase(setOrganisms, (state, action) => {
