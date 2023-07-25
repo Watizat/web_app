@@ -111,7 +111,7 @@ export const fetchOrganism = createAsyncThunk(
   'organisms/fetch-organism',
   async (slug: string) => {
     const { data } = await axiosInstance.get<{ data: Organism[] }>(
-      'https://watizat.lunalink.nl/items/organisme',
+      '/items/organisme',
       {
         params: {
           // IMPOSSIBLE D'AJOUTER PLUS DE PARAMETRES
@@ -186,7 +186,7 @@ export const fetchCategories = createAsyncThunk(
   'categories/fetch-categories',
   async () => {
     const { data } = await axiosInstance.get<{ data: Categorie[] }>(
-      'https://watizat.lunalink.nl/items/categorie?fields=tag,translations.name,translations.slug'
+      '/items/categorie?fields=tag,translations.name,translations.slug'
     );
     return data.data;
   }

@@ -3,8 +3,9 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
-import AxiosInstance from 'axios';
+import axios from 'axios';
 import { Organism, Role, User, Zone } from '../../@types/organism';
+import { axiosInstance } from '../../utils/axios';
 
 interface AdminState {
   organisms: Organism[];
@@ -33,8 +34,8 @@ export const initialState: AdminState = {
 export const fetchAdminOrganisms = createAsyncThunk(
   'admin-organisms/fetch-organisms',
   async () => {
-    const { data } = await AxiosInstance.get<{ data: Organism[] }>(
-      'https://watizat.lunalink.nl/items/organisme',
+    const { data } = await axiosInstance.get<{ data: Organism[] }>(
+      '/items/organisme',
       {
         params: {
           fields: [
@@ -114,7 +115,7 @@ export const fetchAdminOrganisms = createAsyncThunk(
 );
 
 export const fetchUsers = createAsyncThunk('users/fetch-users', async () => {
-  const { data } = await AxiosInstance.get<{ data: User[] }>(
+  const { data } = await axios.get<{ data: User[] }>(
     'https://watizat.lunalink.nl/items/user',
     {
       params: {
@@ -139,14 +140,14 @@ export const setAdminOrganism = createAction<Organism>(
 );
 
 export const fetchZones = createAsyncThunk('zones', async () => {
-  const { data } = await AxiosInstance.get<{ data: Zone[] }>(
+  const { data } = await axios.get<{ data: Zone[] }>(
     'https://watizat.lunalink.nl/items/zone'
   );
   return data.data;
 });
 
 export const fetchRoles = createAsyncThunk('roles', async () => {
-  const { data } = await AxiosInstance.get<{ data: Role[] }>(
+  const { data } = await axios.get<{ data: Role[] }>(
     'https://watizat.lunalink.nl/items/role'
   );
   return data.data;

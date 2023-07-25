@@ -1,9 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { AuthResponse, UserSession } from '../@types/user';
 import {
   getUserDataFromLocalStorage,
   removeUserDataFromLocalStorage,
 } from './user';
-import { AuthResponse, UserSession } from '../@types/user';
 
 // eslint-disable-next-line import/prefer-default-export
 export const axiosInstance = axios.create({
@@ -68,7 +68,7 @@ axiosInstance.interceptors.request.use((config) => {
 });
 
 axiosInstance.interceptors.response.use(
-  (response: AxiosResponse<any>) => {
+  (response: AxiosResponse) => {
     return response;
   },
   (error: AxiosError) => {
