@@ -20,7 +20,7 @@ function OrgaSheet() {
       <Infos />
       <Contacts contacts={organism.contacts} />
       <Data />
-      {/* <Services services={organism.services} /> */}
+      <Services />
     </section>
   );
 }

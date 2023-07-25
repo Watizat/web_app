@@ -53,6 +53,7 @@ export interface Service {
   translations: ServiceTranslation[];
   schedules: Schedule[];
   categorie_id: Categorie;
+  contacts: Contact[];
 }
 
 export interface ServiceTranslation {

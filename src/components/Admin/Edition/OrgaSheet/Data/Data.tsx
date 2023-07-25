@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../hooks/redux';
 import Modal from '../../../Modal/ModalData';
-import Schedules from '../Schedules/Schedules';
+import Schedules from '../../../Schedules/Schedules';
 import './Data.scss';
 
 function Data() {
   const organism = useAppSelector((state) => state.admin.organism);
-  console.log(organism);
   const [isActive, setIsActive] = useState(false);
   if (organism === null) {
     return <span>Erreur</span>;

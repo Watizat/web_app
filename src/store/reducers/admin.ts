@@ -70,6 +70,7 @@ export const fetchAdminOrganisms = createAsyncThunk(
             'translations.id',
             'translations.description',
             'translations.infos_alerte',
+            'services.id',
             'services.categorie_id.tag',
             'services.categorie_id.translations.name',
             'services.categorie_id.translations.slug',

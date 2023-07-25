@@ -1,18 +1,23 @@
 import { useEffect } from 'react';
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
-import Sidebar from '../Sidebar/Sidebar';
 import logo from '../../../assets/logo.svg';
-import Header from '../Header/Header';
-import './App.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { getUserDataFromLocalStorage } from '../../../utils/user';
+import { fetchCategories } from '../../../store/reducers/organisms';
 import { setIsLogged } from '../../../store/reducers/user';
+import { getUserDataFromLocalStorage } from '../../../utils/user';
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
+import './App.scss';
 
 function App() {
   const dispatch = useAppDispatch();
   const user = getUserDataFromLocalStorage();
   const isLogged = useAppSelector((state) => state.user.isLogged);
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(setIsLogged({ isLogged: user?.isLogged || false }));

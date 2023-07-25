@@ -1,29 +1,15 @@
-import { categoriesList } from '../../../data/categories';
+import { Service } from '../../../@types/organism';
+import { useAppSelector } from '../../../hooks/redux';
 import './Modal.scss';
 
-interface ModalProps {
+interface ServiceModalProps {
+  service: Service;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  name?: string;
-  categories?: string;
-  description?: string;
-  infos_alerte?: string;
-  schedules?: {
-    day?: number;
-    opentime_am?: string;
-    closetime_am?: string;
-    opentime_pm?: string;
-    closetime_pm?: string;
-  };
 }
 
-function ModalService({
-  setIsActive,
-  name,
-  categories,
-  description,
-  schedules,
-  infos_alerte,
-}: ModalProps) {
+function ModalService({ service, setIsActive }: ServiceModalProps) {
+  const categoriesList = useAppSelector((state) => state.organism.categories);
+
   return (
     <div className="modal">
       <div className="modal-main">
@@ -34,10 +20,16 @@ function ModalService({
 
             <label className="modal-contact__actu">
               Catégorie du service
-              <select name="actualisation" defaultValue={categories}>
-                {categoriesList.map((i) => (
-                  <option key={i.tag} value={i.tag}>
-                    {i.tag}
+              <select
+                name="actualisation"
+                defaultValue={service.categorie_id.translations[0].name}
+              >
+                {categoriesList.map((category) => (
+                  <option
+                    key={category.translations[0].name}
+                    value={category.translations[0].name}
+                  >
+                    {category.translations[0].name}
                   </option>
                 ))}
               </select>
@@ -48,7 +40,7 @@ function ModalService({
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={name}
+              defaultValue={service.translations[0].name}
             />
           </div>
           <div className="modal-case">
@@ -56,7 +48,7 @@ function ModalService({
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={description}
+              defaultValue={service.translations[0].description}
             />
           </div>
           <div className="modal-case">
@@ -69,7 +61,7 @@ function ModalService({
                 <td colSpan={3}>Aprés-midi</td>
               </thead>
 
-              {schedules.map((day) => (
+              {service.schedules.map((day) => (
                 <tr key={day.day} className="modal-data__hoursLine">
                   <td className="modal-data__hoursDay">
                     <span>{day.day}</span>
@@ -109,7 +101,7 @@ function ModalService({
             <h4 className="modal-case__title">Info s & alertes</h4>
             <textarea
               className="modal-case__textarea"
-              defaultValue={infos_alerte}
+              defaultValue={service.translations[0].infos_alerte}
             />
           </div>
         </form>
@@ -138,18 +130,5 @@ function ModalService({
     </div>
   );
 }
-ModalService.defaultProps = {
-  name: '',
-  categories: ',',
-  description: '',
-  infos_alerte: '',
-  schedules: {
-    day: 0,
-    opentime_am: '     ',
-    closetime_am: '     ',
-    opentime_pm: '     ',
-    closetime_pm: '     ',
-  },
-};
 
 export default ModalService;

@@ -7,6 +7,7 @@ import './Services.scss';
 function Services() {
   const [isActiveService, setIsActiveService] = useState(false);
   const organism = useAppSelector((state) => state.admin.organism);
+  const services = organism?.services;
   return (
     <article className="orgaSheet-card orgaSheet-services">
       {isActiveService && <ModalService setIsActive={setIsActiveService} />}
@@ -23,17 +24,13 @@ function Services() {
       </span>
 
       <ul className="orgaSheet-services__list">
-        {services.map((service: any) => (
-          <ServiceCard
-            key={`services${service.id}`}
-            name={service.translations[0].name}
-            categories={service.categorie_id.translations[0].name}
-            description={service.translations[0].description}
-            schedules={service.schedules}
-            infos_alerte={service.translations[0].infos_alerte}
-            contacts={service.contacts}
-          />
-        ))}
+        {services && services.length > 0 ? (
+          services.map((service) => (
+            <ServiceCard key={service.id} {...service} />
+          ))
+        ) : (
+          <span>Pas de services</span>
+        )}
       </ul>
     </article>
   );

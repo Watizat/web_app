@@ -1,4 +1,4 @@
-import { Schedule } from '../../../../../@types/organism';
+import { Schedule } from '../../../@types/organism';
 import './Schedules.scss';
 
 interface SchedulesProps {
@@ -6,7 +6,6 @@ interface SchedulesProps {
 }
 
 function Schedules({ schedule }: SchedulesProps) {
-  console.log(schedule);
   const daysOfWeek: { [key: number]: string } = {
     1: 'Lundi',
     2: 'Mardi',
