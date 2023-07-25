@@ -1,33 +1,48 @@
+import dayjs from 'dayjs';
+import { useState } from 'react';
 import { User } from '../../../../@types/organism';
+import ModalUsers from '../../Modal/ModalUsers';
 import './UsersDetails.scss';
 
 function UsersDetails({ ...user }: User) {
+  const [isActiveService, setIsActiveService] = useState(false);
   return (
     <tr>
+      {isActiveService && (
+        <ModalUsers setIsActive={setIsActiveService} {...user} />
+      )}
+
       {/* <td className="userstable-checkbox">
         <input type="checkbox" />
       </td> */}
+
       <td className="userstable-name">
         {user.firstname} {user.lastname}
       </td>
+
       <td className="userstable-antenne">{user.zone.name}</td>
+
       <td className="userstable-email">{user.email}</td>
-      <td className="userstable-connexion">{user.last_connected}</td>
+
+      <td className="userstable-connexion">
+        {dayjs(user.last_connected).format('DD MMMM YYYY')}
+      </td>
 
       <td className="userstable-roles">
-        {user.role_id.name === 'editor' ? (
-          <span className="role editor">edition</span>
-        ) : null}
-        {user.role_id.name === 'localref' ? (
+        <span className="role editor">edition</span>
+        {user.role_id.name === 'Ref-local' ? (
           <span className="role localref">ref-local</span>
-        ) : null}
-        {user.role_id.name === 'admin' ? (
-          <span className="role admin">admin</span>
+        ) : user.role_id.name === 'Admin' ? (
+          <>
+            <span className="role localref">ref-local</span>
+            <span className="role admin">admin</span>
+          </>
         ) : null}
       </td>
+
       <td className="userstable-action">
-        <button type="button">
-        <i class="las la-edit"></i>
+        <button type="button" onClick={() => setIsActiveService(true)}>
+          <i className="las la-edit" />
         </button>
       </td>
     </tr>

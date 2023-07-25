@@ -32,10 +32,10 @@ function Users() {
             {/*             <th scope="col" className="userstable-checkbox txt-align-center" />
              */}
             <th scope="col" className="txt-align-left hideForMenu">
-              Prénom & nom
+              Identité
             </th>
             <th scope="col" className="txt-align-left hideForMenu">
-              Antenne locale
+              Antenne
             </th>
             <th scope="col" className="txt-align-center hideForMenu">
               Adresse email

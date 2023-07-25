@@ -37,10 +37,6 @@ export interface OrganismTranslation {
   description: string | undefined;
 }
 
-export interface Zone {
-  name: string;
-}
-
 export interface Schedule {
   id: number;
   day: number;
@@ -91,4 +87,17 @@ export interface User {
     name: string;
   };
   zone: Zone;
+}
+
+export interface Zone {
+  id: number;
+  name: string;
+  users: {
+    id: number;
+  };
+}
+
+export interface Role {
+  id: number;
+  name: string;
 }

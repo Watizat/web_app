@@ -87,6 +87,7 @@
   }
 
   .userstable-roles {
+    text-align: left;
     @include m.tablet-only {
       display: flex;
       flex-direction: column;

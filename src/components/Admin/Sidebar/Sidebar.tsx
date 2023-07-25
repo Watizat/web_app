@@ -1,5 +1,7 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { fetchZones } from '../../../store/reducers/admin';
 import logo from '../../../assets/logo.svg';
 import Container from '../../Container/Container';
 import NavBar from './NavBar/NavBar';
@@ -12,6 +14,13 @@ function Sidebar() {
     localStorage.setItem('city', event.target.value);
     setSelect(event.target.value);
   };
+
+  const dispatch = useAppDispatch();
+  const zones = useAppSelector((state) => state.admin.zones);
+
+  useEffect(() => {
+    dispatch(fetchZones());
+  }, [dispatch]);
 
   return (
     <header className="adminsidebar">
@@ -26,8 +35,11 @@ function Sidebar() {
             <option value="" disabled>
               Selectionner une ville
             </option>
-            <option value="toulouse">Toulouse</option>
-            <option value="paris">Paris</option>
+            {zones.map((zone) => (
+              <option key={zone.id} value={zone.name}>
+                {zone.name}
+              </option>
+            ))}
           </select>
         </div>
         <NavBar />
