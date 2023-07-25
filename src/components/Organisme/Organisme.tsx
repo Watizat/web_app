@@ -13,7 +13,7 @@ import Services from './Services/Services';
 function Organisme() {
   const { slug } = useParams();
   const dispatch = useAppDispatch();
-  const { organisms } = useAppSelector((state) => state.organism);
+  const organisms = useAppSelector((state) => state.organism.organisms);
   const organism = organisms[0];
   console.log(organisms[0]);
   useEffect(() => {
