@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Organism } from '../../../../@types/organism';
 import { useAppSelector } from '../../../../hooks/redux';
 import './Contact.scss';
 

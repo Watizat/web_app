@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import './Card.scss';
 import { useAppSelector } from '../../../../hooks/redux';
 import Schedules from '../../Infos/Schedule/Schedule';
+import Icon from '../../../../ui/icon/icon';
+import './Card.scss';
 
 function Card() {
   const organism = useAppSelector((state) => state.organism.organism);
+
+  // si l'organism n'existe pas
   if (organism === null) {
     return <span>Erreur</span>;
   }
@@ -39,7 +42,11 @@ function Card() {
               onClick={() => handleOpenSettings(index)}
             >
               <h4>
-                <i className="las la-utensils" />
+                <Icon
+                  className="organisme-services-contentcards--cards-header-icon"
+                  icon={service.categorie_id.tag}
+                  size="30px"
+                />
                 {service.categorie_id.translations[0].name}
 
                 <i
@@ -78,8 +85,12 @@ function Card() {
                   </p>
                 </>
               ))}
-              <h5>Horaires</h5>
-              <Schedules schedule={service.schedules} />
+              {service.schedules.length > 0 && (
+                <>
+                  <h5>Horaires</h5>
+                  <Schedules schedule={service.schedules} />
+                </>
+              )}
             </div>
           </article>
         </div>

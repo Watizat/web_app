@@ -20,6 +20,23 @@
   &-details {
     width: 50%;
 
+    & h2{
+      margin-bottom: 0.8em;
+    }
+
+    &-categories{
+      margin-top: 1em;
+
+      &-item{
+        margin-right: 0.8em;
+        width: 45px!important;
+        height: 40px!important;
+      }
+    }
+
+    
+   
+
     @include m.mobile{
       width: 100%;
     }
