@@ -26,7 +26,6 @@ function Login() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await dispatch(login({ email, password }));
-    // await dispatch(fetchUser());
   };
 
   if (isLoading) {

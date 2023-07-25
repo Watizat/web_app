@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import {
   getUserDataFromLocalStorage,
   removeUserDataFromLocalStorage,
@@ -66,3 +66,13 @@ axiosInstance.interceptors.request.use((config) => {
   }
   return config;
 });
+
+axiosInstance.interceptors.response.use(
+  (response: AxiosResponse<any>) => {
+    return response;
+  },
+  (error: AxiosError) => {
+    console.log(error.status);
+    return error;
+  }
+);

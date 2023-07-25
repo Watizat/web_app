@@ -55,13 +55,9 @@ export const logout = createAsyncThunk('user/logout', async () => {
   });
 });
 
-export const setIsLogged = createAction<boolean>('user/checkIsLogged');
-// export const fetchUser = createAsyncThunk('settings/fetchUser', async () => {
-//   const { data: user } = await axiosInstance.get<{ data: UserData }>(
-//     '/users/me'
-//   );
-//   return user.data;
-// });
+export const setIsLogged = createAction<{
+  isLogged: boolean;
+}>('user/setIsLogged');
 
 export default createReducer(initialState, (builder) => {
   builder
@@ -99,15 +95,17 @@ export default createReducer(initialState, (builder) => {
     })
     .addCase(logout.pending, (state) => {
       state.isLoading = true;
-      state.isLogged = false;
-      removeUserDataFromLocalStorage();
     })
     .addCase(logout.rejected, (state) => {
       state.error = 'Une erreur est survenue, lors de la déconnexion';
       state.isLoading = false;
     })
-    .addCase(logout.fulfilled, () => {})
+    .addCase(logout.fulfilled, (state) => {
+      state.isLoading = false;
+      state.isLogged = false;
+      removeUserDataFromLocalStorage();
+    })
     .addCase(setIsLogged, (state, action) => {
-      state.isLogged = action.payload;
+      state.isLogged = action.payload.isLogged;
     });
 });

@@ -18,6 +18,7 @@ import Organisme from './components/Organisme/Organisme';
 import Orientation from './components/Orientation/Orientation';
 import RecoverPassword from './components/RecoverPassword/RecoverPassword';
 import Resultats from './components/Resultats/Resultats';
+import LogginControl from './components/Admin/Loggincontrol/LoggingControl';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,10 +32,10 @@ const router = createBrowserRouter(
         <Route path="/contact" element={<Contact />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/organisme/:slug" element={<Organisme />} />
+        <Route path="/login" element={<Login />} />
       </Route>
       <Route path="/resultats" element={<Resultats />} />
       <Route path="/admin" element={<AdminApp />} errorElement={<App />}>
-        <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/edition" element={<Edition />} />

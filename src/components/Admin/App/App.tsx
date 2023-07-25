@@ -1,11 +1,25 @@
+import { useEffect } from 'react';
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import logo from '../../../assets/logo.svg';
 import Header from '../Header/Header';
 import './App.scss';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { getUserDataFromLocalStorage } from '../../../utils/user';
+import { setIsLogged } from '../../../store/reducers/user';
 
 function App() {
+  const dispatch = useAppDispatch();
+  const user = getUserDataFromLocalStorage();
+  const isLogged = useAppSelector((state) => state.user.isLogged);
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    dispatch(setIsLogged({ isLogged: user?.isLogged || false }));
+  }, [isLogged, dispatch, user?.isLogged]);
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   if (pathname === '/admin') {
     return <Navigate to="/admin/dashboard" replace />;
