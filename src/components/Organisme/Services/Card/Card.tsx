@@ -4,18 +4,22 @@ import { useAppSelector } from '../../../../hooks/redux';
 import Schedules from '../../Infos/Schedule/Schedule';
 import Icon from '../../../../ui/icon/icon';
 import './Card.scss';
+import { Organism } from '../../../../@types/organism';
 
 function Card() {
-  const organism = useAppSelector((state) => state.organism.organism);
+  const organism = useAppSelector(
+    (state) => state.organism.organism as Organism
+  );
+  // Utiliser un tableau d'états pour gérer l'ouverture/fermeture de chaque carte individuellement
+  const [isOpenArray, setIsOpenArray] = useState<boolean[]>(
+    Array(organism.services.length).fill(false)
+    // organism.services.map(() => false)
+  );
 
   // si l'organism n'existe pas
   if (organism === null) {
     return <span>Erreur</span>;
   }
-  // Utiliser un tableau d'états pour gérer l'ouverture/fermeture de chaque carte individuellement
-  const [isOpenArray, setIsOpenArray] = useState<boolean[]>(
-    organism.services.map(() => false)
-  );
 
   function handleOpenSettings(index: number) {
     // Mettre à jour l'état de la carte à l'index spécifié
@@ -28,7 +32,10 @@ function Card() {
     <div className="organisme-services-contentcards">
       {organism.services.map((service, index) => (
         // eslint-disable-next-line react/jsx-key
-        <div className="organisme-services-contentcards--cards" key={index}>
+        <div
+          className="organisme-services-contentcards--cards"
+          key={service.id}
+        >
           <article>
             <button
               className={classNames(
