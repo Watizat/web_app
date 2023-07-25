@@ -10,7 +10,7 @@ function Edition() {
 
   useEffect(() => {
     dispatch(fetchAdminOrganisms());
-  });
+  }, [dispatch]);
   return (
     <div id="edition">
       <OrgaList />
