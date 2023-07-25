@@ -1,5 +1,5 @@
 import { Contact } from '../../../../../@types/organism';
-import ContactCard from '../ContactCard/ContactCard';
+import ContactCard from './ContactCard/ContactCard';
 import './Contacts.scss';
 
 interface ContactProps {

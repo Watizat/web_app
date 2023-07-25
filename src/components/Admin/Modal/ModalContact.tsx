@@ -1,24 +1,12 @@
+import { Contact } from '../../../@types/organism';
 import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  name?: string;
-  job?: string;
-  mail?: string;
-  phone?: string;
-  visibility?: boolean;
-  actualisation?: boolean;
+  contact: Contact;
 }
 
-function ModalContact({
-  setIsActive,
-  name,
-  job,
-  mail,
-  phone,
-  visibility,
-  actualisation,
-}: ModalProps) {
+function ModalContact({ contact, setIsActive }: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
@@ -29,7 +17,7 @@ function ModalContact({
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={name}
+              defaultValue={contact.name}
             />
           </div>
           <div className="modal-case">
@@ -37,7 +25,7 @@ function ModalContact({
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={job}
+              defaultValue={contact.job}
             />
           </div>
           <div className="modal-contact__modes">
@@ -46,7 +34,7 @@ function ModalContact({
               <input
                 className="modal-case__inputTxt modal-contact__mail"
                 type="text"
-                defaultValue={mail}
+                defaultValue={contact.mail}
               />
             </div>
             <div className="modal-case">
@@ -54,7 +42,7 @@ function ModalContact({
               <input
                 className="modal-case__inputTxt"
                 type="number"
-                defaultValue={phone}
+                defaultValue={contact.phone}
               />
             </div>
           </div>
@@ -63,14 +51,17 @@ function ModalContact({
             <div className=" modal-contact__roles">
               <label className="modal-contact__private">
                 Publicité du contact
-                <select name="role" defaultValue={`${visibility}`}>
+                <select name="role" defaultValue={`${contact.visibility}`}>
                   <option value="false">Privé</option>
                   <option value="true">Public</option>
                 </select>
               </label>
               <label className="modal-contact__actu">
                 Contact pour actualisation
-                <select name="actualisation" defaultValue={`${actualisation}`}>
+                <select
+                  name="actualisation"
+                  defaultValue={`${contact.actualisation}`}
+                >
                   <option value="false">Non</option>
                   <option value="true">Oui</option>
                 </select>
@@ -103,12 +94,5 @@ function ModalContact({
     </div>
   );
 }
-ModalContact.defaultProps = {
-  name: '',
-  job: '',
-  mail: '',
-  phone: '',
-  visibility: 'private',
-  actualisation: false,
-};
+
 export default ModalContact;

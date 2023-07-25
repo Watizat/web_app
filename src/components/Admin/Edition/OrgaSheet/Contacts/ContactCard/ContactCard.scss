@@ -1,9 +1,8 @@
-@use '../../../../../styles/variables' as v;
-@use '../../../../../styles/medias' as m;
-@use '../../../../../styles/elements';
+@use '../../../../../../styles/variables' as v;
+@use '../../../../../../styles/medias' as m;
+@use '../../../../../../styles/elements';
 
 .orgaSheet {
-
   &-contacts {
     &__list {
       display: flex;
@@ -35,6 +34,6 @@
     .orgaSheet-case {
       border: 1px solid v.$grey-300;
       border-radius: 5px;
+    }
   }
-}
 }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Service } from '../../../../../../@types/organism';
 import ModalService from '../../../../Modal/ModalService';
 import Schedules from '../../../../Schedules/Schedules';
-import ContactCard from '../../ContactCard/ContactCard';
+import ContactCard from '../../Contacts/ContactCard/ContactCard';
 import './ServiceCard.scss';
 
 function ServiceCard({ ...service }: Service) {
