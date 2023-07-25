@@ -18,10 +18,10 @@ function Schedules({ schedule }: SchedulesProps) {
   };
 
   function getOpeningHours(day: Schedule) {
-    const openAm = day.opentime_am?.slice(0, -3);
-    const closeAm = day.closetime_am?.slice(0, -3);
-    const openPm = day.opentime_pm?.slice(0, -3);
-    const closePm = day.closetime_pm?.slice(0, -3);
+    const openAm = day.opentime_am?.slice(0, -3).replace(':', 'h');
+    const closeAm = day.closetime_am?.slice(0, -3).replace(':', 'h');
+    const openPm = day.opentime_pm?.slice(0, -3).replace(':', 'h');
+    const closePm = day.closetime_pm?.slice(0, -3).replace(':', 'h');
 
     const openMorning = openAm && closeAm;
     const openAfternoon = openPm && closePm;
