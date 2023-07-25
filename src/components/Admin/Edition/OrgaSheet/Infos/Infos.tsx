@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../hooks/redux';
-import Modal from '../../../Modal/ModalInfos';
+import ModalInfos from '../../../Modal/ModalInfos';
 import './Infos.scss';
 
 function Infos() {
@@ -13,7 +13,7 @@ function Infos() {
 
   return (
     <article className="orgaSheet-card orgaSheet-infos">
-      {isActive && <Modal setIsActive={setIsActive} organism={organism} />}
+      {isActive && <ModalInfos setIsActive={setIsActive} organism={organism} />}
 
       <span className="orgaSheet-infos__titleBar">
         <h1>{organism.name}</h1>

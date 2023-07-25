@@ -1,7 +1,12 @@
 import { Organism } from '../../../@types/organism';
 import './Modal.scss';
 
-function ModalData({ ...organism }: Organism) {
+interface ModalDataProps {
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  organism: Organism;
+}
+
+function ModalData({ organism, setIsActive }: ModalDataProps) {
   return (
     <div className="modal">
       <div className="modal-main">
@@ -107,18 +112,5 @@ function ModalData({ ...organism }: Organism) {
     </div>
   );
 }
-ModalData.defaultProps = {
-  pmr: false,
-  animals: false,
-  description: '',
-  infos_alertes: '',
-  schedules: {
-    day: 0,
-    opentime_am: '',
-    closetime_am: '',
-    opentime_pm: '',
-    closetime_pm: '',
-  },
-};
 
 export default ModalData;
