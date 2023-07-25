@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import { User } from '../../../../@types/organism';
 import ModalUsers from '../../Modal/ModalUsers';
@@ -23,7 +24,9 @@ function UsersDetails({ ...user }: User) {
 
       <td className="userstable-email">{user.email}</td>
 
-      <td className="userstable-connexion">{user.last_connected}</td>
+      <td className="userstable-connexion">
+        {dayjs(user.last_connected).format('DD MMMM YYYY')}
+      </td>
 
       <td className="userstable-roles">
         <span className="role editor">edition</span>
