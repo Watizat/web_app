@@ -1,28 +1,7 @@
+import { Organism } from '../../../@types/organism';
 import './Modal.scss';
 
-interface ModalProps {
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  pmr?: boolean;
-  animals?: boolean;
-  description?: string;
-  infos_alertes?: string;
-  schedules?: {
-    day?: number;
-    opentime_am?: string;
-    closetime_am?: string;
-    opentime_pm?: string;
-    closetime_pm?: string;
-  };
-}
-
-function ModalData({
-  setIsActive,
-  pmr,
-  animals,
-  description,
-  schedules,
-  infos_alertes,
-}: ModalProps) {
+function ModalData({ ...organism }: Organism) {
   return (
     <div className="modal">
       <div className="modal-main">
@@ -32,7 +11,7 @@ function ModalData({
             <h4 className="modal-case__title">Accés</h4>
             <div className="modal-data__accessDetails">
               <label className="modal-data__pmr">
-                {pmr ? (
+                {organism.pmr ? (
                   <input type="checkbox" defaultChecked />
                 ) : (
                   <input type="checkbox" />
@@ -40,7 +19,7 @@ function ModalData({
                 Accessible PSH /PMR
               </label>
               <label className="modal-data__pmr">
-                {animals ? (
+                {organism.animals ? (
                   <input type="checkbox" defaultChecked />
                 ) : (
                   <input type="checkbox" />
@@ -53,7 +32,7 @@ function ModalData({
             <h4 className="modal-case__title">Description</h4>
             <textarea
               className="modal-case__textarea"
-              defaultValue={description}
+              defaultValue={organism.translations[0].description}
             />
           </div>
           <div className="modal-case">
@@ -65,7 +44,7 @@ function ModalData({
                 <td />
                 <td colSpan={3}>Aprés-midi</td>
               </thead>
-              {schedules.map((day) => (
+              {organism.schedules.map((day) => (
                 <tr key={day.day} className="modal-data__hoursLine">
                   <td className="modal-data__hoursDay">
                     <span>{day.day}</span>
@@ -105,7 +84,7 @@ function ModalData({
             <h4 className="modal-case__title">Infos, alerte</h4>
             <textarea
               className="modal-case__textarea"
-              defaultValue={infos_alertes}
+              defaultValue={organism.translations[0].infos_alerte}
             />
           </div>
         </form>

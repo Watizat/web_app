@@ -13,16 +13,7 @@ function Infos() {
 
   return (
     <article className="orgaSheet-card orgaSheet-infos">
-      {isActive && (
-        <Modal
-          setIsActive={setIsActive}
-          name={organism.name}
-          address={organism.address}
-          city={organism.city}
-          zipcode={organism.zipcode}
-          website={organism.website}
-        />
-      )}
+      {isActive && <Modal setIsActive={setIsActive} organism={organism} />}
 
       <span className="orgaSheet-infos__titleBar">
         <h1>{organism.name}</h1>

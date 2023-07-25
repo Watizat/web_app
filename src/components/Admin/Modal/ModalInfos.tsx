@@ -1,22 +1,12 @@
+import { Organism } from '../../../@types/organism';
 import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  name?: string;
-  address?: string;
-  city?: string;
-  zipcode?: string;
-  website?: string;
+  organism: Organism;
 }
 
-function ModalInfos({
-  setIsActive,
-  name,
-  address,
-  city,
-  zipcode,
-  website,
-}: ModalProps) {
+function ModalInfos({ organism, setIsActive }: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
@@ -27,7 +17,7 @@ function ModalInfos({
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={name}
+              defaultValue={organism.name}
             />
           </div>
           <div className="modal-case">
@@ -35,7 +25,7 @@ function ModalInfos({
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={address}
+              defaultValue={organism.address}
             />
           </div>
           <div className="modal-case">
@@ -43,7 +33,7 @@ function ModalInfos({
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={city}
+              defaultValue={organism.city}
             />
           </div>
           <div className="modal-case">
@@ -51,7 +41,7 @@ function ModalInfos({
             <input
               className="modal-case__inputTxt"
               type="number"
-              defaultValue={zipcode}
+              defaultValue={organism.zipcode}
             />
           </div>
           <div className="modal-case">
@@ -59,7 +49,7 @@ function ModalInfos({
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={website}
+              defaultValue={organism.website}
             />
           </div>
         </form>
@@ -82,12 +72,5 @@ function ModalInfos({
     </div>
   );
 }
-ModalInfos.defaultProps = {
-  name: '',
-  address: '',
-  city: '',
-  zipcode: '',
-  website: '',
-};
 
 export default ModalInfos;

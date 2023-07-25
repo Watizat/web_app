@@ -19,14 +19,14 @@ function ServiceCard({ ...service }: Service) {
           {service.translations[0]?.name}
         </h4>
         <span className="serviceCard-actions">
-          {/* Besoin d'une modale Ajout de contact ici ! */}
-          {/*           <button
+          {/* Besoin d'une modale Ajout de contact dans un service ici ! */}
+          <button
             type="button"
             className="orgaSheet-edition__menu"
-            onClick={() => setIsActiveContact(true)}
+            // onClick={() => setIsActiveContact(true)}
           >
             <i className="las la-address-book" />
-          </button> */}
+          </button>
           <button
             type="button"
             className="orgaSheet-edition__menu"
