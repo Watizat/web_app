@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchOrganism } from '../../store/reducers/organisms';
-import Icon from '../../ui/icon/icon';
 import Container from '../Container/Container';
 import Breadcrumb from './Breadcrumb/breadcrumb';
 import Header from './Header/Header';
@@ -14,7 +13,6 @@ function Organisme() {
   const { slug } = useParams();
   const dispatch = useAppDispatch();
   const organism = useAppSelector((state) => state.organism.organism);
-  console.log(organism);
 
   useEffect(() => {
     dispatch(fetchOrganism(slug as string));
