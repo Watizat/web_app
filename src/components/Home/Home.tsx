@@ -34,10 +34,10 @@ function Home() {
 
   return (
     <main id="homepage">
-      <section className="hero">
+      <section id="hero">
         <Container>
-          <div className="hero-header">
-            <Link className="hero-header--logo" to="/">
+          <div className="heroHeader">
+            <Link className="heroHeader-logo" to="/">
               <img src={logo} alt="watizat logo" />
             </Link>
             <h1>
@@ -45,8 +45,8 @@ function Home() {
               <span> pour les personnes exilées</span>
             </h1>
           </div>
-          <div className="hero-choice">
-            <article className="hero-choice--left">
+          <div className="choice">
+            <article className="choiceLeft">
               <h2>1. Sélectionner une région&nbsp;</h2>
               <select value={select} onChange={handleChange}>
                 <option value="" disabled>
@@ -59,62 +59,25 @@ function Home() {
                 ))}
               </select>
             </article>
-            <article className="hero-choice--right">
+            <article className="choiceRight">
               <h2>2. Selectionner une catégorie</h2>
-              <div className="categories-choice">
+              <div className="choiceRight-group">
                 {categories.map((categorie) => (
                   <button
                     type="button"
                     key={categorie.translations[0].slug}
                     onClick={handleClick(categorie.translations[0].slug)}
+                    className="choiceRight-button"
                   >
-                    <Icon icon={categorie.tag} size="40px" />
-                    <span className="text-button">
+                    <Icon
+                      icon={categorie.tag}
+                      className="choiceRight-button__icon"
+                    />
+                    <span className="text-button choiceRight-button__text">
                       {categorie.translations[0].name}
                     </span>
                   </button>
                 ))}
-
-                {/* <button type="button" onClick={handleClick('manger')}>
-                  <i className="las la-podcast" />
-                  <span className="text-button">Manger</span>
-                </button>
-                <button type="button" onClick={handleClick('se laver')}>
-                  <i className="las la-eject" />
-                  <span>Se laver</span>
-                </button>
-                <button type="button">
-                  <i className="las la-circle" />
-                  <span>Bagagerie</span>
-                </button>
-                <button type="button">
-                  <i className="las la-music" />
-                  <span>Laverie</span>
-                </button>
-                <button type="button">
-                  <i className="las la-random" />
-                  <span>Manger</span>
-                </button>
-                <button type="button">
-                  <i className="las la-film" />
-                  <span>Manger</span>
-                </button>
-                <button type="button">
-                  <i className="las la-play" />
-                  <span>Femme</span>
-                </button>
-                <button type="button">
-                  <i className="las la-car" />
-                  <span>Enfants</span>
-                </button>
-                <button type="button">
-                  <i className="las la-bus" />
-                  <span>Manger</span>
-                </button>
-                <button type="button">
-                  <i className="las la-taxi" />
-                  <span>Manger</span>
-                </button> */}
               </div>
             </article>
           </div>
@@ -123,10 +86,10 @@ function Home() {
       <section className="info">
         <Container>
           <article className="info-hero">
-            <div className="info-hero--img">
+            <div className="info-hero__img">
               <img src="/img/bghome-guide.jpeg" alt="distribution d'un guide" />
             </div>
-            <div className="info-hero--text">
+            <div className="info-hero__text">
               <h2>
                 Watizat milite pour l’accès à l’information des personnes
                 exilées
