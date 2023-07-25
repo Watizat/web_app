@@ -13,6 +13,7 @@ function Organisme() {
   const { slug } = useParams();
   const dispatch = useAppDispatch();
   const organism = useAppSelector((state) => state.organism.organism);
+  console.log(organism);
 
   useEffect(() => {
     dispatch(fetchOrganism(slug as string));

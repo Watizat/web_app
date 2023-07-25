@@ -8,7 +8,7 @@ import NavBar from './NavBar/NavBar';
 import './Sidebar.scss';
 
 function Sidebar() {
-  const [select, setSelect] = useState(localStorage.getItem('city') || '');
+  const [select] = useState(localStorage.getItem('city') || '');
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     localStorage.setItem('city', event.target.value);
