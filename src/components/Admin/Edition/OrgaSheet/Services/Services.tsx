@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useAppSelector } from '../../../../../hooks/redux';
 import ModalService from '../../../Modal/ModalService';
 import ServiceCard from './ServiceCard/ServiceCard';
 import './Services.scss';
 
-function Services({ services }: any) {
+function Services() {
   const [isActiveService, setIsActiveService] = useState(false);
+  const organism = useAppSelector((state) => state.admin.organism);
   return (
     <article className="orgaSheet-card orgaSheet-services">
       {isActiveService && <ModalService setIsActive={setIsActiveService} />}
