@@ -1,9 +1,4 @@
-import {
-  createAction,
-  createAsyncThunk,
-  createReducer,
-} from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 import { Organism, Role, User, Zone } from '../../@types/organism';
 import { axiosInstance } from '../../utils/axios';
 
@@ -115,7 +110,7 @@ export const fetchAdminOrganisms = createAsyncThunk(
 );
 
 export const fetchUsers = createAsyncThunk('users/fetch-users', async () => {
-  const { data } = await axios.get<{ data: User[] }>(
+  const { data } = await axiosInstance.get<{ data: User[] }>(
     'https://watizat.lunalink.nl/items/user',
     {
       params: {
@@ -212,14 +207,14 @@ export const setAdminOrganism = createAsyncThunk(
 );
 
 export const fetchZones = createAsyncThunk('zones', async () => {
-  const { data } = await axios.get<{ data: Zone[] }>(
+  const { data } = await axiosInstance.get<{ data: Zone[] }>(
     'https://watizat.lunalink.nl/items/zone'
   );
   return data.data;
 });
 
 export const fetchRoles = createAsyncThunk('roles', async () => {
-  const { data } = await axios.get<{ data: Role[] }>(
+  const { data } = await axiosInstance.get<{ data: Role[] }>(
     'https://watizat.lunalink.nl/items/role'
   );
   return data.data;

@@ -51,26 +51,28 @@ const authRefresh: {
   },
 };
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const user = getUserDataFromLocalStorage();
-    if (user) {
+axiosInstance.interceptors.request.use((config) => {
+  const user = getUserDataFromLocalStorage();
+
+  if (user) {
+    // eslint-disable-next-line no-param-reassign
+    config.headers.Authorization = `Bearer ${user.token.access_token}`;
+
+    if (Date.now() - user.session.exp * 1000 > 0 && !authRefresh.inProgress) {
+      const bearer = authRefresh.doRefresh(user);
       // eslint-disable-next-line no-param-reassign
-      config.headers.Authorization = `Bearer ${user.token.access_token}`;
-
-      if (Date.now() - user.session.exp * 1000 > 0 && !authRefresh.inProgress) {
-        const bearer = authRefresh.doRefresh(user);
-        // eslint-disable-next-line no-param-reassign
-        config.headers.Authorization = bearer;
-      }
+      config.headers.Authorization = bearer;
     }
-    return config;
-  },
-  (error) => {
-    // Faites quelque chose avec les erreurs de requête, si nécessaire
-    console.error("Erreur d'interception de la requête :", error);
+  }
+  return config;
+});
 
-    // Vous devez toujours renvoyer une Promise rejetée pour propager l'erreur
-    return Promise.reject(error);
+axiosInstance.interceptors.response.use(
+  (response: AxiosResponse<any>) => {
+    return response;
+  },
+  (error: AxiosError) => {
+    console.log(error.status);
+    return error;
   }
 );
