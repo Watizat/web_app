@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Contact } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 import './Modal.scss';
+import ModalDeleteConfirmation from './ModalDeleteConfirmation';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,14 +12,9 @@ interface ModalProps {
 }
 
 function ModalContact({ contact, setIsActive }: ModalProps) {
+  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
   const id = useAppSelector((state) => state.admin.organism?.id as number);
   const dispatch = useAppDispatch();
-
-  async function handleDelete() {
-    const response = await axiosInstance.delete(`/items/contact/${contact.id}`);
-    dispatch(setAdminOrganism(id));
-    setIsActive(false);
-  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,6 +35,17 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
       console.log(error);
     }
     setIsActive(false);
+  }
+
+  if (isActiveConfirmation) {
+    return (
+      <ModalDeleteConfirmation
+        id={contact.id}
+        organismId={id}
+        setIsActiveConfirmation={setIsActiveConfirmation}
+        setIsActive={setIsActive}
+      />
+    );
   }
 
   return (
@@ -121,7 +129,7 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
             <button
               type="button"
               className="btn btn-danger-fill btn-flat modal-actions__close"
-              onClick={handleDelete}
+              onClick={() => setIsActiveConfirmation(true)}
             >
               Supprimer
             </button>

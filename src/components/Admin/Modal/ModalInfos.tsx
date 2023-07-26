@@ -20,13 +20,10 @@ function ModalInfos({ setIsActive, organism }: ModalProps) {
     console.log(data);
 
     try {
-      const response = await axiosInstance.patch(
-        `/items/organisme/${organism.id}`,
-        {
-          ...data,
-          service: null,
-        }
-      );
+      const response = await axiosInstance.patch(`/items/organisme/${id}`, {
+        ...data,
+        service: null,
+      });
       if (response.status === 200) {
         dispatch(setAdminOrganism(id));
       }
