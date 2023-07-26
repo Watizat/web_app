@@ -10,12 +10,12 @@ interface ModalProps {
 }
 
 function ModalContact({ contact, setIsActive }: ModalProps) {
-  const id = useAppSelector((state) => state.admin.organism?.id);
+  const id = useAppSelector((state) => state.admin.organism?.id as number);
   const dispatch = useAppDispatch();
 
   async function handleDelete() {
     const response = await axiosInstance.delete(`/items/contact/${contact.id}`);
-    dispatch(setAdminOrganism(id as number));
+    dispatch(setAdminOrganism(id));
     setIsActive(false);
   }
 
@@ -33,7 +33,7 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
         }
       );
       if (response.status === 200) {
-        dispatch(setAdminOrganism(id as number));
+        dispatch(setAdminOrganism(id));
       }
     } catch (error) {
       console.log(error);
