@@ -23,7 +23,6 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const data = Object.fromEntries(form);
-    console.log(data);
     try {
       const response = await axiosInstance.patch(
         `/items/contact/${contact.id}`,
