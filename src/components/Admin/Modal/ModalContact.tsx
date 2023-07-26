@@ -52,6 +52,7 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
               className="modal-case__inputTxt"
               type="text"
               defaultValue={contact.firstname}
+              name="firstname"
             />
           </div>
           <div className="modal-case">
@@ -60,6 +61,7 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
               className="modal-case__inputTxt"
               type="text"
               defaultValue={contact.lastname}
+              name="lastname"
             />
           </div>
           <div className="modal-case">
@@ -68,6 +70,7 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
               className="modal-case__inputTxt"
               type="text"
               defaultValue={contact.job}
+              name="job"
             />
           </div>
           <div className="modal-contact__modes">
@@ -77,6 +80,7 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
                 className="modal-case__inputTxt modal-contact__mail"
                 type="text"
                 defaultValue={contact.mail}
+                name="mail"
               />
             </div>
             <div className="modal-case">
@@ -85,6 +89,7 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
                 className="modal-case__inputTxt"
                 type="number"
                 defaultValue={contact.phone}
+                name="phone"
               />
             </div>
           </div>
@@ -93,7 +98,10 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
             <div className=" modal-contact__roles">
               <label className="modal-contact__private">
                 Publicité du contact
-                <select name="role" defaultValue={`${contact.visibility}`}>
+                <select
+                  name="visibility"
+                  defaultValue={`${contact.visibility}`}
+                >
                   <option value="false">Privé</option>
                   <option value="true">Public</option>
                 </select>
