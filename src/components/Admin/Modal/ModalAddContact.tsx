@@ -23,7 +23,6 @@ function ModalAddContact({ setIsActive }: ModalProps) {
         service: null,
       });
       if (response.status === 200) {
-        console.log(response);
         setIsActive(false);
         dispatch(setAdminOrganism(id as number));
       }

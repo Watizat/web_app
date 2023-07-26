@@ -89,6 +89,7 @@ export const setAdminOrganism = createAsyncThunk(
             'mail',
             'website',
             'zone_id.name',
+            'schedules.id',
             'schedules.day',
             'schedules.opentime_am',
             'schedules.closetime_am',
