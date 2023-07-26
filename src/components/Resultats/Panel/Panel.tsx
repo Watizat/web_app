@@ -58,6 +58,7 @@ function Panel() {
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
       />
+      <div className="resultsContentCard">
       {isLoading && <div>Loading...</div>}
       {!isLoading &&
         (filteredOrganisms.length > 0 ? (
@@ -72,6 +73,7 @@ function Panel() {
         ) : (
           <span>Il n&apos;y a aucun résultat.</span>
         ))}
+       </div> 
     </section>
   );
 }

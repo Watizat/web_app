@@ -5,11 +5,6 @@
   display: inline-flex;
   z-index: 100;
   flex-direction: column;
-  gap: 1rem;
-  overflow-y: auto;
-
-  overflow-y:auto;
-
   background-color: rgba(v.$grey-100, .75);
   box-shadow: rgba(0, 0, 0, 0.15) 0.2rem 0rem 0.2rem;
 
@@ -28,4 +23,12 @@
   @include m.qhd {
     width: 50%;
   }
+}
+
+.resultsContentCard {
+  margin-top: 1rem;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
 }

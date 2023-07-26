@@ -22,7 +22,7 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   }));
 
   return (
-    <div id="resultsCard">
+    <div className="resultsCard">
       <div className="Left">
         <div className="Left-upper">
           <div className="Left-upper__position-id">

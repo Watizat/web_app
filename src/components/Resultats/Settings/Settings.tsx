@@ -35,6 +35,9 @@ function Settings({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
 
+  const isTouch = useMediaQuery({ query: '(max-width: 1023px)' });
+  const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' });
+
   const handleCategoryChange = (tag: string) => {
     if (categoryFilter.includes(tag)) {
       dispatch(
@@ -107,7 +110,8 @@ function Settings({
           className="settingsTopBar-dropdownBtn"
           onClick={handleOpenSettings}
         >
-          Filtres
+          {!isOpen ? <span className="settingsTopBar-dropdownBtn__filter">Filtrer</span> : <span className="settingsTopBar-dropdownBtn__valid">Valider</span>}
+
         </button>
       </div>
 
@@ -117,52 +121,67 @@ function Settings({
         })}
       >
         <div className="settingsContent-filter">
-          <span className="settingsContent-filter__title">
+          <div className="settingsContent-filter__title">
             Filtrer par accessibilité
-          </span>
+          </div>
           <div className="settingsContent-filter__list settingsContent-filter__listAccess">
-            <label
-              htmlFor="pmr"
-              className="settingsContent-filter__list__label"
-            >
-              <input
-                type="checkbox"
-                name="pmr"
-                id="pmr"
-                onChange={(event) => handlePmr(event)}
-              />
-              Accessible PSH / PMR
-            </label>
-            <label htmlFor="animals">
-              <input
-                type="checkbox"
-                name="animals"
-                id="animals"
-                onChange={(event) => handleAnimals(event)}
-              />
-              Animaux acceptés
-            </label>
+            <div className="settingsContent-filter__list__div">
+              <label
+                htmlFor="pmr"
+                className="settingsContent-filter__list__label"
+              >
+                <input
+                  type="checkbox"
+                  name="pmr"
+                  id="pmr"
+                  onChange={(event) => handlePmr(event)}
+                />
+                <span className="settingsContent-filter__list__text">Accessible PSH / PMR</span>
+              </label>
+            </div>
+            <div className="settingsContent-filter__list__div">
+              <label htmlFor="animals"
+                className="settingsContent-filter__list__label">
+                <input
+                  type="checkbox"
+                  name="animals"
+                  id="animals"
+                  onChange={(event) => handleAnimals(event)}
+                /><span className="settingsContent-filter__list__text">Animaux acceptés</span>
+              </label>
+            </div>
           </div>
         </div>
 
         <div className="settingsContent-filter">
-          <span className="settingsContent-filter__title">
+          <div className="settingsContent-filter__title">
             Affiner par catégories
-          </span>
-          <div className="settingsContent-filter__list">
+          </div>
+          <div className="settingsContent-filter__list settingsContent-filter__listCategory">
             {categories.map((category) => {
               return (
-                <div key={category.tag}>
-                  <label className="settingsContent-filter__catList__label">
+                <div key={category.tag} className="settingsContent-filter__list__div settingsContent-filter__listCategory__div">
+
+                  {(isTouch) && <Icon
+                    icon={category.tag}
+                    className="settingsContent-filter__list__icon"
+                  />}
+
+                  <label className="settingsContent-filter__list__label">
                     <input
                       type="checkbox"
                       defaultChecked={categoryParams === category.tag}
                       name={category.translations[0].slug}
                       onChange={() => handleCategoryChange(category.tag)}
                       disabled={!activeCategories.includes(category.tag)}
-                      className="settingsContent-catFilter__catList__input"
+                      className="settingsContent-catFilter__listCategory__input"
                     />
-                    {category.translations[0].name}
+
+                    {(isDesktop) && <Icon
+                      icon={category.tag}
+                      className="settingsContent-filter__list__icon"
+                    />}<span className="settingsContent-filter__list__text">{category.translations[0].name}</span>
+
                   </label>
                 </div>
               );

@@ -9,7 +9,7 @@ function Header() {
   const [isActiveUsers, setIsActiveUsers] = useState(false);
 
   return (
-    <header id="header">
+    <header id="headerAdmin">
       {isActiveUsers && <ModalUsers setIsActive={setIsActiveUsers} />}
       <h2>
         {pathname === '/admin/edition' && 'Edition des données'}
