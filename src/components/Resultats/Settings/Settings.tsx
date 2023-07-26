@@ -54,6 +54,10 @@ function Settings({
     setSearchInputValue(event.target.value);
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+  }
+
   function handlePmr(event: React.ChangeEvent<HTMLInputElement>) {
     setIsPmr(event.target.checked);
   }
@@ -89,7 +93,7 @@ function Settings({
   return (
     <div className="settings">
       <div className="settings__top-bar">
-        <form>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Exemple : Croix Rouge française (nord)"
