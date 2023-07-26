@@ -1,17 +1,26 @@
 import { useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../../../../hooks/redux';
+import { useAppSelector } from '../../../../hooks/redux';
 import './Transport.scss';
 import navitiaInstance from '../../../../utils/navitia';
+import { Organism } from '../../../../@types/organism';
+
+interface API {
+  lines: {
+    id: string;
+    code: string;
+    name: string;
+    color: string;
+  }[];
+}
 
 function Transport() {
-  const [data, setData] = useState(null);
-  const organism = useAppSelector((state) => state.organism.organism);
-
-  console.log(organism);
+  const [data, setData] = useState<API | null>(null);
+  const organism = useAppSelector(
+    (state) => state.organism.organism as Organism
+  );
 
   useEffect(() => {
-    const endpoint =
-      `/coverage/fr-sw/coord/`${organism.latitude}`%`${organism.longitude}`/lines/stop_areas?`;
+    const endpoint = `/coverage/fr-sw/coord/${organism.longitude}%3B${organism.latitude}/lines`;
 
     navitiaInstance
       .get(endpoint)
@@ -21,17 +30,30 @@ function Transport() {
       .catch((error) => {
         console.error("Erreur lors de l'appel API:", error);
       });
-  }, []);
+  }, [setData, organism]);
+
+  // si l'organism n'existe pas
+  if (data === null) {
+    return (
+      <article>
+        <h3>Accès en transports</h3>
+        <span>Pas de données de transports</span>
+      </article>
+    );
+  }
 
   return (
     <article>
       <h3>Accès en transports</h3>
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+      {data.lines.map((line) => (
+        <p key={line.id}>
+          <span style={{ backgroundColor: `#${line.color}` }}>{line.code}</span>
+          {line.name}
+        </p>
+      ))}
+      {/* <p><span style={{backgound-color:{area.color}}}>{area.code}</span>{area.name}</p> */}
     </article>
   );
 }
 
 export default Transport;
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}

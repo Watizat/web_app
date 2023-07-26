@@ -37,7 +37,7 @@ function Header() {
           ))}
         </div>
       </div>
-      <MapContainer center={position} zoom={13}>
+      <MapContainer center={[organism.latitude, organism.longitude]} zoom={15}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -50,7 +50,7 @@ function Header() {
           icon={
             new L.DivIcon({
               className: 'custom-icon',
-              html: `<div>${organism.id}</div>`,
+              html: `<div></div>`,
               iconSize: [30, 30],
               iconAnchor: [15, 33.5],
               popupAnchor: [0, -30],
