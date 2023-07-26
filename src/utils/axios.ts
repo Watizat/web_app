@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import jwt_decode from 'jwt-decode';
 import { AuthResponse, UserSession } from '../@types/user';
 import {
   getUserDataFromLocalStorage,
@@ -33,8 +34,12 @@ const authRefresh: {
         }
       )
       .then(({ data: response }) => {
+        const jwtDecode = jwt_decode<UserSession>(response.data.access_token);
+
         // eslint-disable-next-line no-param-reassign
         user.token = { ...response.data };
+        // eslint-disable-next-line no-param-reassign
+        user.session = { ...jwtDecode };
         localStorage.setItem('user', JSON.stringify(user));
         authRefresh.bearer = `Bearer ${response.data.access_token}`;
       })

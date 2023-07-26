@@ -1,4 +1,5 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { Organism, Role, User, Zone } from '../../@types/organism';
 import { axiosInstance } from '../../utils/axios';
 
@@ -30,7 +31,7 @@ export const fetchAdminOrganisms = createAsyncThunk(
   'admin-organisms/fetch-organisms',
   async () => {
     const { data } = await axiosInstance.get<{ data: Organism[] }>(
-      'https://watizat.lunalink.nl/items/organisme',
+      '/items/organisme',
       {
         params: {
           fields: [
@@ -76,12 +77,7 @@ export const fetchAdminOrganisms = createAsyncThunk(
             'services.translations.slug',
             'services.translations.infos_alerte',
             'services.translations.description',
-            'services.schedules.day',
-            'services.schedules.opentime_am',
-            'services.schedules.closetime_am',
-            'services.schedules.opentime_pm',
-            'services.schedules.closetime_pm',
-            'services.schedules.closetime_pm',
+            'services.schedules.*',
             'services.contacts.id',
             'services.contacts.name',
             'services.contacts.job',
@@ -110,23 +106,20 @@ export const fetchAdminOrganisms = createAsyncThunk(
 );
 
 export const fetchUsers = createAsyncThunk('users/fetch-users', async () => {
-  const { data } = await axiosInstance.get<{ data: User[] }>(
-    'https://watizat.lunalink.nl/items/user',
-    {
-      params: {
-        fields: [
-          'id',
-          'firstname',
-          'lastname',
-          'last_connected',
-          'email',
-          'role_id.id',
-          'role_id.name',
-          'zone.name',
-        ].join(','),
-      },
-    }
-  );
+  const { data } = await axiosInstance.get<{ data: User[] }>('/items/user', {
+    params: {
+      fields: [
+        'id',
+        'firstname',
+        'lastname',
+        'last_connected',
+        'email',
+        'role_id.id',
+        'role_id.name',
+        'zone.name',
+      ].join(','),
+    },
+  });
   return data.data;
 });
 
@@ -182,12 +175,7 @@ export const setAdminOrganism = createAsyncThunk(
             'services.translations.slug',
             'services.translations.infos_alerte',
             'services.translations.description',
-            'services.schedules.day',
-            'services.schedules.opentime_am',
-            'services.schedules.closetime_am',
-            'services.schedules.opentime_pm',
-            'services.schedules.closetime_pm',
-            'services.schedules.closetime_pm',
+            'services.schedules.*',
             'services.contacts.id',
             'services.contacts.name',
             'services.contacts.job',
@@ -207,16 +195,12 @@ export const setAdminOrganism = createAsyncThunk(
 );
 
 export const fetchZones = createAsyncThunk('zones', async () => {
-  const { data } = await axiosInstance.get<{ data: Zone[] }>(
-    'https://watizat.lunalink.nl/items/zone'
-  );
+  const { data } = await axiosInstance.get<{ data: Zone[] }>('/items/zone');
   return data.data;
 });
 
 export const fetchRoles = createAsyncThunk('roles', async () => {
-  const { data } = await axiosInstance.get<{ data: Role[] }>(
-    'https://watizat.lunalink.nl/items/role'
-  );
+  const { data } = await axiosInstance.get<{ data: Role[] }>('/items/role');
   return data.data;
 });
 
