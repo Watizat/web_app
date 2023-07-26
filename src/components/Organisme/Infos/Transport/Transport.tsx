@@ -41,7 +41,7 @@ function Transport() {
       </article>
     );
   }
-
+  console.log(data);
   return (
     <article>
       <h3>Accès en transports</h3>
