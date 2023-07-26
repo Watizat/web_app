@@ -48,7 +48,7 @@ export interface Schedule {
 }
 
 export interface Service {
-  contacts: any;
+  contacts: Contact[];
   id: number;
   status: string;
   translations: ServiceTranslation[];

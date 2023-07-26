@@ -1,12 +1,16 @@
+import L from 'leaflet';
 import { useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { useAppSelector } from '../../../hooks/redux';
 import Icon from '../../../ui/icon/icon';
 import './Header.scss';
+import { Organism } from '../../../@types/organism';
 
 function Header() {
   const [position, setPosition] = useState({ lat: 43.6, lng: 1.433333 });
-  const organism = useAppSelector((state) => state.organism.organism);
+  const organism = useAppSelector(
+    (state) => state.organism.organism as Organism
+  );
 
   const tags = [
     ...new Set(organism.services.map((service) => service.categorie_id.tag)),
@@ -16,11 +20,6 @@ function Header() {
     id: index + 1,
     value: tag,
   }));
-  console.log(tags);
-
-  if (organism === null) {
-    return <span>Erreur</span>;
-  }
 
   return (
     <div className="organisme-header">
@@ -44,6 +43,20 @@ function Header() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {/* <Recenter lat={position.lat} lng={position.lng} /> */}
+
+        <Marker
+          key={organism.id}
+          position={[organism.latitude, organism.longitude]}
+          icon={
+            new L.DivIcon({
+              className: 'custom-icon',
+              html: `<div>${organism.id}</div>`,
+              iconSize: [30, 30],
+              iconAnchor: [15, 33.5],
+              popupAnchor: [0, -30],
+            })
+          }
+        />
       </MapContainer>
     </div>
   );
