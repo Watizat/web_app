@@ -2,6 +2,7 @@
 
 .results {
   display: flex;
+  justify-content: center;
     height: calc(100vh - 75px); 
 
     @include m.touch {

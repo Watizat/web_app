@@ -2,26 +2,27 @@
 @use '../../../styles/medias' as m;
 
 #resultsMenu {
+  font-family: 'Roboto', sans-serif;
   z-index: 100;
 
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: .25rem;
+  gap: .5rem;
 
   position: fixed;
-  bottom: 3rem;
-  left: 33%;
+  bottom: 1rem;
+  // left: 32%;
 
-  width: 33%;
 
   padding: .5rem 1rem;
 
   border-radius: 20px;
-  border: 1px solid v.$white;
+  border: .5px solid rgba(v.$white, 0.8);
   color: v.$white;
-  background-color: rgba(v.$black, .9);
+  background-color: v.$black;
+  box-shadow: 0 0 20px #2d5161;
 
   font-size: .9rem;
   font-weight: 800;
@@ -33,7 +34,7 @@
   .resultsMenu-group {
     display: flex;
     align-items: center;
-    gap: .25rem;
+    gap: .1rem;
     &__icon {
       font-size: 1.2rem;
     }
@@ -43,5 +44,11 @@
   &-right {
     background-color: transparent;
   }
+
+  // .resultsMenu-separator {
+  //   @include m.mobile {
+  //     display: none;
+  //   }
+  // }
 
 }

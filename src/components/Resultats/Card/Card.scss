@@ -2,16 +2,21 @@
 @use '../../../styles/medias' as m;
 
 #resultsCard {
-  margin: 0 1.5rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  border-radius: 10px;
-  padding: 1.5rem 1rem .5rem;
   column-gap: 1.5rem;
+
+
+  padding: 1.5rem 1rem .5rem;
+  margin: 0 .5rem;
+  
   background-color: v.$white;
+  border-radius: 10px;
+  border: 1px solid rgba(v.$grey-400, .3);
 
   @include m.desktop {
-    flex-direction: column;
+    margin: 0 1.5rem;
     }
 
     @include m.fullhd {
@@ -19,7 +24,8 @@
       }
 
   &:hover {
-    box-shadow: 0 6px 10px 1px rgba(v.$sucess, .1);
+    box-shadow: 0 6px 10px 1px rgba(v.$sucess, .075);
+    border: 1px solid rgba(v.$sucess, .2);
   }
 
   .Left {

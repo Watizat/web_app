@@ -1,3 +1,4 @@
+import { useMediaQuery } from 'react-responsive';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -92,7 +93,7 @@ function Settings({
         <form className="settingsTopBar-form">
           <input
             type="text"
-            placeholder="Exemple : Croix Rouge française (nord)"
+            placeholder="Recherchez un organisme..."
             id="search-panel"
             value={searchInputValue}
             onChange={handleSearch}
