@@ -1,5 +1,7 @@
 @use '../../../styles/variables' as v;
 
+
+
 .leaflet-container {
   width: 100%;
   z-index: 0;
@@ -11,6 +13,31 @@
 
 .leaflet-popup-content {
   text-align: center;
+  display: flex;
+flex-direction: column;
+
+.popup-button {
+  min-width: 50%;
+  margin: auto;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid v.$info;
+  background-color: v.$info;
+
+  border-radius: 20px;
+  color: v.$white;
+  padding: 0 1rem;
+
+  p {
+    color: v.$white;
+    margin: 0;  
+    padding: .5rem 0rem;
+  }
+}
 
 }
 

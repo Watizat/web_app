@@ -65,12 +65,12 @@ function Map() {
             position={[organism.latitude, organism.longitude]}
             icon={customIcon}
           >
-            <Popup className="Popup">
+            <Popup className="popup">
               <Link to={`/organisme/${organism.slug}`}>{organism.name}-</Link>
               <Link
                 to={`https://www.google.com/maps/search/?api=1&query=${organism.latitude}%2C${organism.longitude}`}
                 target="_blank"
-                className="Popup-button"
+                className="popup-button"
               >
                 <Icon icon="directions_walk" size="1.2rem" />{' '}
                 <p>J&apos;y vais !</p>
