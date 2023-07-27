@@ -3,20 +3,20 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import AccountRequest from './components/AccountRequest/AccountRequest';
+import AccountRequest from './components/Login/AccountRequest';
 import AdminApp from './components/Admin/App/App';
 import Dashboard from './components/Admin/Dashboard/Dashboard';
 import Edition from './components/Admin/Edition/Edition';
 import Users from './components/Admin/Users/Users';
 import App from './components/App/App';
 import Contact from './components/Contact/Contact';
-import ForgottenPassword from './components/ForgottenPassword/ForgottenPassword';
+import ForgottenPassword from './components/Login/ForgottenPassword';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import MentionsLegales from './components/MentionsLegales/MentionsLegales';
 import Organisme from './components/Organisme/Organisme';
 import Orientation from './components/Orientation/Orientation';
-import RecoverPassword from './components/RecoverPassword/RecoverPassword';
+import RecoverPassword from './components/Login/RecoverPassword';
 import Resultats from './components/Resultats/Resultats';
 import LogginControl from './components/Admin/Loggincontrol/LoggingControl';
 

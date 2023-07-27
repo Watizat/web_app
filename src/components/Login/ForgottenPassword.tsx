@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './ForgottenPassword.scss';
+import './Login.scss';
 import { ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
@@ -24,10 +24,10 @@ function ForgottenPassword() {
   };
 
   return (
-    <div className="forgottenPassword">
+    <div className="login">
       <h1>Mot de passé oublié</h1>
-      {message && <p className="forgottenPassword-succes">{message}</p>}
-      <form onSubmit={handleSubmit} className="forgottenPassword-form">
+      {message && <p className="login-succes">{message}</p>}
+      <form onSubmit={handleSubmit} className="login-form">
         <input
           type="email"
           onChange={handleChange}
@@ -36,7 +36,7 @@ function ForgottenPassword() {
         />
         <button type="submit">Demander la réinitialisation</button>
       </form>
-      <div className="forgottenPassword-newAccount">
+      <div className="login-newAccount">
         Pas encore de compte ?
         <Link to="/account-request">
           <br />

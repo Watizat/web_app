@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import './AccountRequest.scss';
+import './Login.scss';
 
 function AccountRequest() {
   return (
-    <div className="accountRequest">
+    <div className="login accountRequest">
       <h1>Demande de création de compte</h1>
-      <form className="accountRequest-form">
+      <form className="login-form accountRequest-form">
         <input type="text" placeholder="Prénom" />
         <input type="text" placeholder="Nom de famille" />
         <input type="text" placeholder="Email" />
@@ -27,7 +27,7 @@ function AccountRequest() {
         <button type="button">Confirmer la demande</button>
       </form>
 
-      <div className="accountRequest-alreadyAccount">
+      <div className="login-newAccount">
         Déja un compte ?
         <Link to="/login">
           <br />

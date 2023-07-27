@@ -32,7 +32,9 @@
       border-bottom: 1px solid v.$grey-300;
       border-radius: 5px;
       padding: .2rem;
-      &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+
+      &::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
         color: v.$grey-700;
         font-weight: 500;
         font-size: 1.1rem;
@@ -58,8 +60,29 @@
     color: v.$primary;
     font-weight: 400;
     font-size: 1.1rem;
-  }  
+  }
+
   &-newAccount {
     text-align: center;
   }
+}
+
+.accountRequest {
+  &-form {
+    width: 45vw;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: column;
+    gap: 3rem;
+
+    &__text {
+      grid-column-start: 2;
+      grid-row-start: 2;
+      grid-row-end: span 2;
+      font-size: 1.1rem;
+    }
+  }
+
+
 }
