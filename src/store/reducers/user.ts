@@ -29,6 +29,7 @@ const initialState: UserState = {
   token: null,
   isLoading: false,
   error: null,
+  message: null,
   ...getUserDataFromLocalStorage(),
 };
 
@@ -53,6 +54,18 @@ export const logout = createAsyncThunk('user/logout', async () => {
     refresh_token: user?.token.refresh_token,
   });
 });
+
+export const askPassword = createAsyncThunk(
+  'user/ask-password',
+  async (email: string) => {
+    console.log({ email });
+    const response = await axiosInstance.post('/auth/password/request', {
+      email,
+      rest_url: 'http://localhost:5173/recover-password',
+    });
+    console.log(response, response.data);
+  }
+);
 
 export const setIsLogged = createAction<{
   isLogged: boolean;
@@ -102,6 +115,21 @@ export default createReducer(initialState, (builder) => {
       state.isLoading = false;
       state.isLogged = false;
       removeUserDataFromLocalStorage();
+    })
+    .addCase(askPassword.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(askPassword.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = null;
+      state.error =
+        'Une erreur est survenue lors de la demande de mot de passe';
+    })
+    .addCase(askPassword.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = 'Le mail a bien été envoyé';
+
+      state.error = null;
     })
     .addCase(setIsLogged, (state, action) => {
       state.isLogged = action.payload.isLogged;

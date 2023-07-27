@@ -15,6 +15,15 @@ export const axiosInstance = axios.create({
 const authRefresh: {
   inProgress: boolean;
   bearer: string | undefined;
+
+  /**
+   * Performs the refresh of the authentication token by sending a POST request to the server.
+   * @param {Object} user - User information and the authentication token.
+   * @param {boolean} user.isLogged - Indicates whether the user is logged in.
+   * @param {UserSession} user.session - User's session information.
+   * @param {AuthResponse} user.token - Authentication token information.
+   * @returns {string | undefined} The new authentication token (in "Bearer" format) if it was successfully refreshed, otherwise `undefined`.
+   */
   doRefresh: (user: {
     isLogged: boolean;
     session: UserSession;
@@ -24,6 +33,9 @@ const authRefresh: {
   inProgress: false,
   bearer: '',
   doRefresh: (user) => {
+    if (authRefresh.inProgress) {
+      return undefined;
+    }
     authRefresh.inProgress = true;
     axios
       .post<{ data: AuthResponse }>(
@@ -56,7 +68,7 @@ const authRefresh: {
   },
 };
 
-axiosInstance.interceptors.request.use((config) => {
+axiosInstance.interceptors.request.use(async (config) => {
   const user = getUserDataFromLocalStorage();
 
   if (user) {
@@ -64,7 +76,7 @@ axiosInstance.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${user.token.access_token}`;
 
     if (Date.now() - user.session.exp * 1000 > 0 && !authRefresh.inProgress) {
-      const bearer = authRefresh.doRefresh(user);
+      const bearer = await authRefresh.doRefresh(user);
       // eslint-disable-next-line no-param-reassign
       config.headers.Authorization = bearer;
     }

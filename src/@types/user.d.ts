@@ -8,6 +8,7 @@ export interface UserState {
   token: AuthResponse | null;
   isLoading: boolean;
   error: string | null;
+  message: string | null;
 }
 
 export interface UserSession {
