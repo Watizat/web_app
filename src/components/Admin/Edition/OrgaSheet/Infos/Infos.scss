@@ -2,8 +2,6 @@
 @use '../../../../../styles/medias' as m;
 @use '../../../../../styles/elements';
 
-
-
 .orgaSheet {
 
   &-infos {
@@ -34,13 +32,9 @@
       justify-content: space-between;
       padding: 0;
 
-      &___title {
-        text-transform: uppercase;
-      }
-
       &___text {
-        font-weight: 700;
-        color: v.$grey-700;
+        font-weight: 600;
+        color: v.$grey-600;
       }
 
       .orgaSheet-case {
