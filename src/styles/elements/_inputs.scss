@@ -8,6 +8,7 @@
       border: 1px solid v.$grey-300;
       padding: .5rem 1rem;
       border-radius: 5px;
+      &:focus {
+        outline: none;
+      }
     }
-
-   

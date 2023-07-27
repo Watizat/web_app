@@ -2,6 +2,7 @@
 
 .leaflet-container {
   width: 100%;
+  z-index: 0;
 }
 
 .leaflet-popup-close-button {
@@ -10,26 +11,78 @@
 
 .leaflet-popup-content {
   text-align: center;
+
 }
 
-.custom-icon {
-  background-color: white;
-  color: black;
-  border-radius: 50%;
-  border: 5px solid v.$primary;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
+.leaflet-top .leaflet-control,
+.leaflet-bottom .leaflet-control,
+.leaflet-left .leaflet-control,
+.leaflet-right .leaflet-control {
+  margin: 0;
+}
+
+
+.leaflet-top,
+.leaflet-left {
+  z-index: 1000;
+  margin: .75rem 1rem;
+  padding: 1rem 1.25rem;
+  // background-color: #fff9;
+  background-color: rgba(v.$white, .7);
+  border-radius: 12px;
+}
+
+.leaflet-bar a {
+  z-index: 100;
+  background-color: v.$black;
+  color: v.$white;
+
+  &:hover {
+    background-color: v.$black;
+    color: v.$white
+  }
+}
+
+.leaflet-touch .leaflet-bar {
+  border: none;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-touch .leaflet-bar a:first-child {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.leaflet-control-zoom-out,
+.leaflet-touch .leaflet-bar a:last-child {
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+
+.custom-icon,
+.custom-me {
+
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  padding: 10px;
+
+  border-radius: 50%;
+  border: 4px solid v.$primary;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: .95rem;
+  font-weight: 500;
   transform-style: preserve-3d;
 
   &::after {
     content: '';
     position: absolute;
-    bottom: -14px; /* Ajustez la valeur ici pour contrôler la position de la pointe vers le bas */
+    bottom: -14px;
+    /* Ajustez la valeur ici pour contrôler la position de la pointe vers le bas */
     left: 50%;
     width: 0;
     height: 0;
@@ -38,36 +91,20 @@
     border-color: v.$primary transparent transparent transparent;
     transform: translateX(-50%) translateZ(-1px);
   }
+}
+
+.custom-icon {
+  background-color: v.$white;
+  color: v.$grey-800;
 }
 
 .custom-me {
   background-color: v.$primary;
-  color: white;
-  border-radius: 50%;
-  border: 5px solid v.$primary;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  color: v.$white;
+
   transform-style: preserve-3d;
   background-image: url('../../../assets/location.svg');
-  background-size: 100%; /* Par exemple, 50% de la taille de la div */
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: 100%;
+  /* Par exemple, 50% de la taille de la div */
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -14px; /* Ajustez la valeur ici pour contrôler la position de la pointe vers le bas */
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 18px 14px 0;
-    border-color: v.$primary transparent transparent transparent;
-    transform: translateX(-50%) translateZ(-1px);
-  }
 }

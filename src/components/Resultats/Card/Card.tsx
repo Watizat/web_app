@@ -22,38 +22,36 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   }));
 
   return (
-    <div className="card_container">
-      <div className="card_container_left">
-        <div className="card_container_left-upper">
-          <div className="card_container_left-upper_top">
-            <div className="card_container_left-upper_position-id">
-              <p>{map_id}</p>
+    <div className="resultsCard">
+      <div className="Left">
+        <div className="Left-upper">
+          <div className="Left-upper__position-id">
+            <p>{map_id}</p>
+          </div>
+          <div className="Left-upper__organizationInfos">
+            <div className="Left-upper__organizationInfos___title">
+              {organism.name}
             </div>
-            <div className="card_container_left-upper_organization-infos">
-              <div className="card_container_left-upper_title">
-                {organism.name}
-              </div>
-              <span className="card_container_left-upper_address">
-                {organism.address}
-              </span>
-            </div>
+            <span className="Left-upper__organizationInfos___address">
+              {organism.address}
+            </span>
           </div>
         </div>
-        <div className="card_container_left-upper_description">
+        <div className="Left-upper__description">
           {organism.translations[0]?.description}
         </div>
-        <div className="card_container_left-lower">
+        <div className="Left-lower">
           <Link
-            className="card_container_left-lower_more-infos-link"
+            className="Left-lower__moreInfos"
             to={`/organisme/${organism.slug}`}
           >
             <Icon icon="plus" size="14px" /> En savoir plus
           </Link>
-          <div className="card_container_left-lower_categories">
+          <div className="Left-lower__categories">
             {categories.map((categorie) => (
               <Icon
                 key={categorie.id}
-                className={`card_container_left-lower_categories_item${
+                className={`Left-lower__categories___item${
                   categorie.isCheck ? '--check' : ''
                 }`}
                 icon={categorie.value}
@@ -64,16 +62,18 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
         </div>
         <span>{organism.translations[0]?.infos_alerte}</span>
       </div>
-      <div className="card_container_right">
+      <div className="Right">
         <Link
-          // to="geo:38.62464092991612,-90.18476128578186"
           to={`https://www.google.com/maps/search/?api=1&query=${organism.latitude}%2C${organism.longitude}`}
           target="_blank"
-          className="card_container_right_go"
+          className="Right-btn btn btn-sucess-fill btn-flat"
         >
           <Icon icon="directions_walk" size="1.2rem" /> <p>J&apos;y vais !</p>
         </Link>
-        <Link to="tel:+33534364095" className="card_container_right_contact">
+        <Link
+          to={`tel:${organism.phone}`}
+          className="Right-btn btn btn-info-fill btn-flat"
+        >
           <Icon icon="phone" size="1.2rem" /> <p>{organism.phone}</p>
         </Link>
       </div>

@@ -1,16 +1,18 @@
 @use '../../styles/variables' as v;
 @use '../../styles/medias' as m;
 
-.header {
+#header {
   display: none;
+
   @include m.desktop {
     display: flex;
   }
-  min-height: 6vh;
+
+  min-height: 75px;
   background-color: v.$primary;
   color: v.$white;
 
-  & .container {
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,12 +21,13 @@
     font-size: 1rem;
     font-weight: 200;
   }
+
   .watizat-logo-topbar {
     display: none;
 
     @include m.desktop {
       display: flex;
-      height: 5vh;
+      height: 60px;
       margin-top: auto;
       margin-bottom: auto;
     }

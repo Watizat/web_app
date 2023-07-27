@@ -4,6 +4,8 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setUserPosition } from '../../../store/reducers/organisms';
+import Icon from '../../../ui/icon/icon';
+
 import './Map.scss';
 
 function Map() {
@@ -38,9 +40,13 @@ function Map() {
 
   return (
     <MapContainer center={position} zoom={13}>
-      <TileLayer
+      {/* <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      /> */}
+      <TileLayer
+        attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
+        url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
       />
 
       {navigatorGps && <Marker position={userPosition} icon={me} />}
@@ -60,7 +66,15 @@ function Map() {
             icon={customIcon}
           >
             <Popup>
-              <Link to={`/organisme/${organism.slug}`}>{organism.name}</Link>
+              <Link to={`/organisme/${organism.slug}`}>{organism.name}-
+              </Link>
+        <Link
+          to={`https://www.google.com/maps/search/?api=1&query=${organism.latitude}%2C${organism.longitude}`}
+          target="_blank"
+          className="Popup-button"
+        >
+          <Icon icon="directions_walk" size="1.2rem" /> <p>J&apos;y vais !</p>
+        </Link>
             </Popup>
           </Marker>
         );

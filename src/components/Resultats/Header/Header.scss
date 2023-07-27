@@ -1,11 +1,33 @@
-.headerResults {
-  background-color: #ba5092;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
 
-  & img {
-    height: 65px;
+#resultsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  min-height: 50px;
+  background-color: v.$primary;
+  color: v.$white;
+
+  @include m.desktop {
+    justify-content: space-between;
+    min-height: 75px;
   }
+
+  .watizat-logo {
+    &__topbar {
+      @include m.desktop {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+    }
+    &__img {
+      height: 40px;
+  }
+
+  .NavBar {
+    font-size: .5rem;
+  }
+}
 }

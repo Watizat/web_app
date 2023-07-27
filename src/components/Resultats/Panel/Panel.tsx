@@ -52,12 +52,15 @@ function Panel() {
   }, [organisms, categoryFilter, isPmr, isAnimalsAccepted, search, dispatch]);
 
   return (
-    <section className="panel">
+    <section id="resultsPanel">
       <Settings
+        isPmr={isPmr}
         setIsPmr={setIsPmr}
+        isAnimalsAccepted={isAnimalsAccepted}
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
       />
+      <div className="resultsContentCard">
       {isLoading && <div>Loading...</div>}
       {!isLoading &&
         (filteredOrganisms.length > 0 ? (
@@ -72,6 +75,7 @@ function Panel() {
         ) : (
           <span>Il n&apos;y a aucun résultat.</span>
         ))}
+       </div> 
     </section>
   );
 }
