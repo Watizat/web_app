@@ -1,8 +1,12 @@
-import { useAppSelector } from '../../../hooks/redux';
+import { useState } from 'react';
+import { Service } from '../../../@types/organism';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 import './Modal.scss';
 
 interface ServiceModalProps {
+  service: Service;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -12,6 +16,7 @@ function setData(data: { [k: string]: FormDataEntryValue }) {
   for (let i = 1; i < 8; i++) {
     myArray.push({
       day: i,
+      id: data[`schedule_id_${i}`],
       opentime_am: data[`schedule_openam_${i}`]
         ? String(data[`schedule_openam_${i}`]).replace('h', ':')
         : null,
@@ -38,43 +43,50 @@ function setData(data: { [k: string]: FormDataEntryValue }) {
   };
 }
 
-function ModalAddService({ setIsActive }: ServiceModalProps) {
+function ModalEditService({ service, setIsActive }: ServiceModalProps) {
   const categoriesList = useAppSelector((state) => state.organism.categories);
-  const organismId = useAppSelector((state) => state.admin.organism?.id);
+  const organismId = useAppSelector(
+    (state) => state.admin.organism?.id as number
+  );
+  const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = Object.fromEntries(new FormData(event.currentTarget));
     const data = setData(form);
     try {
-      const response = await axiosInstance.post(`/items/service`, {
+      setIsLoading(true);
+      await axiosInstance.patch(`/items/service/${service.id}`, {
         categorie_id: data.categorie_id,
-        organisme_id: data.organisme_id,
       });
-      await axiosInstance.post(`/items/service_translation`, {
-        ...data.translations,
-        langue_id: 1,
-        service: response.data.data.id,
-      });
+
+      await axiosInstance.patch(
+        `/items/service_translation/${service.translations[0].id}`,
+        {
+          ...data.translations,
+        }
+      );
+
       await Promise.all(
         data.horaire.map((horaire) =>
-          axiosInstance.post(`/items/schedule`, {
+          axiosInstance.patch(`/items/schedule/${horaire.id}`, {
             ...horaire,
-            service_id: response.data.data.id,
-            organisme_id: null,
           })
         )
       );
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
+    dispatch(setAdminOrganism(organismId));
     setIsActive(false);
   };
-
   return (
     <div className="modal">
       <div className="modal-main">
-        <h1 className="modal-title">Ajouter un service</h1>
+        <h1 className="modal-title">Modifier un service</h1>
         <form className="modal-list" onSubmit={handleSubmit}>
           <input
             type="number"
@@ -84,17 +96,17 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
           />
           <div className="modal-case">
             <h4 className="modal-case__title">Catégorie</h4>
-
             <label className="modal-contact__actu">
               Catégorie du service
               <select
                 name="categorie_id"
-                defaultValue={categoriesList[0].translations[0].name}
+                defaultValue={service.categorie_id.id}
               >
+                <option disabled>Selectionnez une catégorie</option>
                 {categoriesList.map((category) => (
                   <option
                     key={category.translations[0].name}
-                    value={category.id}
+                    value={`${category.id}`}
                   >
                     {category.translations[0].name}
                   </option>
@@ -104,13 +116,19 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Nom du service</h4>
-            <input className="modal-case__inputTxt" type="text" name="name" />
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              defaultValue={service.translations[0].name}
+              name="name"
+            />
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Type de service·s proposé·s</h4>
             <input
               className="modal-case__inputTxt"
               type="text"
+              defaultValue={service.translations[0].description}
               name="description"
             />
           </div>
@@ -126,21 +144,21 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  'Lundi',
-                  'Mardi',
-                  'Mercredi',
-                  'Jeudi',
-                  'vendredi',
-                  'Samedi',
-                  'Dimanche',
-                ].map((i, index) => (
-                  <tr key={i} className="modal-data__hoursLine">
+                {service.schedules.map((day, index) => (
+                  <tr key={day.day} className="modal-data__hoursLine">
                     <td className="modal-data__hoursDay">
-                      <span>{i}</span>
+                      <span>{day.day}</span>
+                      <input
+                        type="hidden"
+                        name={`schedule_id_${day.day}`}
+                        value={day.id}
+                      />
                     </td>
                     <td className="modal-data__hoursHour">
                       <input
+                        defaultValue={day.opentime_am
+                          ?.slice(0, -3)
+                          .replace(':', 'h')}
                         className="modal-data__hoursInput"
                         name={`schedule_openam_${index + 1}`}
                       />
@@ -148,6 +166,9 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
+                        defaultValue={day.closetime_am
+                          ?.slice(0, -3)
+                          .replace(':', 'h')}
                         className="modal-data__hoursInput"
                         name={`schedule_closeam_${index + 1}`}
                       />
@@ -155,6 +176,9 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                     <td className="modal-data__hoursSeparater">/</td>
                     <td className="modal-data__hoursTd">
                       <input
+                        defaultValue={day.opentime_pm
+                          ?.slice(0, -3)
+                          .replace(':', 'h')}
                         className="modal-data__hoursInput"
                         name={`schedule_openpm_${index + 1}`}
                       />
@@ -162,7 +186,9 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        className="modal-data__hoursInput"
+                        defaultValue={day.closetime_pm
+                          ?.slice(0, -3)
+                          .replace(':', 'h')}
                         name={`schedule_closepm_${index + 1}`}
                       />
                     </td>
@@ -173,9 +199,19 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Info s & alertes</h4>
-            <textarea className="modal-case__textarea" name="infos_alerte" />
+            <textarea
+              className="modal-case__textarea"
+              defaultValue={service.translations[0].infos_alerte}
+              name="infos_alerte"
+            />
           </div>
           <div className="modal-actions">
+            <button
+              type="button"
+              className="btn btn-danger-fill btn-flat modal-actions__close"
+            >
+              Supprimer
+            </button>
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"
@@ -185,9 +221,10 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
             </button>
             <button
               type="submit"
-              className="btn btn-sucess-fill btn-flat modal-actions__save"
+              className="btn btn-sucess-fill btn-flat modal-actions__save"x
             >
-              Sauvegarder
+              {isLoading && <span>Sauvegarde en cours...</span>}
+              {!isLoading && <span>Sauvegarder</span>}{' '}
             </button>
           </div>
         </form>
@@ -196,4 +233,4 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
   );
 }
 
-export default ModalAddService;
+export default ModalEditService;
