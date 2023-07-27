@@ -43,7 +43,7 @@ function Schedules({ schedule }: SchedulesProps) {
     }
 
     if (closeAllDay) {
-      return `${openAm}/${closeAm} - ${openPm}/${closePm}`;
+      return `Fermé`;
     }
     return 'Fermé';
   }

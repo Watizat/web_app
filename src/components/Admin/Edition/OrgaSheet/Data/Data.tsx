@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { orga } from '../../../../../data/organismes';
 import { useAppSelector } from '../../../../../hooks/redux';
 import ModalData from '../../../Modal/ModalData';
 import Schedules from '../../../Schedules/Schedules';
@@ -10,6 +11,8 @@ function Data() {
   if (organism === null) {
     return <span>Erreur</span>;
   }
+
+  console.log(organism);
 
   return (
     <article className="orgaSheet-card orgaSheet-data">
