@@ -48,15 +48,30 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
     const data = setData(form);
     console.log(data.translations);
     try {
-      const response = await axiosInstance.post(`/items/service_translation`, {
+      const response = await axiosInstance.post(`/items/service`, {
+        categorie_id: data.categorie_id,
+        organisme_id: data.organisme_id,
+      });
+      const response1 = await axiosInstance.post(`/items/service_translation`, {
         ...data.translations,
         langue_id: 1,
-        // service: null,
+        service: response.data.data.id,
       });
-      console.log(response.data.id);
+      console.log(response1);
+      const test = await Promise.all(
+        data.horaire.map((horaire) =>
+          axiosInstance.post(`/items/schedule`, {
+            ...horaire,
+            service_id: response.data.data,
+            organisme_id: null,
+          })
+        )
+      );
+      console.log(test);
     } catch (error) {
       console.log(error);
     }
+    setIsActive(false);
   };
 
   return (
