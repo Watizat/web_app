@@ -1,14 +1,14 @@
-import { ChangeEvent, useState, useEffect } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../../assets/logo.svg';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchZones } from '../../../store/reducers/admin';
-import logo from '../../../assets/logo.svg';
 import Container from '../../Container/Container';
 import NavBar from './NavBar/NavBar';
 import './Sidebar.scss';
 
 function Sidebar() {
-  const [select] = useState(localStorage.getItem('city') || '');
+  const [select, setSelect] = useState(localStorage.getItem('city') || '');
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     localStorage.setItem('city', event.target.value);
