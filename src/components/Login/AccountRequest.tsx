@@ -1,7 +1,19 @@
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchZones } from '../../store/reducers/admin';
+
 import './Login.scss';
 
 function AccountRequest() {
+  const dispatch = useAppDispatch();
+
+  const zones = useAppSelector((state) => state.admin.zones);
+
+  useEffect(() => {
+    dispatch(fetchZones());
+  }, [dispatch]);
+
   return (
     <div className="login accountRequest">
       <h1>Demande de création de compte</h1>
@@ -14,8 +26,12 @@ function AccountRequest() {
           <option value="" disabled>
             Groupe local
           </option>
-          <option value="toulouse">Toulouse</option>
-          <option value="paris">Paris</option>
+
+          {zones.map((zone) => (
+            <option key={zone.id} value={zone.name}>
+              {zone.name}
+            </option>
+          ))}
         </select>
         <p className="accountRequest-form__text">
           La création de compte est réservée aux membres actifs des groupes

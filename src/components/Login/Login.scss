@@ -63,7 +63,11 @@
   }
 
   &-newAccount {
+    margin-top: 3rem;
     text-align: center;
+    a {
+      font-size: 1rem;
+    }
   }
 }
 
