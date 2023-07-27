@@ -3,7 +3,13 @@
 @use '../../../../../../styles/elements';
 
 .orgaSheet {
-  &-contacts {
+
+  &-contact {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+
     &__list {
       display: flex;
       flex-direction: row;
@@ -11,6 +17,97 @@
       justify-content: space-between;
       padding: 0;
     }
+
+    &__header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      @include m.fullhd {
+        align-items: center;
+      }
+
+      button {
+        width: 10%;
+      }
+    }
+
+    &__subheader {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem 0;
+      justify-content: space-between;
+      width: 90%;
+
+      @include m.desktop {
+        flex-direction: row;
+      }
+
+      &___title {
+        vertical-align: bottom;
+        align-content: end;
+        align-items: end;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: v.$grey-900;
+        text-transform: uppercase;
+      }
+    }
+
+    &__details {
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+
+      &___infos {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-right: 5rem;
+        font-weight: 200;
+
+        &-job{
+          font-weight: 500;
+          color: v.$grey-800;
+        }
+
+        &-phone, &-mail{
+          font-weight: 400;
+          color: v.$grey-700;
+        }
+      }
+    }
+
+    .contacts-roles {
+      font-weight: 500;
+      display: flex;
+      gap: .5rem;
+
+      @include m.fullhd {
+        margin-left: 1rem;
+      }
+
+      &__role {
+        padding: 0.2rem 0.5rem;
+        margin-top: -.2rem;
+        border-radius: 20px;
+        color: v.$white;
+      }
+
+      &__public {
+        background-color: v.$info;
+      }
+
+      &__actualisation {
+        background-color: v.$sucess;
+      }
+
+      &__prive {
+        background-color: v.$danger;
+      }
+    }
+
     .orgaSheet-case {
       flex: 1 2 auto;
       min-height: 9vh;
@@ -30,6 +127,7 @@
       }
     }
   }
+
   &-services {
     .orgaSheet-case {
       border: 1px solid v.$grey-300;

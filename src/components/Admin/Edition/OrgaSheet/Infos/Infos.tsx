@@ -28,20 +28,20 @@ function Infos() {
 
       <ul className="orgaSheet-infos__list">
         <li className="orgaSheet-case">
-          <h4>Adresse</h4>
-          <p>{organism.address}</p>
+          <h4 className="orgaSheet-infos__list___title">Adresse</h4>
+          <p className="orgaSheet-infos__list___text">{organism.address}</p>
         </li>
         <li className="orgaSheet-case">
-          <h4>Ville</h4>
-          <p>{organism.city}</p>
+          <h4 className="orgaSheet-infos__list___title">Ville</h4>
+          <p className="orgaSheet-infos__list___text">{organism.city}</p>
         </li>
         <li className="orgaSheet-case">
-          <h4>Code postal</h4>
-          <p>{organism.zipcode}</p>
+          <h4 className="orgaSheet-infos__list___title">Code postal</h4>
+          <p className="orgaSheet-infos__list___text">{organism.zipcode}</p>
         </li>
         <li className="orgaSheet-case">
-          <h4>Site web</h4>
-          <p>{organism.website}</p>
+          <h4 className="orgaSheet-infos__list___title">Site web</h4>
+          <p className="orgaSheet-infos__list___text">{organism.website}</p>
         </li>
       </ul>
     </article>

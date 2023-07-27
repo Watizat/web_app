@@ -190,21 +190,22 @@ function ModalData({ organism, setIsActive }: ModalDataProps) {
               name="info_alerte"
             />
           </div>
-          <button
-            type="button"
-            className="btn btn-info-fill btn-flat modal-actions__close"
-            onClick={() => setIsActive(false)}
-          >
-            Annuler
-          </button>
-          <button
-            type="submit"
-            className="btn btn-sucess-fill btn-flat modal-actions__save"
-          >
-            {isLoading && <span>Sauvegarde en cours...</span>}
-            {!isLoading && <span>Sauvegarder</span>}
-          </button>
-          <div className="modal-actions" />
+          <div className="modal-actions">
+            <button
+              type="button"
+              className="btn btn-info-fill btn-flat modal-actions__close"
+              onClick={() => setIsActive(false)}
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              className="btn btn-sucess-fill btn-flat modal-actions__save"
+            >
+              {isLoading && <span>Sauvegarde en cours...</span>}
+              {!isLoading && <span>Sauvegarder</span>}
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 import './Modal.scss';
-import ModalDeleteConfirmation from './ModalDeleteContactConfirmation';
+import ModalDeleteConfirmation from './ModalDeleteConfirmation';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;

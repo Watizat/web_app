@@ -11,7 +11,9 @@ function ContactCard({ ...contact }: Contact) {
       {isActive && <Modal setIsActive={setIsActive} contact={contact} />}
       <div className="orgaSheet-contact__header">
         <div className="orgaSheet-contact__subheader">
-          <h5>Contact</h5>
+          <h5 className="orgaSheet-contact__subheader___title">
+            {contact.name}
+          </h5>
           <div className="contacts-roles">
             {contact.actualisation ? (
               <span className="contacts-roles__role contacts-roles__actualisation">
@@ -38,13 +40,18 @@ function ContactCard({ ...contact }: Contact) {
         </button>
       </div>
       <div className="orgaSheet-contact__details">
-        <div className="orgaSheet-contact__infos">
-          <p className="orgaSheet-contact__nom">{contact.name}</p>
-          <p className="orgaSheet-contact__fonction">{contact.job}</p>
+        <div className="orgaSheet-contact__details___infos">
+          <p className="orgaSheet-contact__details___infos-job">
+            {contact.job}
+          </p>
+          <p className="orgaSheet-contact__details___infos-phone">
+            {contact.phone}
+          </p>
         </div>
-        <div className="orgaSheet-contact__name">
-          <p className="orgaSheet-contact__mail">{contact.phone}</p>
-          <p className="orgaSheet-contact__tel">{contact.mail}</p>
+        <div className="orgaSheet-contact__details___infos">
+          <p className="orgaSheet-contact__details___infos-mail">
+            {contact.mail}
+          </p>
         </div>
       </div>
     </div>

@@ -50,6 +50,8 @@
     border-right: 1px solid v.$grey-300;
     font-weight: 300;
     font-size: 0.9rem;
+    font-weight: 500;
+    color: v.$grey-900;
 
     &__header {
       display: flex;
@@ -61,100 +63,10 @@
       color: v.$grey-500;
     }
 
-    p {
-      font-weight: 500;
-      color: v.$grey-900;
-    }
+
   }
 
-  &-contact {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    gap: .5rem;
 
-    &__header {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      @include m.fullhd {
-        align-items: center;
-      }
-      h5 {
-        font-size: 0.9rem;
-        color: v.$grey-700;
-        text-transform: uppercase;
-      }
-
-      button {
-        width: 10%;
-      }
-    }
-
-    &__subheader {
-      display: flex;
-      flex-direction: column;
-      width: 90%;
-
-      @include m.desktop {
-        flex-direction: row;
-      }
-    }
-
-    &__details {
-      display: flex;
-      flex-direction: column;
-
-      @include m.desktop {
-        flex-direction: row;
-      }
-    }
-
-    &__infos {
-      font-weight: 500;
-    }
-
-    &__infos, 
-    &__name {
-      width: 500%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    &__mail,
-    &__tel {
-      font-weight: 400;
-      color: v.$grey-600;
-    }
-
-    .contacts-roles {
-      font-weight: 500;
-      display: flex;
-      gap: .5rem;
-
-      @include m.fullhd {
-        margin-left: 1rem;
-      }
-  
-      &__role {
-        padding: 0.2rem 0.5rem;
-        border-radius: 20px;
-        color: v.$white;
-      }
-      &__public {
-        background-color: v.$info;
-      }
-      &__actualisation {
-        background-color: v.$sucess;
-      }
-      &__prive {
-        background-color: v.$danger;
-      }
-    }
-  }
   &-empty {
     display: flex;
     flex-direction: column;

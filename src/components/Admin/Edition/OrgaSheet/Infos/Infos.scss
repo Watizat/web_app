@@ -5,8 +5,8 @@
 
 
 .orgaSheet {
-  &-infos {
 
+  &-infos {
     width: 100%;
     background-color: v.$white;
     box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.1);
@@ -20,14 +20,11 @@
         font-weight: 500;
         font-size: 1.6rem;
       }
+
       button {
         font-size: 1.4rem;
         margin-right: 2rem;
       }
-    }
-
-    h4 {
-      text-transform: uppercase;
     }
 
     &__list {
@@ -36,6 +33,15 @@
       flex-wrap: wrap;
       justify-content: space-between;
       padding: 0;
+
+      &___title {
+        text-transform: uppercase;
+      }
+
+      &___text {
+        font-weight: 700;
+        color: v.$grey-700;
+      }
 
       .orgaSheet-case {
         width: 50%;
