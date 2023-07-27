@@ -133,39 +133,38 @@ function Settings({
             Filtrer par accessibilité
           </div>
           <div className="settingsContent-filter__list settingsContent-filter__listAccess">
-          <div className={`settingsContent-filter__list___div ${
-              isPmr
-              ? 'settingsContent-filter__list___div-active'
-              : ''
-            }`}>
-              <label
-                className="settingsContent-filter__list___div-label"
-              >
+            <div
+              className={`settingsContent-filter__list___div ${
+                isPmr ? 'settingsContent-filter__list___div-active' : ''
+              }`}
+            >
+              <label className="settingsContent-filter__list___div-label">
                 <input
                   type="checkbox"
                   name="pmr"
                   onChange={(event) => handlePmr(event)}
                 />
-                <i className="las la-wheelchair"></i>
+                <i className="las la-wheelchair" />
                 <span className="settingsContent-filter__list___div-text">
                   Accessible PSH / PMR
                 </span>
               </label>
             </div>
-              
-            <div className={`settingsContent-filter__list___div ${
-              isAnimalsAccepted
-              ? 'settingsContent-filter__list___div-active'
-              : ''
-            }`}>
-            <label
-              className="settingsContent-filter__list___div-label">
+
+            <div
+              className={`settingsContent-filter__list___div ${
+                isAnimalsAccepted
+                  ? 'settingsContent-filter__list___div-active'
+                  : ''
+              }`}
+            >
+              <label className="settingsContent-filter__list___div-label">
                 <input
                   type="checkbox"
                   name="animals"
                   onChange={(event) => handleAnimals(event)}
                 />
-                <i className="las la-dog"></i>
+                <i className="las la-dog" />
                 <span className="settingsContent-filter__list___div-text">
                   Animaux acceptés
                 </span>
@@ -182,20 +181,20 @@ function Settings({
             {categories.map((category) => {
               return (
                 <div
-                    key={category.tag}
-                    className={`settingsContent-filter__list___div settingsContent-filter__listCategory__div 
+                  key={category.tag}
+                  className={`settingsContent-filter__list___div settingsContent-filter__listCategory__div 
                     ${
-                    !activeCategories.includes(category.tag)
-                      ? 'settingsContent-filter__list___div-disabled'
-                      : ''
-                  } 
+                      !activeCategories.includes(category.tag)
+                        ? 'settingsContent-filter__list___div-disabled'
+                        : ''
+                    } 
                   ${
                     categoryFilter.includes(category.tag)
                       ? 'settingsContent-filter__list___div-active'
                       : ''
                   }`}
-                  >
-                    <label className="settingsContent-filter__list___div-label">
+                >
+                  <label className="settingsContent-filter__list___div-label">
                     {isTouch && (
                       <Icon
                         icon={category.tag}
@@ -221,8 +220,8 @@ function Settings({
                     <span className="settingsContent-filter__list___div-text">
                       {category.translations[0].name}
                     </span>
-                </label>
-                  </div>
+                  </label>
+                </div>
               );
             })}
           </div>
@@ -234,4 +233,4 @@ function Settings({
 
 export default Settings;
 
-'dbaeumer.vscode-eslint'
+('dbaeumer.vscode-eslint');
