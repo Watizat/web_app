@@ -233,7 +233,11 @@ const organismReducer = createReducer(initialState, (builder) => {
     .addCase(setFilteredOrganisms, (state, action) => {
       state.filteredOrganisms = action.payload;
     })
+    .addCase(fetchCategories.pending, (state) => {
+      state.isLoading = true;
+    })
     .addCase(fetchCategories.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.categories = action.payload.sort((a, b) =>
         a.tag.localeCompare(b.tag)
       );

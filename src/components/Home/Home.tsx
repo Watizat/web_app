@@ -7,10 +7,12 @@ import logo from '../../assets/logo.svg';
 import Icon from '../../ui/icon/icon';
 import Container from '../Container/Container';
 import './Home.scss';
+import HomeCategorySkeleton from '../Skeleton/HomeCategory/HomeCategory';
 
 function Home() {
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
   const categories = useAppSelector((state) => state.organism.categories);
+  const isLoading = useAppSelector((state) => state.organism.isLoading);
 
   const navigate = useNavigate();
 
@@ -62,59 +64,26 @@ function Home() {
             <article className="hero-choice--right">
               <h2>2. Selectionner une catégorie</h2>
               <div className="categories-choice">
-                {categories.map((categorie) => (
-                  <button
-                    type="button"
-                    key={categorie.translations[0].slug}
-                    onClick={handleClick(categorie.translations[0].slug)}
-                  >
-                    <Icon icon={categorie.tag} size="40px" />
-                    <span className="text-button">
-                      {categorie.translations[0].name}
-                    </span>
-                  </button>
-                ))}
-
-                {/* <button type="button" onClick={handleClick('manger')}>
-                  <i className="las la-podcast" />
-                  <span className="text-button">Manger</span>
-                </button>
-                <button type="button" onClick={handleClick('se laver')}>
-                  <i className="las la-eject" />
-                  <span>Se laver</span>
-                </button>
-                <button type="button">
-                  <i className="las la-circle" />
-                  <span>Bagagerie</span>
-                </button>
-                <button type="button">
-                  <i className="las la-music" />
-                  <span>Laverie</span>
-                </button>
-                <button type="button">
-                  <i className="las la-random" />
-                  <span>Manger</span>
-                </button>
-                <button type="button">
-                  <i className="las la-film" />
-                  <span>Manger</span>
-                </button>
-                <button type="button">
-                  <i className="las la-play" />
-                  <span>Femme</span>
-                </button>
-                <button type="button">
-                  <i className="las la-car" />
-                  <span>Enfants</span>
-                </button>
-                <button type="button">
-                  <i className="las la-bus" />
-                  <span>Manger</span>
-                </button>
-                <button type="button">
-                  <i className="las la-taxi" />
-                  <span>Manger</span>
-                </button> */}
+                {isLoading
+                  ? // Afficher le squelette ici pendant le chargement
+                    Array(16)
+                      .fill(null)
+                      .map((e, i) => (
+                        // eslint-disable-next-line react/no-array-index-key
+                        <HomeCategorySkeleton key={i} />
+                      ))
+                  : categories.map((categorie) => (
+                      <button
+                        type="button"
+                        key={categorie.translations[0].slug}
+                        onClick={handleClick(categorie.translations[0].slug)}
+                      >
+                        <Icon icon={categorie.tag} size="40px" />
+                        <span className="text-button">
+                          {categorie.translations[0].name}
+                        </span>
+                      </button>
+                    ))}
               </div>
             </article>
           </div>

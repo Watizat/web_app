@@ -144,6 +144,9 @@
           justify-content: center;
           margin: auto;
 
+         
+          
+
           button {
             display: flex;
             flex-direction: column;
@@ -256,5 +259,12 @@
         }
       }
     }
+  }
+  
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
   }
 }
