@@ -67,6 +67,7 @@ export interface ServiceTranslation {
 }
 
 export interface Categorie {
+  id: number;
   tag: string;
   translations: CategorieTranslation[];
 }

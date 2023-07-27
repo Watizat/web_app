@@ -186,7 +186,7 @@ export const fetchCategories = createAsyncThunk(
   'categories/fetch-categories',
   async () => {
     const { data } = await axiosInstance.get<{ data: Categorie[] }>(
-      '/items/categorie?fields=tag,translations.name,translations.slug'
+      '/items/categorie?fields=id,tag,translations.name,translations.slug'
     );
     return data.data;
   }

@@ -16,6 +16,10 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(setIsLogged({ isLogged: user?.isLogged || false }));
   }, [isLogged, dispatch, user?.isLogged]);
   if (!user) {
