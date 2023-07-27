@@ -160,9 +160,6 @@
             width: 100%;
             padding: .5rem;
 
-            &:hover {
-              background-color: rgba(v.$primary, .075);
-            }
 
             @include m.desktop {
               flex-direction: row;
@@ -234,8 +231,9 @@
           }
 
           &-active {
-            background-color: rgba(v.$primary, .075);
+            background-color: rgba(v.$primary, .15);
             color: rgba(v.$primary, 1);
+            border-color: rgba(v.$primary, .15);
 
             @include m.desktop {
               background-color: transparent;
