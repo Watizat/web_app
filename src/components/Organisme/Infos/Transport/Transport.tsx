@@ -10,6 +10,7 @@ interface API {
     code: string;
     name: string;
     color: string;
+    text_color: string;
   }[];
 }
 
@@ -47,7 +48,16 @@ function Transport() {
       <h3>Accès en transports</h3>
       {data.lines.map((line) => (
         <p key={line.id}>
-          <span style={{ backgroundColor: `#${line.color}` }}>{line.code}</span>
+          <i className="las la-bus-alt" />
+          <span
+            style={{
+              backgroundColor: `#${line.color}`,
+              color: `#${line.text_color}`,
+            }}
+          >
+            {line.code}
+          </span>
+
           {line.name}
         </p>
       ))}
