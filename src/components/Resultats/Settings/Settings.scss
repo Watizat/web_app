@@ -83,8 +83,8 @@
       overflow-y: auto;
 
       @include m.desktop {
-        
-      padding: 1rem 0 0;
+
+        padding: 1rem 0 0;
       }
     }
 
@@ -107,16 +107,6 @@
           gap: .75rem;
           grid-template-columns: 1fr 1fr;
           max-height: 22rem;
-        }    
-        
-        [type='checkbox'] {
-          width: 1.2rem;
-          height: 1.2rem;
-          display: hidden;
-
-          @include m.desktop {
-            display: flex;
-          }
         }
 
         &__div {
@@ -128,11 +118,10 @@
           font-size: 1rem;
           border: 1px solid rgba(v.$grey-400, .2);
           border-collapse: collapse;
-          padding: .5rem;
           height: 5rem;
 
           @include m.desktop {
-            flex-direction: row-reverse;
+            flex-direction: row;
             justify-content: flex-end;
             align-items: center;
             align-content: center;
@@ -141,9 +130,63 @@
             border: none;
             height: auto;
           }
+
+          &-disabled {
+            background-color: rgba(v.$grey-100, 1);
+            border-color: rgba(v.$grey-300, .5);
+            cursor: not-allowed;
+
+
+            @include m.desktop {
+              background-color: transparent;
+            }
+          }
+
+          &-active {
+            background-color: rgba(v.$primary, .075);
+            color: rgba(v.$primary, 1);
+            border-color: rgba(v.$primary, .3);
+
+            @include m.desktop {
+              background-color: transparent;
+              color: inherit;
+              border-color: transparent;
+            }
+          }
+
+          [type='checkbox'] {
+            width: 1.2rem;
+            height: 1.2rem;
+            display: none;
+
+            @include m.desktop {
+              display: flex;
+            }
+
+            &:disabled {
+              background-color: rgba(v.$grey-100, 1);
+
+              @include m.desktop {
+                background-color: rgba(v.$grey-300, 1);
+              }
+            }
+
+            &:disabled:checked {
+              background-color: v.$sucess;
+            }
+
+
+          }
         }
 
         &__label {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          width: 100%;
+          padding: .5rem;
           @include m.desktop {
             display: flex;
             align-items: center;

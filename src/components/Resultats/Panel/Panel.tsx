@@ -54,7 +54,9 @@ function Panel() {
   return (
     <section id="resultsPanel">
       <Settings
+        isPmr={isPmr}
         setIsPmr={setIsPmr}
+        isAnimalsAccepted={isAnimalsAccepted}
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
       />

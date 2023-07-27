@@ -11,13 +11,17 @@ import Icon from '../../../ui/icon/icon';
 import './Settings.scss';
 
 interface SettingsProps {
+  isPmr: boolean;
   setIsPmr: React.Dispatch<React.SetStateAction<boolean>>;
   setIsAnimalsAccepted: React.Dispatch<React.SetStateAction<boolean>>;
+  isAnimalsAccepted: boolean;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function Settings({
+  isPmr,
   setIsPmr,
+  isAnimalsAccepted,
   setIsAnimalsAccepted,
   setSearch,
 }: SettingsProps) {
@@ -37,6 +41,7 @@ function Settings({
 
   const isTouch = useMediaQuery({ query: '(max-width: 1023px)' });
   const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' });
+  // const [checkboxChecked, setCheckboxChecked] = useState(false);
 
   const handleCategoryChange = (tag: string) => {
     if (categoryFilter.includes(tag)) {
@@ -110,8 +115,11 @@ function Settings({
           className="settingsTopBar-dropdownBtn"
           onClick={handleOpenSettings}
         >
-          {!isOpen ? <span className="settingsTopBar-dropdownBtn__filter">Filtrer</span> : <span className="settingsTopBar-dropdownBtn__valid">Valider</span>}
-
+          {!isOpen ? (
+            <span className="settingsTopBar-dropdownBtn__filter">Filtrer</span>
+          ) : (
+            <span className="settingsTopBar-dropdownBtn__valid">Valider</span>
+          )}
         </button>
       </div>
 
@@ -127,27 +135,34 @@ function Settings({
           <div className="settingsContent-filter__list settingsContent-filter__listAccess">
             <div className="settingsContent-filter__list__div">
               <label
-                htmlFor="pmr"
                 className="settingsContent-filter__list__label"
               >
                 <input
                   type="checkbox"
                   name="pmr"
-                  id="pmr"
                   onChange={(event) => handlePmr(event)}
                 />
-                <span className="settingsContent-filter__list__text">Accessible PSH / PMR</span>
+                <span className="settingsContent-filter__list__text">
+                  Accessible PSH / PMR
+                </span>
               </label>
             </div>
-            <div className="settingsContent-filter__list__div">
-              <label htmlFor="animals"
-                className="settingsContent-filter__list__label">
+              
+            <div className={`settingsContent-filter__list__div ${
+              isAnimalsAccepted
+              ? 'settingsContent-filter__list__div-active'
+              : ''
+            }`}>
+            <label
+              className="settingsContent-filter__list__label">
                 <input
                   type="checkbox"
                   name="animals"
-                  id="animals"
                   onChange={(event) => handleAnimals(event)}
-                /><span className="settingsContent-filter__list__text">Animaux acceptés</span>
+                />
+                <span className="settingsContent-filter__list__text">
+                  Animaux acceptés
+                </span>
               </label>
             </div>
           </div>
@@ -160,14 +175,28 @@ function Settings({
           <div className="settingsContent-filter__list settingsContent-filter__listCategory">
             {categories.map((category) => {
               return (
-                <div key={category.tag} className="settingsContent-filter__list__div settingsContent-filter__listCategory__div">
+                <div
+                    key={category.tag}
+                    className={`settingsContent-filter__list__div settingsContent-filter__listCategory__div 
+                    ${
+                    !activeCategories.includes(category.tag)
+                      ? 'settingsContent-filter__list__div-disabled'
+                      : ''
+                  } 
+                  ${
+                    categoryFilter.includes(category.tag)
+                      ? 'settingsContent-filter__list__div-active'
+                      : ''
+                  }`}
+                  >
+                    <label className="settingsContent-filter__list__label">
+                    {isTouch && (
+                      <Icon
+                        icon={category.tag}
+                        className="settingsContent-filter__list__icon"
+                      />
+                    )}
 
-                  {(isTouch) && <Icon
-                    icon={category.tag}
-                    className="settingsContent-filter__list__icon"
-                  />}
-
-                  <label className="settingsContent-filter__list__label">
                     <input
                       type="checkbox"
                       defaultChecked={categoryParams === category.tag}
@@ -177,13 +206,17 @@ function Settings({
                       className="settingsContent-catFilter__listCategory__input"
                     />
 
-                    {(isDesktop) && <Icon
-                      icon={category.tag}
-                      className="settingsContent-filter__list__icon"
-                    />}<span className="settingsContent-filter__list__text">{category.translations[0].name}</span>
-
-                  </label>
-                </div>
+                    {isDesktop && (
+                      <Icon
+                        icon={category.tag}
+                        className="settingsContent-filter__list__icon"
+                      />
+                    )}
+                    <span className="settingsContent-filter__list__text">
+                      {category.translations[0].name}
+                    </span>
+                </label>
+                  </div>
               );
             })}
           </div>
@@ -194,3 +227,5 @@ function Settings({
 }
 
 export default Settings;
+
+'dbaeumer.vscode-eslint'
