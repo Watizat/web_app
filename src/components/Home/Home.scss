@@ -156,20 +156,23 @@
         }
 
 
-        &-button {
-          display: flex;
-          flex-direction: column;
-          flex-wrap: nowrap;
-          justify-content: center;
-          align-items: center;
-          align-content: center;
-          border: 2px solid rgba(v.$primary, 0.1);
-          border-radius: 25px;
-          background-color: v.$white;
-          color: rgba(v.$grey-800, 0.8);
-          aspect-ratio: 1 / 1;
-          gap: 0.5rem;
-          width: 25%;
+         
+          
+
+          button {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            aspect-ratio: 1 ;
+            border: 1px solid grey;
+            border-radius: 25px;
+            background-color: v.$white;
+            color: v.$primary;
+            width: 10%;
+            gap: 0.5rem;
 
           &__text {
             font-size: 0.8rem;
@@ -254,5 +257,12 @@
         }
       }
     }
+  }
+  
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
   }
 }
