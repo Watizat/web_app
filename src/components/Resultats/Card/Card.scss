@@ -80,9 +80,15 @@
 
     &-lower {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
       align-items: center;
       font-weight: bold;
+      gap: 1rem 0;
+
+      @include m.tablet {
+        flex-direction: row;
+      }
 
       &__moreInfos {
         font-size: 1rem;

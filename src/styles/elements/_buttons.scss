@@ -52,7 +52,7 @@ button {
   &:hover {
     background-color: v.$white;
     color: $color;
-    box-shadow: 4px 4px 6px 2px rgba($color, 0.5);
+    // box-shadow: 4px 4px 6px 2px rgba($color, 0.5);
   }
 }
 .btn-primary {
@@ -87,7 +87,7 @@ button {
   &:hover {
     background-color: $color;
     color: v.$white;
-    box-shadow: 4px 4px 6px 2px rgba($color, 0.5);
+    // box-shadow: 4px 4px 6px 2px rgba($color, 0.5);
   }
 }
 .btn-primary-fill {

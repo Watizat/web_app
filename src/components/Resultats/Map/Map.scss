@@ -1,7 +1,5 @@
 @use '../../../styles/variables' as v;
 
-
-
 .leaflet-container {
   width: 100%;
   z-index: 0;
@@ -14,31 +12,44 @@
 .leaflet-popup-content {
   text-align: center;
   display: flex;
-flex-direction: column;
+  flex-direction: column;
+  font-weight: 800;
 
-.popup-button {
-  min-width: 50%;
-  margin: auto;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  border: 1px solid v.$info;
-  background-color: v.$info;
-
-  border-radius: 20px;
-  color: v.$white;
-  padding: 0 1rem;
-
-  p {
-    color: v.$white;
-    margin: 0;  
-    padding: .5rem 0rem;
+  .popup-text {
+    color: v.$info;
   }
-}
 
+  .popup-button {
+    min-width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    background-color: rgba(v.$primary, .75);
+    color: v.$white;
+    border: 1px solid v.$primary;
+    border-radius: 20px;
+
+    &:hover {
+      background-color: v.$white;
+      color: v.$primary;
+      border: 1.5px solid v.$primary;
+
+      .popup-button__text {
+        color: v.$primary;
+      }
+    }
+
+    &__text {
+      color: v.$white;
+      margin: 0;
+      padding: 0.4rem 0rem;
+    }
+  }
 }
 
 .leaflet-top .leaflet-control,
