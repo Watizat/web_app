@@ -146,6 +146,7 @@ function Settings({
                   name="pmr"
                   onChange={(event) => handlePmr(event)}
                 />
+                <i className="las la-wheelchair"></i>
                 <span className="settingsContent-filter__list___div-text">
                   Accessible PSH / PMR
                 </span>
@@ -164,6 +165,7 @@ function Settings({
                   name="animals"
                   onChange={(event) => handleAnimals(event)}
                 />
+                <i className="las la-dog"></i>
                 <span className="settingsContent-filter__list___div-text">
                   Animaux acceptés
                 </span>

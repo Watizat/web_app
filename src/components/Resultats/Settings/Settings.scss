@@ -103,7 +103,7 @@
         max-height: auto;
         text-align: center;
         border: 1px solid v.$grey-300;
-        border-radius: 20px;
+        border-radius: 10px;
 
         @include m.desktop {
           gap: .75rem;
@@ -119,29 +119,24 @@
           border-collapse: collapse;
           height: 5rem;
 
-          &:first-child {
-            border-top-left-radius: 20px;
+          &:first-child {                          // Premier élement du tableau (en haut à gauche)
+            border-top-left-radius: 10px;
           }
 
-          &:nth-child(+2) {
-            border-top-right-radius: 20px;
+          &:nth-child(+2) {                        // DEuxième élement du tableau (en haut à droite)
+            border-top-right-radius: 10px;
           }
 
-          &:nth-child(2n+1):nth-last-child(-n+2)  {
-            border-bottom-left-radius: 20px;
+          &:nth-child(2n+1):nth-last-child(-n+2)  { // Avant dernier élement du tableau si tableau paire (en bas à gauche)
+            border-bottom-left-radius: 10px;
           }
 
-          &:nth-child(odd):last-child {
-            border-bottom-left-radius: 20px;
+          &:nth-child(odd):last-child {             // Dernier élement du tableau si position imapire (en bah à droite)
+            border-bottom-left-radius: 10px;
           }
 
-          &:nth-child(even):last-child {
-            border-bottom-right-radius: 20px;
-          }
-
-
-          &:hover {
-            background-color: rgba(v.$primary, .075);
+          &:nth-child(even):last-child {            // Dernier élement du tableau si position paire (en bah à gauche)
+            border-bottom-right-radius: 10px;
           }
 
           @include m.desktop {
@@ -153,10 +148,6 @@
             background-color: transparent;
             border: none;
             height: auto;
-
-            &:hover {
-              background-color: transparent;
-            }
           }
 
           &-label {
@@ -168,6 +159,10 @@
             width: 100%;
             padding: .5rem;
 
+            &:hover {
+              background-color: rgba(v.$primary, .075);
+            }
+
             @include m.desktop {
               flex-direction: row;
               justify-content: flex-start;
@@ -177,6 +172,10 @@
               background-color: transparent;
               border: none;
               height: auto;
+
+              &:hover {
+                background-color: transparent;
+              }
             }
 
             [type='checkbox'] {
@@ -202,6 +201,14 @@
 
             }
           }
+          .las {
+            font-size: 2rem;
+
+            @include m.desktop {
+              font-size: 1.5rem;
+              margin-right: 1rem;
+            }
+          }
 
           &-icon {
             height: 2em;
@@ -216,9 +223,10 @@
 
           &-text {
             font-size: .8rem;
-            font-weight: 500;
+            font-weight: 700;
 
             @include m.desktop {
+              font-weight: 500;
               font-size: 1rem;
               text-align: left;
             }
@@ -247,9 +255,14 @@
               cursor: not-allowed;
 
               &:hover {
-
                 background-color: rgba(v.$grey-100, 1);
+
+                @include m.desktop {
+                  background-color: transparent;
+                }
               }
+
+
             }
           }
         }
