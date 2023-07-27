@@ -20,6 +20,23 @@
   &-details {
     width: 50%;
 
+    & h2{
+      margin-bottom: 0.8em;
+    }
+
+    &-categories{
+      margin-top: 1em;
+
+      &-item{
+        margin-right: 0.8em;
+        width: 45px!important;
+        height: 40px!important;
+      }
+    }
+
+    
+   
+
     @include m.mobile{
       width: 100%;
     }
@@ -32,6 +49,34 @@
     & p{
       font-size: 0.9em;
       text-align: justify;
+    }
+  }
+
+  .custom-icon {
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    border: 5px solid v.$primary;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform-style: preserve-3d;
+  
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -14px; /* Ajustez la valeur ici pour contrôler la position de la pointe vers le bas */
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 18px 14px 0;
+      border-color: v.$primary transparent transparent transparent;
+      transform: translateX(-50%) translateZ(-1px);
     }
   }
   

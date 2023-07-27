@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Organism } from '../../../../@types/organism';
 import { useAppSelector } from '../../../../hooks/redux';
 import './Contact.scss';
 
@@ -9,6 +8,7 @@ function Contact() {
   if (organism === null) {
     return <span>Erreur</span>;
   }
+  console.log(organism);
   return (
     <article>
       <h3>Contact</h3>

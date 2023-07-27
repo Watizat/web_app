@@ -1,104 +1,107 @@
 import { useState } from 'react';
 import classNames from 'classnames';
+import { useAppSelector } from '../../../../hooks/redux';
+import Schedules from '../../Infos/Schedule/Schedule';
+import Icon from '../../../../ui/icon/icon';
 import './Card.scss';
+import { Organism } from '../../../../@types/organism';
 
 function Card() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const organism = useAppSelector(
+    (state) => state.organism.organism as Organism
+  );
+  // Utiliser un tableau d'états pour gérer l'ouverture/fermeture de chaque carte individuellement
+  const [isOpenArray, setIsOpenArray] = useState<boolean[]>(
+    Array(organism.services.length).fill(false)
+    // organism.services.map(() => false)
+  );
 
-  function handleOpenSettings() {
-    setIsOpen(!isOpen);
+  // si l'organism n'existe pas
+  if (organism === null) {
+    return <span>Erreur</span>;
   }
+
+  function handleOpenSettings(index: number) {
+    // Mettre à jour l'état de la carte à l'index spécifié
+    const newIsOpenArray = [...isOpenArray];
+    newIsOpenArray[index] = !newIsOpenArray[index];
+    setIsOpenArray(newIsOpenArray);
+  }
+
   return (
     <div className="organisme-services-contentcards">
-      <div className="organisme-services-contentcards--cards">
-        <article>
-          <button
-            className={classNames(
-              'organisme-services-contentcards--cards-header',
-              {
-                'organisme-services-contentcards--cards-header--open': isOpen,
-              }
-            )}
-            type="button"
-            onClick={handleOpenSettings}
-          >
-            <h4>
-              <i className="las la-utensils" /> Repas{' '}
-              <i
-                className={
-                  isOpen ? 'las la-minus-circle' : 'las la-plus-circle'
+      {organism.services.map((service, index) => (
+        // eslint-disable-next-line react/jsx-key
+        <div
+          className="organisme-services-contentcards--cards"
+          key={service.id}
+        >
+          <article>
+            <button
+              className={classNames(
+                'organisme-services-contentcards--cards-header',
+                {
+                  'organisme-services-contentcards--cards-header--open':
+                    isOpenArray[index],
                 }
-              />
-            </h4>
-          </button>
+              )}
+              type="button"
+              onClick={() => handleOpenSettings(index)}
+            >
+              <h4>
+                <Icon
+                  className="organisme-services-contentcards--cards-header-icon"
+                  icon={service.categorie_id.tag}
+                  size="30px"
+                />
+                {service.categorie_id.translations[0].name}
 
-          <div
-            className={classNames(
-              'organisme-services-contentcards--cards-content',
-              { 'is-visible': isOpen }
-            )}
-          >
-            <table>
-              <tr>
-                <td className="organisme-services-contentcards--cards-content-scheduleday">
-                  Lundi
-                </td>
-                <td>
-                  <span>9h-12h</span>/<span>14h-16h</span>
-                </td>
-              </tr>
-              <tr>
-                <td className="organisme-services-contentcards--cards-content-scheduleday">
-                  Mardi
-                </td>
-                <td>
-                  <span>9h-12h</span>/<span>14h-16h</span>
-                </td>
-              </tr>
-              <tr>
-                <td className="organisme-services-contentcards--cards-content-scheduleday">
-                  Mercredi
-                </td>
-                <td>
-                  <span>9h-12h</span>/<span>14h-16h</span>
-                </td>
-              </tr>
-              <tr>
-                <td className="organisme-services-contentcards--cards-content-scheduleday">
-                  Jeudi
-                </td>
-                <td>
-                  <span>9h-12h</span>/<span>14h-16h</span>
-                </td>
-              </tr>
-              <tr>
-                <td className="organisme-services-contentcards--cards-content-scheduleday">
-                  Vendredi
-                </td>
-                <td>
-                  <span>9h-12h</span>/<span>14h-16h</span>
-                </td>
-              </tr>
-              <tr>
-                <td className="organisme-services-contentcards--cards-content-scheduleday">
-                  Samedi
-                </td>
-                <td>
-                  <span>Fermé</span>
-                </td>
-              </tr>
-              <tr>
-                <td className="organisme-services-contentcards--cards-content-scheduleday">
-                  Dimanche
-                </td>
-                <td>
-                  <span>Fermé</span>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </article>
-      </div>
+                <i
+                  className={
+                    isOpenArray[index]
+                      ? 'las la-minus-circle'
+                      : 'las la-plus-circle'
+                  }
+                />
+              </h4>
+            </button>
+
+            <div
+              className={classNames(
+                'organisme-services-contentcards--cards-content',
+                { 'is-visible': isOpenArray[index] }
+              )}
+            >
+              <h5>{service.translations[0].name}</h5>
+              <p className="organisme-services-contentcards--cards-content-txt">
+                {service.translations[0].description}
+              </p>
+              {service.contacts.map((contact) => (
+                <>
+                  <p className="organisme-services-contentcards--cards-content-job">
+                    {contact.job}
+                  </p>
+                  <p className="organisme-services-contentcards--cards-content-txt">
+                    {contact.name}
+                  </p>
+                  <p className="organisme-services-contentcards--cards-content-txt">
+                    {contact.phone}
+                  </p>
+                  <p className="organisme-services-contentcards--cards-content-txt">
+                    {contact.mail.toLowerCase()}
+                  </p>
+                </>
+              ))}
+              {service.schedules.length > 0 && (
+                <>
+                  <h5>Horaires</h5>
+                  <Schedules schedule={service.schedules} />
+                </>
+              )}
+            </div>
+          </article>
+        </div>
+      ))}
     </div>
   );
 }

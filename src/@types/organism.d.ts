@@ -47,9 +47,11 @@ export interface Schedule {
   opentime_pm: string | undefined;
   closetime_pm: string | undefined;
   closed: boolean;
+  schedules.day_translation:Day[];
 }
 
 export interface Service {
+  contacts: Contact[];
   id: number;
   status: string;
   translations: ServiceTranslation[];
