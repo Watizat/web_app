@@ -133,34 +133,38 @@ function Settings({
             Filtrer par accessibilité
           </div>
           <div className="settingsContent-filter__list settingsContent-filter__listAccess">
-            <div className="settingsContent-filter__list__div">
+          <div className={`settingsContent-filter__list___div ${
+              isPmr
+              ? 'settingsContent-filter__list___div-active'
+              : ''
+            }`}>
               <label
-                className="settingsContent-filter__list__label"
+                className="settingsContent-filter__list___div-label"
               >
                 <input
                   type="checkbox"
                   name="pmr"
                   onChange={(event) => handlePmr(event)}
                 />
-                <span className="settingsContent-filter__list__text">
+                <span className="settingsContent-filter__list___div-text">
                   Accessible PSH / PMR
                 </span>
               </label>
             </div>
               
-            <div className={`settingsContent-filter__list__div ${
+            <div className={`settingsContent-filter__list___div ${
               isAnimalsAccepted
-              ? 'settingsContent-filter__list__div-active'
+              ? 'settingsContent-filter__list___div-active'
               : ''
             }`}>
             <label
-              className="settingsContent-filter__list__label">
+              className="settingsContent-filter__list___div-label">
                 <input
                   type="checkbox"
                   name="animals"
                   onChange={(event) => handleAnimals(event)}
                 />
-                <span className="settingsContent-filter__list__text">
+                <span className="settingsContent-filter__list___div-text">
                   Animaux acceptés
                 </span>
               </label>
@@ -177,23 +181,23 @@ function Settings({
               return (
                 <div
                     key={category.tag}
-                    className={`settingsContent-filter__list__div settingsContent-filter__listCategory__div 
+                    className={`settingsContent-filter__list___div settingsContent-filter__listCategory__div 
                     ${
                     !activeCategories.includes(category.tag)
-                      ? 'settingsContent-filter__list__div-disabled'
+                      ? 'settingsContent-filter__list___div-disabled'
                       : ''
                   } 
                   ${
                     categoryFilter.includes(category.tag)
-                      ? 'settingsContent-filter__list__div-active'
+                      ? 'settingsContent-filter__list___div-active'
                       : ''
                   }`}
                   >
-                    <label className="settingsContent-filter__list__label">
+                    <label className="settingsContent-filter__list___div-label">
                     {isTouch && (
                       <Icon
                         icon={category.tag}
-                        className="settingsContent-filter__list__icon"
+                        className="settingsContent-filter__list___div-icon"
                       />
                     )}
 
@@ -203,16 +207,16 @@ function Settings({
                       name={category.translations[0].slug}
                       onChange={() => handleCategoryChange(category.tag)}
                       disabled={!activeCategories.includes(category.tag)}
-                      className="settingsContent-catFilter__listCategory__input"
+                      className="settingsContent-catFilter__listCategoryt___div-input"
                     />
 
                     {isDesktop && (
                       <Icon
                         icon={category.tag}
-                        className="settingsContent-filter__list__icon"
+                        className="settingsContent-filter__list___div-icon"
                       />
                     )}
-                    <span className="settingsContent-filter__list__text">
+                    <span className="settingsContent-filter__list___div-text">
                       {category.translations[0].name}
                     </span>
                 </label>
