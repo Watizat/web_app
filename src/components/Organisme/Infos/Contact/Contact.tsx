@@ -24,19 +24,21 @@ function Contact() {
           <p>mail@mail.com</p>
         </Link>
       </div>
-      <div className="organisme-infos--othercontact">
-        <p className="organisme-infos--othercontact-job">
-          {organism.contacts[0].job}
-        </p>
-        <p>{organism.contacts[0].name}</p>
-        <p>{organism.contacts[0].comment}</p>
-        <Link to="tel:+3300" className="organisme-infos--link">
-          <p>{organism.contacts[0].phone}</p>
-        </Link>
-        <Link to="tel:+3300" className="organisme-infos--link">
-          <p>{organism.contacts[0].mail}</p>
-        </Link>
-      </div>
+      {organism.contacts.length > 0 && (
+        <div className="organisme-infos--othercontact">
+          <p className="organisme-infos--othercontact-job">
+            {organism.contacts[0].job}
+          </p>
+          <p>{organism.contacts[0].name}</p>
+          <p>{organism.contacts[0].comment}</p>
+          <Link to="tel:+3300" className="organisme-infos--link">
+            <p>{organism.contacts[0].phone}</p>
+          </Link>
+          <Link to="tel:+3300" className="organisme-infos--link">
+            <p>{organism.contacts[0].mail}</p>
+          </Link>
+        </div>
+      )}
     </article>
   );
 }

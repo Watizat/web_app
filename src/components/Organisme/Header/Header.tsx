@@ -1,10 +1,10 @@
 import L from 'leaflet';
 import { useState } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { Organism } from '../../../@types/organism';
 import { useAppSelector } from '../../../hooks/redux';
 import Icon from '../../../ui/icon/icon';
 import './Header.scss';
-import { Organism } from '../../../@types/organism';
 
 function Header() {
   const [position, setPosition] = useState({ lat: 43.6, lng: 1.433333 });
@@ -37,26 +37,32 @@ function Header() {
           ))}
         </div>
       </div>
-      <MapContainer center={[organism.latitude, organism.longitude]} zoom={15}>
+      <MapContainer
+        center={
+          organism.latitude ? [organism.latitude, organism.longitude] : position
+        }
+        zoom={15}
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {/* <Recenter lat={position.lat} lng={position.lng} /> */}
-
-        <Marker
-          key={organism.id}
-          position={[organism.latitude, organism.longitude]}
-          icon={
-            new L.DivIcon({
-              className: 'custom-icon',
-              html: `<div></div>`,
-              iconSize: [30, 30],
-              iconAnchor: [15, 33.5],
-              popupAnchor: [0, -30],
-            })
-          }
-        />
+        {organism.latitude && (
+          <Marker
+            key={organism.id}
+            position={[organism.latitude, organism.longitude]}
+            icon={
+              new L.DivIcon({
+                className: 'custom-icon',
+                html: `<div></div>`,
+                iconSize: [30, 30],
+                iconAnchor: [15, 33.5],
+                popupAnchor: [0, -30],
+              })
+            }
+          />
+        )}
       </MapContainer>
     </div>
   );
