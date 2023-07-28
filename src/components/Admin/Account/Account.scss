@@ -1,0 +1,101 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
+
+.account {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 75vw;
+
+  &-main {
+    background-color: v.$white;
+    border-radius: 20px;
+    padding: 3rem 5rem;
+    width: 50%;
+  }
+
+  &-title {
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+    color: v.$primary;
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  &-double {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-case {
+    width: 45%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &__title {
+      color: v.$sucess;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid v.$grey-500;
+    }
+
+    &__inputTxt,
+    textarea {
+      padding: .2rem;
+
+      &:focus {
+        outline: none;
+        background-color: rgba(v.$sucess, .05);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+
+      &[type=number] {
+        appearance: textfield;
+        /* Firefox */
+        -moz-appearance: textfield;
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    &__textarea {
+      resize: vertical;
+      min-height: 5vh;
+    }
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: end;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+}

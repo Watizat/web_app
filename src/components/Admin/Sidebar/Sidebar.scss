@@ -10,7 +10,7 @@
   align-content: center;
 
   position: sticky;
-  top:0;
+  top: 0;
   width: 25vw;
   height: 100vh;
   background-color: v.$primary;
@@ -41,6 +41,7 @@
     align-items: center;
     margin: auto;
     padding: auto;
+
     &--img {
       img {
         max-height: 5vh;
@@ -50,22 +51,45 @@
     }
   }
 
-  &-area {
+  &-myInfos {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 1.5rem auto;
+    gap: .75rem;
+    margin: 1rem auto;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(v.$white, .25);
 
-    select {
-      padding: .25rem 1rem;
-      font-weight: 500;
-      background-color: v.$primary;
-      border: 1px solid v.$primary-var2;
-      border-radius: 20px;
-      padding: .5rem 1rem;
+    &__title {
       color: v.$white;
-      width: 70%;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    &__zone {
+      display: flex;
+      justify-content: center;
+
+      &-select {
+        padding: .25rem 1rem;
+        font-weight: 500;
+        background-color: v.$primary;
+        border: 1px solid v.$primary-var1;
+        border-radius: 20px;
+        padding: .35rem 1rem;
+        color: v.$white;
+        width: 70%;
+        font-size: .9rem;
+      }
+    }
+
+    &__link {
+      color: v.$white;
+      font-size: .9rem;
+      font-weight: 600;
     }
   }
 }

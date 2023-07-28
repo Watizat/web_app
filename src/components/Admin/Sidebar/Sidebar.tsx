@@ -30,17 +30,27 @@ function Sidebar() {
             <img src={logo} alt="watizat logo" />
           </Link>
         </div>
-        <div className="adminsidebar-area">
-          <select value={select} onChange={handleChange}>
-            <option value="" disabled>
-              Selectionner une ville
-            </option>
-            {zones.map((zone) => (
-              <option key={zone.id} value={zone.name}>
-                {zone.name}
+        <div className="adminsidebar-myInfos">
+          <h4 className="adminsidebar-myInfos__title">Mes informations</h4>
+          <label className="adminsidebar-myInfos__zone">
+            <select
+              value={select}
+              onChange={handleChange}
+              className="adminsidebar-myInfos__zone-select"
+            >
+              <option value="" disabled>
+                Selectionner une ville
               </option>
-            ))}
-          </select>
+              {zones.map((zone) => (
+                <option key={zone.id} value={zone.name}>
+                  {zone.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <Link className="adminsidebar-myInfos__link" to="/admin/account">
+            <p>Accéder à mon compte</p>
+          </Link>
         </div>
         <NavBar />
       </Container>
