@@ -6,13 +6,14 @@
   display: none;
 
   @include m.tablet {
-    flex: 2 1 auto;
     display: flex;
     min-height: 100vh;
+    height: 100%;
     font-family: 'Roboto', sans-serif;
 
     #bo-main {
       width: 100%;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       flex-wrap: nowrap;
@@ -21,16 +22,14 @@
 }
 
 #mobileOut {
-  min-height: 100vh;
+  min-height: 100%;
   padding: 0 10vw;
   display: flex;
-  flex-direction: column;    
-  background-image: linear-gradient(
-    rgba(v.$bghome, 0.8),
-    rgba(v.$bghome, 0.5)
-  ),
-  url('../../../../public/img/404mobile.jpg');
-  background-size: cover;  color: v.$white;
+  flex-direction: column;
+  background-image: linear-gradient(rgba(v.$bghome, 0.8), rgba(v.$bghome, 0.5)),
+    url('/img/404mobile.jpg');
+  background-size: cover;
+  color: v.$white;
   text-align: center;
   font-size: 1.35rem;
 

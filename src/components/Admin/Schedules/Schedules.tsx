@@ -16,6 +16,11 @@ function Schedules({ schedule }: SchedulesProps) {
     7: 'Dimanche',
   };
 
+  // Le tableau a maintenant été trié par la propriété 'day' du plus petit au plus grand
+  function comparerParDay(a: { day: number }, b: { day: number }) {
+    return a.day - b.day;
+  }
+
   function getOpeningHours(day: Schedule) {
     const openAm = day.opentime_am?.slice(0, -3).replace(':', 'h');
     const closeAm = day.closetime_am?.slice(0, -3).replace(':', 'h');
@@ -51,14 +56,17 @@ function Schedules({ schedule }: SchedulesProps) {
   return (
     <table className="schedules">
       <tbody>
-        {schedule.map((currentDay) => (
-          <tr key={currentDay.day}>
-            <td>
-              <div>{daysOfWeek[currentDay.day]}</div>
-            </td>
-            <td>{getOpeningHours(currentDay)}</td>
-          </tr>
-        ))}
+        {schedule
+          .slice()
+          .sort(comparerParDay)
+          .map((currentDay) => (
+            <tr key={currentDay.day}>
+              <td>
+                <div>{daysOfWeek[currentDay.day]}</div>
+              </td>
+              <td>{getOpeningHours(currentDay)}</td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );

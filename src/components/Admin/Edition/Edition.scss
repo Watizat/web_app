@@ -3,8 +3,8 @@
 @use '../../../styles/elements';
 
 #edition {
-    display: flex;
-    height: 94vh;
-    background-color: v.$bgadmin;
-    font-family: 'Roboto', sans-serif;
+  display: flex;
+  height: 100%;
+  background-color: v.$bgadmin;
+  font-family: 'Roboto', sans-serif;
 }
