@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { User } from '../../../../@types/organism';
-import ModalUsers from '../../Modal/ModalUsers';
+import ModalUsers from '../../Modal/ModalAddUsers';
 import './UsersDetails.scss';
 
 function UsersDetails({ ...user }: User) {
