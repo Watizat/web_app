@@ -69,11 +69,11 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
           })
         )
       );
+      dispatch(setAdminOrganism(organismId));
+      setIsActive(false);
     } catch (error) {
       console.log(error);
     }
-    dispatch(setAdminOrganism(organismId));
-    setIsActive(false);
   };
 
   return (

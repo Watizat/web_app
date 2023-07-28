@@ -48,7 +48,7 @@ function setData(data: { [k: string]: FormDataEntryValue }) {
   };
 }
 
-function ModalData({ organism, setIsActive }: ModalDataProps) {
+function ModalEditData({ organism, setIsActive }: ModalDataProps) {
   const id = useAppSelector((state) => state.admin.organism?.id as number);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -86,7 +86,7 @@ function ModalData({ organism, setIsActive }: ModalDataProps) {
   return (
     <div className="modal">
       <div className="modal-main">
-        <h1 className="modal-title">Informations génerales</h1>
+        <h1 className="modal-title">Modifier les informations génerales</h1>
         <form className="modal-list" onSubmit={handleSubmit}>
           <div className="modal-case">
             <h4 className="modal-case__title">Accès</h4>
@@ -212,4 +212,4 @@ function ModalData({ organism, setIsActive }: ModalDataProps) {
   );
 }
 
-export default ModalData;
+export default ModalEditData;

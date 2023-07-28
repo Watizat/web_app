@@ -9,7 +9,7 @@ interface ModalProps {
   organism: Organism;
 }
 
-function ModalInfos({ setIsActive, organism }: ModalProps) {
+function ModalEditInfos({ setIsActive, organism }: ModalProps) {
   const id = useAppSelector((state) => state.admin.organism?.id as number);
   const dispatch = useAppDispatch();
 
@@ -35,7 +35,9 @@ function ModalInfos({ setIsActive, organism }: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
-        <h1 className="modal-title">Informations organisme</h1>
+        <h1 className="modal-title">
+          Modifier les informations de l&apos;organisme
+        </h1>
         <form className="modal-list" onSubmit={handleSubmit}>
           <div className="modal-case">
             <h4 className="modal-case__title">Organisme</h4>
@@ -103,4 +105,4 @@ function ModalInfos({ setIsActive, organism }: ModalProps) {
   );
 }
 
-export default ModalInfos;
+export default ModalEditInfos;

@@ -11,7 +11,7 @@ interface ModalProps {
   contact: Contact;
 }
 
-function ModalContact({ contact, setIsActive }: ModalProps) {
+function ModalEditContact({ contact, setIsActive }: ModalProps) {
   const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
   const id = useAppSelector((state) => state.admin.organism?.id as number);
   const dispatch = useAppDispatch();
@@ -44,7 +44,7 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
-        <h1 className="modal-title">Ajouter un contact</h1>
+        <h1 className="modal-title">Modifier un contact</h1>
         <form className="modal-list" onSubmit={handleSubmit}>
           <div className="modal-case">
             <h4 className="modal-case__title">Nom du contact</h4>
@@ -146,4 +146,4 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
   );
 }
 
-export default ModalContact;
+export default ModalEditContact;
