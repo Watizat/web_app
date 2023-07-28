@@ -9,7 +9,7 @@ interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalDeleteConfirmation({
+function ModalDeleteServiceConfirmation({
   setIsActiveConfirmation,
   id,
   setIsActive,
@@ -21,7 +21,7 @@ function ModalDeleteConfirmation({
 
   async function handleDelete(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    await axiosInstance.delete(`/items/contact/${id}`);
+    await axiosInstance.delete(`/items/service/${id}`);
     dispatch(setAdminOrganism(organismId));
     setIsActive(false);
     setIsActiveConfirmation(false);
@@ -55,4 +55,4 @@ function ModalDeleteConfirmation({
   );
 }
 
-export default ModalDeleteConfirmation;
+export default ModalDeleteServiceConfirmation;

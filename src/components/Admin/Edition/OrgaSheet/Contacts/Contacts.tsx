@@ -27,9 +27,13 @@ function Contacts({ contacts }: ContactProps) {
       </span>
 
       <div className="orgaSheet-contacts__list">
-        {contacts.map((contact) => (
-          <ContactCard key={contact.id} {...contact} />
-        ))}
+        {contacts && contacts.length > 0 ? (
+          contacts.map((contact) => (
+            <ContactCard key={contact.id} {...contact} />
+          ))
+        ) : (
+          <span>Pas de contacts</span>
+        )}
       </div>
     </article>
   );

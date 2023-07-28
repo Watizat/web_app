@@ -1,19 +1,16 @@
-import { useState } from 'react';
-import { Contact } from '../../../@types/organism';
+import { Service } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 import './Modal.scss';
-import ModalDeleteConfirmation from './ModalDeleteContactConfirmation';
 
 interface ModalProps {
+  service: Service;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  contact: Contact;
 }
 
-function ModalContact({ contact, setIsActive }: ModalProps) {
-  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
-  const id = useAppSelector((state) => state.admin.organism?.id as number);
+function ModalAddServiceContact({ service, setIsActive }: ModalProps) {
+  const id = useAppSelector((state) => state.admin.organism?.id);
   const dispatch = useAppDispatch();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -21,24 +18,18 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
     const form = new FormData(event.currentTarget);
     const data = Object.fromEntries(form);
     try {
-      await axiosInstance.patch(`/items/contact/${contact.id}`, {
+      console.log(data);
+      const response = await axiosInstance.post('/items/contact', {
         ...data,
+        organisme: null,
       });
-      dispatch(setAdminOrganism(id));
-      setIsActive(false);
+      if (response.status === 200) {
+        setIsActive(false);
+        dispatch(setAdminOrganism(id as number));
+      }
     } catch (error) {
       console.log(error);
     }
-  }
-
-  if (isActiveConfirmation) {
-    return (
-      <ModalDeleteConfirmation
-        id={contact.id}
-        setIsActiveConfirmation={setIsActiveConfirmation}
-        setIsActive={setIsActive}
-      />
-    );
   }
 
   return (
@@ -46,14 +37,15 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
       <div className="modal-main">
         <h1 className="modal-title">Ajouter un contact</h1>
         <form className="modal-list" onSubmit={handleSubmit}>
+          <input
+            type="number"
+            defaultValue={service.id}
+            hidden
+            name="service"
+          />
           <div className="modal-case">
             <h4 className="modal-case__title">Nom du contact</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
-              name="name"
-              defaultValue={contact.name}
-            />
+            <input className="modal-case__inputTxt" type="text" name="name" />
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Commentaire </h4>
@@ -61,17 +53,12 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
               className="modal-case__inputTxt"
               type="text"
               name="comment"
-              defaultValue={contact.comment}
+              placeholder="Informations concernant le contact"
             />
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Fonction</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
-              defaultValue={contact.job}
-              name="job"
-            />
+            <input className="modal-case__inputTxt" type="text" name="job" />
           </div>
           <div className="modal-contact__modes">
             <div className="modal-case">
@@ -79,7 +66,6 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
               <input
                 className="modal-case__inputTxt modal-contact__mail"
                 type="text"
-                defaultValue={contact.mail}
                 name="mail"
               />
             </div>
@@ -88,7 +74,6 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
               <input
                 className="modal-case__inputTxt"
                 type="number"
-                defaultValue={contact.phone}
                 name="phone"
               />
             </div>
@@ -98,20 +83,14 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
             <div className=" modal-contact__roles">
               <label className="modal-contact__private">
                 Publicité du contact
-                <select
-                  name="visibility"
-                  defaultValue={`${contact.visibility}`}
-                >
+                <select name="role">
                   <option value="false">Privé</option>
                   <option value="true">Public</option>
                 </select>
               </label>
               <label className="modal-contact__actu">
                 Contact pour actualisation
-                <select
-                  name="actualisation"
-                  defaultValue={`${contact.actualisation}`}
-                >
+                <select name="actualisation">
                   <option value="false">Non</option>
                   <option value="true">Oui</option>
                 </select>
@@ -119,13 +98,6 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
             </div>
           </div>
           <div className="modal-actions">
-            <button
-              type="button"
-              className="btn btn-danger-fill btn-flat modal-actions__close"
-              onClick={() => setIsActiveConfirmation(true)}
-            >
-              Supprimer
-            </button>
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"
@@ -146,4 +118,4 @@ function ModalContact({ contact, setIsActive }: ModalProps) {
   );
 }
 
-export default ModalContact;
+export default ModalAddServiceContact;

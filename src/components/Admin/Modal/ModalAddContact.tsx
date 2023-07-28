@@ -36,19 +36,16 @@ function ModalAddContact({ setIsActive }: ModalProps) {
         <form className="modal-list" onSubmit={handleSubmit}>
           <input type="number" defaultValue={id} hidden name="organisme" />
           <div className="modal-case">
-            <h4 className="modal-case__title">Prénom</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
-              name="firstname"
-            />
+            <h4 className="modal-case__title">Nom du contact</h4>
+            <input className="modal-case__inputTxt" type="text" name="name" />
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Nom</h4>
+            <h4 className="modal-case__title">Commentaire </h4>
             <input
               className="modal-case__inputTxt"
               type="text"
-              name="lastname"
+              name="comment"
+              placeholder="Informations concernant le contact"
             />
           </div>
           <div className="modal-case">

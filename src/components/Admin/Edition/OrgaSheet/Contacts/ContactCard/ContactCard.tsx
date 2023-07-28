@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Contact } from '../../../../../../@types/organism';
-import Modal from '../../../../Modal/ModalContact';
+import ModalContact from '../../../../Modal/ModalContact';
 import './ContactCard.scss';
 
 function ContactCard({ ...contact }: Contact) {
@@ -8,7 +8,7 @@ function ContactCard({ ...contact }: Contact) {
 
   return (
     <div className="orgaSheet-case orgaSheet-contact">
-      {isActive && <Modal setIsActive={setIsActive} contact={contact} />}
+      {isActive && <ModalContact setIsActive={setIsActive} contact={contact} />}
       <div className="orgaSheet-contact__header">
         <div className="orgaSheet-contact__subheader">
           <h5 className="orgaSheet-contact__subheader___title">
@@ -41,6 +41,9 @@ function ContactCard({ ...contact }: Contact) {
       </div>
       <div className="orgaSheet-contact__details">
         <div className="orgaSheet-contact__details___infos">
+          <p className="orgaSheet-contact__details___infos-job">
+            {contact.comment}
+          </p>
           <p className="orgaSheet-contact__details___infos-job">
             {contact.job}
           </p>

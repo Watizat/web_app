@@ -29,6 +29,7 @@ function Contact() {
           {organism.contacts[0].job}
         </p>
         <p>{organism.contacts[0].name}</p>
+        <p>{organism.contacts[0].comment}</p>
         <Link to="tel:+3300" className="organisme-infos--link">
           <p>{organism.contacts[0].phone}</p>
         </Link>

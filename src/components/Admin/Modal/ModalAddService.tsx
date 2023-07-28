@@ -1,4 +1,5 @@
-import { useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 import './Modal.scss';
 
@@ -40,7 +41,10 @@ function setData(data: { [k: string]: FormDataEntryValue }) {
 
 function ModalAddService({ setIsActive }: ServiceModalProps) {
   const categoriesList = useAppSelector((state) => state.organism.categories);
-  const organismId = useAppSelector((state) => state.admin.organism?.id);
+  const organismId = useAppSelector(
+    (state) => state.admin.organism?.id as number
+  );
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -68,6 +72,7 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
     } catch (error) {
       console.log(error);
     }
+    dispatch(setAdminOrganism(organismId));
     setIsActive(false);
   };
 

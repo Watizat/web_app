@@ -24,8 +24,7 @@ export interface Organism {
 export interface Contact {
   id: number;
   name: string;
-  firstname: string;
-  lastname: string;
+  comment: string;
   job: string;
   phone: string;
   mail: string;

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 import './Modal.scss';
+import ModalDeleteServiceConfirmation from './ModalDeleteServiceConfirmation';
 
 interface ServiceModalProps {
   service: Service;
@@ -49,6 +50,7 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
     (state) => state.admin.organism?.id as number
   );
   const [isLoading, setIsLoading] = useState(false);
+  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -78,11 +80,23 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
       );
       setIsLoading(false);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
     dispatch(setAdminOrganism(organismId));
     setIsActive(false);
   };
+
+  if (isActiveConfirmation) {
+    return (
+      <ModalDeleteServiceConfirmation
+        id={service.id}
+        setIsActiveConfirmation={setIsActiveConfirmation}
+        setIsActive={setIsActive}
+      />
+    );
+  }
+
   return (
     <div className="modal">
       <div className="modal-main">
@@ -209,6 +223,7 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
             <button
               type="button"
               className="btn btn-danger-fill btn-flat modal-actions__close"
+              onClick={() => setIsActiveConfirmation(true)}
             >
               Supprimer
             </button>
