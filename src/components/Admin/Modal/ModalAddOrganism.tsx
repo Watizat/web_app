@@ -7,17 +7,16 @@ interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function createSlug(inputString) {
-  // Replace spaces with hyphens and remove accents
-  const slug = inputString
-    .normalize('NFD') // Normalize accented characters into separate accent + letter characters
-    .replace(/[\u0300-\u036f]/g, '') // Remove accents
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .toLowerCase(); // Convert to lowercase
-  return slug;
-}
-
 function setData(data: { [k: string]: FormDataEntryValue }) {
+  function createSlug(inputString) {
+    // Replace spaces with hyphens and remove accents
+    const slug = inputString
+      .normalize('NFD') // Normalize accented characters into separate accent + letter characters
+      .replace(/[\u0300-\u036f]/g, '') // Remove accents
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .toLowerCase(); // Convert to lowercase
+    return slug;
+  }
   const myArray = [];
   // eslint-disable-next-line no-plusplus
   for (let i = 1; i < 8; i++) {
@@ -73,9 +72,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
     const form = new FormData(event.currentTarget);
     const formData = Object.fromEntries(form);
     const data = setData(formData);
-    console.log(data);
-
-    try {
+    /* try {
       const response = await axiosInstance.post(`/items/organisme`, {
         ...data.organism,
       });
@@ -102,7 +99,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
       console.log(response2);
     } catch (error) {
       console.log(error);
-    }
+    } */
   }
 
   return (
