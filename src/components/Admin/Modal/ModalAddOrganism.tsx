@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { ChangeEvent, useState } from 'react';
 import { useAppSelector } from '../../../hooks/redux';
 import { axiosInstance } from '../../../utils/axios';
@@ -8,15 +9,16 @@ interface ModalProps {
 }
 
 function setData(data: { [k: string]: FormDataEntryValue }) {
-  function createSlug(inputString) {
-    // Replace spaces with hyphens and remove accents
+  // Fonction permettant de transformer une string en slug en retirant les accents et en remplaçant les espaces par des tirets
+  function createSlug(inputString: string) {
     const slug = inputString
-      .normalize('NFD') // Normalize accented characters into separate accent + letter characters
-      .replace(/[\u0300-\u036f]/g, '') // Remove accents
-      .replace(/\s+/g, '-') // Replace spaces with hyphens
-      .toLowerCase(); // Convert to lowercase
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, '-')
+      .toLowerCase();
     return slug;
   }
+
   const myArray = [];
   // eslint-disable-next-line no-plusplus
   for (let i = 1; i < 8; i++) {
@@ -40,7 +42,7 @@ function setData(data: { [k: string]: FormDataEntryValue }) {
     horaire: myArray,
     organism: {
       name: data.name,
-      slug: createSlug(data.name),
+      slug: createSlug(data.name.toString()),
       address: data.address,
       city: data.city,
       zipcode: data.zipcode,
@@ -72,19 +74,28 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
     const form = new FormData(event.currentTarget);
     const formData = Object.fromEntries(form);
     const data = setData(formData);
-    /* try {
+
+    const address = `${data.organism.address} ${data.organism.zipcode} ${data.organism.city}`;
+
+    try {
+      const geolocResponse = await axios.get(
+        `https://api-adresse.data.gouv.fr/search/?q=${address}`
+      );
+
+      const [longitude, latitude] =
+        geolocResponse.data.features[0].geometry.coordinates;
+
       const response = await axiosInstance.post(`/items/organisme`, {
         ...data.organism,
+        latitude,
+        longitude,
       });
 
-      const response2 = await axiosInstance.post(
-        `/items/organisme_translation`,
-        {
-          ...data.translations,
-          organisme: response.data.data.id,
-          langue_id: 1,
-        }
-      );
+      await axiosInstance.post(`/items/organisme_translation`, {
+        ...data.translations,
+        organisme: response.data.data.id,
+        langue_id: 1,
+      });
 
       await Promise.all(
         data.horaire.map((horaire) =>
@@ -95,11 +106,9 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
           })
         )
       );
-      console.log(response);
-      console.log(response2);
     } catch (error) {
       console.log(error);
-    } */
+    }
   }
 
   return (

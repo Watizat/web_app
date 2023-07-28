@@ -47,6 +47,28 @@
   }
 
   &-case {
+    &.test {
+      position: relative;
+      & .suggestion {
+        position: absolute;
+        background-color: white;
+        border: 1px solid black;
+        transform: translateY(30px);
+        width: 100%;
+        padding: 5px;
+        & li {
+          list-style: none;
+        }
+        & button {
+          width: 100%;
+          text-align: left;
+
+          &:hover {
+            background-color: gray;
+          }
+        }
+      }
+    }
     list-style: none;
     display: flex;
     flex-direction: column;
