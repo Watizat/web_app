@@ -1,0 +1,16 @@
+.transport{
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+  line-height: 1em;
+  & i{
+    font-size: 1.9em;
+  }
+  &-num{
+    padding: 0.3em 0.4em 0.2em;
+    margin-right: 0.2em;
+    border-radius: 0.3em;
+    font-weight: 600;
+  }
+}
