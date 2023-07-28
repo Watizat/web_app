@@ -1,11 +1,14 @@
+import { useMediaQuery } from 'react-responsive';
 import { Link, Navigate } from 'react-router-dom';
 import { ChangeEvent, FormEvent } from 'react';
-import './Login.scss';
+import logo from '../../assets/logo.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { KeyOfloginCredentials } from '../../@types/user';
 import { changeLoginCredentialsField, login } from '../../store/reducers/user';
+import './Login.scss';
 
 function Login() {
+  const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
   const dispatch = useAppDispatch();
   const email = useAppSelector((state) => state.user.loginCredentials.email);
   const password = useAppSelector(
@@ -37,33 +40,55 @@ function Login() {
   }
 
   return (
-    <div className="login">
-      <h1>Login</h1>
-      {error && <p className="login-error">{error}</p>}
-      <form className="login-form" onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={handleChangeField('email')}
-          value={email}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={handleChangeField('password')}
-          value={password}
-        />
-        <button type="submit">Login</button>
-      </form>
-      <Link to="/forgotten-password">Mot de passe oublié</Link>
-      <div className="login-newAccount">
-        Pas de compte ?
-        <Link to="/account-request">
+    <>
+      {isTablet && (
+        <div className="login">
+          <h1>Login</h1>
+          {error && <p className="login-error">{error}</p>}
+          <form className="login-form" onSubmit={handleSubmit}>
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={handleChangeField('email')}
+              value={email}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={handleChangeField('password')}
+              value={password}
+            />
+            <button type="submit">Login</button>
+          </form>
+          <Link to="/forgotten-password">Mot de passe oublié</Link>
+          <div className="login-newAccount">
+            Pas de compte ?
+            <Link to="/account-request">
+              <br />
+              Faire une demande
+            </Link>
+          </div>
+        </div>
+      )}
+
+      <div id="mobileOut">
+        <Link className="mobileOut__logo" to="/">
+          <img src={logo} alt="watizat logo" />
+        </Link>
+        <p>
+          Cet espace n&apos;est pas adapté pour une consultation depuis un
+          terminal de type smartphone
           <br />
-          Faire une demande
+          <br /> Merci de bien vouloir le consulter à nouveau depuis une
+          tablette ou ordinateur
+          <br />
+          <br /> Promis, ceci n&apos;est pas un caprice de dévellopeur.se 🤪
+        </p>
+        <Link className="mobileOut__returnToHome" to="/">
+          <p>Retourner vers la page d&apos;accueil</p>
         </Link>
       </div>
-    </div>
+    </>
   );
 }
 

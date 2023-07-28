@@ -56,17 +56,17 @@
     border: 1px solid transparent;
 
     &:hover {
-    background-color: v.$primary;
-    border-color: v.$primary;
+      background-color: v.$primary;
+      border-color: v.$primary;
     }
 
     &:active {
-    background-color: v.$white;
-    color: v.$primary;
-    border-color: v.$primary;
-    box-shadow: none;
-    font-weight: 600;
-  }
+      background-color: v.$white;
+      color: v.$primary;
+      border-color: v.$primary;
+      box-shadow: none;
+      font-weight: 600;
+    }
   }
 
   a {
@@ -79,6 +79,7 @@
   &-newAccount {
     margin-top: 3rem;
     text-align: center;
+
     a {
       font-size: 1rem;
     }
@@ -103,6 +104,44 @@
       font-weight: 800;
     }
   }
+}
 
+#mobileOut {
+  min-height: 100vh;
+  padding: 0 10vw;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(rgba(v.$bghome, 0.8),
+      rgba(v.$bghome, 0.5)),
+    url('../../../../public/img/404mobile.jpg');
+  background-size: cover;
+  color: v.$white;
+  text-align: center;
+  font-size: 1.35rem;
 
+  .mobileOut__logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: auto;
+    margin: 10vh 0 5vh 0;
+
+    img {
+      margin: auto;
+    }
+  }
+
+  .mobileOut__returnToHome {
+    margin-top: 5vh;
+    color: v.$white;
+    border: 1px solid v.$white;
+    border-radius: 20px;
+    padding: 1rem;
+  }
+
+  @include m.tablet {
+    display: none;
+  }
 }

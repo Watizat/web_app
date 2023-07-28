@@ -1,3 +1,4 @@
+import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
@@ -10,6 +11,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import './App.scss';
 
 function App() {
+  const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
   const dispatch = useAppDispatch();
   const user = getUserDataFromLocalStorage();
   const isLogged = useAppSelector((state) => state.user.isLogged);
@@ -32,16 +34,18 @@ function App() {
 
   return (
     <>
-      <div id="bo-app">
-        <Sidebar />
+      {isTablet && (
+        <div id="bo-app">
+          <Sidebar />
 
-        <main
-          id={`${pathname !== '/admin/dashboard' ? 'bo-main' : 'dashboard'}`}
-        >
-          {pathname !== '/admin/dashboard' && <Header />}
-          <Outlet />
-        </main>
-      </div>
+          <main
+            id={`${pathname !== '/admin/dashboard' ? 'bo-main' : 'dashboard'}`}
+          >
+            {pathname !== '/admin/dashboard' && <Header />}
+            <Outlet />
+          </main>
+        </div>
+      )}
 
       <div id="mobileOut">
         <Link className="mobileOut__logo" to="/">

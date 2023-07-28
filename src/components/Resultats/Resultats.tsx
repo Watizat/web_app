@@ -16,19 +16,20 @@ function Resultats() {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => { 
+  useEffect(() => {
     dispatch(fetchOrganisms(/* category as string */));
   }, [dispatch]);
-  return ( 
+  return (
     <>
       <Header />
       <main className="results">
         {(isDesktop || !isActiveMap) && <Panel />}
         {(isDesktop || isActiveMap) && <Map />}
-        {isTouch && <Menu isActiveMap={isActiveMap} setIsActiveMap={setIsActiveMap}/>}
+        {isTouch && (
+          <Menu isActiveMap={isActiveMap} setIsActiveMap={setIsActiveMap} />
+        )}
       </main>
     </>
-    
   );
 }
 
