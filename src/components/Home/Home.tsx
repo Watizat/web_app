@@ -10,9 +10,9 @@ import './Home.scss';
 import HomeCategorySkeleton from '../Skeleton/HomeCategory/HomeCategory';
 
 function Home() {
+  const isLoading = useAppSelector((state) => state.organism.isLoading);
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
   const categories = useAppSelector((state) => state.organism.categories);
-  const isLoading = useAppSelector((state) => state.organism.isLoading);
 
   const navigate = useNavigate();
 
@@ -63,10 +63,9 @@ function Home() {
             </article>
             <article className="choiceRight">
               <h2>2. Selectionner une catégorie</h2>
-              <div className="categories-choice">
+              <div className="choiceRight-group">
                 {isLoading
-                  ? // Afficher le squelette ici pendant le chargement
-                    Array(16)
+                  ? Array(16)
                       .fill(null)
                       .map((e, i) => (
                         // eslint-disable-next-line react/no-array-index-key
@@ -77,9 +76,13 @@ function Home() {
                         type="button"
                         key={categorie.translations[0].slug}
                         onClick={handleClick(categorie.translations[0].slug)}
+                        className="choiceRight-button"
                       >
-                        <Icon icon={categorie.tag} size="40px" />
-                        <span className="text-button">
+                        <Icon
+                          icon={categorie.tag}
+                          className="choiceRight-button__icon"
+                        />
+                        <span className="text-button choiceRight-button__text">
                           {categorie.translations[0].name}
                         </span>
                       </button>

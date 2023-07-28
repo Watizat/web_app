@@ -1,11 +1,9 @@
-import './HomeCategory.scss';
-
 function HomeCategorySkeleton() {
   return (
-    <div className="skeleton-category">
-      <div className="skeleton-category-icon" />
-      <div className="skeleton-category-span" />
-    </div>
+    <button type="button" className="choiceRight-button--skeleton">
+      <div className="choiceRight-button__icon--skeleton" />
+      <div className="text-button choiceRight-button__text--skeleton" />
+    </button>
   );
 }
 

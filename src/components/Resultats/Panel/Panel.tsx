@@ -4,6 +4,7 @@ import { setFilteredOrganisms } from '../../../store/reducers/organisms';
 import Card from '../Card/Card';
 import Settings from '../Settings/Settings';
 import './Panel.scss';
+import ResultatsCardSkeleton from '../../Skeleton/ResultatCard/ResultatCard';
 
 function Panel() {
   const dispatch = useAppDispatch();
@@ -61,21 +62,24 @@ function Panel() {
         setSearch={setSearch}
       />
       <div className="resultsContentCard">
-      {isLoading && <div>Loading...</div>}
-      {!isLoading &&
-        (filteredOrganisms.length > 0 ? (
-          filteredOrganisms.map((organism, index) => (
-            <Card
-              key={organism.id}
-              organism={organism}
-              map_id={index + 1}
-              categoryFilter={categoryFilter}
-            />
-          ))
-        ) : (
-          <span>Il n&apos;y a aucun résultat.</span>
-        ))}
-       </div> 
+        {isLoading &&
+          Array(5)
+            .fill(null)
+            .map((e, i) => <ResultatsCardSkeleton key={i} />)}
+        {!isLoading &&
+          (filteredOrganisms.length > 0 ? (
+            filteredOrganisms.map((organism, index) => (
+              <Card
+                key={organism.id}
+                organism={organism}
+                map_id={index + 1}
+                categoryFilter={categoryFilter}
+              />
+            ))
+          ) : (
+            <span>Il n&apos;y a aucun résultat.</span>
+          ))}
+      </div>
     </section>
   );
 }

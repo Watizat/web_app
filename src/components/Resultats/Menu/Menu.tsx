@@ -2,12 +2,11 @@ import { useState } from 'react';
 import './Menu.scss';
 
 interface MenuProps {
-  isActiveMap: boolean,
-  setIsActiveMap: React.Dispatch<React.SetStateAction<boolean>>
+  isActiveMap: boolean;
+  setIsActiveMap: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Menu({isActiveMap, setIsActiveMap}: MenuProps) {
-
+function Menu({ isActiveMap, setIsActiveMap }: MenuProps) {
   const [isActiveFilters, setIsActiveFilters] = useState(false);
 
   return (
@@ -47,7 +46,6 @@ function Menu({isActiveMap, setIsActiveMap}: MenuProps) {
           Filtres
         </button>
       </div> */}
-
     </div>
   );
 }

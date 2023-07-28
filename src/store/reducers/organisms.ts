@@ -208,6 +208,7 @@ const organismReducer = createReducer(initialState, (builder) => {
       state.isLoading = false;
     })
     .addCase(fetchOrganisms.rejected, (state, action) => {
+      state.isLoading = false;
       console.log(action.payload);
     })
     .addCase(fetchOrganism.pending, (state) => {
@@ -225,6 +226,9 @@ const organismReducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchCategories.pending, (state) => {
       state.isLoading = true;
+    })
+    .addCase(fetchCategories.rejected, (state) => {
+      state.isLoading = false;
     })
     .addCase(fetchCategories.fulfilled, (state, action) => {
       state.isLoading = false;
