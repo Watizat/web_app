@@ -43,8 +43,9 @@ function ServiceCard({ ...service }: Service) {
         </span>
       </span>
       <div className="serviceCard-data">
-        <p className="serviceCard-data__info">
-          Categorie : {service.categorie_id.translations[0]?.name}
+        <p className="serviceCard-data__info serviceCard-data__category">
+          <span className="serviceCard-data__info-title">Categorie : </span>
+          {service.categorie_id.translations[0]?.name}
         </p>
         <p className="serviceCard-data__info">
           {service.translations[0]?.description}
