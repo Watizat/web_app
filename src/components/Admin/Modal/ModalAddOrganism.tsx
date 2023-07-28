@@ -7,6 +7,16 @@ interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+function createSlug(inputString) {
+  // Replace spaces with hyphens and remove accents
+  const slug = inputString
+    .normalize('NFD') // Normalize accented characters into separate accent + letter characters
+    .replace(/[\u0300-\u036f]/g, '') // Remove accents
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .toLowerCase(); // Convert to lowercase
+  return slug;
+}
+
 function setData(data: { [k: string]: FormDataEntryValue }) {
   const myArray = [];
   // eslint-disable-next-line no-plusplus
@@ -31,6 +41,7 @@ function setData(data: { [k: string]: FormDataEntryValue }) {
     horaire: myArray,
     organism: {
       name: data.name,
+      slug: createSlug(data.name),
       address: data.address,
       city: data.city,
       zipcode: data.zipcode,
