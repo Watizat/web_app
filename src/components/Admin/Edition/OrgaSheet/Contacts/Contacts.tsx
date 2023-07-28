@@ -32,7 +32,9 @@ function Contacts({ contacts }: ContactProps) {
             <ContactCard key={contact.id} {...contact} />
           ))
         ) : (
-          <span>Pas de contacts</span>
+          <span className="orgaSheet-contacts__noContacts">
+            Aucun contact à afficher
+          </span>
         )}
       </div>
     </article>

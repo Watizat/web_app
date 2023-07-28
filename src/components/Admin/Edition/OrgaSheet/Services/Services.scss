@@ -5,10 +5,19 @@
 .orgaSheet {
   &-services {
     &__list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 2rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr;
+
+      @include m.desktop {
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 2rem;
+      }
+
+      @include m.fullhd {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 2rem;
+      }
+
     }
     &__serviceCard {
       display: flex;
@@ -18,17 +27,8 @@
       border: 1px solid v.$grey-300;
       border-radius: 20px;
       margin-bottom: 1rem;
-
-      @include m.desktop {
-        width: 48%;
-      }
-
-      @include m.fullhd {
-        width: 30%;
-      }
     }
     .serviceCard {
-
       &-header {
         display: flex;
         justify-content: space-between;
