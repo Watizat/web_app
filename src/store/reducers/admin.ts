@@ -1,5 +1,4 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { Organism, Role, User, Zone } from '../../@types/organism';
 import { axiosInstance } from '../../utils/axios';
 
