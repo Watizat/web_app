@@ -11,33 +11,31 @@ import {
 const authRefresh: {
   inProgress: boolean;
   bearer: string | undefined;
-  queue: Array<(bearer: string) => void>;
-  /**
-   * Performs the refresh of the authentication token by sending a POST request to the server.
-   * @param {Object} user - User information and the authentication token.
-   * @param {boolean} user.isLogged - Indicates whether the user is logged in.
-   * @param {UserSession} user.session - User's session information.
-   * @param {AuthResponse} user.token - Authentication token information.
-   * @returns {string | undefined} The new authentication token (in "Bearer" format) if it was successfully refreshed, otherwise `undefined`.
-   */
-  // Fontion pour rafraichir le token
+  queue: Array<() => void>;
+  // Fonction pour rafraichir le token
   doRefresh: (user: {
     isLogged: boolean;
     session: UserSession;
     token: AuthResponse;
-  }) => string | undefined;
+  }) => Promise<string | undefined>;
 } = {
   queue: [], // File d'attente pour les requêtes en attente de token rafraîchi
   inProgress: false, // Indique si le rafraîchissement du token est en cours
   bearer: '', // Le token d'authentification actuel
   doRefresh: (user) => {
     if (authRefresh.inProgress) {
-      // Si le rafraîchissement est déjà en cours, ne rien faire
-      return undefined;
+      // Si le rafraîchissement est déjà en cours, renvoyer la promesse en attente
+      return new Promise<string | undefined>((resolve) => {
+        authRefresh.queue.push(() => {
+          resolve(authRefresh.bearer);
+        });
+      });
     }
+
     authRefresh.inProgress = true; // Définir en cours de rafraîchissement
+
     // Appel à l'API pour rafraîchir le token
-    axios
+    const refreshPromise = axios
       .post<{ data: AuthResponse }>(
         'https://watizat.lunalink.nl/auth/refresh',
         {
@@ -58,17 +56,27 @@ const authRefresh: {
         localStorage.setItem('user', JSON.stringify(updatedUser));
         // Mettre à jour le token d'authentification dans l'objet authRefresh
         authRefresh.bearer = `Bearer ${response.data.access_token}`;
+
+        // Rappeler les fonctions de rappel pour exécuter les requêtes en attente avec le nouveau jeton
+        authRefresh.queue.forEach((callback) => callback());
+        authRefresh.queue = []; // Vider la file d'attente
+        return authRefresh.bearer;
       })
-      .catch(() => {
+      .catch((error) => {
         // En cas d'erreur, effacer le token d'authentification
         authRefresh.bearer = undefined;
         // Supprimer les informations utilisateur du stockage local
         removeUserDataFromLocalStorage();
+        throw error;
       })
       .finally(() => {
         authRefresh.inProgress = false; // Remettre en cours à false une fois terminé
       });
-    return authRefresh.bearer;
+
+    // Ajouter la promesse à la file d'attente
+    authRefresh.queue.push(() => refreshPromise);
+
+    return refreshPromise;
   },
 };
 
@@ -88,7 +96,7 @@ axiosInstance.interceptors.request.use(async (config) => {
     if (Date.now() - user.session.exp * 1000 > 0 && !authRefresh.inProgress) {
       // Si le token est expiré et que le rafraîchissement n'est pas en cours,
       // rafraîchir le token et mettre à jour l'en-tête d'autorisation
-      const bearer = authRefresh.doRefresh(user);
+      const bearer = await authRefresh.doRefresh(user);
       updatedConfig.headers.Authorization = bearer;
     }
     return updatedConfig; // Renvoyer la configuration modifiée
@@ -109,7 +117,7 @@ axiosInstance.interceptors.response.use(
       if (user) {
         try {
           // Rafraîchir le token JWT
-          const bearer = authRefresh.doRefresh(user);
+          const bearer = await authRefresh.doRefresh(user);
           // Récupérer la configuration de la requête d'origine
           const originalRequest = error.config;
           // Ajouter le nouveau token dans l'en-tête d'autorisation de la requête d'origine
@@ -117,8 +125,7 @@ axiosInstance.interceptors.response.use(
             originalRequest.headers.Authorization = bearer;
             // Renvoyer la requête d'origine avec le nouveau token
             return await new Promise((resolve) => {
-              authRefresh.queue.push((newBearer: string) => {
-                originalRequest.headers.Authorization = newBearer;
+              authRefresh.queue.push(() => {
                 resolve(axiosInstance(originalRequest));
               });
             });
