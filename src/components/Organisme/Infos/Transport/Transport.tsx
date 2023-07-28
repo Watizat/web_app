@@ -3,7 +3,6 @@ import { useAppSelector } from '../../../../hooks/redux';
 import './Transport.scss';
 import navitiaInstance from '../../../../utils/navitia';
 import { Organism } from '../../../../@types/organism';
-import classNames from 'classnames';
 
 interface Endpoint {
   lines: {
@@ -31,8 +30,19 @@ interface StopAreas {
   stop_areas: [id: string];
 }
 
+interface TransportData {
+  busLine: string;
+  stopName: string;
+  placeNearbyData: PlaceNearbyData[];
+}
+
+interface PlaceNearbyData {
+  distance: number;
+  name: string;
+}
+
 function Transport() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<TransportData[]>([]);
   const organism = useAppSelector(
     (state) => state.organism.organism as Organism
   );
@@ -43,22 +53,31 @@ function Transport() {
         const endpoint = `/coverage/fr-sw/coord/${organism.longitude}%3B${organism.latitude}/lines`;
         const response = await navitiaInstance.get(endpoint);
         const endPoint = response.data as Endpoint;
-        const promises = endPoint.lines.map(async (line) => {
+        const busLines = endPoint.lines;
+        // console.log('objet buslines', busLines);
+        const batchSize = 10;
+        const dataTransport = [];
+        const promises = busLines.map(async (line) => {
           const stopAreas = `coverage/fr-sw/lines/${line.id}/stop_areas`;
           try {
             const stopAreasResponse = await navitiaInstance.get(stopAreas);
             const stopAreasData = stopAreasResponse.data as StopAreas;
-            console.log('stoparea :', stopAreasData);
+            // console.log('stoparea :', stopAreasData);
             const stopsPromises = stopAreasData.stop_areas.map(async (stop) => {
-              // console.log('stop dans le map :', stop);
+              // console.log('stop dans le map :', stop.id);
               const placeNearby = `coverage/fr-sw/stop_areas/${stop.id}/places_nearby`;
               // console.log('appel api placenearby :', placeNearby);
               try {
-                const placeNearbyResponse = await navitiaInstance.get(
-                  placeNearby
-                );
+                // eslint-disable-next-line prettier/prettier
+                const placeNearbyResponse = await navitiaInstance.get(placeNearby);
+                const placeNearbyData = placeNearbyResponse.data;
+                // console.log('data des placeNear', placeNearbyResponse);
                 // console.log('placenearby dans le map :', placeNearbyResponse);
-                return placeNearbyResponse.data;
+                return {
+                  busLine: line.code,
+                  stopName: stop.name,
+                  placeNearbyData,
+                };
               } catch (error) {
                 console.error(
                   "Erreur lors de l'appel API des placesNearby",
@@ -68,27 +87,23 @@ function Transport() {
               }
             });
 
-            console.log('stoppromises :', stopsPromises);
-            const responses = await Promise.all(stopsPromises);
-            console.log('les réponses :', responses);
-            const filteredResponses = responses.filter((data) => data !== null);
-            console.log('les réponses filtrer :', filteredResponses);
-            const formattedData = [];
-            filteredResponses.forEach((response, index) => {
-              const busLine = endPoint.lines[index].name;
-              const stopName = stopAreasData[index].name;
-              const { distance } = response;
-              formattedData.push({ busLine, stopName, distance });
-            });
-            setData(formattedData);
-            console.log(formattedData);
+            // console.log('stoppromises :', stopsPromises);
+            const stopResponses = await Promise.all(stopsPromises);
+            // console.log('les réponses :', responses);
+            const filteredResponses = stopResponses.filter(
+              (stop) => stop !== null
+            );
+            dataTransport.push(...filteredResponses);
+            // console.log('les réponses filtrer :', filteredResponses)
+            console.log('Données récupérées :', dataTransport);
           } catch (error) {
             console.error("Erreur lors de l'appel API des stopAreas", error);
           }
         });
         await Promise.all(promises);
+        setData(dataTransport);
       } catch (error) {
-        console.error("Erreur lors de l'appel API:", error);
+        console.error("Erreur lors de l'appel API endpoint:", error);
       }
     };
     fetchData();
@@ -103,11 +118,10 @@ function Transport() {
       </article>
     );
   }
-  console.log(data);
   return (
     <article>
       <h3>Accès en transports</h3>
-      {data.map((item) => (
+      {/*  {dataTransport.map((item) => (
         <p className="transport" key={item.id}>
           <i
             className={
@@ -128,7 +142,7 @@ function Transport() {
 
           {line.name}
         </p>
-      ))}
+      ))} */}
       {/* <p><span style={{backgound-color:{area.color}}}>{area.code}</span>{area.name}</p> */}
     </article>
   );
