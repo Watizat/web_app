@@ -221,7 +221,7 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
             </button>
             <button
               type="submit"
-              className="btn btn-sucess-fill btn-flat modal-actions__save"x
+              className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
               {isLoading && <span>Sauvegarde en cours...</span>}
               {!isLoading && <span>Sauvegarder</span>}{' '}
