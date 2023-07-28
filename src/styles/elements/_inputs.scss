@@ -3,6 +3,7 @@
 
     /* Basic styling */
     select {
+      cursor: pointer;
       background-color: v.$white;
       border: none;
       border: 1px solid v.$grey-300;

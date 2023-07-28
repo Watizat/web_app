@@ -38,11 +38,19 @@ function Sidebar() {
               onChange={handleChange}
               className="adminsidebar-myInfos__zone-select"
             >
-              <option value="" disabled>
+              <option
+                value=""
+                disabled
+                className="adminsidebar-myInfos__zone-select__default"
+              >
                 Selectionner une ville
               </option>
               {zones.map((zone) => (
-                <option key={zone.id} value={zone.name}>
+                <option
+                  key={zone.id}
+                  value={zone.name}
+                  className="adminsidebar-myInfos__zone-select__option"
+                >
                   {zone.name}
                 </option>
               ))}

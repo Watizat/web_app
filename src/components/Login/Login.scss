@@ -49,10 +49,24 @@
   }
 
   button {
-    background-color: v.$primary;
+    background-color: v.$primary-var3;
     color: v.$white;
     border-radius: 5px;
     padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+
+    &:hover {
+    background-color: v.$primary;
+    border-color: v.$primary;
+    }
+
+    &:active {
+    background-color: v.$white;
+    color: v.$primary;
+    border-color: v.$primary;
+    box-shadow: none;
+    font-weight: 600;
+  }
   }
 
   a {
@@ -79,12 +93,14 @@
     grid-template-columns: 1fr 1fr;
     grid-auto-flow: column;
     gap: 3rem;
+    font-weight: 800;
 
     &__text {
       grid-column-start: 2;
       grid-row-start: 2;
       grid-row-end: span 2;
       font-size: 1.1rem;
+      font-weight: 800;
     }
   }
 

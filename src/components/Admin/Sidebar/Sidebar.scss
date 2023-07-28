@@ -83,6 +83,18 @@
         color: v.$white;
         width: 70%;
         font-size: .9rem;
+
+        option {
+          background-color: v.$white;
+        }
+
+        &__default {
+          color: v.$grey-600;
+        }
+
+        &__option {
+          color: v.$grey-800;
+        }
       }
     }
 
