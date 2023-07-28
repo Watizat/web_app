@@ -45,7 +45,8 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
             className="Left-lower__moreInfos"
             to={`/organisme/${organism.slug}`}
           >
-            <Icon icon="plus" size="14px" /> En savoir plus
+            <Icon icon="plus" className="Left-lower__moreInfos-icon" /> En
+            savoir plus
           </Link>
           <div className="Left-lower__categories">
             {categories.map((categorie) => (
@@ -55,7 +56,6 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
                   categorie.isCheck ? '--check' : ''
                 }`}
                 icon={categorie.value}
-                size="30px"
               />
             ))}
           </div>

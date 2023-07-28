@@ -112,8 +112,6 @@ function Settings({
             className="settingsTopBar-form__input"
           />
         </form>
-        {/*         <Icon icon={isOpen ? 'arrow_up' : 'arrow_down'} size="30px" />
-         */}
         <button
           type="button"
           className="settingsTopBar-dropdownBtn"
