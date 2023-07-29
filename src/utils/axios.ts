@@ -1,4 +1,3 @@
-// Dans votre fichier axiosInstance.js
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import jwt_decode from 'jwt-decode';
 import { AuthResponse, UserSession } from '../@types/user';
@@ -63,10 +62,18 @@ const authRefresh: {
         return authRefresh.bearer;
       })
       .catch((error) => {
-        // En cas d'erreur, effacer le token d'authentification
-        authRefresh.bearer = undefined;
-        // Supprimer les informations utilisateur du stockage local
-        removeUserDataFromLocalStorage();
+        // Vérifier si l'erreur est due à un refresh token expiré (code 401 Unauthorized)
+        if (error.response && error.response.status === 401) {
+          // Gérer le scénario où le refresh token a également expiré
+          // Par exemple, déconnecter l'utilisateur ou rediriger vers la page de connexion
+          removeUserDataFromLocalStorage(); // Déconnecter l'utilisateur et supprimer les données utilisateur du stockage local
+          // Rediriger vers la page de connexion (remplacez '/login' par le chemin réel de connexion)
+          window.location.href = '/login';
+        } else {
+          // S'il ne s'agit pas d'un refresh token expiré, gérer l'erreur comme auparavant
+          authRefresh.bearer = undefined;
+          removeUserDataFromLocalStorage();
+        }
         throw error;
       })
       .finally(() => {
@@ -91,16 +98,38 @@ axiosInstance.interceptors.request.use(async (config) => {
   const user = getUserDataFromLocalStorage();
   if (user) {
     const updatedConfig = { ...config }; // Crée une copie de l'objet de configuration
-    // Ajouter le token d'authentification dans l'en-tête d'autorisation
-    updatedConfig.headers.Authorization = `Bearer ${user.token.access_token}`;
-    if (Date.now() - user.session.exp * 1000 > 0 && !authRefresh.inProgress) {
-      // Si le token est expiré et que le rafraîchissement n'est pas en cours,
-      // rafraîchir le token et mettre à jour l'en-tête d'autorisation
-      const bearer = await authRefresh.doRefresh(user);
-      updatedConfig.headers.Authorization = bearer;
+    const currentTime = Date.now();
+
+    if (currentTime >= user.session.exp * 1000) {
+      // Si le token d'accès a expiré, essayer de rafraîchir le token
+      if (!authRefresh.inProgress) {
+        try {
+          const bearer = await authRefresh.doRefresh(user);
+          updatedConfig.headers.Authorization = bearer; // Mettre à jour l'en-tête Authorization avec le nouveau token
+        } catch (refreshError) {
+          // Gérer les erreurs de rafraîchissement (par exemple, déconnecter l'utilisateur ou rediriger vers la page de connexion)
+          removeUserDataFromLocalStorage(); // Déconnecter l'utilisateur et supprimer les données utilisateur du stockage local
+          // Rediriger vers la page de connexion (remplacez '/login' par le chemin réel de connexion)
+          window.location.href = '/login';
+          return Promise.reject(refreshError);
+        }
+      } else {
+        // Si le rafraîchissement du token est déjà en cours, mettre la requête dans la file d'attente
+        await new Promise<void>((resolve) => {
+          authRefresh.queue.push(() => {
+            updatedConfig.headers.Authorization = `Bearer ${authRefresh.bearer}`;
+            resolve();
+          });
+        });
+      }
+    } else {
+      // Le token est toujours valide, poursuivre la requête normalement
+      updatedConfig.headers.Authorization = `Bearer ${user.token.access_token}`;
     }
+
     return updatedConfig; // Renvoyer la configuration modifiée
   }
+
   return config; // Si l'utilisateur n'est pas connecté, renvoyer la configuration d'origine
 });
 
@@ -131,7 +160,10 @@ axiosInstance.interceptors.response.use(
             });
           }
         } catch (refreshError) {
-          // Gérer les erreurs de rafraîchissement si nécessaire
+          // Gérer les erreurs de rafraîchissement (par exemple, déconnecter l'utilisateur ou rediriger vers la page de connexion)
+          removeUserDataFromLocalStorage(); // Déconnecter l'utilisateur et supprimer les données utilisateur du stockage local
+          // Rediriger vers la page de connexion (remplacez '/login' par le chemin réel de connexion)
+          window.location.href = '/login';
           return Promise.reject(refreshError);
         }
       }
