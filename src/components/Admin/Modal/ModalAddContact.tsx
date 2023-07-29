@@ -4,6 +4,7 @@ import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 
 import { Inputs } from '../../../@types/formInputs';
+import { validateEmail } from '../../../utils/form/form';
 import './Modal.scss';
 
 interface ModalProps {
@@ -34,16 +35,6 @@ function ModalAddContact({ setIsActive }: ModalProps) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
-  };
-
-  const validateEmail = (value: string) => {
-    // Si la valeur est vide, la validation réussit
-    if (!value) {
-      return true;
-    }
-    // Expression régulière pour valider un email
-    const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    return emailPattern.test(value) || `Cette adresse email n'est pas valide`;
   };
 
   return (
