@@ -1,80 +1,64 @@
 import axios from 'axios';
 import { ChangeEvent, useState } from 'react';
-import { useAppSelector } from '../../../hooks/redux';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Inputs } from '../../../@types/formInputs';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import {
+  fetchAdminOrganisms,
+  setAdminOrganism,
+} from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
+import {
+  createSlug,
+  scheduleFormat,
+  validateScheduleFormat,
+} from '../../../utils/form/form';
 import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function setData(data: { [k: string]: FormDataEntryValue }) {
-  // Fonction permettant de transformer une string en slug en retirant les accents et en remplaçant les espaces par des tirets
-  function createSlug(inputString: string) {
-    const slug = inputString
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/\s+/g, '-')
-      .toLowerCase();
-    return slug;
-  }
-
-  const myArray = [];
-  // eslint-disable-next-line no-plusplus
-  for (let i = 1; i < 8; i++) {
-    myArray.push({
-      day: i,
-      opentime_am: data[`schedule_openam_${i}`]
-        ? String(data[`schedule_openam_${i}`]).replace('h', ':')
-        : null,
-      closetime_am: data[`schedule_closeam_${i}`]
-        ? String(data[`schedule_closeam_${i}`]).replace('h', ':')
-        : null,
-      opentime_pm: data[`schedule_openpm_${i}`]
-        ? String(data[`schedule_openpm_${i}`]).replace('h', ':')
-        : null,
-      closetime_pm: data[`schedule_closepm_${i}`]
-        ? String(data[`schedule_closepm_${i}`]).replace('h', ':')
-        : null,
-    });
-  }
-  return {
-    horaire: myArray,
-    organism: {
-      name: data.name,
-      slug: createSlug(data.name.toString()),
-      address: data.address,
-      city: data.city,
-      zipcode: data.zipcode,
-      website: data.website,
-      phone: data.phone,
-      zone_id: data.zone_id,
-      pmr: !!data.pmr,
-      animals: !!data.animals,
-    },
-    translations: {
-      description: data.description,
-      infos_alerte: data.infos_alerte,
-      // langue_id
-    },
-  };
-}
-
 function ModalAddOrganism({ setIsActive }: ModalProps) {
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
   const zones = useAppSelector((state) => state.admin.zones);
+  const dispatch = useAppDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     localStorage.setItem('city', event.target.value);
     setSelect(event.target.value);
   };
 
-  async function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const formData = Object.fromEntries(form);
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    function setData(data: Inputs) {
+      return {
+        horaire: scheduleFormat(data),
+        organism: {
+          name: data.name,
+          slug: createSlug(data.name.toString()),
+          address: data.address,
+          city: data.city,
+          zipcode: data.zipcode,
+          website: data.website,
+          phone: data.phone,
+          zone_id: data.zone_id,
+          pmr: !!data.pmr,
+          animals: !!data.animals,
+        },
+        translations: {
+          description: data.description,
+          infos_alerte: data.infos_alerte,
+          // langue_id
+        },
+      };
+    }
     const data = setData(formData);
-
     const address = `${data.organism.address} ${data.organism.zipcode} ${data.organism.city}`;
 
     try {
@@ -98,7 +82,8 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
       });
 
       await Promise.all(
-        data.horaire.map((horaire) =>
+        // Il faut retirer la propriété id de l'objet horaire pour éviter une erreur à la création dans la bdd
+        data.horaire.map(({ id, ...horaire }) =>
           axiosInstance.post(`/items/schedule`, {
             ...horaire,
             service_id: null,
@@ -106,17 +91,24 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
           })
         )
       );
+      setIsActive(false);
+      dispatch(setAdminOrganism(response.data.data.id));
+      dispatch(fetchAdminOrganisms());
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className="modal">
       <div className="modal-main">
         <h1 className="modal-title">Créer un organisme</h1>
-        <form className="modal-list" onSubmit={handleSubmit}>
-          <select value={select} onChange={handleChange} name="zone_id">
+        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
+          <select
+            value={select}
+            {...register('zone_id', { required: 'Ce champ est requis' })}
+            onChange={handleChange}
+          >
             <option value="" disabled>
               Selectionner une ville
             </option>
@@ -128,63 +120,96 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
           </select>
           <div className="modal-case">
             <h4 className="modal-case__title">Nom de l&apos;organisme</h4>
-            <input className="modal-case__inputTxt" type="text" name="name" />
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              {...register('name', { required: 'Ce champs est requis' })}
+            />
+            {errors.name && <small>{errors.name.message}</small>}
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Adresse</h4>
             <input
               className="modal-case__inputTxt"
               type="text"
-              name="address"
+              {...register('address', { required: 'Ce champs est requis' })}
             />
+            {errors.address && <small>{errors.address.message}</small>}
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Ville</h4>
-            <input className="modal-case__inputTxt" type="text" name="city" />
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              {...register('city', { required: 'Ce champs est requis' })}
+            />
+            {errors.city && <small>{errors.city.message}</small>}
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Code postal</h4>
             <input
               className="modal-case__inputTxt"
               type="number"
-              name="zipcode"
+              {...register('zipcode', { required: 'Ce champs est requis' })}
             />
+            {errors.zipcode && <small>{errors.zipcode.message}</small>}
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Telephone</h4>
             <input
               className="modal-case__inputTxt"
               type="number"
-              name="phone"
+              {...register('phone', {
+                minLength: {
+                  value: 10,
+                  message:
+                    'Le numéro de téléphone doit comporter au moins 10 chiffres.',
+                },
+                maxLength: {
+                  value: 10,
+                  message:
+                    'Le numéro de téléphone ne peut pas comporter plus de 10 chiffres.',
+                },
+              })}
             />
+            {errors.phone && <small>{errors.phone.message}</small>}
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Site web</h4>
             <input
               className="modal-case__inputTxt"
               type="text"
-              name="website"
+              {...register('website')}
             />
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Accès</h4>
             <div className="modal-data__accessDetails">
               <label className="modal-data__pmr">
-                <input type="checkbox" name="pmr" />
+                <input type="checkbox" {...register('pmr')} />
                 Accessible PSH / PMR
               </label>
               <label className="modal-data__pmr">
-                <input type="checkbox" name="animals" />
+                <input type="checkbox" {...register('animals')} />
                 Animaux admis
               </label>
             </div>
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Description</h4>
-            <textarea className="modal-case__textarea" name="description" />
+            <textarea
+              className="modal-case__textarea"
+              {...register('description')}
+            />
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Horaires</h4>
+            <h4 className="modal-case__title">
+              Horaires
+              <span>
+                {' '}
+                (Formats d&apos;horaires acceptés: 10h, 10h00, 10:00)
+              </span>
+            </h4>
             <table className="modal-data__hours">
               <thead className="modal-data__hoursHead">
                 <tr>
@@ -207,32 +232,55 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                   <tr key={i} className="modal-data__hoursLine">
                     <td className="modal-data__hoursDay">
                       <span>{i}</span>
+                      <input
+                        type="hidden"
+                        {...register(
+                          `schedule_id_${index + 1}`
+                          // , { value: '',}
+                        )}
+                      />
                     </td>
                     <td className="modal-data__hoursHour">
                       <input
                         className="modal-data__hoursInput"
-                        name={`schedule_openam_${index + 1}`}
+                        {...register(`schedule_openam_${index + 1}`, {
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
+                      <small>
+                        {errors[`schedule_openam_${index + 1}`] &&
+                          errors[`schedule_openam_${index + 1}`]?.message}
+                      </small>
                     </td>
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
                         className="modal-data__hoursInput"
-                        name={`schedule_closeam_${index + 1}`}
+                        {...register(`schedule_closeam_${index + 1}`, {
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">/</td>
                     <td className="modal-data__hoursTd">
                       <input
                         className="modal-data__hoursInput"
-                        name={`schedule_openpm_${index + 1}`}
+                        {...register(`schedule_openpm_${index + 1}`, {
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
                         className="modal-data__hoursInput"
-                        name={`schedule_closepm_${index + 1}`}
+                        {...register(`schedule_closepm_${index + 1}`, {
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                   </tr>
@@ -242,7 +290,10 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Info s & alertes</h4>
-            <textarea className="modal-case__textarea" name="infos_alerte" />
+            <textarea
+              className="modal-case__textarea"
+              {...register('infos_alerte')}
+            />
           </div>
           <div className="modal-actions">
             <button
