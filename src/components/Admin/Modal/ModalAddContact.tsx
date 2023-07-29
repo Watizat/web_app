@@ -3,21 +3,11 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 
+import { Inputs } from '../../../@types/formInputs';
 import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-interface Inputs {
-  name: string;
-  comment: string;
-  mail: string;
-  job: string;
-  phone: number;
-  role: boolean;
-  actualisation: boolean;
-  organisme: number;
 }
 
 function ModalAddContact({ setIsActive }: ModalProps) {
@@ -41,6 +31,7 @@ function ModalAddContact({ setIsActive }: ModalProps) {
         dispatch(setAdminOrganism(id as number));
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };

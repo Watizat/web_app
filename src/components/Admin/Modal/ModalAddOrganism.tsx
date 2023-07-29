@@ -1,4 +1,5 @@
 import axios from 'axios';
+import classNames from 'classnames';
 import { ChangeEvent, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
@@ -25,6 +26,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  const [isSaving, setIsSaving] = useState(false);
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
 
   const dispatch = useAppDispatch();
@@ -62,6 +64,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
     const address = `${data.organism.address} ${data.organism.zipcode} ${data.organism.city}`;
 
     try {
+      setIsSaving(true);
       const geolocResponse = await axios.get(
         `https://api-adresse.data.gouv.fr/search/?q=${address}`
       );
@@ -92,9 +95,11 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
         )
       );
       setIsActive(false);
+      setIsSaving(false);
       dispatch(setAdminOrganism(response.data.data.id));
       dispatch(fetchAdminOrganisms());
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
@@ -242,21 +247,25 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                     </td>
                     <td className="modal-data__hoursHour">
                       <input
-                        className="modal-data__hoursInput"
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_openam_${index + 1}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
                         {...register(`schedule_openam_${index + 1}`, {
                           validate: (value) =>
                             validateScheduleFormat(value as string),
                         })}
                       />
-                      <small>
-                        {errors[`schedule_openam_${index + 1}`] &&
-                          errors[`schedule_openam_${index + 1}`]?.message}
-                      </small>
                     </td>
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        className="modal-data__hoursInput"
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_closeam_${index + 1}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
                         {...register(`schedule_closeam_${index + 1}`, {
                           validate: (value) =>
                             validateScheduleFormat(value as string),
@@ -266,7 +275,11 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                     <td className="modal-data__hoursSeparater">/</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        className="modal-data__hoursInput"
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_openpm_${index + 1}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
                         {...register(`schedule_openpm_${index + 1}`, {
                           validate: (value) =>
                             validateScheduleFormat(value as string),
@@ -276,7 +289,11 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        className="modal-data__hoursInput"
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_closepm_${index + 1}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
                         {...register(`schedule_closepm_${index + 1}`, {
                           validate: (value) =>
                             validateScheduleFormat(value as string),
@@ -307,7 +324,8 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
               type="submit"
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
-              Sauvegarder
+              {isSaving && <span>Sauvegarde en cours...</span>}
+              {!isSaving && <span>Sauvegarder</span>}
             </button>
           </div>
         </form>

@@ -1,6 +1,13 @@
 export interface Inputs {
   zone_id: string;
   name: string;
+  comment: string;
+  mail: string;
+  job: string;
+  role: boolean;
+  actualisation: boolean;
+  organisme: number;
+  service: number;
   address: string;
   city: string;
   zipcode: number;

@@ -33,7 +33,7 @@ export const validateScheduleFormat = (value: string) => {
   }
   // Expression régulière pour valider un email
   const schedulePattern =
-    /^(?:2[0-3]|[01]?[0-9])(?::[0-5][0-9]|h(?:[0-5][0-9])?)?$/;
+    /^(?:2[0-3]|[01]?[0-9])(?::[0-5][0-9]|h(?:[0-5][0-9])?)$/;
   return schedulePattern.test(value) || false;
 };
 

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
@@ -5,7 +6,10 @@ import { Organism } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
-import { scheduleFormat } from '../../../utils/form/form';
+import {
+  scheduleFormat,
+  validateScheduleFormat,
+} from '../../../utils/form/form';
 import './Modal.scss';
 
 interface ModalDataProps {
@@ -120,44 +124,68 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                     </td>
                     <td className="modal-data__hoursHour">
                       <input
-                        className="modal-data__hoursInput"
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_openam_${day.day}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
                         {...register(`schedule_openam_${day.day}`, {
                           value: day.opentime_am
                             ?.slice(0, -3)
                             .replace(':', 'h'),
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
                         })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        className="modal-data__hoursInput"
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_closeam_${day.day}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
                         {...register(`schedule_closeam_${day.day}`, {
                           value: day.closetime_am
                             ?.slice(0, -3)
                             .replace(':', 'h'),
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
                         })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">/</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        className="modal-data__hoursInput"
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_openpm_${day.day}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
                         {...register(`schedule_openpm_${day.day}`, {
                           value: day.opentime_pm
                             ?.slice(0, -3)
                             .replace(':', 'h'),
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
                         })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        className="modal-data__hoursInput"
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_closepm_${day.day}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
                         {...register(`schedule_closepm_${day.day}`, {
                           value: day.closetime_pm
                             ?.slice(0, -3)
                             .replace(':', 'h'),
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
                         })}
                       />
                     </td>
