@@ -1,44 +1,33 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import { useAppSelector } from '../../../../hooks/redux';
 import './Transport.scss';
 import navitiaInstance from '../../../../utils/navitia';
 import { Organism } from '../../../../@types/organism';
 
-interface Endpoint {
-  lines: {
-    id: string;
-    code: string;
-    name: string;
-    color: string;
-    text_color: string;
-    commercial_mode: { name: string };
-  }[];
-}
-
-interface Place {
-  lines: {
-    id: string;
-    code: string;
-    name: string;
-    color: string;
-    text_color: string;
-    commercial_mode: { name: string };
-  }[];
-}
-
-interface StopAreas {
-  stop_areas: [id: string];
-}
-
 interface TransportData {
-  busLine: string;
-  stopName: string;
-  placeNearbyData: PlaceNearbyData[];
+  id: string;
+  name: string;
+  distance: string;
+  lines: BusLine[];
 }
 
+interface PlaceNearby {
+  places_nearby: PlaceNearbyData[];
+}
 interface PlaceNearbyData {
-  distance: number;
+  id: string;
   name: string;
+  distance: string;
+  lines: BusLine[];
+}
+
+interface BusLine {
+  id: string;
+  code: string;
+  color: string;
+  text_color: string;
+  commercial_mode: string; // Modification de l'interface CommercialMode
 }
 
 function Transport() {
@@ -48,69 +37,84 @@ function Transport() {
   );
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPlaceNearby = async () => {
+      const placeNearbyEndpoint = `/coverage/fr-sw/coord/${organism.longitude}%3B${organism.latitude}/places_nearby?distance=500&type[]=stop_area&`;
       try {
-        const endpoint = `/coverage/fr-sw/coord/${organism.longitude}%3B${organism.latitude}/lines`;
-        const response = await navitiaInstance.get(endpoint);
-        const endPoint = response.data as Endpoint;
-        const busLines = endPoint.lines;
-        // console.log('objet buslines', busLines);
-        const batchSize = 10;
-        const dataTransport = [];
-        const promises = busLines.map(async (line) => {
-          const stopAreas = `coverage/fr-sw/lines/${line.id}/stop_areas`;
-          try {
-            const stopAreasResponse = await navitiaInstance.get(stopAreas);
-            const stopAreasData = stopAreasResponse.data as StopAreas;
-            // console.log('stoparea :', stopAreasData);
-            const stopsPromises = stopAreasData.stop_areas.map(async (stop) => {
-              // console.log('stop dans le map :', stop.id);
-              const placeNearby = `coverage/fr-sw/stop_areas/${stop.id}/places_nearby`;
-              // console.log('appel api placenearby :', placeNearby);
-              try {
-                // eslint-disable-next-line prettier/prettier
-                const placeNearbyResponse = await navitiaInstance.get(placeNearby);
-                const placeNearbyData = placeNearbyResponse.data;
-                // console.log('data des placeNear', placeNearbyResponse);
-                // console.log('placenearby dans le map :', placeNearbyResponse);
-                return {
-                  busLine: line.code,
-                  stopName: stop.name,
-                  placeNearbyData,
-                };
-              } catch (error) {
-                console.error(
-                  "Erreur lors de l'appel API des placesNearby",
-                  error
-                );
-                return null;
-              }
-            });
-
-            // console.log('stoppromises :', stopsPromises);
-            const stopResponses = await Promise.all(stopsPromises);
-            // console.log('les réponses :', responses);
-            const filteredResponses = stopResponses.filter(
-              (stop) => stop !== null
-            );
-            dataTransport.push(...filteredResponses);
-            // console.log('les réponses filtrer :', filteredResponses)
-            console.log('Données récupérées :', dataTransport);
-          } catch (error) {
-            console.error("Erreur lors de l'appel API des stopAreas", error);
-          }
+        const responseNearby = await navitiaInstance.get(placeNearbyEndpoint);
+        const placesNearby = responseNearby.data as PlaceNearby;
+        const placeNearbyTransport = placesNearby.places_nearby.map((place) => {
+          return {
+            id: place.id,
+            name: place.name,
+            distance: place.distance,
+            lines: [],
+          };
         });
-        await Promise.all(promises);
-        setData(dataTransport);
+        return placeNearbyTransport;
       } catch (error) {
-        console.error("Erreur lors de l'appel API endpoint:", error);
+        console.error("Erreur lors de l'appel API placeNearby:", error);
+        return null;
       }
     };
+
+    const fetchBusLines = async () => {
+      const placeNearbyTransport = await fetchPlaceNearby();
+      // console.log('placeNearbyTransport :', placeNearbyTransport);
+      if (!placeNearbyTransport) {
+        return;
+      }
+      const busLinesPromises = placeNearbyTransport.map(async (stop) => {
+        const { id, ...rest } = stop;
+        const busLinesEndpoint = `coverage/fr-sw/stop_areas/${stop.id}/lines`;
+        try {
+          const busLinesResponse = await navitiaInstance.get(busLinesEndpoint);
+          const busLinesData = busLinesResponse.data;
+          // console.log('busLinesData :', busLinesData);
+          const busLine = busLinesData.lines.map((line) => {
+            return {
+              id: line.id,
+              code: line.code,
+              color: line.color,
+              text_color: line.text_color,
+              commercial_mode: line.commercial_mode.name,
+            };
+          });
+          const updatedStop = {
+            id,
+            ...rest,
+            lines: busLine,
+          };
+
+          return updatedStop;
+        } catch (error) {
+          console.error("Erreur lors de l'appel API des BusLines", error);
+        }
+      });
+
+      const updatedPlaceNearbyTransport = await Promise.all(busLinesPromises);
+
+      console.log('All data :', updatedPlaceNearbyTransport);
+      return updatedPlaceNearbyTransport;
+    };
+    const fetchData = async () => {
+      const placeNearbyTransport = await fetchPlaceNearby();
+
+      if (!placeNearbyTransport) {
+        setData([]);
+        return;
+      }
+
+      const dataWithBusLines = await fetchBusLines(placeNearbyTransport);
+      setData(dataWithBusLines);
+
+      console.log('All data :', dataWithBusLines);
+    };
+
     fetchData();
   }, [organism]);
 
   // si l'organism n'existe pas
-  if (data === null) {
+  if (data.length === 0) {
     return (
       <article>
         <h3>Accès en transports</h3>
@@ -118,32 +122,39 @@ function Transport() {
       </article>
     );
   }
+
   return (
     <article>
       <h3>Accès en transports</h3>
-      {/*  {dataTransport.map((item) => (
-        <p className="transport" key={item.id}>
-          <i
-            className={
-              item.busLine.commercial_mode.name === 'Bus'
-                ? classNames('las la-bus-alt')
-                : classNames('las la-subway')
-            }
-          />
-          <span
-            className="transport-num"
-            style={{
-              backgroundColor: `#${item.busLine.color}`,
-              color: `#${item.busLine.text_color}`,
-            }}
-          >
-            {item.busLine.code}
-          </span>
-
-          {line.name}
-        </p>
-      ))} */}
-      {/* <p><span style={{backgound-color:{area.color}}}>{area.code}</span>{area.name}</p> */}
+      {data.map((item) => (
+        <div className="transport" key={item.id}>
+          <p>
+            {item.name} à {item.distance} m
+          </p>
+          <div className="transport-lines">
+            {item.lines.map((line) => (
+              <React.Fragment key={line.id}>
+                <span
+                  className="transport-num"
+                  style={{
+                    backgroundColor: `#${line.color}`,
+                    color: `#${line.text_color}`,
+                  }}
+                >
+                  <i
+                    className={
+                      line.commercial_mode === 'Bus'
+                        ? classNames('las la-bus-alt')
+                        : classNames('las la-subway')
+                    }
+                  />
+                  {line.code}
+                </span>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      ))}
     </article>
   );
 }
