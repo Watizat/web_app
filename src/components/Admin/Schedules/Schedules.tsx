@@ -33,22 +33,22 @@ function Schedules({ schedule }: SchedulesProps) {
     const noLunchBreak = openAm && !closeAm && !openPm && closePm;
 
     if (openMorning && openAfternoon) {
-      return `${openAm} à ${closeAm} - ${openPm} à ${closePm}`;
+      return `${openAm} à ${closeAm} et ${openPm} à ${closePm}`;
     }
     if (noLunchBreak) {
       return `${openAm} à ${closePm}`;
     }
 
     if (!openMorning && openAfternoon) {
-      return `Fermé - ${openPm} à ${closePm}`;
+      return `${openPm} à ${closePm}`;
     }
 
     if (openMorning && !openAfternoon) {
-      return `${openAm} à ${closeAm} - Fermé`;
+      return `${openAm} à ${closeAm}`;
     }
 
     if (closeAllDay) {
-      return `Fermé`;
+      return 'Fermé';
     }
     return 'Fermé';
   }

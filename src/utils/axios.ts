@@ -22,7 +22,7 @@ const authRefresh: {
   queue: [], // File d'attente pour les requêtes en attente de token rafraîchi
   inProgress: false, // Indique si le rafraîchissement du token est en cours
   bearer: '', // Le token d'authentification actuel
-  doRefresh: (user) => {
+  doRefresh: async (user) => {
     if (authRefresh.inProgress) {
       // Si le rafraîchissement est déjà en cours, renvoyer la promesse en attente
       return new Promise<string | undefined>((resolve) => {
@@ -35,7 +35,7 @@ const authRefresh: {
     authRefresh.inProgress = true; // Définir en cours de rafraîchissement
 
     // Appel à l'API pour rafraîchir le token
-    const refreshPromise = axios
+    const refreshPromise = await axios
       .post<{ data: AuthResponse }>(
         'https://watizat.lunalink.nl/auth/refresh',
         {

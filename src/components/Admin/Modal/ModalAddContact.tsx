@@ -55,7 +55,7 @@ function ModalAddContact({ setIsActive }: ModalProps) {
             type="number"
             defaultValue={id}
             hidden
-            {...register('organisme')}
+            {...register('organisme_id')}
           />
           <div className="modal-case">
             <h4 className="modal-case__title">Nom du contact</h4>

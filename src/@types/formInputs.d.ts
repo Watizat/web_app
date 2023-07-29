@@ -6,7 +6,8 @@ export interface Inputs {
   job: string;
   role: boolean;
   actualisation: boolean;
-  organisme: number;
+  organisme_id: number;
+  categorie_id: number;
   service: number;
   address: string;
   city: string;
