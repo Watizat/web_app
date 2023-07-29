@@ -1,15 +1,6 @@
 import { Inputs } from '../../@types/formInputs';
 
-// Fonction permettant de transformer une string en slug en retirant les accents et en remplaçant les espaces par des tirets
-export function createSlug(inputString: string) {
-  const slug = inputString
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\s+/g, '-')
-    .toLowerCase();
-  return slug;
-}
-
+// Fonction permettant de mettre en forme les données d'horaires et return un tableau d'objets horaire
 export function scheduleFormat(data: Inputs) {
   const myArray = [];
   // eslint-disable-next-line no-plusplus
@@ -34,6 +25,7 @@ export function scheduleFormat(data: Inputs) {
   return myArray;
 }
 
+// Fonction permettant de vérifier que le format des horaires correspond à ce qui est attendu par le serveur
 export const validateScheduleFormat = (value: string) => {
   // Si la valeur est vide, la validation réussit
   if (!value) {
@@ -44,3 +36,13 @@ export const validateScheduleFormat = (value: string) => {
     /^(?:2[0-3]|[01]?[0-9])(?::[0-5][0-9]|h(?:[0-5][0-9])?)?$/;
   return schedulePattern.test(value) || false;
 };
+
+// Fonction permettant de transformer une string en slug en retirant les accents et en remplaçant les espaces par des tirets
+export function createSlug(inputString: string) {
+  const slug = inputString
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-')
+    .toLowerCase();
+  return slug;
+}
