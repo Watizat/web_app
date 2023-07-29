@@ -46,3 +46,13 @@ export function createSlug(inputString: string) {
     .toLowerCase();
   return slug;
 }
+
+export const validateEmail = (value: string) => {
+  // Si la valeur est vide, la validation réussit
+  if (!value) {
+    return true;
+  }
+  // Expression régulière pour valider un email
+  const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  return emailPattern.test(value) || `Cette adresse email n'est pas valide`;
+};
