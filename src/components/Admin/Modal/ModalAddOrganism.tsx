@@ -20,15 +20,15 @@ interface ModalProps {
 }
 
 function ModalAddOrganism({ setIsActive }: ModalProps) {
-  const [select, setSelect] = useState(localStorage.getItem('city') || '');
-  const zones = useAppSelector((state) => state.admin.zones);
-  const dispatch = useAppDispatch();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  const [select, setSelect] = useState(localStorage.getItem('city') || '');
+
+  const dispatch = useAppDispatch();
+  const zones = useAppSelector((state) => state.admin.zones);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     localStorage.setItem('city', event.target.value);
@@ -38,7 +38,6 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     function setData(data: Inputs) {
       return {
-        horaire: scheduleFormat(data),
         organism: {
           name: data.name,
           slug: createSlug(data.name.toString()),
@@ -51,11 +50,12 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
           pmr: !!data.pmr,
           animals: !!data.animals,
         },
-        translations: {
+        translation: {
           description: data.description,
           infos_alerte: data.infos_alerte,
           // langue_id
         },
+        horaire: scheduleFormat(data),
       };
     }
     const data = setData(formData);
@@ -76,13 +76,13 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
       });
 
       await axiosInstance.post(`/items/organisme_translation`, {
-        ...data.translations,
+        ...data.translation,
         organisme: response.data.data.id,
         langue_id: 1,
       });
 
       await Promise.all(
-        // Il faut retirer la propriété id de l'objet horaire pour éviter une erreur à la création dans la bdd
+        // Il faut retirer la propriété id de l'objet horaire (inutile ici) pour éviter une erreur à la création dans la bdd
         data.horaire.map(({ id, ...horaire }) =>
           axiosInstance.post(`/items/schedule`, {
             ...horaire,
