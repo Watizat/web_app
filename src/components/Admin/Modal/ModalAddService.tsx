@@ -34,9 +34,9 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
           description: data.description,
           infos_alerte: data.infos_alerte,
         },
-        horaire: scheduleFormat(data),
         categorie_id: data.categorie_id,
         organisme_id: data.organisme_id,
+        horaire: scheduleFormat(data),
       };
     }
     const data = setData(formData);
@@ -83,10 +83,7 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
 
             <label className="modal-contact__actu">
               Catégorie du service
-              <select
-                {...register('categorie_id')}
-                defaultValue={categoriesList[0].translations[0].name}
-              >
+              <select {...register('categorie_id')}>
                 {categoriesList.map((category) => (
                   <option
                     key={category.translations[0].name}
