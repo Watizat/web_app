@@ -115,7 +115,7 @@ function ModalAddContact({ setIsActive }: ModalProps) {
             <div className=" modal-contact__roles">
               <label className="modal-contact__private">
                 Publicité du contact
-                <select {...register('role', { required: true })}>
+                <select {...register('visibility', { required: true })}>
                   <option value="false">Privé</option>
                   <option value="true">Public</option>
                 </select>

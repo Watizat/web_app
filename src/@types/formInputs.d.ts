@@ -4,7 +4,7 @@ export interface Inputs {
   comment: string;
   mail: string;
   job: string;
-  role: boolean;
+  visibility: boolean;
   actualisation: boolean;
   organisme_id: number;
   categorie_id: number;

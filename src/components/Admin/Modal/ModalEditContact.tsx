@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Inputs } from '../../../@types/formInputs';
 import { Contact } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
+import { validateEmail } from '../../../utils/form/form';
 import './Modal.scss';
 import ModalDeleteConfirmation from './ModalDeleteContactConfirmation';
 
@@ -16,10 +19,13 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
   const id = useAppSelector((state) => state.admin.organism?.id as number);
   const dispatch = useAppDispatch();
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const data = Object.fromEntries(form);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       await axiosInstance.patch(`/items/contact/${contact.id}`, {
         ...data,
@@ -27,9 +33,10 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
       dispatch(setAdminOrganism(id));
       setIsActive(false);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
-  }
+  };
 
   if (isActiveConfirmation) {
     return (
@@ -45,22 +52,23 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
     <div className="modal">
       <div className="modal-main">
         <h1 className="modal-title">Modifier un contact</h1>
-        <form className="modal-list" onSubmit={handleSubmit}>
+        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
           <div className="modal-case">
             <h4 className="modal-case__title">Nom du contact</h4>
             <input
               className="modal-case__inputTxt"
               type="text"
-              name="name"
+              {...register('name', { required: 'Ce champs est requis' })}
               defaultValue={contact.name}
             />
+            {errors.name && <small>{errors.name.message}</small>}
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Commentaire </h4>
             <input
               className="modal-case__inputTxt"
               type="text"
-              name="comment"
+              {...register('comment')}
               defaultValue={contact.comment}
             />
           </div>
@@ -70,7 +78,7 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
               className="modal-case__inputTxt"
               type="text"
               defaultValue={contact.job}
-              name="job"
+              {...register('job')}
             />
           </div>
           <div className="modal-contact__modes">
@@ -80,8 +88,11 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
                 className="modal-case__inputTxt modal-contact__mail"
                 type="text"
                 defaultValue={contact.mail}
-                name="mail"
+                {...register('mail', {
+                  validate: validateEmail,
+                })}
               />
+              {errors.mail?.message && <small>{errors.mail.message}</small>}
             </div>
             <div className="modal-case">
               <h4 className="modal-case__title">Telephone</h4>
@@ -89,8 +100,20 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
                 className="modal-case__inputTxt"
                 type="number"
                 defaultValue={contact.phone}
-                name="phone"
+                {...register('phone', {
+                  minLength: {
+                    value: 10,
+                    message:
+                      'Le numéro de téléphone doit comporter au moins 10 chiffres.',
+                  },
+                  maxLength: {
+                    value: 10,
+                    message:
+                      'Le numéro de téléphone ne peut pas comporter plus de 10 chiffres.',
+                  },
+                })}
               />
+              {errors.phone?.message && <small>{errors.phone.message}</small>}
             </div>
           </div>
           <div className="modal-case">
@@ -99,7 +122,7 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
               <label className="modal-contact__private">
                 Publicité du contact
                 <select
-                  name="visibility"
+                  {...register('visibility', { required: true })}
                   defaultValue={`${contact.visibility}`}
                 >
                   <option value="false">Privé</option>
@@ -109,7 +132,7 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
               <label className="modal-contact__actu">
                 Contact pour actualisation
                 <select
-                  name="actualisation"
+                  {...register('actualisation', { required: true })}
                   defaultValue={`${contact.actualisation}`}
                 >
                   <option value="false">Non</option>
