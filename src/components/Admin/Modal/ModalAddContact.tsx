@@ -1,19 +1,19 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Inputs } from '../../../@types/formInputs';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
-import { axiosInstance } from '../../../utils/axios';
-
-import { Inputs } from '../../../@types/formInputs';
+import { addOrganismContact } from '../../../store/reducers/crud';
 import { validateEmail } from '../../../utils/form/form';
 import './Modal.scss';
 
 interface ModalProps {
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalAddContact({ setIsActive }: ModalProps) {
+function ModalAddContact({ setIsModalActive }: ModalProps) {
   const dispatch = useAppDispatch();
   const id = useAppSelector((state) => state.admin.organism?.id);
+  const isSaving = useAppSelector((state) => state.crud.isSaving);
 
   const {
     register,
@@ -22,19 +22,9 @@ function ModalAddContact({ setIsActive }: ModalProps) {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    try {
-      const response = await axiosInstance.post('/items/contact', {
-        ...data,
-        service: null,
-      });
-      if (response.status === 200) {
-        setIsActive(false);
-        dispatch(setAdminOrganism(id as number));
-      }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
+    await dispatch(addOrganismContact(data));
+    await dispatch(setAdminOrganism(id as number));
+    setIsModalActive(false);
   };
 
   return (
@@ -133,7 +123,7 @@ function ModalAddContact({ setIsActive }: ModalProps) {
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"
-              onClick={() => setIsActive(false)}
+              onClick={() => setIsModalActive(false)}
             >
               Annuler
             </button>
@@ -141,7 +131,8 @@ function ModalAddContact({ setIsActive }: ModalProps) {
               type="submit"
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
-              Sauvegarder
+              {isSaving && <span>Sauvegarde en cours...</span>}
+              {!isSaving && <span>Sauvegarder</span>}
             </button>
           </div>
         </form>

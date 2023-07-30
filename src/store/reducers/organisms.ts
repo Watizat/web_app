@@ -214,9 +214,6 @@ const organismReducer = createReducer(initialState, (builder) => {
       state.organisms = action.payload;
       state.isLoading = false;
     })
-    .addCase(fetchOrganisms.rejected, (state, action) => {
-      console.log(action.payload);
-    })
     .addCase(fetchOrganism.pending, (state) => {
       state.isLoading = true;
     })

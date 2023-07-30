@@ -1,50 +1,31 @@
-import axios from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
 import { Organism } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
-import { axiosInstance } from '../../../utils/axios';
+import { editOrganismInfos } from '../../../store/reducers/crud';
 import './Modal.scss';
 
 interface ModalProps {
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   organism: Organism;
 }
 
-function ModalEditInfos({ setIsActive, organism }: ModalProps) {
+function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const id = useAppSelector((state) => state.admin.organism?.id as number);
+  const organismId = useAppSelector(
+    (state) => state.admin.organism?.id as number
+  );
   const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const address = `${data.address} ${data.zipcode} ${data.city}`;
-
-    try {
-      const geolocResponse = await axios.get(
-        `https://api-adresse.data.gouv.fr/search/?q=${address}`
-      );
-
-      const [longitude, latitude] =
-        geolocResponse.data.features[0].geometry.coordinates;
-      const response = await axiosInstance.patch(`/items/organisme/${id}`, {
-        ...data,
-        latitude,
-        longitude,
-        service: null,
-      });
-      if (response.status === 200) {
-        dispatch(setAdminOrganism(id));
-      }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
-    setIsActive(false);
+    await dispatch(editOrganismInfos({ data, organismId }));
+    await dispatch(setAdminOrganism(organismId));
+    setIsModalActive(false);
   };
 
   return (
@@ -107,7 +88,7 @@ function ModalEditInfos({ setIsActive, organism }: ModalProps) {
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"
-              onClick={() => setIsActive(false)}
+              onClick={() => setIsModalActive(false)}
             >
               Annuler
             </button>
