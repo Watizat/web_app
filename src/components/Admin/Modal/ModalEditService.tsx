@@ -6,11 +6,7 @@ import { Service } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { editService } from '../../../store/reducers/crud';
-import { axiosInstance } from '../../../utils/axios';
-import {
-  scheduleFormat,
-  validateScheduleFormat,
-} from '../../../utils/form/form';
+import { validateScheduleFormat } from '../../../utils/form/form';
 import './Modal.scss';
 import ModalDeleteServiceConfirmation from './ModalDeleteServiceConfirmation';
 
@@ -39,6 +35,7 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
     const serviceId = service.id;
     const serviceTranslationId = service.translations[0].id;
     await dispatch(editService({ formData, serviceId, serviceTranslationId }));
+
     setIsActive(false);
     await dispatch(setAdminOrganism(organismId));
   };
