@@ -1,8 +1,15 @@
+import classNames from 'classnames';
 import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Inputs } from '../../../@types/formInputs';
 import { Organism } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
+import {
+  scheduleFormat,
+  validateScheduleFormat,
+} from '../../../utils/form/form';
 import './Modal.scss';
 
 interface ModalDataProps {
@@ -10,53 +17,28 @@ interface ModalDataProps {
   organism: Organism;
 }
 
-/**
- * Transforme un objet de données en un format spécifique pour l'envoi au serveur.
- * @param {Object.<string, FormDataEntryValue>} data - Les données à transformer.
- * @returns {Object} Un nouvel objet contenant les données transformées.
- */
-function setData(data: { [k: string]: FormDataEntryValue }) {
-  const myArray = [];
-  // eslint-disable-next-line no-plusplus
-  for (let i = 1; i < 8; i++) {
-    if (data[`schedule_id_${i}`]) {
-      myArray.push({
-        day: i,
-        id: data[`schedule_id_${i}`],
-        opentime_am: data[`schedule_openam_${i}`]
-          ? String(data[`schedule_openam_${i}`]).replace('h', ':')
-          : null,
-        closetime_am: data[`schedule_closeam_${i}`]
-          ? String(data[`schedule_closeam_${i}`]).replace('h', ':')
-          : null,
-        opentime_pm: data[`schedule_openpm_${i}`]
-          ? String(data[`schedule_openpm_${i}`]).replace('h', ':')
-          : null,
-        closetime_pm: data[`schedule_closepm_${i}`]
-          ? String(data[`schedule_closepm_${i}`]).replace('h', ':')
-          : null,
-      });
-    }
-  }
-  return {
-    organism: { pmr: !!data.pmr, animals: !!data.animals },
-    organism_translation: {
-      description: data.description,
-      infos_alerte: data.info_alerte,
-    },
-    horaire: myArray,
-  };
-}
-
 function ModalEditData({ organism, setIsActive }: ModalDataProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
   const id = useAppSelector((state) => state.admin.organism?.id as number);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const data = setData(Object.fromEntries(form));
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    function setData(data: Inputs) {
+      return {
+        organism: { pmr: !!data.pmr, animals: !!data.animals },
+        translation: {
+          description: data.description,
+          infos_alerte: data.info_alerte,
+        },
+        horaire: scheduleFormat(data),
+      };
+    }
+    const data = setData(formData);
     try {
       setIsLoading(true);
       await axiosInstance.patch(`/items/organisme/${id}`, {
@@ -65,7 +47,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
       await axiosInstance.patch(
         `/items/organisme_translation/${organism.translations[0].id}`,
         {
-          ...data.organism_translation,
+          ...data.translation,
         }
       );
       await Promise.all(
@@ -81,13 +63,13 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className="modal">
       <div className="modal-main">
         <h1 className="modal-title">Modifier les informations génerales</h1>
-        <form className="modal-list" onSubmit={handleSubmit}>
+        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
           <div className="modal-case">
             <h4 className="modal-case__title">Accès</h4>
             <div className="modal-data__accessDetails">
@@ -95,7 +77,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                 <input
                   type="checkbox"
                   defaultChecked={organism.pmr}
-                  name="pmr"
+                  {...register('pmr')}
                 />
                 Accessible PSH / PMR
               </label>
@@ -103,7 +85,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                 <input
                   type="checkbox"
                   defaultChecked={organism.animals}
-                  name="animals"
+                  {...register('animals')}
                 />
                 Animaux admis
               </label>
@@ -114,7 +96,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
             <textarea
               className="modal-case__textarea"
               defaultValue={organism.translations[0].description}
-              name="description"
+              {...register('description')}
             />
           </div>
           <div className="modal-case">
@@ -135,46 +117,76 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                       <span>{day.day}</span>
                       <input
                         type="hidden"
-                        name={`schedule_id_${day.day}`}
-                        value={day.id}
+                        {...register(`schedule_id_${day.day}`, {
+                          value: day.id,
+                        })}
                       />
                     </td>
                     <td className="modal-data__hoursHour">
                       <input
-                        defaultValue={day.opentime_am
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
-                        className="modal-data__hoursInput"
-                        name={`schedule_openam_${day.day}`}
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_openam_${day.day}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
+                        {...register(`schedule_openam_${day.day}`, {
+                          value: day.opentime_am
+                            ?.slice(0, -3)
+                            .replace(':', 'h'),
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        defaultValue={day.closetime_am
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
-                        className="modal-data__hoursInput"
-                        name={`schedule_closeam_${day.day}`}
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_closeam_${day.day}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
+                        {...register(`schedule_closeam_${day.day}`, {
+                          value: day.closetime_am
+                            ?.slice(0, -3)
+                            .replace(':', 'h'),
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">/</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        defaultValue={day.opentime_pm
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
-                        className="modal-data__hoursInput"
-                        name={`schedule_openpm_${day.day}`}
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_openpm_${day.day}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
+                        {...register(`schedule_openpm_${day.day}`, {
+                          value: day.opentime_pm
+                            ?.slice(0, -3)
+                            .replace(':', 'h'),
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        defaultValue={day.closetime_pm
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
-                        name={`schedule_closepm_${day.day}`}
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_closepm_${day.day}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
+                        {...register(`schedule_closepm_${day.day}`, {
+                          value: day.closetime_pm
+                            ?.slice(0, -3)
+                            .replace(':', 'h'),
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                   </tr>
@@ -187,7 +199,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
             <textarea
               className="modal-case__textarea"
               defaultValue={organism.translations[0].infos_alerte}
-              name="info_alerte"
+              {...register('info_alerte')}
             />
           </div>
           <div className="modal-actions">
