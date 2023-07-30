@@ -171,15 +171,17 @@ export const addServiceContact = createAsyncThunk(
   }
 );
 
-export const addOrganismContact = createAsyncThunk(
-  'crud/add-contact-organism',
-  async (formData: Inputs) => {
-    await axiosInstance.post('/items/contact', {
-      ...formData,
-      service: null,
-    });
-  }
-);
+export const addOrganismContact = createAsyncThunk<
+  number,
+  Inputs,
+  { rejectValue: string }
+>('crud/add-contact-organism', async (formData: Inputs) => {
+  const { data } = await axiosInstance.post('/items/contac', {
+    ...formData,
+    service: null,
+  });
+  return data;
+});
 
 export const editOrganismInfos = createAsyncThunk(
   'crud/edit-organism-infos',
@@ -286,6 +288,9 @@ const crudReducer = createReducer(initialState, (builder) => {
       state.isSaving = true;
     })
     .addCase(addOrganismContact.fulfilled, (state) => {
+      state.isSaving = false;
+    })
+    .addCase(addOrganismContact.rejected, (state) => {
       state.isSaving = false;
     })
     .addCase(editContact.pending, (state) => {

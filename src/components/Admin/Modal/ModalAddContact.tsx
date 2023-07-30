@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
@@ -16,6 +17,7 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const dispatch = useAppDispatch();
   const organismId = useAppSelector(
@@ -24,15 +26,22 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
   const isSaving = useAppSelector((state) => state.crud.isSaving);
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    await dispatch(addOrganismContact(formData));
-    setIsModalActive(false);
-    await dispatch(setAdminOrganism(organismId));
+    const response = await dispatch(addOrganismContact(formData));
+    if (response.meta.requestStatus === 'fulfilled') {
+      setIsModalActive(false);
+      await dispatch(setAdminOrganism(organismId));
+    } else {
+      setErrorMessage(
+        'Une erreur est survenue lors de la création du contact.'
+      );
+    }
   };
 
   return (
     <div className="modal">
       <div className="modal-main">
         <h1 className="modal-title">Ajouter un contact</h1>
+        {errorMessage && <span>{errorMessage}</span>}
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
           <input
             type="number"
