@@ -22,7 +22,7 @@ function ModalDeleteConfirmation({
   async function handleDelete(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     await axiosInstance.delete(`/items/contact/${id}`);
-    dispatch(setAdminOrganism(organismId));
+    await dispatch(setAdminOrganism(organismId));
     setIsActive(false);
     setIsActiveConfirmation(false);
   }

@@ -4,7 +4,7 @@ import { Inputs } from '../../../@types/formInputs';
 import { Contact } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
-import { axiosInstance } from '../../../utils/axios';
+import { editContact } from '../../../store/reducers/crud';
 import { validateEmail } from '../../../utils/form/form';
 import './Modal.scss';
 import ModalDeleteConfirmation from './ModalDeleteContactConfirmation';
@@ -15,27 +15,23 @@ interface ModalProps {
 }
 
 function ModalEditContact({ contact, setIsActive }: ModalProps) {
-  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
-  const id = useAppSelector((state) => state.admin.organism?.id as number);
-  const dispatch = useAppDispatch();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    try {
-      await axiosInstance.patch(`/items/contact/${contact.id}`, {
-        ...data,
-      });
-      dispatch(setAdminOrganism(id));
-      setIsActive(false);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
+  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const id = useAppSelector((state) => state.admin.organism?.id as number);
+  const isSaving = useAppSelector((state) => state.crud.isSaving);
+
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    const contactId = contact.id;
+    await dispatch(editContact({ formData, contactId }));
+    setIsActive(false);
+    await dispatch(setAdminOrganism(id));
   };
 
   if (isActiveConfirmation) {
@@ -160,7 +156,8 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
               type="submit"
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
-              Sauvegarder
+              {isSaving && <span>Sauvegarde en cours...</span>}
+              {!isSaving && <span>Sauvegarder</span>}{' '}
             </button>
           </div>
         </form>

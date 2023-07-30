@@ -1,15 +1,11 @@
 import classNames from 'classnames';
-import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
 import { Organism } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
-import { axiosInstance } from '../../../utils/axios';
-import {
-  scheduleFormat,
-  validateScheduleFormat,
-} from '../../../utils/form/form';
+import { editOrganismData } from '../../../store/reducers/crud';
+import { validateScheduleFormat } from '../../../utils/form/form';
 import './Modal.scss';
 
 interface ModalDataProps {
@@ -23,46 +19,20 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const id = useAppSelector((state) => state.admin.organism?.id as number);
+
   const dispatch = useAppDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const organismId = useAppSelector(
+    (state) => state.admin.organism?.id as number
+  );
+  const isSaving = useAppSelector((state) => state.crud.isSaving);
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    function setData(data: Inputs) {
-      return {
-        organism: { pmr: !!data.pmr, animals: !!data.animals },
-        translation: {
-          description: data.description,
-          infos_alerte: data.info_alerte,
-        },
-        horaire: scheduleFormat(data),
-      };
-    }
-    const data = setData(formData);
-    try {
-      setIsLoading(true);
-      await axiosInstance.patch(`/items/organisme/${id}`, {
-        ...data.organism,
-      });
-      await axiosInstance.patch(
-        `/items/organisme_translation/${organism.translations[0].id}`,
-        {
-          ...data.translation,
-        }
-      );
-      await Promise.all(
-        data.horaire.map((horaire) =>
-          axiosInstance.patch(`/items/schedule/${horaire.id}`, horaire)
-        )
-      );
-
-      dispatch(setAdminOrganism(id));
-      setIsActive(false);
-      setIsLoading(false);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
+    const organismTranslationId = organism.translations[0].id;
+    await dispatch(
+      editOrganismData({ formData, organismId, organismTranslationId })
+    );
+    setIsActive(false);
+    await dispatch(setAdminOrganism(organismId));
   };
 
   return (
@@ -214,8 +184,8 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
               type="submit"
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
-              {isLoading && <span>Sauvegarde en cours...</span>}
-              {!isLoading && <span>Sauvegarder</span>}
+              {isSaving && <span>Sauvegarde en cours...</span>}
+              {!isSaving && <span>Sauvegarder</span>}
             </button>
           </div>
         </form>

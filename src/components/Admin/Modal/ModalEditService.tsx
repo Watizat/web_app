@@ -5,6 +5,7 @@ import { Inputs } from '../../../@types/formInputs';
 import { Service } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
+import { editService } from '../../../store/reducers/crud';
 import { axiosInstance } from '../../../utils/axios';
 import {
   scheduleFormat,
@@ -19,61 +20,27 @@ interface ServiceModalProps {
 }
 
 function ModalEditService({ service, setIsActive }: ServiceModalProps) {
+  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
+  const dispatch = useAppDispatch();
   const categoriesList = useAppSelector((state) => state.organism.categories);
   const organismId = useAppSelector(
     (state) => state.admin.organism?.id as number
   );
-  const [isLoading, setIsLoading] = useState(false);
-  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
-
-  const dispatch = useAppDispatch();
+  const isSaving = useAppSelector((state) => state.crud.isSaving);
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    function setData(data: Inputs) {
-      return {
-        translations: {
-          name: data.name,
-          description: data.description,
-          infos_alerte: data.infos_alerte,
-        },
-        categorie_id: data.categorie_id,
-        organisme_id: data.organisme_id,
-        horaire: scheduleFormat(data),
-      };
-    }
-    const data = setData(formData);
-    try {
-      setIsLoading(true);
-      await axiosInstance.patch(`/items/service/${service.id}`, {
-        categorie_id: data.categorie_id,
-      });
-
-      await axiosInstance.patch(
-        `/items/service_translation/${service.translations[0].id}`,
-        {
-          ...data.translations,
-        }
-      );
-
-      await Promise.all(
-        data.horaire.map((horaire) =>
-          axiosInstance.patch(`/items/schedule/${horaire.id}`, {
-            ...horaire,
-          })
-        )
-      );
-      setIsLoading(false);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
-    dispatch(setAdminOrganism(organismId));
+    const serviceId = service.id;
+    const serviceTranslationId = service.translations[0].id;
+    await dispatch(editService({ formData, serviceId, serviceTranslationId }));
     setIsActive(false);
+    await dispatch(setAdminOrganism(organismId));
   };
 
   if (isActiveConfirmation) {
@@ -258,8 +225,8 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
               type="submit"
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
-              {isLoading && <span>Sauvegarde en cours...</span>}
-              {!isLoading && <span>Sauvegarder</span>}{' '}
+              {isSaving && <span>Sauvegarde en cours...</span>}
+              {!isSaving && <span>Sauvegarder</span>}{' '}
             </button>
           </div>
         </form>

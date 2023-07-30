@@ -22,7 +22,7 @@ function ModalDeleteServiceConfirmation({
   async function handleDelete(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     await axiosInstance.delete(`/items/service/${id}`);
-    dispatch(setAdminOrganism(organismId));
+    await dispatch(setAdminOrganism(organismId));
     setIsActive(false);
     setIsActiveConfirmation(false);
   }

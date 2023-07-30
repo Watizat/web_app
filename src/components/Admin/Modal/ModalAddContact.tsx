@@ -11,20 +11,22 @@ interface ModalProps {
 }
 
 function ModalAddContact({ setIsModalActive }: ModalProps) {
-  const dispatch = useAppDispatch();
-  const id = useAppSelector((state) => state.admin.organism?.id);
-  const isSaving = useAppSelector((state) => state.crud.isSaving);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await dispatch(addOrganismContact(data));
-    await dispatch(setAdminOrganism(id as number));
+  const dispatch = useAppDispatch();
+  const organismId = useAppSelector(
+    (state) => state.admin.organism?.id as number
+  );
+  const isSaving = useAppSelector((state) => state.crud.isSaving);
+
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    await dispatch(addOrganismContact(formData));
     setIsModalActive(false);
+    await dispatch(setAdminOrganism(organismId));
   };
 
   return (
@@ -34,7 +36,7 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
           <input
             type="number"
-            defaultValue={id}
+            defaultValue={organismId}
             hidden
             {...register('organisme')}
           />

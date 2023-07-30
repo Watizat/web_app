@@ -3,7 +3,7 @@ import { Inputs } from '../../../@types/formInputs';
 import { Service } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
-import { axiosInstance } from '../../../utils/axios';
+import { addServiceContact } from '../../../store/reducers/crud';
 import { validateEmail } from '../../../utils/form/form';
 import './Modal.scss';
 
@@ -13,29 +13,22 @@ interface ModalProps {
 }
 
 function ModalAddServiceContact({ service, setIsActive }: ModalProps) {
-  const id = useAppSelector((state) => state.admin.organism?.id);
-  const dispatch = useAppDispatch();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    try {
-      const response = await axiosInstance.post('/items/contact', {
-        ...data,
-        organisme: null,
-      });
-      if (response.status === 200) {
-        setIsActive(false);
-        dispatch(setAdminOrganism(id as number));
-      }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
+  const dispatch = useAppDispatch();
+  const organismId = useAppSelector(
+    (state) => state.admin.organism?.id as number
+  );
+  const isSaving = useAppSelector((state) => state.crud.isSaving);
+
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    await dispatch(addServiceContact(formData));
+    setIsActive(false);
+    await dispatch(setAdminOrganism(organismId));
   };
 
   return (
@@ -138,7 +131,8 @@ function ModalAddServiceContact({ service, setIsActive }: ModalProps) {
               type="submit"
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
-              Sauvegarder
+              {isSaving && <span>Sauvegarde en cours...</span>}
+              {!isSaving && <span>Sauvegarder</span>}
             </button>
           </div>
         </form>

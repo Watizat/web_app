@@ -1,4 +1,3 @@
-import axios from 'axios';
 import classNames from 'classnames';
 import { ChangeEvent, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -8,12 +7,8 @@ import {
   fetchAdminOrganisms,
   setAdminOrganism,
 } from '../../../store/reducers/admin';
-import { axiosInstance } from '../../../utils/axios';
-import {
-  createSlug,
-  scheduleFormat,
-  validateScheduleFormat,
-} from '../../../utils/form/form';
+import { addOrganism } from '../../../store/reducers/crud';
+import { validateScheduleFormat } from '../../../utils/form/form';
 import './Modal.scss';
 
 interface ModalProps {
@@ -26,10 +21,11 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const [isSaving, setIsSaving] = useState(false);
+
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
 
   const dispatch = useAppDispatch();
+  const isSaving = useAppSelector((state) => state.crud.isSaving);
   const zones = useAppSelector((state) => state.admin.zones);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -38,70 +34,10 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    function setData(data: Inputs) {
-      return {
-        organism: {
-          name: data.name,
-          slug: createSlug(data.name.toString()),
-          address: data.address,
-          city: data.city,
-          zipcode: data.zipcode,
-          website: data.website,
-          phone: data.phone,
-          zone_id: data.zone_id,
-          pmr: !!data.pmr,
-          animals: !!data.animals,
-        },
-        translation: {
-          description: data.description,
-          infos_alerte: data.infos_alerte,
-          // langue_id
-        },
-        horaire: scheduleFormat(data),
-      };
-    }
-    const data = setData(formData);
-    const address = `${data.organism.address} ${data.organism.zipcode} ${data.organism.city}`;
-
-    try {
-      setIsSaving(true);
-      const geolocResponse = await axios.get(
-        `https://api-adresse.data.gouv.fr/search/?q=${address}`
-      );
-
-      const [longitude, latitude] =
-        geolocResponse.data.features[0].geometry.coordinates;
-
-      const response = await axiosInstance.post(`/items/organisme`, {
-        ...data.organism,
-        latitude,
-        longitude,
-      });
-
-      await axiosInstance.post(`/items/organisme_translation`, {
-        ...data.translation,
-        organisme: response.data.data.id,
-        langue_id: 1,
-      });
-
-      await Promise.all(
-        // Il faut retirer la propriété id de l'objet horaire (inutile ici) pour éviter une erreur à la création dans la bdd
-        data.horaire.map(({ id, ...horaire }) =>
-          axiosInstance.post(`/items/schedule`, {
-            ...horaire,
-            service_id: null,
-            organisme_id: response.data.data.id,
-          })
-        )
-      );
-      setIsActive(false);
-      setIsSaving(false);
-      dispatch(setAdminOrganism(response.data.data.id));
-      dispatch(fetchAdminOrganisms());
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
+    const { payload: id } = await dispatch(addOrganism(formData));
+    await dispatch(setAdminOrganism(id));
+    setIsActive(false);
+    await dispatch(fetchAdminOrganisms());
   };
 
   return (

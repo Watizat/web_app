@@ -17,15 +17,17 @@ function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
+  const dispatch = useAppDispatch();
   const organismId = useAppSelector(
     (state) => state.admin.organism?.id as number
   );
-  const dispatch = useAppDispatch();
+  const isSaving = useAppSelector((state) => state.crud.isSaving);
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await dispatch(editOrganismInfos({ data, organismId }));
-    await dispatch(setAdminOrganism(organismId));
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    await dispatch(editOrganismInfos({ formData, organismId }));
     setIsModalActive(false);
+    await dispatch(setAdminOrganism(organismId));
   };
 
   return (
@@ -96,7 +98,8 @@ function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
               type="submit"
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
-              Sauvegarder
+              {isSaving && <span>Sauvegarde en cours...</span>}
+              {!isSaving && <span>Sauvegarder</span>}
             </button>
           </div>
         </form>
