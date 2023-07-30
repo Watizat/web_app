@@ -172,6 +172,9 @@ export const fetchOrganism = createAsyncThunk(
         },
       }
     );
+    if (data.data.length === 0) {
+      return null;
+    }
     return data.data[0];
   }
 );

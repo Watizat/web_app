@@ -24,7 +24,7 @@ function Breadcrumb() {
         </Link>
         <i className="las la-angle-right" />
         <Link to="/resultats/#" className="link-active">
-          <li>Nom de l'organisme</li>
+          <li>Nom de l&apos;organisme</li>
         </Link>
       </ul>
     </div>
