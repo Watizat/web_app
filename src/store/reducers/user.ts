@@ -61,7 +61,7 @@ export const askPassword = createAsyncThunk(
     console.log({ email });
     const response = await axiosInstance.post('/auth/password/request', {
       email,
-      rest_url: 'http://localhost:5173/recover-password',
+      reset_url: 'https://watizat.aliceout.io/recover-password',
     });
     console.log(response, response.data);
   }
