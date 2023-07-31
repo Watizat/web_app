@@ -1,7 +1,6 @@
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEventHandler, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchZones } from '../../store/reducers/admin';
+import { useAppSelector } from '../../hooks/redux';
 
 import logo from '../../assets/logo.svg';
 import Icon from '../../ui/icon/icon';
