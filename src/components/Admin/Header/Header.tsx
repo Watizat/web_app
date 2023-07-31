@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import ModalAddOrganism from '../Modal/ModalAddOrganism';
-import ModalUsers from '../Modal/ModalAddUsers';
+import ModalUsers from '../Modal/ModalEditUsers';
 import './Header.scss';
 
 function Header() {

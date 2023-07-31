@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import { DirectusUser } from '../../../../@types/user';
 import { useAppSelector } from '../../../../hooks/redux';
-import ModalUsers from '../../Modal/ModalAddUsers';
+import ModalUsers from '../../Modal/ModalEditUsers';
 import './UsersDetails.scss';
 
 interface UsersDetailsProps {
