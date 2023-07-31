@@ -4,6 +4,7 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchZones } from '../../store/reducers/admin';
 import { fetchCategories, fetchDays } from '../../store/reducers/organisms';
 import './App.scss';
 
@@ -18,6 +19,10 @@ function App() {
       setLoading(false);
     };
     fetchData();
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchZones());
   }, [dispatch]);
 
   useEffect(() => {

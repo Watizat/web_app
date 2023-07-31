@@ -1,4 +1,4 @@
-import { useEffect, ChangeEvent, MouseEventHandler, useState } from 'react';
+import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchZones } from '../../store/reducers/admin';
@@ -25,12 +25,7 @@ function Home() {
       navigate(`resultats/?city=${select}&category=${category}`);
     };
 
-  const dispatch = useAppDispatch();
   const zones = useAppSelector((state) => state.admin.zones);
-
-  useEffect(() => {
-    dispatch(fetchZones());
-  }, [dispatch]);
 
   return (
     <main id="homepage">

@@ -1,18 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchZones } from '../../store/reducers/admin';
+import { useAppSelector } from '../../hooks/redux';
 
 import './Login.scss';
 
 function AccountRequest() {
-  const dispatch = useAppDispatch();
-
   const zones = useAppSelector((state) => state.admin.zones);
-
-  useEffect(() => {
-    dispatch(fetchZones());
-  }, [dispatch]);
 
   return (
     <div className="login accountRequest">
