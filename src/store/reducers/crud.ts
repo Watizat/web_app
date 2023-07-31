@@ -290,9 +290,6 @@ const crudReducer = createReducer(initialState, (builder) => {
     .addCase(addOrganismContact.fulfilled, (state) => {
       state.isSaving = false;
     })
-    .addCase(addOrganismContact.rejected, (state) => {
-      state.isSaving = false;
-    })
     .addCase(editContact.pending, (state) => {
       state.isSaving = true;
     })
