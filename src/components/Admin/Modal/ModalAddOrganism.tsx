@@ -1,107 +1,156 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
-import { Service } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { setAdminOrganism } from '../../../store/reducers/admin';
-import { editService } from '../../../store/reducers/crud';
+import {
+  fetchAdminOrganisms,
+  setAdminOrganism,
+} from '../../../store/reducers/admin';
+import { addOrganism } from '../../../store/reducers/crud';
 import { validateScheduleFormat } from '../../../utils/form/form';
 import './Modal.scss';
-import ModalDeleteServiceConfirmation from './ModalDeleteServiceConfirmation';
 
-interface ServiceModalProps {
-  service: Service;
+interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalEditService({ service, setIsActive }: ServiceModalProps) {
-  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
-
+function ModalAddOrganism({ setIsActive }: ModalProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
 
+  const [select, setSelect] = useState(localStorage.getItem('city') || '');
+
   const dispatch = useAppDispatch();
-  const categoriesList = useAppSelector((state) => state.organism.categories);
-  const organismId = useAppSelector(
-    (state) => state.admin.organism?.id as number
-  );
   const isSaving = useAppSelector((state) => state.crud.isSaving);
+  const zones = useAppSelector((state) => state.admin.zones);
 
-  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    const serviceId = service.id;
-    const serviceTranslationId = service.translations[0].id;
-    await dispatch(editService({ formData, serviceId, serviceTranslationId }));
-
-    setIsActive(false);
-    await dispatch(setAdminOrganism(organismId));
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    localStorage.setItem('city', event.target.value);
+    setSelect(event.target.value);
   };
 
-  if (isActiveConfirmation) {
-    return (
-      <ModalDeleteServiceConfirmation
-        id={service.id}
-        setIsActiveConfirmation={setIsActiveConfirmation}
-        setIsActive={setIsActive}
-      />
-    );
-  }
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    const { payload: id } = await dispatch(addOrganism(formData));
+    await dispatch(setAdminOrganism(id));
+    setIsActive(false);
+    await dispatch(fetchAdminOrganisms());
+  };
 
   return (
     <div className="modal">
       <div className="modal-main">
-        <h1 className="modal-title">Modifier un service</h1>
+        <h1 className="modal-title">Créer un organisme</h1>
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="number"
-            hidden
-            defaultValue={organismId}
-            {...register('organisme_id')}
-          />
+          <select
+            value={select}
+            {...register('zone_id', { required: 'Ce champ est requis' })}
+            onChange={handleChange}
+          >
+            <option value="" disabled>
+              Selectionner une ville
+            </option>
+            {zones.map((zone) => (
+              <option key={zone.id} value={zone.id}>
+                {zone.name}
+              </option>
+            ))}
+          </select>
           <div className="modal-case">
-            <h4 className="modal-case__title">Catégorie</h4>
-            <label className="modal-contact__actu">
-              Catégorie du service
-              <select
-                {...register('categorie_id')}
-                defaultValue={service.categorie_id.id}
-              >
-                <option disabled>Selectionnez une catégorie</option>
-                {categoriesList.map((category) => (
-                  <option
-                    key={category.translations[0].name}
-                    value={`${category.id}`}
-                  >
-                    {category.translations[0].name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <div className="modal-case">
-            <h4 className="modal-case__title">Nom du service</h4>
+            <h4 className="modal-case__title">Nom de l&apos;organisme</h4>
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={service.translations[0].name}
               {...register('name', { required: 'Ce champs est requis' })}
             />
             {errors.name && <small>{errors.name.message}</small>}
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Type de service·s proposé·s</h4>
+            <h4 className="modal-case__title">Adresse</h4>
             <input
               className="modal-case__inputTxt"
               type="text"
-              defaultValue={service.translations[0].description}
+              {...register('address', { required: 'Ce champs est requis' })}
+            />
+            {errors.address && <small>{errors.address.message}</small>}
+          </div>
+          <div className="modal-case">
+            <h4 className="modal-case__title">Ville</h4>
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              {...register('city', { required: 'Ce champs est requis' })}
+            />
+            {errors.city && <small>{errors.city.message}</small>}
+          </div>
+          <div className="modal-case">
+            <h4 className="modal-case__title">Code postal</h4>
+            <input
+              className="modal-case__inputTxt"
+              type="number"
+              {...register('zipcode', { required: 'Ce champs est requis' })}
+            />
+            {errors.zipcode && <small>{errors.zipcode.message}</small>}
+          </div>
+          <div className="modal-case">
+            <h4 className="modal-case__title">Telephone</h4>
+            <input
+              className="modal-case__inputTxt"
+              type="number"
+              {...register('phone', {
+                minLength: {
+                  value: 10,
+                  message:
+                    'Le numéro de téléphone doit comporter au moins 10 chiffres.',
+                },
+                maxLength: {
+                  value: 10,
+                  message:
+                    'Le numéro de téléphone ne peut pas comporter plus de 10 chiffres.',
+                },
+              })}
+            />
+            {errors.phone && <small>{errors.phone.message}</small>}
+          </div>
+          <div className="modal-case">
+            <h4 className="modal-case__title">Site web</h4>
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              {...register('website')}
+            />
+          </div>
+          <div className="modal-case">
+            <h4 className="modal-case__title">Accès</h4>
+            <div className="modal-data__accessDetails">
+              <label className="modal-data__pmr">
+                <input type="checkbox" {...register('pmr')} />
+                Accessible PSH / PMR
+              </label>
+              <label className="modal-data__pmr">
+                <input type="checkbox" {...register('animals')} />
+                Animaux admis
+              </label>
+            </div>
+          </div>
+          <div className="modal-case">
+            <h4 className="modal-case__title">Description</h4>
+            <textarea
+              className="modal-case__textarea"
               {...register('description')}
             />
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Horaires</h4>
+            <h4 className="modal-case__title">
+              Horaires
+              <span>
+                {' '}
+                (Formats d&apos;horaires acceptés: 10h, 10h00, 10:00)
+              </span>
+            </h4>
             <table className="modal-data__hours">
               <thead className="modal-data__hoursHead">
                 <tr>
@@ -112,22 +161,28 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                 </tr>
               </thead>
               <tbody>
-                {service.schedules.map((day, index) => (
-                  <tr key={day.day} className="modal-data__hoursLine">
+                {[
+                  'Lundi',
+                  'Mardi',
+                  'Mercredi',
+                  'Jeudi',
+                  'vendredi',
+                  'Samedi',
+                  'Dimanche',
+                ].map((i, index) => (
+                  <tr key={i} className="modal-data__hoursLine">
                     <td className="modal-data__hoursDay">
-                      <span>{day.day}</span>
+                      <span>{i}</span>
                       <input
                         type="hidden"
-                        {...register(`schedule_id_${index + 1}`, {
-                          value: day.id,
-                        })}
+                        {...register(
+                          `schedule_id_${index + 1}`
+                          // , { value: '',}
+                        )}
                       />
                     </td>
                     <td className="modal-data__hoursHour">
                       <input
-                        defaultValue={day.opentime_am
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
                         className={classNames(
                           'modal-data__hoursInput',
                           errors[`schedule_openam_${index + 1}`] &&
@@ -142,9 +197,6 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        defaultValue={day.closetime_am
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
                         className={classNames(
                           'modal-data__hoursInput',
                           errors[`schedule_closeam_${index + 1}`] &&
@@ -159,9 +211,6 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                     <td className="modal-data__hoursSeparater">/</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        defaultValue={day.opentime_pm
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
                         className={classNames(
                           'modal-data__hoursInput',
                           errors[`schedule_openpm_${index + 1}`] &&
@@ -176,9 +225,6 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        defaultValue={day.closetime_pm
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
                         className={classNames(
                           'modal-data__hoursInput',
                           errors[`schedule_closepm_${index + 1}`] &&
@@ -199,18 +245,10 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
             <h4 className="modal-case__title">Info s & alertes</h4>
             <textarea
               className="modal-case__textarea"
-              defaultValue={service.translations[0].infos_alerte}
               {...register('infos_alerte')}
             />
           </div>
           <div className="modal-actions">
-            <button
-              type="button"
-              className="btn btn-danger-fill btn-flat modal-actions__close"
-              onClick={() => setIsActiveConfirmation(true)}
-            >
-              Supprimer
-            </button>
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"
@@ -223,7 +261,7 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
               {isSaving && <span>Sauvegarde en cours...</span>}
-              {!isSaving && <span>Sauvegarder</span>}{' '}
+              {!isSaving && <span>Sauvegarder</span>}
             </button>
           </div>
         </form>
@@ -232,4 +270,4 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
   );
 }
 
-export default ModalEditService;
+export default ModalAddOrganism;

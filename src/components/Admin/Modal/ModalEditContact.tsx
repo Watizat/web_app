@@ -1,64 +1,61 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
+import { Contact } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
-import { addOrganismContact } from '../../../store/reducers/crud';
+import { editContact } from '../../../store/reducers/crud';
 import { validateEmail } from '../../../utils/form/form';
 import './Modal.scss';
+import ModalDeleteConfirmation from './ModalDeleteContactConfirmation';
 
 interface ModalProps {
-  setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  contact: Contact;
 }
 
-function ModalAddContact({ setIsModalActive }: ModalProps) {
+function ModalEditContact({ contact, setIsActive }: ModalProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
 
   const dispatch = useAppDispatch();
-  const organismId = useAppSelector(
-    (state) => state.admin.organism?.id as number
-  );
+  const id = useAppSelector((state) => state.admin.organism?.id as number);
   const isSaving = useAppSelector((state) => state.crud.isSaving);
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    const response = await dispatch(addOrganismContact(formData));
-    if (response.meta.requestStatus === 'fulfilled') {
-      setIsModalActive(false);
-      await dispatch(setAdminOrganism(organismId));
-    } else {
-      setErrorMessage(
-        'Une erreur est survenue lors de la création du contact.'
-      );
-    }
+    const contactId = contact.id;
+    await dispatch(editContact({ formData, contactId }));
+    setIsActive(false);
+    await dispatch(setAdminOrganism(id));
   };
+
+  if (isActiveConfirmation) {
+    return (
+      <ModalDeleteConfirmation
+        id={contact.id}
+        setIsActiveConfirmation={setIsActiveConfirmation}
+        setIsActive={setIsActive}
+      />
+    );
+  }
 
   return (
     <div className="modal">
       <div className="modal-main">
-        <h1 className="modal-title">Ajouter un contact</h1>
-        {errorMessage && <span>{errorMessage}</span>}
+        <h1 className="modal-title">Modifier un contact</h1>
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="number"
-            defaultValue={organismId}
-            hidden
-            {...register('organisme')}
-          />
           <div className="modal-case">
             <h4 className="modal-case__title">Nom du contact</h4>
             <input
-              className={
-                errors.name
-                  ? 'modal-case__inputTxt error'
-                  : 'modal-case__inputTxt'
-              }
+              className="modal-case__inputTxt"
               type="text"
               {...register('name', { required: 'Ce champs est requis' })}
+              defaultValue={contact.name}
             />
             {errors.name && <small>{errors.name.message}</small>}
           </div>
@@ -68,6 +65,7 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
               className="modal-case__inputTxt"
               type="text"
               {...register('comment')}
+              defaultValue={contact.comment}
             />
           </div>
           <div className="modal-case">
@@ -75,6 +73,7 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
+              defaultValue={contact.job}
               {...register('job')}
             />
           </div>
@@ -84,6 +83,7 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
               <input
                 className="modal-case__inputTxt modal-contact__mail"
                 type="text"
+                defaultValue={contact.mail}
                 {...register('mail', {
                   validate: validateEmail,
                 })}
@@ -95,6 +95,7 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
               <input
                 className="modal-case__inputTxt"
                 type="number"
+                defaultValue={contact.phone}
                 {...register('phone', {
                   minLength: {
                     value: 10,
@@ -116,14 +117,20 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
             <div className=" modal-contact__roles">
               <label className="modal-contact__private">
                 Publicité du contact
-                <select {...register('visibility', { required: true })}>
+                <select
+                  {...register('visibility', { required: true })}
+                  defaultValue={`${contact.visibility}`}
+                >
                   <option value="false">Privé</option>
                   <option value="true">Public</option>
                 </select>
               </label>
               <label className="modal-contact__actu">
                 Contact pour actualisation
-                <select {...register('actualisation', { required: true })}>
+                <select
+                  {...register('actualisation', { required: true })}
+                  defaultValue={`${contact.actualisation}`}
+                >
                   <option value="false">Non</option>
                   <option value="true">Oui</option>
                 </select>
@@ -133,8 +140,15 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
           <div className="modal-actions">
             <button
               type="button"
+              className="btn btn-danger-fill btn-flat modal-actions__close"
+              onClick={() => setIsActiveConfirmation(true)}
+            >
+              Supprimer
+            </button>
+            <button
+              type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"
-              onClick={() => setIsModalActive(false)}
+              onClick={() => setIsActive(false)}
             >
               Annuler
             </button>
@@ -143,7 +157,7 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
               {isSaving && <span>Sauvegarde en cours...</span>}
-              {!isSaving && <span>Sauvegarder</span>}
+              {!isSaving && <span>Sauvegarder</span>}{' '}
             </button>
           </div>
         </form>
@@ -152,4 +166,4 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
   );
 }
 
-export default ModalAddContact;
+export default ModalEditContact;

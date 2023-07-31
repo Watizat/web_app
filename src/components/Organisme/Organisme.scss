@@ -2,29 +2,25 @@
 @use '../../styles/medias' as m;
 @use '../../styles/elements';
 
-
-
 .organisme {
   &-container {
     background-color: #f5f5f5;
     padding: 30px 0;
+    flex-grow: 1;
   }
-  
+
   background-color: v.$white;
   border-radius: 15px;
   padding: 25px;
   margin: 30px 0;
 
-  @include m.mobile{
+  @include m.mobile {
     margin: 10px 0;
   }
 
   h3 {
-    color:v.$primary;
+    color: v.$primary;
     border-bottom: 0.5px solid v.$grey-500;
     margin: 0.5em 0;
   }
-
-
 }
-

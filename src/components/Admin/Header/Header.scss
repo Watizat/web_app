@@ -3,18 +3,18 @@
 @use '../../../styles/elements';
 
 #headerAdmin {
-  position: sticky;
   top: 0;
 
-  display: flex; 
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  z-index: 100;
 
   min-height: 6vh;
 
   background-color: v.$white;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px .1rem .5rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0.1rem 0.5rem;
   border-bottom: 1px solid v.$grey-200;
 
   h2 {
@@ -26,5 +26,4 @@
   button {
     margin-right: 2rem;
   }
-
 }

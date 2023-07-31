@@ -28,7 +28,6 @@
       }
     }
     .serviceCard {
-
       &-header {
         display: flex;
         justify-content: space-between;
@@ -59,7 +58,21 @@
 
         &__info,
         &__alerts {
-          color: v.$grey-700;
+          color: v.$grey-600;
+        }
+
+        &__info {
+          &-title {
+            color: v.$sucess;
+          }
+        }
+
+        &__category {
+          color: v.$sucess;
+          width: max-content;
+          padding-right: 2rem;
+          padding-bottom: .5rem;
+          border-bottom: 1px solid v.$sucess;
         }
 
         &__hoursDetails {

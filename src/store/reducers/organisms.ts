@@ -172,6 +172,9 @@ export const fetchOrganism = createAsyncThunk(
         },
       }
     );
+    if (data.data.length === 0) {
+      return null;
+    }
     return data.data[0];
   }
 );
@@ -210,9 +213,6 @@ const organismReducer = createReducer(initialState, (builder) => {
     .addCase(fetchOrganisms.fulfilled, (state, action) => {
       state.organisms = action.payload;
       state.isLoading = false;
-    })
-    .addCase(fetchOrganisms.rejected, (state, action) => {
-      console.log(action.payload);
     })
     .addCase(fetchOrganism.pending, (state) => {
       state.isLoading = true;

@@ -9,27 +9,33 @@ interface ContactProps {
 }
 
 function Contacts({ contacts }: ContactProps) {
-  const [isActive, setIsActive] = useState(false);
+  const [isModalActive, setIsModalActive] = useState(false);
 
   return (
     <article className="orgaSheet-card orgaSheet-contacts">
-      {isActive && <ModalAddContact setIsActive={setIsActive} />}
+      {isModalActive && <ModalAddContact setIsModalActive={setIsModalActive} />}
 
       <span className="orgaSheet-card__titleBar">
         <h3 className="orgaSheet-card__title">Contacts</h3>
         <button
           type="button"
           className="orgaSheet-card__menu"
-          onClick={() => setIsActive(true)}
+          onClick={() => setIsModalActive(true)}
         >
           <i className="las la-plus-circle" />
         </button>
       </span>
 
       <div className="orgaSheet-contacts__list">
-        {contacts.map((contact) => (
-          <ContactCard key={contact.id} {...contact} />
-        ))}
+        {contacts && contacts.length > 0 ? (
+          contacts.map((contact) => (
+            <ContactCard key={contact.id} {...contact} />
+          ))
+        ) : (
+          <span className="orgaSheet-contacts__noContacts">
+            Aucun contact à afficher
+          </span>
+        )}
       </div>
     </article>
   );

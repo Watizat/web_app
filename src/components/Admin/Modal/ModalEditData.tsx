@@ -1,23 +1,19 @@
 import classNames from 'classnames';
-import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
-import { Service } from '../../../@types/organism';
+import { Organism } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
-import { editService } from '../../../store/reducers/crud';
+import { editOrganismData } from '../../../store/reducers/crud';
 import { validateScheduleFormat } from '../../../utils/form/form';
 import './Modal.scss';
-import ModalDeleteServiceConfirmation from './ModalDeleteServiceConfirmation';
 
-interface ServiceModalProps {
-  service: Service;
+interface ModalDataProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  organism: Organism;
 }
 
-function ModalEditService({ service, setIsActive }: ServiceModalProps) {
-  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
-
+function ModalEditData({ organism, setIsActive }: ModalDataProps) {
   const {
     register,
     handleSubmit,
@@ -25,78 +21,51 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
   } = useForm<Inputs>();
 
   const dispatch = useAppDispatch();
-  const categoriesList = useAppSelector((state) => state.organism.categories);
   const organismId = useAppSelector(
     (state) => state.admin.organism?.id as number
   );
   const isSaving = useAppSelector((state) => state.crud.isSaving);
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    const serviceId = service.id;
-    const serviceTranslationId = service.translations[0].id;
-    await dispatch(editService({ formData, serviceId, serviceTranslationId }));
-
+    const organismTranslationId = organism.translations[0].id;
+    await dispatch(
+      editOrganismData({ formData, organismId, organismTranslationId })
+    );
     setIsActive(false);
     await dispatch(setAdminOrganism(organismId));
   };
 
-  if (isActiveConfirmation) {
-    return (
-      <ModalDeleteServiceConfirmation
-        id={service.id}
-        setIsActiveConfirmation={setIsActiveConfirmation}
-        setIsActive={setIsActive}
-      />
-    );
-  }
-
   return (
     <div className="modal">
       <div className="modal-main">
-        <h1 className="modal-title">Modifier un service</h1>
+        <h1 className="modal-title">Modifier les informations génerales</h1>
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="number"
-            hidden
-            defaultValue={organismId}
-            {...register('organisme_id')}
-          />
           <div className="modal-case">
-            <h4 className="modal-case__title">Catégorie</h4>
-            <label className="modal-contact__actu">
-              Catégorie du service
-              <select
-                {...register('categorie_id')}
-                defaultValue={service.categorie_id.id}
-              >
-                <option disabled>Selectionnez une catégorie</option>
-                {categoriesList.map((category) => (
-                  <option
-                    key={category.translations[0].name}
-                    value={`${category.id}`}
-                  >
-                    {category.translations[0].name}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <h4 className="modal-case__title">Accès</h4>
+            <div className="modal-data__accessDetails">
+              <label className="modal-data__pmr">
+                <input
+                  type="checkbox"
+                  defaultChecked={organism.pmr}
+                  {...register('pmr')}
+                />
+                Accessible PSH / PMR
+              </label>
+              <label className="modal-data__pmr">
+                <input
+                  type="checkbox"
+                  defaultChecked={organism.animals}
+                  {...register('animals')}
+                />
+                Animaux admis
+              </label>
+            </div>
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Nom du service</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
-              defaultValue={service.translations[0].name}
-              {...register('name', { required: 'Ce champs est requis' })}
-            />
-            {errors.name && <small>{errors.name.message}</small>}
-          </div>
-          <div className="modal-case">
-            <h4 className="modal-case__title">Type de service·s proposé·s</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
-              defaultValue={service.translations[0].description}
+            <h4 className="modal-case__title">Description</h4>
+            <textarea
+              className="modal-case__textarea"
+              defaultValue={organism.translations[0].description}
               {...register('description')}
             />
           </div>
@@ -108,32 +77,32 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                   <td>Jours</td>
                   <td colSpan={3}>Matin</td>
                   <td />
-                  <td colSpan={3}>Aprés-midi</td>
+                  <td colSpan={3}>Après-midi</td>
                 </tr>
               </thead>
               <tbody>
-                {service.schedules.map((day, index) => (
+                {organism.schedules.map((day) => (
                   <tr key={day.day} className="modal-data__hoursLine">
                     <td className="modal-data__hoursDay">
                       <span>{day.day}</span>
                       <input
                         type="hidden"
-                        {...register(`schedule_id_${index + 1}`, {
+                        {...register(`schedule_id_${day.day}`, {
                           value: day.id,
                         })}
                       />
                     </td>
                     <td className="modal-data__hoursHour">
                       <input
-                        defaultValue={day.opentime_am
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
                         className={classNames(
                           'modal-data__hoursInput',
-                          errors[`schedule_openam_${index + 1}`] &&
+                          errors[`schedule_openam_${day.day}`] &&
                             'modal-data__hoursInput--error'
                         )}
-                        {...register(`schedule_openam_${index + 1}`, {
+                        {...register(`schedule_openam_${day.day}`, {
+                          value: day.opentime_am
+                            ?.slice(0, -3)
+                            .replace(':', 'h'),
                           validate: (value) =>
                             validateScheduleFormat(value as string),
                         })}
@@ -142,15 +111,15 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        defaultValue={day.closetime_am
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
                         className={classNames(
                           'modal-data__hoursInput',
-                          errors[`schedule_closeam_${index + 1}`] &&
+                          errors[`schedule_closeam_${day.day}`] &&
                             'modal-data__hoursInput--error'
                         )}
-                        {...register(`schedule_closeam_${index + 1}`, {
+                        {...register(`schedule_closeam_${day.day}`, {
+                          value: day.closetime_am
+                            ?.slice(0, -3)
+                            .replace(':', 'h'),
                           validate: (value) =>
                             validateScheduleFormat(value as string),
                         })}
@@ -159,15 +128,15 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                     <td className="modal-data__hoursSeparater">/</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        defaultValue={day.opentime_pm
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
                         className={classNames(
                           'modal-data__hoursInput',
-                          errors[`schedule_openpm_${index + 1}`] &&
+                          errors[`schedule_openpm_${day.day}`] &&
                             'modal-data__hoursInput--error'
                         )}
-                        {...register(`schedule_openpm_${index + 1}`, {
+                        {...register(`schedule_openpm_${day.day}`, {
+                          value: day.opentime_pm
+                            ?.slice(0, -3)
+                            .replace(':', 'h'),
                           validate: (value) =>
                             validateScheduleFormat(value as string),
                         })}
@@ -176,15 +145,15 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        defaultValue={day.closetime_pm
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
                         className={classNames(
                           'modal-data__hoursInput',
-                          errors[`schedule_closepm_${index + 1}`] &&
+                          errors[`schedule_closepm_${day.day}`] &&
                             'modal-data__hoursInput--error'
                         )}
-                        {...register(`schedule_closepm_${index + 1}`, {
+                        {...register(`schedule_closepm_${day.day}`, {
+                          value: day.closetime_pm
+                            ?.slice(0, -3)
+                            .replace(':', 'h'),
                           validate: (value) =>
                             validateScheduleFormat(value as string),
                         })}
@@ -196,21 +165,14 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
             </table>
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Info s & alertes</h4>
+            <h4 className="modal-case__title">Infos, alerte</h4>
             <textarea
               className="modal-case__textarea"
-              defaultValue={service.translations[0].infos_alerte}
-              {...register('infos_alerte')}
+              defaultValue={organism.translations[0].infos_alerte}
+              {...register('info_alerte')}
             />
           </div>
           <div className="modal-actions">
-            <button
-              type="button"
-              className="btn btn-danger-fill btn-flat modal-actions__close"
-              onClick={() => setIsActiveConfirmation(true)}
-            >
-              Supprimer
-            </button>
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"
@@ -223,7 +185,7 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
               {isSaving && <span>Sauvegarde en cours...</span>}
-              {!isSaving && <span>Sauvegarder</span>}{' '}
+              {!isSaving && <span>Sauvegarder</span>}
             </button>
           </div>
         </form>
@@ -232,4 +194,4 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
   );
 }
 
-export default ModalEditService;
+export default ModalEditData;

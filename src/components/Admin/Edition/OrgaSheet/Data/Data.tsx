@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../hooks/redux';
-import ModalData from '../../../Modal/ModalData';
+import ModalEditData from '../../../Modal/ModalEditData';
 import Schedules from '../../../Schedules/Schedules';
 import './Data.scss';
 
@@ -13,7 +13,9 @@ function Data() {
 
   return (
     <article className="orgaSheet-card orgaSheet-data">
-      {isActive && <ModalData setIsActive={setIsActive} organism={organism} />}
+      {isActive && (
+        <ModalEditData setIsActive={setIsActive} organism={organism} />
+      )}
 
       <span className="orgaSheet-card__titleBar">
         <h3 className="orgaSheet-card__title">Informations génerales</h3>

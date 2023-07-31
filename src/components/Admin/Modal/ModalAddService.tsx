@@ -1,96 +1,53 @@
-import { useAppSelector } from '../../../hooks/redux';
-import { axiosInstance } from '../../../utils/axios';
+import classNames from 'classnames';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Inputs } from '../../../@types/formInputs';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { setAdminOrganism } from '../../../store/reducers/admin';
+import { addService } from '../../../store/reducers/crud';
+import { validateScheduleFormat } from '../../../utils/form/form';
 import './Modal.scss';
 
 interface ServiceModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function setData(data: { [k: string]: FormDataEntryValue }) {
-  const myArray = [];
-  // eslint-disable-next-line no-plusplus
-  for (let i = 1; i < 8; i++) {
-    myArray.push({
-      day: i,
-      opentime_am: data[`schedule_openam_${i}`]
-        ? String(data[`schedule_openam_${i}`]).replace('h', ':')
-        : null,
-      closetime_am: data[`schedule_closeam_${i}`]
-        ? String(data[`schedule_closeam_${i}`]).replace('h', ':')
-        : null,
-      opentime_pm: data[`schedule_openpm_${i}`]
-        ? String(data[`schedule_openpm_${i}`]).replace('h', ':')
-        : null,
-      closetime_pm: data[`schedule_closepm_${i}`]
-        ? String(data[`schedule_closepm_${i}`]).replace('h', ':')
-        : null,
-    });
-  }
-  return {
-    translations: {
-      name: data.name,
-      description: data.description,
-      infos_alerte: data.infos_alerte,
-    },
-    horaire: myArray,
-    categorie_id: data.categorie_id,
-    organisme_id: data.organisme_id,
-  };
-}
-
 function ModalAddService({ setIsActive }: ServiceModalProps) {
-  const categoriesList = useAppSelector((state) => state.organism.categories);
-  const organismId = useAppSelector((state) => state.admin.organism?.id);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = Object.fromEntries(new FormData(event.currentTarget));
-    const data = setData(form);
-    try {
-      const response = await axiosInstance.post(`/items/service`, {
-        categorie_id: data.categorie_id,
-        organisme_id: data.organisme_id,
-      });
-      await axiosInstance.post(`/items/service_translation`, {
-        ...data.translations,
-        langue_id: 1,
-        service: response.data.data.id,
-      });
-      await Promise.all(
-        data.horaire.map((horaire) =>
-          axiosInstance.post(`/items/schedule`, {
-            ...horaire,
-            service_id: response.data.data.id,
-            organisme_id: null,
-          })
-        )
-      );
-    } catch (error) {
-      console.log(error);
-    }
+  const dispatch = useAppDispatch();
+  const categoriesList = useAppSelector((state) => state.organism.categories);
+  const organismId = useAppSelector(
+    (state) => state.admin.organism?.id as number
+  );
+  const isSaving = useAppSelector((state) => state.crud.isSaving);
+
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    await dispatch(addService(formData));
     setIsActive(false);
+    await dispatch(setAdminOrganism(organismId));
   };
 
   return (
     <div className="modal">
       <div className="modal-main">
         <h1 className="modal-title">Ajouter un service</h1>
-        <form className="modal-list" onSubmit={handleSubmit}>
+        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
           <input
             type="number"
-            name="organisme_id"
-            hidden
             defaultValue={organismId}
+            hidden
+            {...register('organisme_id')}
           />
           <div className="modal-case">
             <h4 className="modal-case__title">Catégorie</h4>
 
             <label className="modal-contact__actu">
               Catégorie du service
-              <select
-                name="categorie_id"
-                defaultValue={categoriesList[0].translations[0].name}
-              >
+              <select {...register('categorie_id')}>
                 {categoriesList.map((category) => (
                   <option
                     key={category.translations[0].name}
@@ -104,14 +61,19 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Nom du service</h4>
-            <input className="modal-case__inputTxt" type="text" name="name" />
+            <input
+              className="modal-case__inputTxt"
+              type="text"
+              {...register('name', { required: 'Ce champs est requis' })}
+            />
+            {errors.name && <small>{errors.name.message}</small>}
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Type de service·s proposé·s</h4>
             <input
               className="modal-case__inputTxt"
               type="text"
-              name="description"
+              {...register('description')}
             />
           </div>
           <div className="modal-case">
@@ -138,32 +100,67 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                   <tr key={i} className="modal-data__hoursLine">
                     <td className="modal-data__hoursDay">
                       <span>{i}</span>
+                      <input
+                        type="hidden"
+                        {...register(
+                          `schedule_id_${index + 1}`
+                          // , { value: '',}
+                        )}
+                      />
                     </td>
                     <td className="modal-data__hoursHour">
                       <input
-                        className="modal-data__hoursInput"
-                        name={`schedule_openam_${index + 1}`}
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_openam_${index + 1}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
+                        {...register(`schedule_openam_${index + 1}`, {
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        className="modal-data__hoursInput"
-                        name={`schedule_closeam_${index + 1}`}
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_closeam_${index + 1}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
+                        {...register(`schedule_closeam_${index + 1}`, {
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">/</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        className="modal-data__hoursInput"
-                        name={`schedule_openpm_${index + 1}`}
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_openpm_${index + 1}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
+                        {...register(`schedule_openpm_${index + 1}`, {
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                     <td className="modal-data__hoursSeparater">-</td>
                     <td className="modal-data__hoursTd">
                       <input
-                        className="modal-data__hoursInput"
-                        name={`schedule_closepm_${index + 1}`}
+                        className={classNames(
+                          'modal-data__hoursInput',
+                          errors[`schedule_closepm_${index + 1}`] &&
+                            'modal-data__hoursInput--error'
+                        )}
+                        {...register(`schedule_closepm_${index + 1}`, {
+                          validate: (value) =>
+                            validateScheduleFormat(value as string),
+                        })}
                       />
                     </td>
                   </tr>
@@ -173,7 +170,10 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Info s & alertes</h4>
-            <textarea className="modal-case__textarea" name="infos_alerte" />
+            <textarea
+              className="modal-case__textarea"
+              {...register('infos_alerte')}
+            />
           </div>
           <div className="modal-actions">
             <button
@@ -187,7 +187,8 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
               type="submit"
               className="btn btn-sucess-fill btn-flat modal-actions__save"
             >
-              Sauvegarder
+              {isSaving && <span>Sauvegarde en cours...</span>}
+              {!isSaving && <span>Sauvegarder</span>}
             </button>
           </div>
         </form>

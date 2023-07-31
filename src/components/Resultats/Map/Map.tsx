@@ -52,38 +52,42 @@ function Map() {
       {navigatorGps && <Marker position={userPosition} icon={me} />}
 
       {organisms.map((organism, index) => {
-        const customIcon = new L.DivIcon({
-          className: 'custom-icon',
-          html: `<div>${index + 1}</div>`,
-          iconSize: [30, 30],
-          iconAnchor: [15, 33.5],
-          popupAnchor: [0, -30],
-        });
-        return (
-          <Marker
-            key={organism.id}
-            position={[organism.latitude, organism.longitude]}
-            icon={customIcon}
-          >
-            <Popup className="popup">
-              <Link className="popup-text" to={`/organisme/${organism.slug}`}>
-                {organism.name}
-              </Link>
-              <Link
-                to={`https://www.google.com/maps/search/?api=1&query=${organism.latitude}%2C${organism.longitude}`}
-                target="_blank"
-                className="popup-button"
-              >
-                <Icon
-                  className="popup-button__icon"
-                  icon="directions_walk"
-                  size="1.2rem"
-                />{' '}
-                <p className="popup-button__text">J&apos;y vais !</p>
-              </Link>
-            </Popup>
-          </Marker>
-        );
+        if (organism.latitude !== null && organism.longitude !== null) {
+          const customIcon = new L.DivIcon({
+            className: 'custom-icon',
+            html: `<div>${index + 1}</div>`,
+            iconSize: [30, 30],
+            iconAnchor: [15, 33.5],
+            popupAnchor: [0, -30],
+          });
+          return (
+            <Marker
+              key={organism.id}
+              position={[organism.latitude, organism.longitude]}
+              icon={customIcon}
+            >
+              <Popup className="popup">
+                <Link className="popup-text" to={`/organisme/${organism.slug}`}>
+                  {organism.name}
+                </Link>
+                <Link
+                  to={`https://www.google.com/maps/search/?api=1&query=${organism.latitude}%2C${organism.longitude}`}
+                  target="_blank"
+                  className="popup-button"
+                >
+                  <Icon
+                    className="popup-button__icon"
+                    icon="directions_walk"
+                    size="1.2rem"
+                  />{' '}
+                  <p className="popup-button__text">J&apos;y vais !</p>
+                </Link>
+              </Popup>
+            </Marker>
+          );
+        }
+        // Return null if latitude or longitude is null
+        return null;
       })}
     </MapContainer>
   );

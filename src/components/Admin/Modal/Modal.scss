@@ -7,10 +7,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  min-height: 100vh;
+  height: 100vh;
   width: 100vw;
-  background-color: rgba(v.$grey-900, .65);
-  backdrop-filter: blur(5px);
+  background-color: rgba(v.$grey-900, 0.85);
   display: flex;
   align-content: center;
   align-items: center;
@@ -44,6 +43,28 @@
   }
 
   &-case {
+    &.test {
+      position: relative;
+      & .suggestion {
+        position: absolute;
+        background-color: white;
+        border: 1px solid black;
+        transform: translateY(30px);
+        width: 100%;
+        padding: 5px;
+        & li {
+          list-style: none;
+        }
+        & button {
+          width: 100%;
+          text-align: left;
+
+          &:hover {
+            background-color: gray;
+          }
+        }
+      }
+    }
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -63,16 +84,16 @@
 
     &__inputTxt,
     textarea {
-      padding: .2rem;
+      padding: 0.2rem;
 
       &:focus {
         outline: none;
-        background-color: rgba(v.$sucess, .05);
+        background-color: rgba(v.$sucess, 0.05);
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
       }
 
-      &[type=number] {
+      &[type='number'] {
         appearance: textfield;
         /* Firefox */
         -moz-appearance: textfield;
@@ -107,7 +128,6 @@
   // Entrées spécifiques
 
   &-data {
-
     &__accessDetails {
       display: flex;
       gap: 2rem;
@@ -128,7 +148,7 @@
     &__hoursHead {
       text-align: center;
       font-weight: 500;
-      background-color: rgba(v.$sucess, .4);
+      background-color: rgba(v.$sucess, 0.4);
       color: v.$grey-800;
     }
 
@@ -136,7 +156,7 @@
       border-bottom: 1px solid v.$grey-800;
 
       &:hover {
-        background-color: rgba(v.$sucess, .2);
+        background-color: rgba(v.$sucess, 0.2);
       }
     }
 
@@ -161,17 +181,22 @@
       width: 100%;
       text-align: center;
       border: none;
-      background-color: rgba(v.$sucess, .02);
+      background-color: rgba(v.$sucess, 0.02);
+
+      &--error {
+        background-color: rgba(v.$danger, 0.3);
+      }
 
       &:focus {
         outline: none;
-        background-color: v.$white;
+        // background-color: v.$white;
       }
     }
   }
 
   &-contact {
-    &__modes, &__roles {
+    &__modes,
+    &__roles {
       display: flex;
       gap: 25%;
     }
@@ -182,17 +207,18 @@
       gap: 30%;
     }
 
-&__private, &__actu {
-  font-weight: 400;
-  select {
-    font-weight: 300;
-  margin-left: 1rem;
-  background-color: v.$white;
-  border: 1px solid v.$grey-300;
-  border-radius: 10px;
-  padding: .2rem .4rem;
-}
-}
+    &__private,
+    &__actu {
+      font-weight: 400;
+      select {
+        font-weight: 300;
+        margin-left: 1rem;
+        background-color: v.$white;
+        border: 1px solid v.$grey-300;
+        border-radius: 10px;
+        padding: 0.2rem 0.4rem;
+      }
+    }
 
     &__mail {
       width: 200%;

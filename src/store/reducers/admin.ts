@@ -1,5 +1,4 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { Organism, Role, User, Zone } from '../../@types/organism';
 import { axiosInstance } from '../../utils/axios';
 
@@ -98,9 +97,7 @@ export const setAdminOrganism = createAsyncThunk(
             'schedules.closed',
             'contacts.id',
             'contacts.name',
-            'contacts.firstname',
-            'contacts.lastname',
-            'contacts.name',
+            'contacts.comment',
             'contacts.job',
             'contacts.phone',
             'contacts.mail',
@@ -111,10 +108,12 @@ export const setAdminOrganism = createAsyncThunk(
             'translations.infos_alerte',
             'services.id',
             'services.categorie_id.tag',
+            'services.categorie_id.id',
             'services.categorie_id.translations.name',
             'services.categorie_id.translations.slug',
             'services.categorie_id.translations.description',
             'services.categorie_id.translations.',
+            'services.translations.id',
             'services.translations.name',
             'services.translations.slug',
             'services.translations.infos_alerte',
@@ -122,6 +121,7 @@ export const setAdminOrganism = createAsyncThunk(
             'services.schedules.*',
             'services.contacts.id',
             'services.contacts.name',
+            'services.contacts.comment',
             'services.contacts.job',
             'services.contacts.mail',
             'services.contacts.phone',

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Service } from '../../../../../../@types/organism';
+import ModalAddServiceContact from '../../../../Modal/ModalAddServiceContact';
 import ModalEditService from '../../../../Modal/ModalEditService';
 import Schedules from '../../../../Schedules/Schedules';
 import ContactCard from '../../Contacts/ContactCard/ContactCard';
@@ -7,23 +8,28 @@ import './ServiceCard.scss';
 
 function ServiceCard({ ...service }: Service) {
   const [isActiveService, setIsActiveService] = useState(false);
-  // const [isActiveContact, setIsActiveContact] = useState(false);
+  const [isActiveContact, setIsActiveContact] = useState(false);
 
   return (
     <li className="orgaSheet-services__serviceCard">
       {isActiveService && (
         <ModalEditService setIsActive={setIsActiveService} service={service} />
       )}
+      {isActiveContact && (
+        <ModalAddServiceContact
+          setIsActive={setIsActiveContact}
+          service={service}
+        />
+      )}
       <span className="serviceCard-header">
         <h4 className="serviceCard-subheader">
           {service.translations[0]?.name}
         </h4>
         <span className="serviceCard-actions">
-          {/* Besoin d'une modale Ajout de contact dans un service ici ! */}
           <button
             type="button"
             className="orgaSheet-edition__menu"
-            // onClick={() => setIsActiveContact(true)}
+            onClick={() => setIsActiveContact(true)}
           >
             <i className="las la-address-book" />
           </button>
@@ -37,8 +43,9 @@ function ServiceCard({ ...service }: Service) {
         </span>
       </span>
       <div className="serviceCard-data">
-        <p className="serviceCard-data__info">
-          Categorie : {service.categorie_id.translations[0]?.name}
+        <p className="serviceCard-data__info serviceCard-data__category">
+          <span className="serviceCard-data__info-title">Categorie : </span>
+          {service.categorie_id.translations[0]?.name}
         </p>
         <p className="serviceCard-data__info">
           {service.translations[0]?.description}

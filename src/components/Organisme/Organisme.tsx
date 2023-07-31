@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchOrganism } from '../../store/reducers/organisms';
@@ -13,14 +13,25 @@ function Organisme() {
   const { slug } = useParams();
   const dispatch = useAppDispatch();
   const organism = useAppSelector((state) => state.organism.organism);
-  console.log(organism);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchOrganism(slug as string));
+    const fetchData = async () => {
+      await dispatch(fetchOrganism(slug as string));
+      setLoading(false);
+    };
+    fetchData();
   }, [dispatch, slug]);
 
-  if (organism === null) {
-    return <span>Erreur</span>;
+  if (organism === null && !loading) {
+    return (
+      <main className="organisme-container">
+        <Container>
+          <Breadcrumb />
+          <span>Cet organisme n&apos;éxiste pas.</span>
+        </Container>
+      </main>
+    );
   }
 
   return (
@@ -28,9 +39,13 @@ function Organisme() {
       <Container>
         <Breadcrumb />
         <section className="organisme">
-          <Header />
-          <Infos />
-          <Services />
+          {!loading && (
+            <>
+              <Header />
+              <Infos />
+              <Services />
+            </>
+          )}
         </section>
       </Container>
     </main>
