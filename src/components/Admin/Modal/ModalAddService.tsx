@@ -24,6 +24,7 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
     (state) => state.admin.organism?.id as number
   );
   const isSaving = useAppSelector((state) => state.crud.isSaving);
+  const days = useAppSelector((state) => state.organism.days);
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     await dispatch(addService(formData));
@@ -88,18 +89,10 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  'Lundi',
-                  'Mardi',
-                  'Mercredi',
-                  'Jeudi',
-                  'vendredi',
-                  'Samedi',
-                  'Dimanche',
-                ].map((i, index) => (
-                  <tr key={i} className="modal-data__hoursLine">
+                {days.map((i, index) => (
+                  <tr key={i.name} className="modal-data__hoursLine">
                     <td className="modal-data__hoursDay">
-                      <span>{i}</span>
+                      <span>{i.name}</span>
                       <input
                         type="hidden"
                         {...register(

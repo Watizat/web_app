@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
-import { Categorie, Organism } from '../../@types/organism';
+import { Categorie, Days, Organism } from '../../@types/organism';
 import { axiosInstance } from '../../utils/axios';
 
 interface OrganismsState {
@@ -14,6 +14,8 @@ interface OrganismsState {
   categories: Categorie[];
   userPosition: { lat: number; lng: number };
   organism: Organism | null;
+  days: Days[];
+  langue: number;
 }
 
 export const initialState: OrganismsState = {
@@ -24,6 +26,8 @@ export const initialState: OrganismsState = {
   categories: [],
   userPosition: { lat: 0, lng: 0 },
   organism: null,
+  days: [],
+  langue: 1,
 };
 
 export const fetchOrganisms = createAsyncThunk(
@@ -97,6 +101,23 @@ export const fetchOrganisms = createAsyncThunk(
               },
             }, */
           },
+        },
+      }
+    );
+    return data.data;
+  }
+);
+
+export const fetchDays = createAsyncThunk(
+  'organisms/fetch-days',
+  async (langue_id: number) => {
+    const { data } = await axiosInstance.get<{ data: Days[] }>(
+      '/items/day_translation',
+      {
+        params: {
+          fields: ['name', 'numberday'],
+          filter: { langue: langue_id },
+          sort: 'numberday',
         },
       }
     );
@@ -183,7 +204,12 @@ export const fetchCategories = createAsyncThunk(
   'categories/fetch-categories',
   async () => {
     const { data } = await axiosInstance.get<{ data: Categorie[] }>(
-      '/items/categorie?fields=id,tag,translations.name,translations.slug'
+      '/items/categorie?fields=id,tag,translations.name,translations.slug',
+      {
+        params: {
+          sort: 'translations.name',
+        },
+      }
     );
     return data.data;
   }
@@ -221,6 +247,9 @@ const organismReducer = createReducer(initialState, (builder) => {
       state.organism = action.payload;
       state.isLoading = false;
     })
+    .addCase(fetchDays.fulfilled, (state, action) => {
+      state.days = action.payload;
+    })
     .addCase(setOrganisms, (state, action) => {
       state.organisms = action.payload;
     })
@@ -228,9 +257,7 @@ const organismReducer = createReducer(initialState, (builder) => {
       state.filteredOrganisms = action.payload;
     })
     .addCase(fetchCategories.fulfilled, (state, action) => {
-      state.categories = action.payload.sort((a, b) =>
-        a.tag.localeCompare(b.tag)
-      );
+      state.categories = action.payload;
     })
     .addCase(filterCategories, (state, action) => {
       state.categoryFilter = action.payload;

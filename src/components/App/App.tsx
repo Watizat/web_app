@@ -3,13 +3,14 @@ import { Outlet } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
-import { useAppDispatch } from '../../hooks/redux';
-import { fetchCategories } from '../../store/reducers/organisms';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchCategories, fetchDays } from '../../store/reducers/organisms';
 import './App.scss';
 
 function App() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
+  const langue = useAppSelector((state) => state.organism.langue);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,6 +19,10 @@ function App() {
     };
     fetchData();
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchDays(1));
+  }, [dispatch, langue]);
 
   return (
     <div className="app">
