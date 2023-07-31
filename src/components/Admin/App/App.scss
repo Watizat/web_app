@@ -19,43 +19,55 @@
       flex-wrap: nowrap;
     }
   }
-}
 
-#mobileOut {
-  min-height: 100%;
-  padding: 0 10vw;
-  display: flex;
-  flex-direction: column;
-  background-image: linear-gradient(rgba(v.$bghome, 0.8), rgba(v.$bghome, 0.5)),
-    url('/img/404mobile.jpg');
-  background-size: cover;
-  color: v.$white;
-  text-align: center;
-  font-size: 1.35rem;
+  .bo-app__sidebar {
+    display: none;
 
-  .mobileOut__logo {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin: auto;
-    padding: auto;
-    margin: 10vh 0 5vh 0;
+    align-content: center;
 
-    img {
-      margin: auto;
+    @include m.widescreen {
+      display: flex;
     }
   }
 
-  .mobileOut__returnToHome {
-    margin-top: 5vh;
+  #mobileOut {
+    min-height: 100vh;
+    padding: 0 10vw;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba(v.$bghome, 0.8), rgba(v.$bghome, 0.5)),
+      url('/img/404mobile.jpg');
+    background-size: cover;
     color: v.$white;
-    border: 1px solid v.$white;
-    border-radius: 20px;
-    padding: 1rem;
-  }
+    text-align: center;
+    font-size: 1.35rem;
 
-  @include m.tablet {
-    display: none;
+    .mobileOut__logo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      padding: auto;
+      margin: 10vh 0 5vh 0;
+
+      img {
+        margin: auto;
+      }
+    }
+
+    .mobileOut__returnToHome {
+      margin-top: 5vh;
+      color: v.$white;
+      border: 1px solid v.$white;
+      border-radius: 20px;
+      padding: 1rem;
+    }
+
+    @include m.tablet {
+      display: none;
+    }
   }
 }

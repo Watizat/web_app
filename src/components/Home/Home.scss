@@ -7,47 +7,6 @@
     min-height: calc(100vh - 75px - 50px);
   }
 
-  h1 {
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin: 1rem 0;
-    max-height: 60vw;
-
-    @include m.desktop {
-      font-size: 2rem;
-    }
-
-    @include m.widescreen {
-      font-size: 3rem;
-    }
-
-    span {
-      font-size: 1rem;
-      font-weight: 800;
-      display: block;
-
-      @include m.desktop {
-        font-size: 1rem;
-      }
-
-      @include m.widescreen {
-        font-size: 2rem;
-      }
-    }
-  }
-
-  h2 {
-    text-align: center;
-    font-size: 1rem;
-    margin: 1rem 0 1rem 0;
-
-    @include m.desktop {
-      font-size: 1.5rem;
-      margin: 2rem 0 2rem 0;
-    }
-  }
-
   #hero {
     display: flex;
     flex-direction: column;
@@ -83,16 +42,40 @@
 
     .heroHeader {
       display: flex;
+      align-items: center;
+      justify-content: center;
+
       margin-top: 1rem;
       gap: 1rem;
 
-      @include m.desktop {
-        &-logo {
-          display: none;
-        }
-
-        h1 {
+      &-title {
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin: 1rem 0;
+        max-height: 60vw;
+    
+        @include m.desktop {
+          font-size: 2rem;
           margin: auto;
+        }
+    
+        @include m.widescreen {
+          font-size: 3rem;
+        }
+      }
+
+      &-subtitle {
+        font-size: 1rem;
+        font-weight: 800;
+        display: block;
+  
+        @include m.desktop {
+          font-size: 1rem;
+        }
+  
+        @include m.widescreen {
+          font-size: 2rem;
         }
       }
     }
@@ -103,8 +86,8 @@
       justify-content: flex-end;
       align-items: flex-start;
       align-content: flex-start;
-      margin: 3rem auto auto auto;
-      gap: 3rem;
+      margin: auto;
+      gap: 2rem;
 
       @include m.widescreen {
         margin: 0;
@@ -114,6 +97,17 @@
 
       @include m.fullhd {
         margin: 5rem 0 0 0;
+      }
+
+      &-title {
+        text-align: center;
+        font-size: 1rem;
+        margin: 1rem 0 1rem 0;
+    
+        @include m.desktop {
+          font-size: 1.5rem;
+          margin: 2rem 0 2rem 0;
+        }
       }
 
       .choiceLeft {
@@ -240,7 +234,7 @@
           font-size: 1.2rem;
         }
 
-        h2 {
+        &___title {
           font-size: 1.3rem;
           text-align: left;
 

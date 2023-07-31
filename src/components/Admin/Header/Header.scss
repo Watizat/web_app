@@ -26,4 +26,19 @@
   button {
     margin-right: 2rem;
   }
+
+  .headerAdmin-hamburger {
+    @include m.widescreen {
+      display: none;
+    }
+    &__open {
+      color: v.$white;
+    }
+  }
+
+  .headerAdmin-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 }

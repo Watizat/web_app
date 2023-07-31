@@ -2,12 +2,7 @@
 @use '../../styles/medias' as m;
 
 #header {
-  display: none;
-
-  @include m.desktop {
-    display: flex;
-  }
-
+  display: flex;
   min-height: 75px;
   background-color: v.$primary;
   color: v.$white;
@@ -22,14 +17,39 @@
     font-weight: 200;
   }
 
-  .watizat-logo-topbar {
+  .header-logo {
+    display: flex;
+    height: 55px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .header-hamburger {
+    font-size: 2.5rem;
+
+    @include m.tablet {
+      display: none;
+    }
+  }
+
+  .header-navbar {
     display: none;
 
-    @include m.desktop {
+    @include m.tablet {
       display: flex;
-      height: 60px;
-      margin-top: auto;
-      margin-bottom: auto;
     }
+
+    .navbar {
+      display: flex;
+      gap: 30px;
+      a {
+        color: v.$white;
+        font-weight: 600;
+  
+        &:hover {
+          font-weight: 600;
+          color: v.$warning;
+        }
+      }}
   }
 }
