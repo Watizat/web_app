@@ -31,7 +31,7 @@
       border: 2px solid transparent;
       border-bottom: 1px solid v.$grey-300;
       border-radius: 5px;
-      padding: .2rem;
+      padding: 0.2rem;
 
       &::placeholder {
         /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -43,7 +43,7 @@
       &:focus {
         outline: none;
         // border: 2px solid rgba(v.$sucess, .7);
-        background-color: rgba(v.$sucess, .075);
+        background-color: rgba(v.$sucess, 0.075);
       }
     }
   }
@@ -111,9 +111,8 @@
   padding: 0 10vw;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(rgba(v.$bghome, 0.8),
-      rgba(v.$bghome, 0.5)),
-    url('../../../../public/img/404mobile.jpg');
+  background-image: linear-gradient(rgba(v.$bghome, 0.8), rgba(v.$bghome, 0.5)),
+    url('/img/404mobile.jpg');
   background-size: cover;
   color: v.$white;
   text-align: center;
