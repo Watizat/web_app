@@ -1,13 +1,14 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 import { Organism, Role, User, Zone } from '../../@types/organism';
+import { DirectusUser } from '../../@types/user';
 import { axiosInstance } from '../../utils/axios';
 
 interface AdminState {
   organisms: Organism[];
   organism: Organism | null;
   isLoading: boolean;
-  users: User[];
-  user: User | null;
+  users: DirectusUser[];
+  user: DirectusUser | null;
   zones: Zone[];
   zone: Zone | null;
   roles: Role[];
@@ -47,17 +48,18 @@ export const fetchAdminOrganisms = createAsyncThunk(
 );
 
 export const fetchUsers = createAsyncThunk('users/fetch-users', async () => {
-  const { data } = await axiosInstance.get<{ data: User[] }>('/items/user', {
+  const { data } = await axiosInstance.get<{ data: DirectusUser[] }>('/users', {
     params: {
       fields: [
-        'id',
+        /*         'id',
         'firstname',
         'lastname',
         'last_connected',
         'email',
         'role_id.id',
         'role_id.name',
-        'zone.name',
+        'zone.name', */
+        '*',
       ].join(','),
     },
   });
@@ -144,7 +146,7 @@ export const fetchZones = createAsyncThunk('zones', async () => {
 });
 
 export const fetchRoles = createAsyncThunk('roles', async () => {
-  const { data } = await axiosInstance.get<{ data: Role[] }>('/items/role');
+  const { data } = await axiosInstance.get<{ data: Role[] }>('/roles');
   return data.data;
 });
 

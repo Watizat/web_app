@@ -51,11 +51,9 @@ function Users() {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {users.map((user) => (
-            <UsersDetails key={user.id} {...user} />
-          ))}
-        </tbody>
+        {users.map((user) => (
+          <UsersDetails key={user.id} user={user} />
+        ))}
       </table>
     </div>
   );

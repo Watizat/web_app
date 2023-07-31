@@ -1,19 +1,38 @@
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
-import { User } from '../../../@types/organism';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Inputs } from '../../../@types/formInputs';
+import { DirectusUser } from '../../../@types/user';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { fetchRoles, fetchZones } from '../../../store/reducers/admin';
+import {
+  fetchRoles,
+  fetchUsers,
+  fetchZones,
+} from '../../../store/reducers/admin';
+import { editUser } from '../../../store/reducers/user';
 import './Modal.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  user?: User;
+  user: DirectusUser;
 }
 
-function ModalUsers({ setIsActive, user: { ...user } }: ModalProps) {
+function ModalUsers({ setIsActive, user }: ModalProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
   const dispatch = useAppDispatch();
   const zones = useAppSelector((state) => state.admin.zones);
   const roles = useAppSelector((state) => state.admin.roles);
+
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    await dispatch(editUser(formData));
+    setIsActive(false);
+    await dispatch(fetchUsers());
+  };
 
   useEffect(() => {
     dispatch(fetchZones());
@@ -24,14 +43,16 @@ function ModalUsers({ setIsActive, user: { ...user } }: ModalProps) {
     <div className="modal">
       <div className="modal-main">
         <h1 className="modal-title">Informations organisme</h1>
-        <form className="modal-list">
+        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
           <div className="modal-double">
             <div className="modal-case modal-double__case">
+              <input type="text" hidden value={user.id} {...register('id')} />
               <h4 className="modal-case__title">Prénom</h4>
               <input
                 className="modal-case__inputTxt"
                 type="text"
-                defaultValue={user.firstname}
+                {...register('first_name')}
+                defaultValue={user.first_name}
               />
             </div>
             <div className="modal-case modal-double__case">
@@ -39,16 +60,17 @@ function ModalUsers({ setIsActive, user: { ...user } }: ModalProps) {
               <input
                 className="modal-case__inputTxt"
                 type="text"
-                defaultValue={user.lastname}
+                {...register('last_name')}
+                defaultValue={user.last_name}
               />
             </div>
           </div>
           <div className="modal-double">
             <div className="modal-case modal-double__case">
               <h4 className="modal-case__title">Antenne local</h4>
-              <select>
+              <select {...register('zone')} defaultValue={user.zone}>
                 {zones.map((zone) => (
-                  <option key={zone.id} value={zone.name}>
+                  <option key={zone.id} value={zone.id}>
                     {zone.name}
                   </option>
                 ))}
@@ -59,6 +81,7 @@ function ModalUsers({ setIsActive, user: { ...user } }: ModalProps) {
               <input
                 className="modal-case__inputTxt"
                 type="text"
+                {...register('email')}
                 defaultValue={user.email}
               />
             </div>
@@ -66,9 +89,9 @@ function ModalUsers({ setIsActive, user: { ...user } }: ModalProps) {
           <div className="modal-double">
             <div className="modal-case modal-double__case">
               <h4 className="modal-case__title">Rôles</h4>
-              <select defaultValue={user.role_id.name}>
+              <select defaultValue={user.role} {...register('role')}>
                 {roles.map((role) => (
-                  <option key={role.id} value={role.name}>
+                  <option key={role.id} value={role.id}>
                     {role.name}
                   </option>
                 ))}
@@ -76,11 +99,9 @@ function ModalUsers({ setIsActive, user: { ...user } }: ModalProps) {
             </div>
             <div className="modal-case modal-double__case">
               <h4 className="modal-case__title">Dernière connexion</h4>
-              {dayjs(user.last_connected).format('DD  MMMM  YYYY')}
+              {dayjs(user.last_access).format('DD  MMMM  YYYY')}
             </div>
           </div>
-        </form>
-        <div className="modal-actions">
           <button
             type="button"
             className="btn btn-danger-fill btn-flat modal-actions__close"
@@ -95,24 +116,16 @@ function ModalUsers({ setIsActive, user: { ...user } }: ModalProps) {
             Annuler
           </button>
           <button
-            type="button"
+            type="submit"
             className="btn btn-sucess-fill btn-flat modal-actions__save"
           >
             Sauvegarder
           </button>
-        </div>
+        </form>
+        <div className="modal-actions" />
       </div>
     </div>
   );
 }
-ModalUsers.defaultProps = {
-  user: {
-    firstname: '',
-    lastname: '',
-    role_id: { name: '' },
-    email: '',
-    last_connected: '',
-  },
-};
 
 export default ModalUsers;

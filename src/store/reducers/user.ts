@@ -49,6 +49,15 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+export const editUser = createAsyncThunk(
+  'user/edit-user',
+  async (formData: Inputs) => {
+    await axiosInstance.patch(`/users/${formData.id}`, {
+      ...formData,
+    });
+  }
+);
+
 export const login = createAsyncThunk(
   'user/login',
   async (loginCredentials: UserState['loginCredentials']) => {

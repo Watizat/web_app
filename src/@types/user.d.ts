@@ -27,4 +27,15 @@ export interface AuthResponse {
   refresh_token: string;
 }
 
+export interface DirectusUser {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  role: string;
+  zone: number;
+  last_access: string;
+}
+
 export type KeyOfloginCredentials = keyof UserState['loginCredentials'];
