@@ -176,7 +176,8 @@ export const addOrganismContact = createAsyncThunk<
   Inputs,
   { rejectValue: string }
 >('crud/add-contact-organism', async (formData: Inputs) => {
-  const { data } = await axiosInstance.post('/items/contact', { ...formData,
+  const { data } = await axiosInstance.post('/items/contact', {
+    ...formData,
     service: null,
   });
   return data;

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Organism } from '../../../../@types/organism';
 import { useAppSelector } from '../../../../hooks/redux';
 import navitiaInstance from '../../../../utils/navitia';
@@ -90,7 +90,6 @@ function Transport() {
     };
     const fetchData = async () => {
       const placeNearbyTransport = await fetchPlaceNearby();
-      // console.log(placeNearbyTransport);
 
       if (!placeNearbyTransport) {
         setData([]);
