@@ -16,11 +16,6 @@ function InactivityDetector() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(
-      Date.now(),
-      lastActionDate,
-      lastActionDate ? Date.now() - lastActionDate : null
-    );
     if (
       lastActionDate &&
       Date.now() - lastActionDate > timeout + 2 * 1000 * 60
