@@ -57,8 +57,8 @@ function Map() {
             className: 'custom-icon',
             html: `<div>${index + 1}</div>`,
             iconSize: [30, 30],
-            iconAnchor: [15, 33.5],
-            popupAnchor: [0, -30],
+            iconAnchor: [15, 30],
+            popupAnchor: [0, -28],
           });
           return (
             <Marker

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../store/reducers/organisms';
 import Card from '../Card/Card';
@@ -54,12 +54,21 @@ function Panel() {
 
   const organismToScroll = useAppSelector((state) => state.organism.scroll);
 
+  const resultsContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    // Lorsque selectedMarkerOrganismeId change, on fait défiler la liste
     if (organismToScroll) {
       const element = document.getElementById(organismToScroll.toString());
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (element && resultsContainerRef.current) {
+        const containerTop =
+          resultsContainerRef.current.getBoundingClientRect().top;
+        const elementTop = element.getBoundingClientRect().top;
+        const scrollDistance = elementTop - containerTop - 25;
+
+        resultsContainerRef.current.scrollTo({
+          top: resultsContainerRef.current.scrollTop + scrollDistance,
+          behavior: 'smooth',
+        });
       }
     }
   }, [organismToScroll]);
@@ -73,7 +82,7 @@ function Panel() {
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
       />
-      <div className="resultsContentCard">
+      <div className="resultsContentCard" ref={resultsContainerRef}>
         {isLoading && <div>Loading...</div>}
         {!isLoading &&
           (filteredOrganisms.length > 0 ? (

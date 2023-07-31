@@ -35,20 +35,18 @@ function Organisme() {
   }
 
   return (
-    <main className="organisme-container">
-      <Container>
-        <Breadcrumb />
-        <section className="organisme">
-          {!loading && (
-            <>
-              <Header />
-              <Infos />
-              <Services />
-            </>
-          )}
-        </section>
-      </Container>
-    </main>
+    !loading && (
+      <main className="organisme-container">
+        <Container>
+          <Breadcrumb />
+          <section className="organisme">
+            <Header />
+            <Infos />
+            <Services />
+          </section>
+        </Container>
+      </main>
+    )
   );
 }
 
