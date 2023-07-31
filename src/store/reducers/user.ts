@@ -6,6 +6,7 @@ import {
   createReducer,
 } from '@reduxjs/toolkit';
 
+import { Inputs } from '../../@types/formInputs';
 import {
   AuthResponse,
   KeyOfloginCredentials,
@@ -37,6 +38,16 @@ export const changeLoginCredentialsField = createAction<{
   field: KeyOfloginCredentials;
   value: string;
 }>('user/change-credentials-login');
+
+export const registerUser = createAsyncThunk(
+  'user/registerUser',
+  async (formData: Inputs) => {
+    await axiosInstance.post('/users', {
+      ...formData,
+      role: '5754603f-add3-4823-9c77-a2f9789074fc',
+    });
+  }
+);
 
 export const login = createAsyncThunk(
   'user/login',
@@ -133,5 +144,8 @@ export default createReducer(initialState, (builder) => {
     })
     .addCase(setIsLogged, (state, action) => {
       state.isLogged = action.payload.isLogged;
+    })
+    .addCase(registerUser.fulfilled, (state) => {
+      state.message = 'un administrateur va vérifier votre demande';
     });
 });

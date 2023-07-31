@@ -1,26 +1,51 @@
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
+import { Inputs } from '../../@types/formInputs';
+import { registerUser } from '../../store/reducers/user';
 import './Login.scss';
 
 function AccountRequest() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const dispatch = useAppDispatch();
   const zones = useAppSelector((state) => state.admin.zones);
+
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    await dispatch(registerUser(formData));
+  };
 
   return (
     <div className="login accountRequest">
       <h1>Demande de création de compte</h1>
-      <form className="login-form accountRequest-form">
-        <input type="text" placeholder="Prénom" />
-        <input type="text" placeholder="Nom de famille" />
-        <input type="text" placeholder="Email" />
-        <input type="text" placeholder="Mot de passe" />
-        <select>
+      <form
+        className="login-form accountRequest-form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <input type="text" placeholder="Prénom" {...register('first_name')} />
+        <input
+          type="text"
+          placeholder="Nom de famille"
+          {...register('last_name')}
+        />
+        <input type="text" placeholder="Email" {...register('email')} />
+        <input
+          type="text"
+          placeholder="Mot de passe"
+          {...register('password')}
+        />
+        <select {...register('zone')}>
           <option value="" disabled>
             Groupe local
           </option>
 
           {zones.map((zone) => (
-            <option key={zone.id} value={zone.name}>
+            <option key={zone.id} value={zone.id}>
               {zone.name}
             </option>
           ))}
@@ -32,7 +57,7 @@ function AccountRequest() {
           <br />
           Toute demande devra être confirmée par un·e référent·e local
         </p>
-        <button type="button">Confirmer la demande</button>
+        <button type="submit">Confirmer la demande</button>
       </form>
 
       <div className="login-newAccount">
