@@ -3,13 +3,6 @@
 @use '../../../../../styles/elements';
 
 .orgaList {
-  display: flex;
-  flex-direction: column;
-  width: 20vw;
-  padding: 0;
-
-  background-color: v.$white;
-  box-shadow: rgba(0, 0, 0, 0.15) 0.5rem 0rem 0.5rem;
 
   &-searchCard {
     position: sticky;

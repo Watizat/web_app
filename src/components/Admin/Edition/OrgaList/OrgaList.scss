@@ -10,7 +10,7 @@
   background-color: v.$white;
   box-shadow: rgba(0, 0, 0, 0.15) 0.2rem 0rem 0.5rem;
 
-  width: 30vw;
+  width: 40vw;
 
   &-list {
     overflow-y: auto;
@@ -28,6 +28,7 @@
 
   &-card {
     width: 100%;
+    padding: .5rem 0;
 
     background-color: v.$white;
     border-bottom: 1px solid v.$grey-200;
@@ -56,27 +57,27 @@
     &-button {
       min-height: 6vh;
     }
-    width: 20vw;
+    width: 30vw;
   }
 
   @include m.widescreen {
     &-button {
       min-height: 7vh;
     }
-    width: 19vw;
+    width: 25vw;
   }
 
   @include m.fullhd {
     &-button {
       min-height: 8vh;
     }
-    width: 17vw;
+    width: 20vw;
   }
 
   @include m.qhd {
     &-button {
       min-height: 6vh;
     }
-    width: 14vw;
+    width: 17vw;
   }
 }
