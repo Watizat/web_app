@@ -8,7 +8,7 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import './Header.scss';
 
 function Header() {
-  const [isOpen, setOpen] = useState(false);
+  const [MenuIsOpen, MenuSetOpen] = useState(false);
   return (
     <header id="header">
       <Container>
@@ -19,9 +19,9 @@ function Header() {
           <NavBar />
         </div>
         <div className="header-hamburger">
-          <Hamburger toggled={isOpen} toggle={setOpen} />
+          <Hamburger toggled={MenuIsOpen} toggle={MenuSetOpen} />
         </div>
-        {isOpen && <BurgerMenu setOpen={setOpen} />}
+        {MenuIsOpen && <BurgerMenu MenuSetOpen={MenuSetOpen} />}
       </Container>
     </header>
   );

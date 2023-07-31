@@ -3,7 +3,11 @@ import './NavBar.scss';
 import { useAppDispatch } from '../../../../hooks/redux';
 import { logout } from '../../../../store/reducers/user';
 
-function NavBar() {
+interface ModalProps {
+  SidebarsetOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function NavBar({ SidebarsetOpen }: ModalProps) {
   const dispatch = useAppDispatch();
 
   const links = [
@@ -56,6 +60,7 @@ function NavBar() {
         <NavLink
           key={e.name}
           to={e.to}
+          onClick={() => SidebarsetOpen(false)}
           className={({ isActive }) => (isActive ? 'adminNav-isActive' : '')}
         >
           <i className={e.icon} />
