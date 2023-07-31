@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { setUserPosition } from '../../../store/reducers/organisms';
+import { scrollCard, setUserPosition } from '../../../store/reducers/organisms';
 import Icon from '../../../ui/icon/icon';
 
 import './Map.scss';
@@ -65,6 +65,11 @@ function Map() {
               key={organism.id}
               position={[organism.latitude, organism.longitude]}
               icon={customIcon}
+              eventHandlers={{
+                click: () => {
+                  dispatch(scrollCard(organism.id));
+                },
+              }}
             >
               <Popup className="popup">
                 <Link className="popup-text" to={`/organisme/${organism.slug}`}>
@@ -79,7 +84,7 @@ function Map() {
                     className="popup-button__icon"
                     icon="directions_walk"
                     size="1.2rem"
-                  />{' '}
+                  />
                   <p className="popup-button__text">J&apos;y vais !</p>
                 </Link>
               </Popup>

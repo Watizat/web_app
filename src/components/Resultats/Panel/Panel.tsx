@@ -15,6 +15,7 @@ function Panel() {
   const categoryFilter = useAppSelector(
     (state) => state.organism.categoryFilter
   );
+
   const [isPmr, setIsPmr] = useState<boolean>(false);
   const [isAnimalsAccepted, setIsAnimalsAccepted] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
@@ -50,6 +51,18 @@ function Panel() {
 
     dispatch(setFilteredOrganisms(setFilter));
   }, [organisms, categoryFilter, isPmr, isAnimalsAccepted, search, dispatch]);
+
+  const organismToScroll = useAppSelector((state) => state.organism.scroll);
+
+  useEffect(() => {
+    // Lorsque selectedMarkerOrganismeId change, on fait défiler la liste
+    if (organismToScroll) {
+      const element = document.getElementById(organismToScroll.toString());
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [organismToScroll]);
 
   return (
     <section id="resultsPanel">

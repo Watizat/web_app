@@ -16,6 +16,7 @@ interface OrganismsState {
   organism: Organism | null;
   days: Days[];
   langue: number;
+  scroll: number;
 }
 
 export const initialState: OrganismsState = {
@@ -28,7 +29,10 @@ export const initialState: OrganismsState = {
   organism: null,
   days: [],
   langue: 1,
+  scroll: 1,
 };
+
+export const scrollCard = createAction<number>('organism/focus-card');
 
 export const fetchOrganisms = createAsyncThunk(
   'organisms/fetch-organisms',
@@ -229,6 +233,9 @@ const organismReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchOrganisms.pending, (state) => {
       state.isLoading = true;
+    })
+    .addCase(scrollCard, (state, action) => {
+      state.scroll = action.payload;
     })
     .addCase(fetchOrganisms.fulfilled, (state, action) => {
       state.organisms = action.payload;
