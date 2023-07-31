@@ -6,7 +6,8 @@
 
   &-searchCard {
     position: sticky;
-    top: 0vh;
+    overflow-y: auto;
+    top: 6vh;
     display: flex;
     flex-direction: column;
     gap: .5rem;

@@ -8,12 +8,10 @@
   @include m.tablet {
     display: flex;
     min-height: 100vh;
-    height: 100%;
     font-family: 'Roboto', sans-serif;
 
     #bo-main {
       width: 100%;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       flex-wrap: nowrap;

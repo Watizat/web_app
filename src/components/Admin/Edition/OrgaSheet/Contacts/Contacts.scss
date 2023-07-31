@@ -6,26 +6,24 @@
 
   &-contacts {
     &__list {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr;
       justify-content: space-between;
       padding: 0;
-    }
-    .orgaSheet-case {
-      min-height: 9vh;
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
 
       @include m.desktop {
-        width: 50%;
+        grid-template-columns: 1fr 1fr;
       }
 
       @include m.qhd {
-        width: 33%;
+        grid-template-columns: 1fr 1fr 1fr;
       }
+    }
+    .orgaSheet-case {
+      min-height: 9vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     &__noContacts {
