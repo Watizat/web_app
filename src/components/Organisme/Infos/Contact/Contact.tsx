@@ -8,7 +8,6 @@ function Contact() {
   if (organism === null) {
     return <span>Erreur</span>;
   }
-  console.log(organism);
   return (
     <article>
       <h3>Contact</h3>
@@ -24,21 +23,23 @@ function Contact() {
           <p>mail@mail.com</p>
         </Link>
       </div>
-      {organism.contacts.length > 0 && (
-        <div className="organisme-infos--othercontact">
-          <p className="organisme-infos--othercontact-job">
-            {organism.contacts[0].job}
-          </p>
-          <p>{organism.contacts[0].name}</p>
-          <p>{organism.contacts[0].comment}</p>
-          <Link to="tel:+3300" className="organisme-infos--link">
-            <p>{organism.contacts[0].phone}</p>
-          </Link>
-          <Link to="tel:+3300" className="organisme-infos--link">
-            <p>{organism.contacts[0].mail}</p>
-          </Link>
-        </div>
-      )}
+      {organism.contacts.length > 0 &&
+        organism.contacts.map((contact) => (
+          <div className="organisme-infos--othercontact" key={contact.name}>
+            <p className="organisme-infos--othercontact-job">{contact.job}</p>
+            <p>{contact.name}</p>
+            <p>{contact.comment}</p>
+            <Link to={`tel:${contact.phone}`} className="organisme-infos--link">
+              <p>{contact.phone}</p>
+            </Link>
+            <Link
+              to={`mailto:${contact.mail}`}
+              className="organisme-infos--link"
+            >
+              <p>{contact.mail}</p>
+            </Link>
+          </div>
+        ))}
     </article>
   );
 }

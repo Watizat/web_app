@@ -93,13 +93,6 @@ export const fetchOrganisms = createAsyncThunk(
             zone_id: {
               name: 'Toulouse',
             },
-            /* services: {
-              categorie_id: {
-                translations: {
-                  slug: `${category}`,
-                },
-              },
-            }, */
           },
         },
       }
@@ -160,6 +153,7 @@ export const fetchOrganism = createAsyncThunk(
             'translations.id',
             'translations.description',
             'translations.infos_alerte',
+            'services.id',
             'services.categorie_id.id',
             'services.categorie_id.tag',
             'services.categorie_id.translations.name',

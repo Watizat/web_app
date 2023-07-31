@@ -19,6 +19,7 @@ export interface Organism {
   translations: OrganismTranslation[];
   schedules: Schedule[];
   services: Service[];
+  contacts: Contact[];
 }
 
 export interface Contact {
