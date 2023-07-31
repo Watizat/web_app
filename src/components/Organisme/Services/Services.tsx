@@ -10,9 +10,11 @@ function Services() {
   return (
     <div className="organisme-services">
       <h3>Services proposés</h3>
-      {organism.services.map((service) => (
-        <Card key={service.id} service={service} />
-      ))}
+      <div className="organisme-services-contentcards">
+        {organism.services.map((service) => (
+          <Card key={service.id} service={service} />
+        ))}
+      </div>
     </div>
   );
 }
