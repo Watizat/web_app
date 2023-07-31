@@ -61,21 +61,21 @@ function Panel() {
         setSearch={setSearch}
       />
       <div className="resultsContentCard">
-      {isLoading && <div>Loading...</div>}
-      {!isLoading &&
-        (filteredOrganisms.length > 0 ? (
-          filteredOrganisms.map((organism, index) => (
-            <Card
-              key={organism.id}
-              organism={organism}
-              map_id={index + 1}
-              categoryFilter={categoryFilter}
-            />
-          ))
-        ) : (
-          <span>Il n&apos;y a aucun résultat.</span>
-        ))}
-       </div> 
+        {isLoading && <div>Loading...</div>}
+        {!isLoading &&
+          (filteredOrganisms.length > 0 ? (
+            filteredOrganisms.map((organism, index) => (
+              <Card
+                key={organism.id}
+                organism={organism}
+                map_id={index + 1}
+                categoryFilter={categoryFilter}
+              />
+            ))
+          ) : (
+            <span>Il n&apos;y a aucun résultat.</span>
+          ))}
+      </div>
     </section>
   );
 }

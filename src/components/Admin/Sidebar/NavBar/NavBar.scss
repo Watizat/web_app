@@ -46,4 +46,10 @@
     background-color: rgba(v.$primary-var4, 0.3);
     font-weight: 800;
   }
+
+  &-forbidden {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 50%;
+  }
 }

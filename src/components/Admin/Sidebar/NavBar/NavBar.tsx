@@ -7,37 +7,48 @@ function NavBar() {
   const dispatch = useAppDispatch();
 
   const links = [
-    { name: 'Dashboard', to: '/admin/dashboard', icon: 'las la-igloo' },
+    {
+      name: 'Dashboard',
+      to: '/admin/dashboard',
+      icon: 'las la-igloo',
+      active: true,
+    },
     {
       name: 'Edition des données',
       to: '/admin/edition',
       icon: 'las la-pen-fancy',
+      active: true,
     },
     {
       name: 'Espace traduction',
       to: '/admin/translate',
       icon: 'las la-globe-africa',
+      active: false,
     },
     {
       name: 'Actualisation',
       to: '/admin/actualisation',
       icon: 'las la-mail-bulk',
+      active: false,
     },
     {
       name: 'Extraction guides',
       to: '/admin/guides',
       icon: 'las la-drafting-compass',
+      active: false,
     },
     {
       name: 'Utilisateteur·ice·s',
       to: '/admin/users',
       icon: 'las la-user-secret',
+      active: true,
     },
     {
       name: 'Directus (backend)',
       to: 'https://watizat.lunalink.nl',
       target: '_blank',
       icon: 'las la-carrot',
+      active: true,
     },
     // {
     //   name: 'Se déconnecter',
@@ -56,7 +67,11 @@ function NavBar() {
         <NavLink
           key={e.name}
           to={e.to}
-          className={({ isActive }) => (isActive ? 'adminNav-isActive' : '')}
+          className={({ isActive }) =>
+            isActive
+              ? 'adminNav-isActive'
+              : `${e.active ? '' : 'adminNav-forbidden'}`
+          }
         >
           <i className={e.icon} />
           <li>{e.name}</li>
