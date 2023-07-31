@@ -1,20 +1,14 @@
 import { Schedule } from '../../../../@types/organism';
+import { useAppSelector } from '../../../../hooks/redux';
 import './Schedule.scss';
 
 interface SchedulesProps {
   schedule: Schedule[];
+  displayAll: boolean;
 }
 
-function Schedules({ schedule }: SchedulesProps) {
-  const daysOfWeek: { [key: number]: string } = {
-    1: 'Lundi',
-    2: 'Mardi',
-    3: 'Mercredi',
-    4: 'Jeudi',
-    5: 'Vendredi',
-    6: 'Samedi',
-    7: 'Dimanche',
-  };
+function Schedules({ schedule, displayAll }: SchedulesProps) {
+  const days = useAppSelector((state) => state.organism.days);
 
   function getOpeningHours(day: Schedule) {
     const openAm = day.opentime_am?.slice(0, -3).replace(':', 'h');
@@ -28,39 +22,45 @@ function Schedules({ schedule }: SchedulesProps) {
     const noLunchBreak = openAm && !closeAm && !openPm && closePm;
 
     if (openMorning && openAfternoon) {
-      return `${openAm}/${closeAm} - ${openPm}/${closePm}`;
+      return `${openAm} à ${closeAm} et ${openPm} à ${closePm}`;
     }
     if (noLunchBreak) {
-      return `${openAm}/${closePm}`;
+      return `${openAm} à ${closePm}`;
     }
 
     if (!openMorning && openAfternoon) {
-      return `Fermé - ${openPm}/${closePm}`;
+      return `${openPm} à ${closePm}`;
     }
 
     if (openMorning && !openAfternoon) {
-      return `${openAm}/${closeAm} - Fermé`;
+      return `${openAm} à ${closeAm}`;
     }
 
     if (closeAllDay) {
-      return `${openAm}/${closeAm} - ${openPm}/${closePm}`;
+      if (displayAll) {
+        return 'Fermé';
+      }
+      return null;
     }
     return 'Fermé';
   }
 
   return (
-    <table className="organisme-infos--schedule">
+    <table className="schedules">
       <tbody>
-        {schedule.map((currentDay) => (
-          <tr key={currentDay.day}>
-            <td>
-              <div className="organisme-infos--schedule-day">
-                {daysOfWeek[currentDay.day]}
-              </div>
-            </td>
-            <td>{getOpeningHours(currentDay)}</td>
-          </tr>
-        ))}
+        {schedule.map(
+          (currentDay) =>
+            getOpeningHours(currentDay) !== null && (
+              <tr key={currentDay.day}>
+                <td>
+                  <div>
+                    {days.find((day) => day.numberday === currentDay.day)?.name}
+                  </div>
+                </td>
+                <td>{getOpeningHours(currentDay)}</td>
+              </tr>
+            )
+        )}
       </tbody>
     </table>
   );

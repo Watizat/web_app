@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Organism } from '../../../../@types/organism';
 import { useAppSelector } from '../../../../hooks/redux';
 import navitiaInstance from '../../../../utils/navitia';

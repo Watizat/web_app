@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import classNames from 'classnames';
-import { useAppSelector } from '../../../../hooks/redux';
-import Schedules from '../../Infos/Schedule/Schedule';
-import Icon from '../../../../ui/icon/icon';
-import './Card.scss';
+import { useState } from 'react';
 import { Organism } from '../../../../@types/organism';
+import { useAppSelector } from '../../../../hooks/redux';
+import Icon from '../../../../ui/icon/icon';
+import Schedules from '../../Infos/Schedule/Schedule';
+import './Card.scss';
 
 function Card() {
   const organism = useAppSelector(
@@ -95,7 +95,7 @@ function Card() {
               {service.schedules.length > 0 && (
                 <>
                   <h5>Horaires</h5>
-                  <Schedules schedule={service.schedules} />
+                  <Schedules schedule={service.schedules} displayAll={false} />
                 </>
               )}
             </div>

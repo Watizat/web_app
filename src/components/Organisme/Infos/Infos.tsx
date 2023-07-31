@@ -16,7 +16,7 @@ function Infos() {
       <article>
         <h3>Horaires</h3>
         {organism.schedules && organism.schedules.length > 0 ? (
-          <Schedule schedule={organism.schedules} />
+          <Schedule schedule={organism.schedules} displayAll />
         ) : (
           <p style={{ color: 'red' }}>
             Il n&apos;y a pas d&apos;horaires enregistrés.

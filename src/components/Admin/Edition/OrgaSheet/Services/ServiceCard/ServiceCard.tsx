@@ -51,7 +51,7 @@ function ServiceCard({ ...service }: Service) {
           {service.translations[0]?.description}
         </p>
         {service.schedules && service.schedules.length > 0 ? (
-          <Schedules schedule={service.schedules} />
+          <Schedules schedule={service.schedules} displayAll={false} />
         ) : (
           <p style={{ color: 'red' }}>
             Il n&apos;y a pas d&apos;horaires enregistrés.

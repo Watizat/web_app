@@ -107,6 +107,6 @@ export interface Role {
 }
 
 export interface Days {
-  day: number;
+  numberday: number;
   name: string;
 }

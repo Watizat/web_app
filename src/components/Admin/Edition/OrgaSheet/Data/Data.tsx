@@ -50,7 +50,7 @@ function Data() {
           <h4>Horaires</h4>
           <div className="orgaSheet-data__hoursDetails">
             {organism.schedules && organism.schedules.length > 0 ? (
-              <Schedules schedule={organism.schedules} />
+              <Schedules schedule={organism.schedules} displayAll />
             ) : (
               <p style={{ color: 'red' }}>
                 Il n&apos;y a pas d&apos;horaires enregistrés.
