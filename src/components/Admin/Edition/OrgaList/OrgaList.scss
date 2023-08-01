@@ -35,7 +35,7 @@
 
   &-button {
     width: 100%;
-    padding: 0 1rem;
+    padding: .5rem 1rem;
     text-align: left;
 
     &:hover {
@@ -47,25 +47,18 @@
     }
 
     @include m.desktop {
-      min-height: 6vh;
+      padding: 0 1rem;
+      min-height: 5vh;
     }
 
     @include m.widescreen {
-      min-height: 7vh;
-    }
-
-    @include m.fullhd {
-      min-height: 8vh;
-    }
-
-    @include m.qhd {
       min-height: 6vh;
     }
   }
 
   &-card {
     width: 100%;
-    padding: .5rem 0;
+    padding: 0;
 
     background-color: v.$white;
     border-bottom: 1px solid v.$grey-200;

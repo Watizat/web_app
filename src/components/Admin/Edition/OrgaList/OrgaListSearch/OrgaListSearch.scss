@@ -12,13 +12,13 @@
     flex-direction: column;
     gap: .5rem;
     align-items: center;
-    padding: 1rem 0.75rem;
+    padding: 0.75rem;
     box-shadow: rgba(0, 0, 0, 0.075) 0rem 0.1rem 0.8rem;
 
     &__search {
       width: 100%;
       padding: 0.5rem 0.75rem;
-      border-radius:0.5em;
+      border-radius: 5px;
       color: v.$grey-700;
       border: 1px solid v.$grey-500;
       box-shadow: none;
@@ -50,6 +50,7 @@
 
     &__text {
       display: none;
+      margin-right: .5rem;
     }
 
     &__logo {
@@ -63,11 +64,25 @@
         color: v.$sucess;
         border: 1.5px solid v.$sucess;
       }
+    }    
+    
+    @include m.tablet {
+      padding: 0.75rem;
+
+      &__text {
+        display: flex;
+      }
     }
 
     @include m.desktop {
-      padding: 0 0.75rem;
-      input[type='search'], &__logo  {
+      padding: 0.75rem;
+
+      &__text {
+        display: flex;
+      }
+
+      &__search,
+      &__logo {
         padding: 0.1rem;
       }
 
@@ -84,7 +99,15 @@
 
     @include m.fullhd {
       padding: 1rem 0.75rem;
-      input[type='search'], &__logo  {
+      flex-direction: row;
+      gap: 0;
+
+      &__text {
+        display: none;
+      }
+
+      &__search,
+      &__logo {
         padding: 0.25rem;
       }
 
@@ -110,6 +133,7 @@
 
       &__search {
         margin-right: 1rem;
+        width: 200%;
       }
     }
   }

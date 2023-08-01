@@ -1,3 +1,4 @@
+import { useMediaQuery } from 'react-responsive';
 import { Fade as Hamburger } from 'hamburger-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
@@ -9,6 +10,7 @@ import NavBar from '../NavBar/NavBar';
 import './Header.scss';
 
 function Header() {
+  const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
   const isOpen = useAppSelector((state) => state.hamburger.isOpen);
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
@@ -45,7 +47,7 @@ function Header() {
               toggle={() => dispatch(toggleHamburger(!isOpen))}
             />
           </div>
-          {isOpen && <BurgerMenu />}
+          {isOpen && !isTablet && <BurgerMenu />}
         </Container>
       )}
     </header>
