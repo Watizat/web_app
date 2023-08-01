@@ -94,7 +94,7 @@ export const fetchOrganisms = createAsyncThunk(
           ].join(','),
           filter: {
             zone_id: {
-              name: city,
+              name: { _icontains: city },
             },
           },
         },
