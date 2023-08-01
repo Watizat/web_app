@@ -14,59 +14,69 @@ select {
   }
 }
 
-fieldset {
-  border-radius: 5px;
-  width: max-content;
-  border: 1px solid #D4D4D5;
+form {
+  fieldset {
+    border-radius: 5px;
+    width: max-content;
+    border: 1px solid #D4D4D5;   
 
-  legend {
-  padding-top: 0;
-  padding-bottom: 0;
-  display: none;
-  margin-top: -20px; 
-  font-size: .75rem;
-  }
-  
-
-  select {
-    font-weight: 400;
-  }
-
-  input {
-    font-size: 1rem;
-    box-shadow: none;
-    border: none;      
-    font-weight: 400;
-    color: v.$grey-800; ;
+    legend {
+      padding-top: 0;
+      padding-bottom: 0;
+      display: none;
+      margin-top: -20px;
+      font-size: .75rem;
+    } 
     
-    &::placeholder {
-      /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: v.$grey-700;
-      font-weight: 500;
-      font-size: .9rem;
+    select + legend {
+      display: inline;
     }
-  
-    &:focus {
-      outline: none;
+
+
+    select {
+      font-weight: 400;
+      padding: 0;
+      margin: .3rem 0 0;
+    }
+
+    input {
+      font-size: 1rem;
+      box-shadow: none;
+      border: none;
+      font-weight: 400;
+      color: v.$grey-800;
+      ;
+
       &::placeholder {
         /* Chrome, Firefox, Opera, Safari 10.1+ */
-        color: transparent;
+        color: v.$grey-700;
+        font-weight: 500;
+        font-size: .9rem;
+      }
+
+      &:focus {
+        outline: none;
+
+        &::placeholder {
+          /* Chrome, Firefox, Opera, Safari 10.1+ */
+          color: transparent;
+        }
       }
     }
+
   }
 
-}
+  fieldset:focus-within {
+    transition: margin 0.7s;
+    border: 1px solid v.$primary;
 
-fieldset:focus-within {
-  transition: margin 0.7s;
-  border: 1px solid v.$primary;
+    legend {
+      color: v.$primary;
+      display: inline;
+    }
 
-  legend {
-    color: v.$primary;
-    display: inline;
-  }
-
-  input {
-    margin-top: 0;
+    input {
+      margin-top: 0;
+    }
   }
 }

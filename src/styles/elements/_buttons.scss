@@ -59,15 +59,6 @@ button {
 .btn-primary {
   @include btn-color(v.$primary);
 }
-.btn-secondary {
-  @include btn-color(v.$secondary);
-}
-.btn-tertiary {
-  @include btn-color(v.$tertiary);
-}
-.btn-quaternary {
-  @include btn-color(v.$quaternary);
-}
 .btn-info {
   @include btn-color(v.$info);
 }
@@ -93,15 +84,6 @@ button {
 }
 .btn-primary-fill {
   @include btn-fill(v.$primary);
-}
-.btn-secondary-fill {
-  @include btn-fill(v.$secondary);
-}
-.btn-tertiary-fill {
-  @include btn-fill(v.$tertiary);
-}
-.btn-quaternary-fill {
-  @include btn-fill(v.$quaternary);
 }
 .btn-info-fill {
   @include btn-fill(v.$info);

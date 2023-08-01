@@ -53,38 +53,9 @@
     textarea {
       width: 100%;
       border: none;
-      border-bottom: 1px solid v.$grey-500;
     }
 
-    &__inputTxt,
-    textarea {
-      padding: .2rem;
 
-      &:focus {
-        outline: none;
-        background-color: rgba(v.$sucess, .05);
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-      }
-
-      &[type=number] {
-        appearance: textfield;
-        /* Firefox */
-        -moz-appearance: textfield;
-      }
-
-      /* Chrome, Safari, Edge, Opera */
-      &::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
-      /* Chrome, Safari, Edge, Opera */
-      &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-    }
 
     &__textarea {
       resize: vertical;

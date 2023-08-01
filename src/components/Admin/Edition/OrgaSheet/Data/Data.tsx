@@ -29,7 +29,8 @@ function Data() {
       </span>
 
       <ul className="orgaSheet-data__list">
-        <li className="orgaSheet-case orgaSheet-data__access">
+        <fieldset className="orgaSheet-case orgaSheet-data__access">
+          <legend>Accès</legend>
           <h4>Accés</h4>
           <div className="orgaSheet-data__accessDetails">
             <label className="orgaSheet-data__pmr">
@@ -41,12 +42,14 @@ function Data() {
               Animaux admis
             </label>
           </div>
-        </li>
-        <li className="orgaSheet-case">
+        </fieldset>
+        <fieldset className="orgaSheet-case">
+          <legend>Description</legend>
           <h4>Description</h4>
           <p>{organism.translations[0]?.description}</p>
-        </li>
-        <li className="orgaSheet-case orgaSheet-data__hours">
+        </fieldset>
+        <fieldset className="orgaSheet-case orgaSheet-data__hours">
+          <legend>Horaires</legend>
           <h4>Horaires</h4>
           <div className="orgaSheet-data__hoursDetails">
             {organism.schedules && organism.schedules.length > 0 ? (
@@ -57,11 +60,12 @@ function Data() {
               </p>
             )}
           </div>
-        </li>
-        <li className="orgaSheet-case">
+        </fieldset>
+        <fieldset className="orgaSheet-case">
+          <legend>Infos, alerte</legend>
           <h4>Infos, alerte</h4>
           <p>{organism.translations[0]?.infos_alerte}</p>
-        </li>
+        </fieldset>
       </ul>
     </article>
   );
