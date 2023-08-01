@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/redux';
+import { toggleHamburger } from '../../store/reducers/hamburger';
 import './NavBar.scss';
 
-interface NavBarProps {
-  setMenuIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function NavBar({ setMenuIsOpen }: NavBarProps) {
+function NavBar() {
+  const dispatch = useAppDispatch();
   return (
     <div className="navbar">
-      <Link to="/" onClick={() => setMenuIsOpen(false)}>
+      <Link to="/" onClick={() => dispatch(toggleHamburger(false))}>
         Accueil
       </Link>
       {/* <Link to="/orientation"  onClick={() => setMenuIsOpen(false)}>Fil d&apos;orientation</Link> */}

@@ -4,11 +4,7 @@ import FooterLinks from '../Footer/FooterLinks/FooterLinks';
 import NavBar from '../NavBar/NavBar';
 import './BurgerMenu.scss';
 
-interface ModalProps {
-  setMenuIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function BurgerMenu({ setMenuIsOpen }: ModalProps) {
+function BurgerMenu() {
   return (
     <div id="BurgerMenu">
       <div className="BurgerMenu">
@@ -17,8 +13,8 @@ function BurgerMenu({ setMenuIsOpen }: ModalProps) {
             <img src={logo} alt="watizat logo" />
           </Link>
           <div className="BurgerMenu-navbar">
-            <NavBar setMenuIsOpen={setMenuIsOpen} />
-            <FooterLinks setMenuIsOpen={setMenuIsOpen} />
+            <NavBar />
+            <FooterLinks />
           </div>
         </div>
       </div>

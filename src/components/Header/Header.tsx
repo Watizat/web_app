@@ -1,17 +1,16 @@
 import { Fade as Hamburger } from 'hamburger-react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { toggleHamburger } from '../../store/reducers/hamburger';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import Container from '../Container/Container';
 import NavBar from '../NavBar/NavBar';
 import './Header.scss';
 
-interface HeaderProps {
-  menuIsOpen: boolean;
-  setMenuIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function Header({ menuIsOpen, setMenuIsOpen }: HeaderProps) {
+function Header() {
+  const isOpen = useAppSelector((state) => state.hamburger.isOpen);
+  const dispatch = useAppDispatch();
   return (
     <header id="header">
       <Container>
@@ -19,12 +18,15 @@ function Header({ menuIsOpen, setMenuIsOpen }: HeaderProps) {
           <img src={logo} alt="watizat logo" />
         </Link>
         <div className="header-navbar">
-          <NavBar setMenuIsOpen={setMenuIsOpen} />
+          <NavBar />
         </div>
         <div className="header-hamburger">
-          <Hamburger toggled={menuIsOpen} toggle={setMenuIsOpen} />
+          <Hamburger
+            toggled={isOpen}
+            toggle={() => dispatch(toggleHamburger(!isOpen))}
+          />
         </div>
-        {menuIsOpen && <BurgerMenu setMenuIsOpen={setMenuIsOpen} />}
+        {isOpen && <BurgerMenu />}
       </Container>
     </header>
   );
