@@ -3,24 +3,25 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import AccountRequest from './components/Login/AccountRequest';
+import Account from './components/Admin/Account/Account';
 import AdminApp from './components/Admin/App/App';
 import Dashboard from './components/Admin/Dashboard/Dashboard';
 import Edition from './components/Admin/Edition/Edition';
 import Users from './components/Admin/Users/Users';
 import App from './components/App/App';
 import Contact from './components/Contact/Contact';
-import ForgottenPassword from './components/Login/ForgottenPassword';
+import NotFound from './components/Errors/NotFound/NotFound';
 import Home from './components/Home/Home';
+import InactivityDetector from './components/InactivityDetector/InactivityDetector';
+import AccountRequest from './components/Login/AccountRequest';
+import ForgottenPassword from './components/Login/ForgottenPassword';
 import Login from './components/Login/Login';
+import NewUser from './components/Login/NewUser';
+import RecoverPassword from './components/Login/RecoverPassword';
 import MentionsLegales from './components/MentionsLegales/MentionsLegales';
 import Organisme from './components/Organisme/Organisme';
 import Orientation from './components/Orientation/Orientation';
-import RecoverPassword from './components/Login/RecoverPassword';
 import Resultats from './components/Resultats/Resultats';
-import Account from './components/Admin/Account/Account';
-import NotFound from './components/Errors/NotFound/NotFound';
-import InactivityDetector from './components/InactivityDetector/InactivityDetector';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/organisme/:slug" element={<Organisme />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/new-user" element={<NewUser />} />
       </Route>
       <Route path="/resultats" element={<Resultats />} />
       <Route path="/admin" element={<AdminApp />} errorElement={<App />}>

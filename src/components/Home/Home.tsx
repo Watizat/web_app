@@ -1,14 +1,15 @@
 import { ChangeEvent, MouseEventHandler, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux';
 
-import logo from '../../assets/logo.svg';
 import Icon from '../../ui/icon/icon';
 import Container from '../Container/Container';
 import './Home.scss';
 
 function Home() {
-  const [select, setSelect] = useState(localStorage.getItem('city') || '');
+  const [select, setSelect] = useState<string>(
+    localStorage.getItem('city') || ''
+  );
   const categories = useAppSelector((state) => state.organism.categories);
 
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Home() {
   const handleClick =
     (category: string): MouseEventHandler<HTMLButtonElement> =>
     () => {
-      navigate(`resultats/?city=${select}&category=${category}`);
+      navigate(`resultats/?city=${select.toLowerCase()}&category=${category}`);
     };
 
   const zones = useAppSelector((state) => state.admin.zones);

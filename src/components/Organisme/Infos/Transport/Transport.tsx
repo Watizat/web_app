@@ -37,7 +37,6 @@ function Transport() {
   const organism = useAppSelector(
     (state) => state.organism.organism as Organism
   );
-
   useEffect(() => {
     const fetchPlaceNearby = async () => {
       const placeNearbyEndpoint = `/coverage/fr-sw/coord/${organism.longitude}%3B${organism.latitude}/places_nearby?distance=500&type[]=stop_area&`;
@@ -112,6 +111,7 @@ function Transport() {
       </article>
     );
   }
+  console.log(data);
 
   return (
     <article>
