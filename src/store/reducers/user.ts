@@ -118,7 +118,6 @@ export default createReducer(initialState, (builder) => {
       state.isLogged = true;
       state.isActive = true;
       state.lastActionDate = Date.now();
-
       state.loginCredentials = { ...initialState.loginCredentials };
       state.isLoading = false;
       localStorage.setItem(

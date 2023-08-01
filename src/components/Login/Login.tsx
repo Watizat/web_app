@@ -1,9 +1,9 @@
+import { ChangeEvent, FormEvent } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Link, Navigate } from 'react-router-dom';
-import { ChangeEvent, FormEvent } from 'react';
+import { KeyOfloginCredentials } from '../../@types/user';
 import logo from '../../assets/logo.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { KeyOfloginCredentials } from '../../@types/user';
 import { changeLoginCredentialsField, login } from '../../store/reducers/user';
 import './Login.scss';
 
@@ -14,7 +14,6 @@ function Login() {
   const password = useAppSelector(
     (state) => state.user.loginCredentials.password
   );
-  const isLoading = useAppSelector((state) => state.user.isLoading);
   const isLogged = useAppSelector((state) => state.user.isLogged);
   const error = useAppSelector((state) => state.user.error);
 
@@ -30,10 +29,6 @@ function Login() {
     event.preventDefault();
     await dispatch(login({ email, password }));
   };
-
-  if (isLoading) {
-    return <div>isLoading...</div>;
-  }
 
   if (isLogged) {
     return <Navigate to="/admin/dashboard" />;

@@ -18,7 +18,7 @@ function FooterLinks() {
       </Link>
       <Link
         className="important"
-        to="/admin"
+        to="/admin/dashboard"
         onClick={() => dispatch(toggleHamburger(false))}
       >
         Membres Watizat

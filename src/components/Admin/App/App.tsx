@@ -1,9 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
+import {
+  Link,
+  Navigate,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchCategories, fetchDays } from '../../../store/reducers/organisms';
+import { axiosInstance } from '../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
@@ -15,6 +22,8 @@ function App() {
   const user = getUserDataFromLocalStorage();
   const { pathname } = useLocation();
   const langue = useAppSelector((state) => state.organism.langue);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -24,17 +33,31 @@ function App() {
     dispatch(fetchDays(1));
   }, [dispatch, langue]);
 
+  useEffect(() => {
+    async function check() {
+      setIsLoading(true);
+      const { data } = await axiosInstance.get('/users/me');
+      if (data.data.role === '5754603f-add3-4823-9c77-a2f9789074fc') {
+        setIsLoading(false);
+        return navigate('/new-user');
+      }
+      setIsLoading(false);
+      return <Navigate to="/admin/dashboard" replace />;
+    }
+    check();
+  }, [navigate]);
+
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  if (pathname === '/admin') {
+  if (pathname === '/admin' || pathname === '/admin/') {
     return <Navigate to="/admin/dashboard" replace />;
   }
 
   return (
     <>
-      {isTablet && (
+      {isTablet && !isLoading && (
         <div id="bo-app">
           <Sidebar />
 
