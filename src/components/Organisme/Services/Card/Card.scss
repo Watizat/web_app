@@ -2,35 +2,35 @@
 @use '../../../../styles/medias' as m;
 @use '../../../../styles/elements';
 
-.organisme-services{
+.organisme-services {
 
-  &-contentcards{
+  &-contentcards {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 1.3rem;
 
-      &--cards {
-        display: flex;
-        justify-content: space-between;
-        flex-basis: 32%;
-        flex-wrap: wrap;
-        margin-bottom: 0.8rem;
+    &--cards {
+      display: flex;
+      justify-content: space-between;
+      flex-basis: 32%;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
 
-        @include m.mobile{
-          flex-basis: 100%;
-        }
-       
+      @include m.mobile {
+        flex-basis: 100%;
+      }
 
-      &-header{
+
+      &-header {
         width: 100%;
         background-color: v.$grey-100;
         padding: 0.4rem;
         color: v.$watigreen;
         border-radius: 10px;
 
-        & h4{
+        & h4 {
           display: flex;
           flex-wrap: nowrap;
           justify-content: space-between;
@@ -38,24 +38,24 @@
           align-items: center;
         }
 
-        &-icon{
-            margin-right: 0.8em;
-            width: 30px!important;
-            height: 25px!important;
+        &-icon {
+          margin-right: 0.8em;
+          width: 30px !important;
+          height: 25px !important;
         }
 
-        &--open{
+        &--open {
           background-color: v.$watigreen;
           transition: background color 800ms;
           cursor: pointer;
 
-          & h4{
+          & h4 {
             color: v.$white;
           }
 
 
         }
-  
+
       }
 
       & article {
@@ -63,29 +63,29 @@
         flex: 0 0 auto;
       }
 
-      &-content{
+      &-content {
         background-color: v.$grey-100;
         padding: 2em;
         font-size: 0.9em;
         margin-top: -1.5em;
         display: none;
 
-        &-scheduleday{
+        &-scheduleday {
           color: v.$watigreen;
           font-weight: 600;
         }
 
-        & h5{
+        & h5 {
           font-size: 1em;
           color: v.$primary;
           margin-top: 0.8em;
         }
 
-        &-txt{
+        &-txt {
           font-size: 0.9em;
         }
 
-        &-job{
+        &-job {
           font-weight: 600;
           color: v.$watigreen;
           margin-top: 0.4em;
@@ -98,8 +98,8 @@
   }
 
 
- }
+}
 
- .is-visible{
+.is-visible {
   display: block;
 }

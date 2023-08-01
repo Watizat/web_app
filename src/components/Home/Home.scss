@@ -23,7 +23,7 @@
         rgba(v.$bghome, 0.8),
         rgba(v.$bghome, 0.5)
       ),
-      url('/img/bghome-portrait.jpg');
+      url('/img/bghome-portrait.webp');
     min-height: 100vh;
 
     @include m.desktop {
@@ -31,7 +31,7 @@
           rgba(v.$bghome, 0.8),
           rgba(v.$bghome, 0.5)
         ),
-        url('/img/bghome-landscape.jpg');
+        url('/img/bghome-landscape.webp');
       min-height: 40vh;
     }
 
