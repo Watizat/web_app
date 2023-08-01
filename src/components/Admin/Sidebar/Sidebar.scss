@@ -5,36 +5,40 @@
 .adminsidebar {
   top: 0;
   min-height: 100vh;
-  width: 25vw;
+  width: 100%;
   background-color: v.$primary;
   position: sticky;
   overflow-y: auto;
 
+  @include m.tablet {
+    width: 40%;
+  }
+
   @include m.desktop {
-    width: 20vw;
+    width: 30%;
   }
 
   @include m.widescreen {
-    width: 17vw;
+    width: 20vw;
   }
 
   @include m.fullhd {
-    width: 15vw;
+    width: 20vw;
   }
 
   @include m.qhd {
-    width: 12vw;
+    width: 15vw;
   }
 
   &-logo {
-    height: 6vh;
+    min-height: 6vh;
     background-color: rgba(v.$primary-var3, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: auto;
-    padding: auto;
+    padding: 0.4em 0;
 
     &--img {
       img {

@@ -29,11 +29,12 @@
   }
 
   .headerAdmin-hamburger {
+    z-index: 1000;
     @include m.widescreen {
       display: none;
     }
     &__open {
-      color: v.$white;
+      color: v.$grey-300;
     }
   }
 
@@ -44,5 +45,8 @@
     box-shadow: rgba(0, 0, 0, 0.15) 0.2rem 0rem 0.5rem;
     background-color: rgba(v.$grey-900, 0.8);
     width: 100vw;
+    @include m.widescreen {
+      display: none;
+    }
 }
 }

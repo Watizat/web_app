@@ -51,11 +51,6 @@ function NavBar() {
       icon: 'las la-carrot',
       active: true,
     },
-    // {
-    //   name: 'Se déconnecter',
-    //   to: '/auth/logout',
-    //   icon: 'las la-sign-out-alt',
-    // },
   ];
 
   const handleLogout = () => {

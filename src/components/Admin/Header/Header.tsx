@@ -1,14 +1,17 @@
 import { Fade as Hamburger } from 'hamburger-react';
+import { useMediaQuery } from 'react-responsive';
+
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { toggleHamburger } from '../../../store/reducers/hamburger';
 import ModalAddOrganism from '../Modal/ModalAddOrganism';
-import Sidebar from '../Sidebar/Sidebar';
+// import Sidebar from '../Sidebar/Sidebar';
 import './Header.scss';
 
 function Header() {
+  const isWidescreen = useMediaQuery({ query: '(min-width: 1216px)' });
   const { pathname } = useLocation();
   const [isActiveOrganism, setIsActiveOrganism] = useState(false);
   const isOpen = useAppSelector((state) => state.hamburger.isOpen);
@@ -20,7 +23,9 @@ function Header() {
         <ModalAddOrganism setIsActive={setIsActiveOrganism} />
       )}
 
-      {!isOpen && (
+      {/* {!isWidescreen && isOpen === false} */}
+
+      {!isOpen ? (
         <div className="headerAdmin-hamburger">
           <Hamburger
             size={27}
@@ -28,14 +33,7 @@ function Header() {
             toggle={() => dispatch(toggleHamburger(!isOpen))}
           />
         </div>
-      )}
-      {isOpen && (
-        <span className="headerAdmin-sidebar">
-          <Sidebar />
-        </span>
-      )}
-
-      {isOpen && (
+      ) : (
         <div className="headerAdmin-hamburger headerAdmin-hamburger__open">
           <Hamburger
             size={27}
@@ -44,6 +42,7 @@ function Header() {
           />
         </div>
       )}
+
       <h2>
         {pathname === '/admin/edition' && 'Edition des données'}
         {pathname === '/admin/users' && 'Gestion des utilisateur·ices'}

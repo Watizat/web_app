@@ -7,38 +7,38 @@ function Dashboard() {
       name: 'Edition des données',
       to: '/admin/edition',
       icon: 'las la-pen-fancy',
-      state: '',
+      active: true,
     },
     {
       name: 'Espace traduction',
       to: '/admin/translate',
       icon: 'las la-globe-africa',
-      state: 'is-inactive',
+      active: false,
     },
     {
       name: 'Actualisation',
       to: '/admin/actualisation',
       icon: 'las la-mail-bulk',
-      state: 'is-inactive',
+      active: false,
     },
     {
       name: 'Extraction guides',
       to: '/admin/guides',
       icon: 'las la-drafting-compass',
-      state: 'is-inactive',
+      active: false,
     },
     {
       name: 'Utilisateteur·ice·s',
       to: '/admin/users',
       icon: 'las la-user-secret',
-      state: '',
+      active: true,
     },
     {
       name: 'Directus (backend)',
       to: 'https://watizat.lunalink.nl',
       target: '_blank',
       icon: 'las la-carrot',
-      state: '',
+      active: true,
     },
   ];
 
@@ -47,8 +47,13 @@ function Dashboard() {
       <h1>Dashboard</h1>
       <ul className="dashboardLinks">
         {links.map((e) => (
-          <Link key={e.name} to={e.to} target={e.target}>
-            <li className={`dashboardLinks-card ${e.state}`}>
+          <Link
+            key={e.name}
+            to={e.to}
+            target={e.target}
+            className={`${e.active ? '' : 'dashboardLinks-forbidden'}`}
+          >
+            <li className="dashboardLinks-card">
               <div className="dashboardLinks-card__logo">
                 <i className={e.icon} />
               </div>

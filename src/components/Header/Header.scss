@@ -52,4 +52,13 @@
         }
       }}
   }
+
+  .header-reasultsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+      max-width: 95vw;
+      width: 100%;
+      margin: 0 auto;
+  }
 }

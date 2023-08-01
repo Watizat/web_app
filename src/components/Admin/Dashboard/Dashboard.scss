@@ -6,6 +6,8 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  justify-content: flex-start;
+  align-items: center;
 
   h1 {
     margin-top: 5rem;
@@ -14,8 +16,12 @@
     font-weight: 400;
     text-align: center;
 
+    @include m.desktop{
+      margin-top: 3rem;
+    }
+
     @include m.fullhd {
-      margin-top: 10rem;
+      margin-top: 3rem;
     }
   }
 
@@ -37,9 +43,9 @@
     }
 
     @include m.fullhd {
-      margin-top: 7.5rem;
-      column-gap: 15rem;
-      row-gap: 10rem;
+      margin-top: 5rem;
+      column-gap: 8rem;
+      row-gap: 5rem;
     }
 
     &-card {
@@ -95,15 +101,23 @@
         font-size: 1rem;
       }
     }
-    
-    .is-inactive {
+
+    &-forbidden {
+      pointer-events: none;
+      cursor: not-allowed;
+      opacity: 50%;
+
       background-color: v.$grey-100;
-      border: 1px solid v.$grey-400;
       color: v.$grey-500;      
       
       &:hover {
         box-shadow: none;
         transform: none;
+      }
+
+      .dashboardLinks-card {
+        color: v.$grey-500;
+      border: 1.5px solid v.$grey-500;
       }
     }
   }

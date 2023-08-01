@@ -5,12 +5,27 @@
 .orgaList {
   display: flex;
   flex-direction: column;
-  padding: 0;
 
   background-color: v.$white;
   box-shadow: rgba(0, 0, 0, 0.15) 0.2rem 0rem 0.5rem;
 
-  width: 40vw;
+  min-width: 30vw;
+
+  @include m.desktop {  
+    min-width: 27vw;
+  }
+
+  @include m.widescreen {
+    min-width: 24vw;
+  }
+
+  @include m.fullhd {
+    min-width: 21vw;
+  }
+
+  @include m.qhd {
+    min-width: 17vw;
+  }
 
   &-list {
     overflow-y: auto;
@@ -21,12 +36,29 @@
     width: 100%;
     padding: 0 1rem;
     text-align: left;
+
     &:hover {
       background-color: rgba(v.$sucess, 0.2);
     }
 
     &.selected {
       background-color: rgba(v.$sucess, 0.2);
+    }
+
+    @include m.desktop {
+      min-height: 6vh;
+    }
+
+    @include m.widescreen {
+      min-height: 7vh;
+    }
+
+    @include m.fullhd {
+      min-height: 8vh;
+    }
+
+    @include m.qhd {
+      min-height: 6vh;
     }
   }
 
@@ -55,33 +87,5 @@
     flex-direction: column;
     justify-content: center;
     padding-left: 1rem;
-  }
-
-  @include m.desktop {
-    &-button {
-      min-height: 6vh;
-    }
-    width: 30vw;
-  }
-
-  @include m.widescreen {
-    &-button {
-      min-height: 7vh;
-    }
-    width: 25vw;
-  }
-
-  @include m.fullhd {
-    &-button {
-      min-height: 8vh;
-    }
-    width: 20vw;
-  }
-
-  @include m.qhd {
-    &-button {
-      min-height: 6vh;
-    }
-    width: 17vw;
   }
 }

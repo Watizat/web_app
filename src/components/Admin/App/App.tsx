@@ -1,20 +1,25 @@
 import { useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
+
 import logo from '../../../assets/logo.svg';
+import { toggleHamburger } from '../../../store/reducers/hamburger';
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
+
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchCategories, fetchDays } from '../../../store/reducers/organisms';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
-import Header from '../Header/Header';
-import Sidebar from '../Sidebar/Sidebar';
 import './App.scss';
 
 function App() {
   const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
+  const isWidescreen = useMediaQuery({ query: '(min-width: 1216px)' });
   const dispatch = useAppDispatch();
   const user = getUserDataFromLocalStorage();
   const { pathname } = useLocation();
   const langue = useAppSelector((state) => state.organism.langue);
+  const isOpen = useAppSelector((state) => state.hamburger.isOpen);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -36,7 +41,7 @@ function App() {
     <>
       {isTablet && (
         <div id="bo-app">
-          <Sidebar />
+          {(isWidescreen || isOpen) && <Sidebar />}
 
           <main
             id={`${pathname !== '/admin/dashboard' ? 'bo-main' : 'dashboard'}`}
