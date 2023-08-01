@@ -2,7 +2,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
 import { fetchOrganisms } from '../../store/reducers/organisms';
-import Header from './Header/Header';
+import Header from '../Header/Header';
 import Map from './Map/Map';
 import Panel from './Panel/Panel';
 import Menu from './Menu/Menu';

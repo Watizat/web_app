@@ -14,11 +14,11 @@
     align-items: center;
     padding: 0.75rem;
     box-shadow: rgba(0, 0, 0, 0.075) 0rem 0.1rem 0.8rem;
-
-    &__search {
-      width: 100%;
-      padding: 0.5rem 0.75rem;
-      border-radius: 5px;
+    input[type='search'] {
+      margin-right: 0.5rem;
+      width: 70%;
+      padding: 0.2rem;
+      border-radius:0.5em;
       color: v.$grey-700;
       border: 1px solid v.$grey-500;
       box-shadow: none;
@@ -66,14 +66,8 @@
     }
 
     @include m.desktop {
-      padding: 0.75rem;
-
-      &__text {
-        display: flex;
-      }
-
-      &__search,
-      &__logo {
+      padding: 0 0.75rem;
+      input[type='search'], &__logo  {
         padding: 0.1rem;
       }
 
@@ -90,15 +84,7 @@
 
     @include m.fullhd {
       padding: 1rem 0.75rem;
-      flex-direction: row;
-      gap: 0;
-
-      &__text {
-        display: none;
-      }
-
-      &__search,
-      &__logo {
+      input[type='search'], &__logo  {
         padding: 0.25rem;
       }
 
