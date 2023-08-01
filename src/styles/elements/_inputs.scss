@@ -1,15 +1,72 @@
 @use '../variables' as v;
 @use '../medias' as m;
 
-    /* Basic styling */
-    select {
-      cursor: pointer;
-      background-color: v.$white;
-      border: none;
-      border: 1px solid v.$grey-300;
-      padding: .5rem 1rem;
-      border-radius: 5px;
-      &:focus {
-        outline: none;
+/* Basic styling */
+select {
+  cursor: pointer;
+  background-color: v.$white;
+  border: none;
+  padding: .5rem 1rem;
+  border-radius: 5px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+fieldset {
+  border-radius: 5px;
+  width: max-content;
+  border: 1px solid #D4D4D5;
+
+  legend {
+  padding-top: 0;
+  padding-bottom: 0;
+  display: none;
+  margin-top: -20px; 
+  font-size: .75rem;
+  }
+  
+
+  select {
+    font-weight: 400;
+  }
+
+  input {
+    font-size: 1rem;
+    box-shadow: none;
+    border: none;      
+    font-weight: 400;
+    color: v.$grey-800; ;
+    
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: v.$grey-700;
+      font-weight: 500;
+      font-size: .9rem;
+    }
+  
+    &:focus {
+      outline: none;
+      &::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: transparent;
       }
     }
+  }
+
+}
+
+fieldset:focus-within {
+  transition: margin 0.7s;
+  border: 1px solid v.$primary;
+
+  legend {
+    color: v.$primary;
+    display: inline;
+  }
+
+  input {
+    margin-top: 0;
+  }
+}

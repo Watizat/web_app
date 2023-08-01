@@ -15,18 +15,24 @@ function UsersDetails({ user }: UsersDetailsProps) {
 
   function renderRoles(data: DirectusUser) {
     if (data.role === '4a30876c-cea0-455f-92d0-593212918aaf') {
-      return <span className="role localref">ref-local</span>;
+      return (
+        <>
+          <span className="role editor">edition</span>
+          <span className="role localref">ref-local</span>
+        </>
+      );
     }
     if (data.role === '53de6ec2-6d70-48c8-8532-61f96133f139') {
       return (
         <>
+          <span className="role editor">edition</span>
           <span className="role localref">ref-local</span>
           <span className="role admin">admin</span>
         </>
       );
     }
     if (data.role === '5754603f-add3-4823-9c77-a2f9789074fc') {
-      return <span className="role nouveau">Nouveau</span>;
+      return <span className="role newrole">Nouveau</span>;
     }
     return <span className="role editor">edition</span>;
   }

@@ -105,6 +105,10 @@
         font-size: 0.85rem;
       }
     }
+    .newrole {
+      background-color: v.$warning;
+      color: v.$grey-700;
+    }
     .editor {
       background-color: v.$info;
     }

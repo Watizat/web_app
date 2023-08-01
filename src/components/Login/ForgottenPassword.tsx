@@ -28,12 +28,15 @@ function ForgottenPassword() {
       <h1>Mot de passé oublié</h1>
       {message && <p className="login-succes">{message}</p>}
       <form onSubmit={handleSubmit} className="login-form">
-        <input
-          type="email"
-          onChange={handleChange}
-          value={email}
-          placeholder="Email"
-        />
+        <fieldset>
+          <legend>Email</legend>
+          <input
+            type="email"
+            onChange={handleChange}
+            value={email}
+            placeholder="Email"
+          />
+        </fieldset>
         <button type="submit">Demander la réinitialisation</button>
       </form>
       <div className="login-newAccount">

@@ -27,29 +27,44 @@ function AccountRequest() {
         className="login-form accountRequest-form"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <input type="text" placeholder="Prénom" {...register('first_name')} />
-        <input
-          type="text"
-          placeholder="Nom de famille"
-          {...register('last_name')}
-        />
-        <input type="text" placeholder="Email" {...register('email')} />
-        <input
-          type="text"
-          placeholder="Mot de passe"
-          {...register('password')}
-        />
-        <select {...register('zone')}>
-          <option value="" disabled>
-            Groupe local
-          </option>
-
-          {zones.map((zone) => (
-            <option key={zone.id} value={zone.id}>
-              {zone.name}
+        <fieldset>
+          <legend>Prénom</legend>
+          <input type="text" placeholder="Prénom" {...register('first_name')} />
+        </fieldset>
+        <fieldset>
+          <legend>Nom de famille</legend>
+          <input
+            type="text"
+            placeholder="Nom de famille"
+            {...register('last_name')}
+          />
+        </fieldset>
+        <fieldset>
+          <legend>Adresse email</legend>
+          <input type="text" placeholder="Email" {...register('email')} />
+        </fieldset>
+        <fieldset>
+          <legend>Mot de passe</legend>
+          <input
+            type="password"
+            placeholder="Mot de passe"
+            {...register('password')}
+          />
+        </fieldset>
+        <fieldset>
+          <legend>Antenne locale</legend>
+          <select {...register('zone')}>
+            <option value="" disabled>
+              Groupe local
             </option>
-          ))}
-        </select>
+
+            {zones.map((zone) => (
+              <option key={zone.id} value={zone.id}>
+                {zone.name}
+              </option>
+            ))}
+          </select>
+        </fieldset>
         <p className="accountRequest-form__text">
           La création de compte est réservée aux membres actifs des groupes
           locaux de l’association Watizat

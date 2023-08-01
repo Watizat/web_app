@@ -41,18 +41,25 @@ function Login() {
           <h1>Login</h1>
           {error && <p className="login-error">{error}</p>}
           <form className="login-form" onSubmit={handleSubmit}>
-            <input
-              type="email"
-              placeholder="Email"
-              onChange={handleChangeField('email')}
-              value={email}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              onChange={handleChangeField('password')}
-              value={password}
-            />
+            <fieldset>
+              <legend>Email</legend>
+              <input
+                type="email"
+                placeholder="Email"
+                onChange={handleChangeField('email')}
+                value={email}
+              />
+            </fieldset>
+
+            <fieldset>
+              <legend>Mot de passe</legend>
+              <input
+                type="password"
+                placeholder="Mot de passe"
+                onChange={handleChangeField('password')}
+                value={password}
+              />
+            </fieldset>
             <button type="submit">Login</button>
           </form>
           <Link to="/forgotten-password">Mot de passe oublié</Link>
