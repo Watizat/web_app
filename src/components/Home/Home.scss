@@ -19,14 +19,18 @@
     background-position: center;
     background-size: cover;
 
-    background-image:
-      linear-gradient(rgba(v.$bghome, 0.8), rgba(v.$bghome, 0.5)),
+    background-image: linear-gradient(
+        rgba(v.$bghome, 0.8),
+        rgba(v.$bghome, 0.5)
+      ),
       url('./img/bghome-portrait.jpg');
     min-height: 100vh;
 
     @include m.desktop {
-      background-image:
-        linear-gradient(rgba(v.$bghome, 0.8), rgba(v.$bghome, 0.5)),
+      background-image: linear-gradient(
+          rgba(v.$bghome, 0.8),
+          rgba(v.$bghome, 0.5)
+        ),
         url('./img/bghome-landscape.jpg');
       min-height: 40vh;
     }
@@ -172,8 +176,8 @@
           flex-wrap: wrap;
           justify-content: center;
           margin: auto;
+          width: 100%;
         }
-
 
         &-button {
           display: flex;
@@ -230,9 +234,9 @@
 
           @include m.fullhd {
             width: 10%;
-          &__text {
-            font-size: 0.9rem;
-          }
+            &__text {
+              font-size: 0.9rem;
+            }
           }
 
           @include m.qhd {
@@ -294,5 +298,11 @@
         }
       }
     }
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
   }
 }

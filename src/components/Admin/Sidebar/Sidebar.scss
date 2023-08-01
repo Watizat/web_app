@@ -32,12 +32,14 @@
 
   &-logo {
     min-height: 6vh;
+    min-height: 6vh;
     background-color: rgba(v.$primary-var3, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: auto;
+    padding: 0.4em 0;
     padding: 0.4em 0;
 
     &--img {
