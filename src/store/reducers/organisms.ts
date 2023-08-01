@@ -241,6 +241,10 @@ const organismReducer = createReducer(initialState, (builder) => {
       state.organisms = action.payload;
       state.isLoading = false;
     })
+    .addCase(fetchOrganisms.rejected, (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload);
+    })
     .addCase(fetchOrganism.pending, (state) => {
       state.isLoading = true;
     })
@@ -256,6 +260,12 @@ const organismReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setFilteredOrganisms, (state, action) => {
       state.filteredOrganisms = action.payload;
+    })
+    .addCase(fetchCategories.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(fetchCategories.rejected, (state) => {
+      state.isLoading = false;
     })
     .addCase(fetchCategories.fulfilled, (state, action) => {
       state.categories = action.payload;

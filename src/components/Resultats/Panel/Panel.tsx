@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../store/reducers/organisms';
+import ResultatsCardSkeleton from '../../Skeleton/ResultatCard/ResultatCard';
 import Card from '../Card/Card';
 import Settings from '../Settings/Settings';
 import './Panel.scss';
@@ -82,8 +83,11 @@ function Panel() {
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
       />
-      <div className="resultsContentCard" ref={resultsContainerRef}>
-        {isLoading && <div>Loading...</div>}
+      <div className="resultsContentCard">
+        {isLoading &&
+          Array(5)
+            .fill(null)
+            .map((e, i) => <ResultatsCardSkeleton key={i} />)}
         {!isLoading &&
           (filteredOrganisms.length > 0 ? (
             filteredOrganisms.map((organism, index) => (
