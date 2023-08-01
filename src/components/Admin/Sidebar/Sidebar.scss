@@ -60,17 +60,38 @@
     margin: 1rem auto;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid rgba(v.$white, 0.25);
+    color: v.$white;
 
-    select {
-      padding: 0.25rem 1rem;
-      font-weight: 500;
-      background-color: v.$primary;
-      border: 1px solid v.$primary-var2;
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
+    &__zone {
+      &-select {
+        padding: 0.25rem 1rem;
+        font-weight: 500;
+        background-color: v.$primary;
+        border: 1px solid v.$primary-var2;
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        color: v.$white;
+        font-size: 0.9rem;
+        font-weight: 600;
+
+        &__default,
+        &__option {
+          background-color: v.$white;
+          color: v.$grey-500;
+        }
+
+        &__option {
+          background-color: v.$white;
+          color: v.$grey-700;
+        }
+      }
+    }
+
+    &__link {
+      text-decoration: none;
       color: v.$white;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 500;
+      font-size: .9rem;
     }
   }
 }

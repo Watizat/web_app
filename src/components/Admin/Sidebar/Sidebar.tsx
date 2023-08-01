@@ -57,7 +57,7 @@ function Sidebar() {
             </select>
           </label>
           <Link className="adminsidebar-myInfos__link" to="/admin/account">
-            <p>Accéder à mon compte</p>
+            Accéder à mon compte
           </Link>
         </div>
         <NavBar />
