@@ -9,6 +9,9 @@ export interface UserState {
   isLoading: boolean;
   error: string | null;
   message: string | null;
+  timeout: number;
+  isActive: boolean;
+  lastActionDate: number | null;
 }
 
 export interface UserSession {

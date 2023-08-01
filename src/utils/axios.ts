@@ -12,11 +12,7 @@ const authRefresh: {
   bearer: string | undefined;
   queue: Array<() => void>;
   // Fonction pour rafraichir le token
-  doRefresh: (user: {
-    isLogged: boolean;
-    session: UserSession;
-    token: AuthResponse;
-  }) => Promise<string | undefined>;
+  doRefresh: (user: { token: AuthResponse }) => Promise<string | undefined>;
 } = {
   queue: [], // File d'attente pour les requêtes en attente de token rafraîchi
   inProgress: false, // Indique si le rafraîchissement du token est en cours
@@ -43,13 +39,10 @@ const authRefresh: {
         }
       )
       .then(({ data: response }) => {
-        // Décoder les informations du token
-        const jwtDecode = jwt_decode<UserSession>(response.data.access_token);
         // Mettre à jour le token d'authentification et la session utilisateur
         const updatedUser = {
           ...user,
           token: { ...response.data },
-          session: { ...jwtDecode },
         };
         // Enregistrer les informations mises à jour dans le stockage local
         localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -97,10 +90,10 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(async (config) => {
   const user = getUserDataFromLocalStorage();
   if (user) {
+    const session = jwt_decode<UserSession>(user.token.access_token);
     const updatedConfig = { ...config }; // Crée une copie de l'objet de configuration
     const currentTime = Date.now();
-
-    if (currentTime >= user.session.exp * 1000) {
+    if (currentTime >= session.exp * 1000) {
       // Si le token d'accès a expiré, essayer de rafraîchir le token
       if (!authRefresh.inProgress) {
         try {

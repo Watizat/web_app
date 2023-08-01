@@ -19,12 +19,12 @@ import Orientation from './components/Orientation/Orientation';
 import RecoverPassword from './components/Login/RecoverPassword';
 import Resultats from './components/Resultats/Resultats';
 import Account from './components/Admin/Account/Account';
-import LogginControl from './components/Admin/Loggincontrol/LoggingControl';
 import NotFound from './components/Errors/NotFound/NotFound';
+import InactivityDetector from './components/InactivityDetector/InactivityDetector';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <>
+    <Route path="/" element={<InactivityDetector />}>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="/orientation" element={<Orientation />} />
@@ -44,7 +44,7 @@ const router = createBrowserRouter(
         <Route path="/admin/edition" element={<Edition />} />
       </Route>
       <Route path="*" element={<NotFound />} />
-    </>
+    </Route>
   )
 );
 

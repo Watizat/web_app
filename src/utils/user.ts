@@ -1,12 +1,12 @@
-import { AuthResponse, UserSession } from '../@types/user';
+import { AuthResponse } from '../@types/user';
 
 export const getUserDataFromLocalStorage = () => {
   const userDataStr = localStorage.getItem('user');
   const userData = userDataStr
     ? (JSON.parse(userDataStr) as {
-        isLogged: boolean;
-        session: UserSession;
         token: AuthResponse;
+        isActive: boolean;
+        lastActionDate: number | null;
       })
     : null;
   return userData;

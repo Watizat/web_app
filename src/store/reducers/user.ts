@@ -19,6 +19,8 @@ import {
   removeUserDataFromLocalStorage,
 } from '../../utils/user';
 
+const timeout = 5 * 1000 * 60;
+
 const initialState: UserState = {
   loginCredentials: {
     email: '',
@@ -31,6 +33,9 @@ const initialState: UserState = {
   isLoading: false,
   error: null,
   message: null,
+  timeout,
+  isActive: false,
+  lastActionDate: null,
   ...getUserDataFromLocalStorage(),
 };
 
@@ -70,6 +75,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('user/logout', async () => {
   const user = getUserDataFromLocalStorage();
+
   await axiosInstance.post('/auth/logout', {
     refresh_token: user?.token.refresh_token,
   });
@@ -78,12 +84,10 @@ export const logout = createAsyncThunk('user/logout', async () => {
 export const askPassword = createAsyncThunk(
   'user/ask-password',
   async (email: string) => {
-    console.log({ email });
-    const response = await axiosInstance.post('/auth/password/request', {
+    await axiosInstance.post('/auth/password/request', {
       email,
-      reset_url: 'https://watizat.aliceout.io/recover-password',
+      reset_url: 'http://localhost:5173/recover-password',
     });
-    console.log(response, response.data);
   }
 );
 
@@ -112,15 +116,17 @@ export default createReducer(initialState, (builder) => {
       state.token = { ...action.payload };
       state.error = null;
       state.isLogged = true;
+      state.isActive = true;
+      state.lastActionDate = Date.now();
 
       state.loginCredentials = { ...initialState.loginCredentials };
       state.isLoading = false;
       localStorage.setItem(
         'user',
         JSON.stringify({
-          isLogged: state.isLogged,
-          session: state.session,
           token: state.token,
+          isActive: state.isActive,
+          lastActionDate: state.lastActionDate,
         })
       );
     })
@@ -134,18 +140,20 @@ export default createReducer(initialState, (builder) => {
     .addCase(logout.fulfilled, (state) => {
       state.isLoading = false;
       state.isLogged = false;
+      state.isActive = false;
+      state.lastActionDate = null;
       removeUserDataFromLocalStorage();
     })
     .addCase(askPassword.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(askPassword.rejected, (state, action) => {
+    .addCase(askPassword.rejected, (state) => {
       state.isLoading = false;
       state.message = null;
       state.error =
         'Une erreur est survenue lors de la demande de mot de passe';
     })
-    .addCase(askPassword.fulfilled, (state, action) => {
+    .addCase(askPassword.fulfilled, (state) => {
       state.isLoading = false;
       state.message = 'Le mail a bien été envoyé';
 
