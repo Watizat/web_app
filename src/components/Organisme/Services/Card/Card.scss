@@ -37,8 +37,10 @@
           align-content: center;
         }
 
-        & i{
-          font-size: 1.5em;
+        &-icon{
+            margin-right: 0.8em;
+            width: 30px!important;
+            height: 25px!important;
         }
 
         &--open{

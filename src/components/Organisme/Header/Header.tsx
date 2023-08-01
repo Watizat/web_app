@@ -32,7 +32,6 @@ function Header() {
               key={categorie.id}
               className="organisme-details-categories-item"
               icon={categorie.value}
-              size="30px"
             />
           ))}
         </div>

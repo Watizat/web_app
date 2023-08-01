@@ -41,7 +41,6 @@ function Card({ service }: ServiceProps) {
             <Icon
               className="organisme-services-contentcards--cards-header-icon"
               icon={service.categorie_id.tag}
-              size="30px"
             />
             {service.categorie_id.translations[0].name}
 
