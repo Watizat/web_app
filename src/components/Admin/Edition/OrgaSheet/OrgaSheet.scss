@@ -24,23 +24,25 @@
   &-card {
     width: 100%;
     background-color: v.$white;
-    box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    // box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.1);
 
     &__titleBar {
       display: flex;
       justify-content: space-between;
-      background-color: v.$sucess;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border-bottom: .5px solid rgba(v.$info, .3);
     }
 
     &__title {
       padding: 0.75rem;
-      color: v.$white;
+      color: v.$info;
+      font-weight: 500;
     }
     
     &__menu {
-      color: v.$white;
+      color: v.$info;
       margin-right: 2rem;
       font-size: 1.4rem;
     }
@@ -57,8 +59,8 @@
     border-right: 1px solid v.$grey-300;
     font-weight: 300;
     font-size: 0.9rem;
-    font-weight: 500;
-    color: v.$grey-900;
+    font-weight: 400;
+    color: v.$grey-800;
 
     &__header {
       display: flex;

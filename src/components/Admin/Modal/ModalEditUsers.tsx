@@ -102,27 +102,28 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
               {dayjs(user.last_access).format('DD  MMMM  YYYY')}
             </div>
           </div>
-          <button
-            type="button"
-            className="btn btn-danger-fill btn-flat modal-actions__close"
-          >
-            Supprimer
-          </button>
-          <button
-            type="button"
-            className="btn btn-info-fill btn-flat modal-actions__close"
-            onClick={() => setIsActive(false)}
-          >
-            Annuler
-          </button>
-          <button
-            type="submit"
-            className="btn btn-sucess-fill btn-flat modal-actions__save"
-          >
-            Sauvegarder
-          </button>
+          <div className="modal-actions">
+            <button
+              type="button"
+              className="btn btn-danger-fill btn-flat modal-actions__close"
+            >
+              Supprimer
+            </button>
+            <button
+              type="button"
+              className="btn btn-info-fill btn-flat modal-actions__close"
+              onClick={() => setIsActive(false)}
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              className="btn btn-sucess-fill btn-flat modal-actions__save"
+            >
+              Sauvegarder
+            </button>
+          </div>
         </form>
-        <div className="modal-actions" />
       </div>
     </div>
   );

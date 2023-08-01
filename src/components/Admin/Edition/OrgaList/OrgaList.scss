@@ -39,11 +39,11 @@
     text-align: left;
 
     &:hover {
-      background-color: rgba(v.$sucess, 0.2);
+      background-color: rgba(v.$info, 0.1);
     }
 
     &.selected {
-      background-color: rgba(v.$sucess, 0.2);
+      background-color: rgba(v.$info, 0.2);
     }
 
     @include m.desktop {

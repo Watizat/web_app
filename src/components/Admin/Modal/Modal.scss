@@ -32,9 +32,11 @@
   }
 
   &-title {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     font-size: 1.75rem;
-    color: v.$primary;
+    color: v.$info;
+    font-weight: 500;
+    font-size: 1.5rem;
   }
 
   &-list {
@@ -77,18 +79,18 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: .75rem;
 
     &__title {
-      color: v.$sucess;
-      font-weight: 800;
+      color: v.$primary-var2;
+      font-weight: 500;
       font-size: 1.1rem;
     }
 
     input,
     textarea {
       border: none;
-      border-bottom: 1px solid v.$grey-500;
+      border-bottom: 1px solid v.$grey-400;
     }
 
     &__inputTxt,
@@ -97,7 +99,7 @@
 
       &:focus {
         outline: none;
-        background-color: rgba(v.$sucess, 0.05);
+        background-color: rgba(v.$primary-var2, 0.05);
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
       }

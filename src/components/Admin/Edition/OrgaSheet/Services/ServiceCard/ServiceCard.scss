@@ -27,6 +27,15 @@
         width: 30%;
       }
     }
+    &__serviceCard {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 1rem;
+      border: 1px solid v.$grey-300;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
     .serviceCard {
       &-header {
         display: flex;
@@ -34,11 +43,11 @@
         align-items: center;
         align-content: center;
         border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        background-color: rgba(v.$grey-100, .25);
+        // border-top-right-radius: 20px;
+        // background-color: rgba(v.$grey-100, .25);
 
-        border: 1px solid v.$grey-100;
-        color: v.$primary;
+        border-bottom: 1px solid v.$grey-300;
+        color: v.$danger;
         padding: .6rem 1rem .6rem .6rem;
         font-size: 1rem;
       }
@@ -56,23 +65,13 @@
         padding: 0 1rem 1rem 1rem;
         gap: 1rem;
 
+        &__category {
+          color: v.$info;
+        }
+
         &__info,
         &__alerts {
-          color: v.$grey-600;
-        }
-
-        &__info {
-          &-title {
-            color: v.$sucess;
-          }
-        }
-
-        &__category {
-          color: v.$sucess;
-          width: max-content;
-          padding-right: 2rem;
-          padding-bottom: .5rem;
-          border-bottom: 1px solid v.$sucess;
+          color: v.$grey-700;
         }
 
         &__hoursDetails {

@@ -88,7 +88,7 @@ function Home() {
                 Watizat milite pour l’accès à l’information des personnes
                 exilées
               </h2>
-              <p>
+              <p className="info-hero__text___txt">
                 L’association WATIZAT milite pour l’accès à l’information des
                 personnes exilées en France. Nous constatons que l’information
                 est une ressource vitale qui peut avoir des conséquences
@@ -99,9 +99,11 @@ function Home() {
                 meilleure compréhension des services et des acteur·ice·s
                 présents sur le territoire.
               </p>
-              <button className="btn btn-sucess btn-rounded" type="button">
-                <span>En savoir plus sur Watizat</span>
-              </button>
+              <div>
+                <button className="btn btn-sucess btn-rounded" type="button">
+                  <span>En savoir plus sur Watizat</span>
+                </button>
+              </div>
             </div>
           </article>
         </Container>

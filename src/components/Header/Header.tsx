@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleHamburger } from '../../store/reducers/hamburger';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import Container from '../Container/Container';
-import NavBar from '../NavBar/NavBar';
+import NavBar from './NavBar/NavBar';
 import './Header.scss';
 
 function Header() {

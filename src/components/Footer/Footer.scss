@@ -37,8 +37,17 @@
     }
   }
   &-links {
-    .footerlinks{
-    display: flex;
-    gap: 2rem;
-  }}
+    .footerlinks {
+      display: flex;
+      gap: 2rem;
+      gap: 30px;
+      a {
+        color: v.$white;
+        font-weight: 500;
+    
+        &:hover {
+          font-weight: 500;
+          color: v.$warning;
+        }
+      }}}
 }

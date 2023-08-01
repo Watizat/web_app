@@ -66,13 +66,13 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
         <Link
           to={`https://www.google.com/maps/search/?api=1&query=${organism.latitude}%2C${organism.longitude}`}
           target="_blank"
-          className="Right-btn btn btn-sucess-fill btn-flat"
+          className="Right-btn btn btn-sucess btn-flat"
         >
           <Icon icon="directions_walk" size="1.2rem" /> <p>J&apos;y vais !</p>
         </Link>
         <Link
           to={`tel:${organism.phone}`}
-          className="Right-btn btn btn-info-fill btn-flat"
+          className="Right-btn btn btn-info btn-flat"
         >
           <Icon icon="phone" size="1.2rem" /> <p>{organism.phone}</p>
         </Link>

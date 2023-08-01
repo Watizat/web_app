@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/redux';
-import { toggleHamburger } from '../../store/reducers/hamburger';
+import { useAppDispatch } from '../../../hooks/redux';
+import { toggleHamburger } from '../../../store/reducers/hamburger';
 import './NavBar.scss';
 
 function NavBar() {

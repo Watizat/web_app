@@ -49,16 +49,16 @@
       align-items: center;
       justify-content: center;
 
-      margin-top: 1rem;
+      margin-top: 2rem;
       gap: 1rem;
 
       &-title {
         text-align: center;
         font-size: 1.2rem;
-        font-weight: 500;
+        font-weight: 600;
         margin: 1rem 0;
         max-height: 60vw;
-    
+
         @include m.desktop {
           font-size: 2rem;
           margin: auto;
@@ -71,7 +71,7 @@
 
       &-subtitle {
         font-size: 1rem;
-        font-weight: 800;
+        font-weight: 600;
         display: block;
   
         @include m.desktop {
@@ -186,7 +186,7 @@
           justify-content: center;
           align-items: center;
           align-content: center;
-          border: 2px solid rgba(v.$primary, 0.1);
+          border: 1px solid rgba(v.$primary, 0.1);
           border-radius: 1.2rem;
           background-color: v.$white;
           color: rgba(v.$grey-800, 0.8);
@@ -195,6 +195,7 @@
           width: 25%;
           box-sizing: content-box;
           contain: content;
+          padding: .25rem;
           @include m.touch{
             width: 23%;
           }
@@ -244,9 +245,9 @@
           }
 
           &:hover {
-            box-shadow: 0px 8px 24px 0px rgba(v.$primary, 0.5);
+            // box-shadow: 0px 6px 16px 0px rgba(v.$primary, 0.5);
             color: v.$primary;
-            border: 2px solid v.$primary;
+            border: 1px solid v.$primary;
 
             &__text {
               font-weight: 600;
@@ -274,10 +275,13 @@
       margin-top: 3rem;
 
       &__text {
+        display: flex;
+        flex-direction: column;
         flex-basis: 80%;
         margin: 0 2rem;
         text-align: justify;
         font-size: 0.8rem;
+        gap: 1.5rem;
 
         @include m.fullhd {
           flex-basis: 80%;
@@ -291,6 +295,11 @@
           @include m.fullhd {
             font-size: 2rem;
           }
+        }
+
+        &___txt {
+          font-weight: 500;
+          font-size: 1rem;
         }
 
         button {
