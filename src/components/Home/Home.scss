@@ -60,14 +60,18 @@
     background-position: center;
     background-size: cover;
 
-    background-image:
-      linear-gradient(rgba(v.$bghome, 0.8), rgba(v.$bghome, 0.5)),
+    background-image: linear-gradient(
+        rgba(v.$bghome, 0.8),
+        rgba(v.$bghome, 0.5)
+      ),
       url('./img/bghome-portrait.jpg');
     min-height: 100vh;
 
     @include m.desktop {
-      background-image:
-        linear-gradient(rgba(v.$bghome, 0.8), rgba(v.$bghome, 0.5)),
+      background-image: linear-gradient(
+          rgba(v.$bghome, 0.8),
+          rgba(v.$bghome, 0.5)
+        ),
         url('./img/bghome-landscape.jpg');
       min-height: 40vh;
     }
@@ -156,8 +160,7 @@
           width: 100%;
         }
 
-
-        &-button, &-button--skeleton {
+        &-button {
           display: flex;
           flex-direction: column;
           flex-wrap: nowrap;
@@ -172,33 +175,13 @@
           gap: 0.5rem;
           width: 25%;
 
-          &__text, &__text--skeleton {
+          &__text {
             font-size: 0.8rem;
           }
 
-          &__icon, &__icon--skeleton {
+          &__icon {
             width: 2rem;
             aspect-ratio: 1/1;
-          }
-          // Skeleton
-          &__text--skeleton {
-            border-radius: 15px;
-            font-size: 0.8rem;
-            width: 80%;
-            height: 1rem;
-          }
-        
-          &__icon--skeleton {
-            border-radius: 5px;
-            
-          }
-        
-          &__text--skeleton, &__icon--skeleton {
-            background: #eee;
-            background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-            border-radius: 5px;
-            background-size: 200% 100%;
-            animation: 1.5s shine linear infinite;
           }
 
           @include m.tablet {
@@ -211,14 +194,9 @@
 
           @include m.fullhd {
             width: 10%;
-          &__text {
-            font-size: 0.9rem;
-          }
-          &--skeleton {
-            width: 15%;
-          }
-        
-
+            &__text {
+              font-size: 0.9rem;
+            }
           }
 
           @include m.qhd {
