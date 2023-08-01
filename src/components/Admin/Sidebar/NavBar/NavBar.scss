@@ -23,6 +23,14 @@
     font-weight: 500;
     font-size: 0.9em;
     transition: background 300ms;
+
+  @include m.desktop {
+    font-size: 0.8em;
+  }
+
+  @include m.widescreen {
+    font-size: 0.9em;
+  }
   
     @include m.fullhd {
       font-size: 1.1em;

@@ -31,17 +31,16 @@ function Home() {
       <section id="hero">
         <Container>
           <div className="heroHeader">
-            <Link className="heroHeader-logo" to="/">
-              <img src={logo} alt="watizat logo" />
-            </Link>
-            <h1>
+            <h1 className="heroHeader-title">
               Guide d&lsquo;information en ligne
-              <span> pour les personnes exilées</span>
+              <span className="heroHeader-subtitle">
+                pour les personnes exilées
+              </span>
             </h1>
           </div>
           <div className="choice">
             <article className="choiceLeft">
-              <h2>1. Sélectionner une région&nbsp;</h2>
+              <h2 className="choice-title">1. Sélectionner une région&nbsp;</h2>
               <select value={select} onChange={handleChange}>
                 <option value="" disabled>
                   Selectionner une ville...
@@ -54,7 +53,7 @@ function Home() {
               </select>
             </article>
             <article className="choiceRight">
-              <h2>2. Selectionner une catégorie</h2>
+              <h2 className="choice-title">2. Selectionner une catégorie</h2>
               <div className="choiceRight-group">
                 {categories.map((categorie) => (
                   <button
@@ -84,7 +83,7 @@ function Home() {
               <img src="/img/bghome-guide.jpeg" alt="distribution d'un guide" />
             </div>
             <div className="info-hero__text">
-              <h2>
+              <h2 className="info-hero__text___title">
                 Watizat milite pour l’accès à l’information des personnes
                 exilées
               </h2>

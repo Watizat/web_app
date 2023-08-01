@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import Container from '../Container/Container';
+import FooterLinks from './FooterLinks/FooterLinks';
 import './Footer.scss';
 
 function Footer() {
@@ -7,11 +7,9 @@ function Footer() {
     <footer className="footer">
       <Container>
         <span>Watizat 2023</span>
-        <Link to="/mentions-legales">Mentions légales</Link>
-        <Link to="/contact">Nous contacter</Link>
-        <Link className="important" to="/admin">
-          Membres Watizat
-        </Link>
+        <div className="footer-links">
+          <FooterLinks />
+        </div>
       </Container>
     </footer>
   );

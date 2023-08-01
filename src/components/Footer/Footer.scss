@@ -36,4 +36,9 @@
       font-weight: 900;
     }
   }
+  &-links {
+    .footerlinks{
+    display: flex;
+    gap: 2rem;
+  }}
 }

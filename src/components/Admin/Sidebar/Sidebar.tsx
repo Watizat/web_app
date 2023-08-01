@@ -7,7 +7,11 @@ import Container from '../../Container/Container';
 import NavBar from './NavBar/NavBar';
 import './Sidebar.scss';
 
-function Sidebar() {
+interface ModalProps {
+  SidebarsetOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Sidebar({ SidebarsetOpen }: ModalProps) {
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -60,7 +64,7 @@ function Sidebar() {
             <p>Accéder à mon compte</p>
           </Link>
         </div>
-        <NavBar />
+        <NavBar SidebarsetOpen={SidebarsetOpen} />
       </Container>
     </header>
   );

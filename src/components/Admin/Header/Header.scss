@@ -12,6 +12,7 @@
   z-index: 100;
 
   min-height: 6vh;
+  position: sticky;
 
   background-color: v.$white;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0.1rem 0.5rem;
@@ -26,4 +27,22 @@
   button {
     margin-right: 2rem;
   }
+
+  .headerAdmin-hamburger {
+    @include m.widescreen {
+      display: none;
+    }
+    &__open {
+      color: v.$white;
+    }
+  }
+
+  .headerAdmin-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: rgba(0, 0, 0, 0.15) 0.2rem 0rem 0.5rem;
+    background-color: rgba(v.$grey-900, 0.8);
+    width: 100vw;
+}
 }

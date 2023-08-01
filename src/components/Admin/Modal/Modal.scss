@@ -8,17 +8,23 @@
   top: 0;
   left: 0;
   width: 100vw;
-  background-color: rgba(v.$grey-900, 0.85);
+
   display: flex;
   align-content: center;
   align-items: center;
   justify-content: center;
 
+  background-color: rgba(v.$grey-900, 0.85);
+
   &-main {
-    width: 50vw;
+    width: 75vw;
     background-color: v.$white;
     border-radius: 20px;
     padding: 3rem 5rem;
+
+    @include m.fullhd {
+    width: 50vw;
+    }
   }
 
   &-title {

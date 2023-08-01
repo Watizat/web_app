@@ -41,7 +41,9 @@ function App() {
     <>
       {isTablet && (
         <div id="bo-app">
-          <Sidebar />
+          <span className="bo-app__sidebar">
+            <Sidebar />
+          </span>
 
           <main
             id={`${pathname !== '/admin/dashboard' ? 'bo-main' : 'dashboard'}`}
