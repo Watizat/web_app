@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
@@ -15,7 +15,6 @@ function App() {
   const user = getUserDataFromLocalStorage();
   const { pathname } = useLocation();
   const langue = useAppSelector((state) => state.organism.langue);
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -37,17 +36,12 @@ function App() {
     <>
       {isTablet && (
         <div id="bo-app">
-          <Sidebar setSidebarIsOpen={setSidebarIsOpen} />
+          <Sidebar />
 
           <main
             id={`${pathname !== '/admin/dashboard' ? 'bo-main' : 'dashboard'}`}
           >
-            {pathname !== '/admin/dashboard' && (
-              <Header
-                sidebarIsOpen={sidebarIsOpen}
-                setSidebarIsOpen={setSidebarIsOpen}
-              />
-            )}
+            {pathname !== '/admin/dashboard' && <Header />}
             <Outlet />
           </main>
         </div>
