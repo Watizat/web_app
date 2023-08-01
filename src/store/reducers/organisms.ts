@@ -36,12 +36,11 @@ export const scrollCard = createAction<number>('organism/focus-card');
 
 export const fetchOrganisms = createAsyncThunk(
   'organisms/fetch-organisms',
-  async (/* category: string */) => {
+  async (city: string) => {
     const { data } = await axiosInstance.get<{ data: Organism[] }>(
       '/items/organisme',
       {
         params: {
-          // IMPOSSIBLE D'AJOUTER PLUS DE PARAMETRES
           fields: [
             'id',
             'name',
@@ -95,7 +94,7 @@ export const fetchOrganisms = createAsyncThunk(
           ].join(','),
           filter: {
             zone_id: {
-              name: 'Toulouse',
+              name: city,
             },
           },
         },
@@ -129,7 +128,6 @@ export const fetchOrganism = createAsyncThunk(
       '/items/organisme',
       {
         params: {
-          // IMPOSSIBLE D'AJOUTER PLUS DE PARAMETRES
           fields: [
             'id',
             'name',
@@ -243,6 +241,7 @@ const organismReducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchOrganisms.rejected, (state, action) => {
       state.isLoading = false;
+      // eslint-disable-next-line no-console
       console.log(action.payload);
     })
     .addCase(fetchOrganism.pending, (state) => {

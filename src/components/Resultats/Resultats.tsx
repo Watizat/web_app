@@ -1,11 +1,12 @@
-import { useMediaQuery } from 'react-responsive';
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux';
 import { fetchOrganisms } from '../../store/reducers/organisms';
 import Header from './Header/Header';
 import Map from './Map/Map';
-import Panel from './Panel/Panel';
 import Menu from './Menu/Menu';
+import Panel from './Panel/Panel';
 import './Resultats.scss';
 
 function Resultats() {
@@ -14,11 +15,15 @@ function Resultats() {
 
   const [isActiveMap, setIsActiveMap] = useState(false);
 
+  const [queryParamaters] = useSearchParams();
+  const city = queryParamaters.get('city');
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchOrganisms(/* category as string */));
-  }, [dispatch]);
+    dispatch(fetchOrganisms(city as string));
+  }, [dispatch, city]);
+
   return (
     <>
       <Header />
