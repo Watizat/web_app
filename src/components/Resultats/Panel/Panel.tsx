@@ -83,7 +83,7 @@ function Panel() {
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
       />
-      <div className="resultsContentCard">
+      <div className="resultsContentCard" ref={resultsContainerRef}>
         {isLoading &&
           Array(5)
             .fill(null)
