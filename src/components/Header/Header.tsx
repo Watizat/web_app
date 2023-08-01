@@ -1,14 +1,17 @@
 import { Fade as Hamburger } from 'hamburger-react';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import Container from '../Container/Container';
 import NavBar from '../NavBar/NavBar';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import './Header.scss';
 
-function Header() {
-  const [MenuIsOpen, MenuSetOpen] = useState(false);
+interface HeaderProps {
+  menuIsOpen: boolean;
+  setMenuIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Header({ menuIsOpen, setMenuIsOpen }: HeaderProps) {
   return (
     <header id="header">
       <Container>
@@ -16,12 +19,12 @@ function Header() {
           <img src={logo} alt="watizat logo" />
         </Link>
         <div className="header-navbar">
-          <NavBar />
+          <NavBar setMenuIsOpen={setMenuIsOpen} />
         </div>
         <div className="header-hamburger">
-          <Hamburger toggled={MenuIsOpen} toggle={MenuSetOpen} />
+          <Hamburger toggled={menuIsOpen} toggle={setMenuIsOpen} />
         </div>
-        {MenuIsOpen && <BurgerMenu MenuSetOpen={MenuSetOpen} />}
+        {menuIsOpen && <BurgerMenu setMenuIsOpen={setMenuIsOpen} />}
       </Container>
     </header>
   );

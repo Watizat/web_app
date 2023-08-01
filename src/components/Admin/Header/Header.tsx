@@ -2,45 +2,45 @@ import { Fade as Hamburger } from 'hamburger-react';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import Sidebar from '../Sidebar/Sidebar';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { toggleHamburger } from '../../../store/reducers/hamburger';
 import ModalAddOrganism from '../Modal/ModalAddOrganism';
-import ModalUsers from '../Modal/ModalEditUsers';
+import Sidebar from '../Sidebar/Sidebar';
 import './Header.scss';
 
 function Header() {
   const { pathname } = useLocation();
-  const [isActiveUsers, setIsActiveUsers] = useState(false);
   const [isActiveOrganism, setIsActiveOrganism] = useState(false);
-  const [SidebarisOpen, SidebarsetOpen] = useState(false);
+  const isOpen = useAppSelector((state) => state.hamburger.isOpen);
+  const dispatch = useAppDispatch();
 
   return (
     <header id="headerAdmin">
-      {isActiveUsers && <ModalUsers setIsActive={setIsActiveUsers} />}
       {isActiveOrganism && (
         <ModalAddOrganism setIsActive={setIsActiveOrganism} />
       )}
 
-      {!SidebarisOpen && (
+      {!isOpen && (
         <div className="headerAdmin-hamburger">
           <Hamburger
             size={27}
-            toggled={SidebarisOpen}
-            toggle={SidebarsetOpen}
+            toggled={isOpen}
+            toggle={() => dispatch(toggleHamburger(!isOpen))}
           />
         </div>
       )}
-      {SidebarisOpen && (
+      {isOpen && (
         <span className="headerAdmin-sidebar">
-          <Sidebar SidebarsetOpen={SidebarsetOpen} />
+          <Sidebar />
         </span>
       )}
 
-      {SidebarisOpen && (
+      {isOpen && (
         <div className="headerAdmin-hamburger headerAdmin-hamburger__open">
           <Hamburger
             size={27}
-            toggled={SidebarisOpen}
-            toggle={SidebarsetOpen}
+            toggled={isOpen}
+            toggle={() => dispatch(toggleHamburger(!isOpen))}
           />
         </div>
       )}
@@ -49,15 +49,6 @@ function Header() {
         {pathname === '/admin/users' && 'Gestion des utilisateur·ices'}
       </h2>
 
-      {pathname === '/admin/users' && (
-        <button
-          type="button"
-          className="btn btn-sucess btn-rounded btn-flat"
-          onClick={() => setIsActiveUsers(true)}
-        >
-          Ajouter un·e utilisateur·ice
-        </button>
-      )}
       {pathname === '/admin/edition' && (
         <button
           type="button"

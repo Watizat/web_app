@@ -5,10 +5,10 @@ import NavBar from '../NavBar/NavBar';
 import './BurgerMenu.scss';
 
 interface ModalProps {
-  MenuSetOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setMenuIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function BurgerMenu({ MenuSetOpen }: ModalProps) {
+function BurgerMenu({ setMenuIsOpen }: ModalProps) {
   return (
     <div id="BurgerMenu">
       <div className="BurgerMenu">
@@ -17,8 +17,8 @@ function BurgerMenu({ MenuSetOpen }: ModalProps) {
             <img src={logo} alt="watizat logo" />
           </Link>
           <div className="BurgerMenu-navbar">
-            <NavBar MenuSetOpen={MenuSetOpen} />
-            <FooterLinks MenuSetOpen={MenuSetOpen} />
+            <NavBar setMenuIsOpen={setMenuIsOpen} />
+            <FooterLinks setMenuIsOpen={setMenuIsOpen} />
           </div>
         </div>
       </div>

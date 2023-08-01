@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import adminReducer from './reducers/admin';
 import crudReducer from './reducers/crud';
+import hamburgerReducer from './reducers/hamburger';
 import organismReducer from './reducers/organisms';
 import userReducer from './reducers/user';
 
@@ -10,6 +11,7 @@ const store = configureStore({
     user: userReducer,
     admin: adminReducer,
     crud: crudReducer,
+    hamburger: hamburgerReducer,
   },
 });
 

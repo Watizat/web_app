@@ -1,14 +1,17 @@
 import Container from '../Container/Container';
-import FooterLinks from './FooterLinks/FooterLinks';
 import './Footer.scss';
+import FooterLinks from './FooterLinks/FooterLinks';
 
-function Footer() {
+interface ModalProps {
+  setMenuIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+function Footer({ setMenuIsOpen }: ModalProps) {
   return (
     <footer className="footer">
       <Container>
         <span>Watizat 2023</span>
         <div className="footer-links">
-          <FooterLinks />
+          <FooterLinks setMenuIsOpen={setMenuIsOpen} />
         </div>
       </Container>
     </footer>

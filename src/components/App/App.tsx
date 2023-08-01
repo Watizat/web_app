@@ -12,6 +12,7 @@ function App() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
   const langue = useAppSelector((state) => state.organism.langue);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,9 +34,9 @@ function App() {
     <div className="app">
       {!loading && (
         <>
-          <Header />
+          <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
           <Outlet />
-          <Footer />
+          <Footer setMenuIsOpen={setMenuIsOpen} />
         </>
       )}
     </div>

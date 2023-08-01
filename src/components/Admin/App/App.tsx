@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchCategories, fetchDays } from '../../../store/reducers/organisms';
-import { setIsLogged } from '../../../store/reducers/user';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
@@ -14,9 +13,9 @@ function App() {
   const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
   const dispatch = useAppDispatch();
   const user = getUserDataFromLocalStorage();
-  const isLogged = useAppSelector((state) => state.user.isLogged);
   const { pathname } = useLocation();
   const langue = useAppSelector((state) => state.organism.langue);
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -26,9 +25,6 @@ function App() {
     dispatch(fetchDays(1));
   }, [dispatch, langue]);
 
-  useEffect(() => {
-    dispatch(setIsLogged({ isLogged: user?.isLogged || false }));
-  }, [isLogged, dispatch, user?.isLogged]);
   if (!user) {
     return <Navigate to="/login" replace />;
   }
@@ -41,14 +37,17 @@ function App() {
     <>
       {isTablet && (
         <div id="bo-app">
-          <span className="bo-app__sidebar">
-            <Sidebar />
-          </span>
+          <Sidebar setSidebarIsOpen={setSidebarIsOpen} />
 
           <main
             id={`${pathname !== '/admin/dashboard' ? 'bo-main' : 'dashboard'}`}
           >
-            {pathname !== '/admin/dashboard' && <Header />}
+            {pathname !== '/admin/dashboard' && (
+              <Header
+                sidebarIsOpen={sidebarIsOpen}
+                setSidebarIsOpen={setSidebarIsOpen}
+              />
+            )}
             <Outlet />
           </main>
         </div>

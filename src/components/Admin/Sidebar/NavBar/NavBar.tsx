@@ -1,13 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
-import './NavBar.scss';
 import { useAppDispatch } from '../../../../hooks/redux';
+import { toggleHamburger } from '../../../../store/reducers/hamburger';
 import { logout } from '../../../../store/reducers/user';
+import './NavBar.scss';
 
-interface ModalProps {
-  SidebarsetOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function NavBar({ SidebarsetOpen }: ModalProps) {
+function NavBar() {
   const dispatch = useAppDispatch();
 
   const links = [
@@ -71,7 +68,7 @@ function NavBar({ SidebarsetOpen }: ModalProps) {
         <NavLink
           key={e.name}
           to={e.to}
-          onClick={() => SidebarsetOpen(false)}
+          onClick={() => dispatch(toggleHamburger(false))}
           className={({ isActive }) =>
             isActive
               ? 'adminNav-isActive'
