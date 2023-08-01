@@ -1,14 +1,9 @@
 import dayjs from 'dayjs';
-import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
 import { DirectusUser } from '../../../@types/user';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import {
-  fetchRoles,
-  fetchUsers,
-  fetchZones,
-} from '../../../store/reducers/admin';
+import { fetchUsers } from '../../../store/reducers/admin';
 import { editUser } from '../../../store/reducers/user';
 import './Modal.scss';
 
@@ -28,16 +23,13 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
   const zones = useAppSelector((state) => state.admin.zones);
   const roles = useAppSelector((state) => state.admin.roles);
 
+  console.log(user);
+
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     await dispatch(editUser(formData));
     setIsActive(false);
-    await dispatch(fetchUsers());
+    await dispatch(fetchUsers(null));
   };
-
-  useEffect(() => {
-    dispatch(fetchZones());
-    dispatch(fetchRoles());
-  }, [dispatch]);
 
   return (
     <div className="modal">

@@ -47,11 +47,15 @@ export const fetchAdminOrganisms = createAsyncThunk(
   }
 );
 
-export const fetchUsers = createAsyncThunk('users/fetch-users', async () => {
-  const { data } = await axiosInstance.get<{ data: DirectusUser[] }>('/users', {
-    params: {
-      fields: [
-        /*         'id',
+export const fetchUsers = createAsyncThunk(
+  'users/fetch-users',
+  async (zone: string | null) => {
+    const { data } = await axiosInstance.get<{ data: DirectusUser[] }>(
+      '/users',
+      {
+        params: {
+          fields: [
+            /*         'id',
         'firstname',
         'lastname',
         'last_connected',
@@ -59,12 +63,17 @@ export const fetchUsers = createAsyncThunk('users/fetch-users', async () => {
         'role_id.id',
         'role_id.name',
         'zone.name', */
-        '*',
-      ].join(','),
-    },
-  });
-  return data.data;
-});
+            '*',
+          ].join(','),
+          filter: {
+            zone,
+          },
+        },
+      }
+    );
+    return data.data;
+  }
+);
 
 export const setAdminOrganism = createAsyncThunk(
   'admin-organisms/set-organism',
