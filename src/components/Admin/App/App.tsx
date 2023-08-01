@@ -64,7 +64,7 @@ function App() {
       {isTablet && !isLoading && (
         <div id="bo-app">
           {(isWidescreen || isOpen) && <Sidebar />}
-
+          {/* <Sidebar /> */}
           <main
             id={`${pathname !== '/admin/dashboard' ? 'bo-main' : 'dashboard'}`}
           >
