@@ -8,7 +8,6 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
-import { toggleHamburger } from '../../../store/reducers/hamburger';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
