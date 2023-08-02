@@ -17,6 +17,7 @@ interface ServiceModalProps {
 
 function ModalEditService({ service, setIsActive }: ServiceModalProps) {
   const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
+  const days = useAppSelector((state) => state.organism.days);
 
   const {
     register,
@@ -112,7 +113,7 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                   <tr>
                     <td>Jours</td>
                     <td colSpan={3}>Matin</td>
-                    <td />
+                    <td> / </td>
                     <td colSpan={3}>Aprés-midi</td>
                   </tr>
                 </thead>
@@ -120,7 +121,9 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                   {service.schedules.map((day, index) => (
                     <tr key={day.day} className="modal-data__hoursLine">
                       <td className="modal-data__hoursDay">
-                        <span>{day.day}</span>
+                        <span>
+                          {days.find((d) => d.numberday === day.day)?.name}
+                        </span>
                         <input
                           type="hidden"
                           {...register(`schedule_id_${index + 1}`, {

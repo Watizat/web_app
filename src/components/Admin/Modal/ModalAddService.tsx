@@ -90,7 +90,7 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                   <tr>
                     <td>Jours</td>
                     <td colSpan={3}>Matin</td>
-                    <td />
+                    <td> / </td>
                     <td colSpan={3}>Aprés-midi</td>
                   </tr>
                 </thead>
@@ -101,10 +101,7 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                         <span>{i.name}</span>
                         <input
                           type="hidden"
-                          {...register(
-                            `schedule_id_${index + 1}`
-                            // , { value: '',}
-                          )}
+                          {...register(`schedule_id_${index + 1}`)}
                         />
                       </td>
                       <td className="modal-data__hoursHour">

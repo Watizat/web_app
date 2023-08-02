@@ -21,6 +21,9 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
   } = useForm<Inputs>();
 
   const dispatch = useAppDispatch();
+  const days = useAppSelector((state) => state.organism.days);
+  console.log(days);
+
   const organismId = useAppSelector(
     (state) => state.admin.organism?.id as number
   );
@@ -82,7 +85,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                   <tr>
                     <td>Jours</td>
                     <td colSpan={3}>Matin</td>
-                    <td />
+                    <td> / </td>
                     <td colSpan={3}>Après-midi</td>
                   </tr>
                 </thead>
@@ -90,7 +93,9 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                   {organism.schedules.map((day) => (
                     <tr key={day.day} className="modal-data__hoursLine">
                       <td className="modal-data__hoursDay">
-                        <span>{day.day}</span>
+                        <span>
+                          {days.find((d) => d.numberday === day.day)?.name}
+                        </span>
                         <input
                           type="hidden"
                           {...register(`schedule_id_${day.day}`, {

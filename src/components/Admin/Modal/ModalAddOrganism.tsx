@@ -9,8 +9,8 @@ import {
 } from '../../../store/reducers/admin';
 import { addOrganism } from '../../../store/reducers/crud';
 import {
-  validateScheduleFormat,
   validateEmail,
+  validateScheduleFormat,
 } from '../../../utils/form/form';
 import './Modal.scss';
 
@@ -30,6 +30,8 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
   const dispatch = useAppDispatch();
   const isSaving = useAppSelector((state) => state.crud.isSaving);
   const zones = useAppSelector((state) => state.admin.zones);
+  const days = useAppSelector((state) => state.organism.days);
+  const city = useAppSelector((state) => state.user.city as string);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     localStorage.setItem('city', event.target.value);
@@ -40,7 +42,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
     const { payload: id } = await dispatch(addOrganism(formData));
     await dispatch(setAdminOrganism(id));
     setIsActive(false);
-    await dispatch(fetchAdminOrganisms());
+    await dispatch(fetchAdminOrganisms(city));
   };
 
   return (
@@ -185,29 +187,18 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                   <tr>
                     <td>Jours</td>
                     <td colSpan={3}>Matin</td>
-                    <td />
+                    <td> / </td>
                     <td colSpan={3}>Aprés-midi</td>
                   </tr>
                 </thead>
                 <tbody>
-                  {[
-                    'Lundi',
-                    'Mardi',
-                    'Mercredi',
-                    'Jeudi',
-                    'vendredi',
-                    'Samedi',
-                    'Dimanche',
-                  ].map((i, index) => (
-                    <tr key={i} className="modal-data__hoursLine">
+                  {days.map((i, index) => (
+                    <tr key={i.name} className="modal-data__hoursLine">
                       <td className="modal-data__hoursDay">
-                        <span>{i}</span>
+                        <span>{i.name}</span>
                         <input
                           type="hidden"
-                          {...register(
-                            `schedule_id_${index + 1}`
-                            // , { value: '',}
-                          )}
+                          {...register(`schedule_id_${index + 1}`)}
                         />
                       </td>
                       <td className="modal-data__hoursHour">
