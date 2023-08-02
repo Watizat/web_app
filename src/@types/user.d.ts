@@ -12,6 +12,7 @@ export interface UserState {
   timeout: number;
   isActive: boolean;
   lastActionDate: number | null;
+  isRegistered: boolean;
 }
 
 export interface UserSession {

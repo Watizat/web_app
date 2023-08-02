@@ -36,6 +36,7 @@ const initialState: UserState = {
   timeout,
   isActive: false,
   lastActionDate: null,
+  isRegistered: false,
   ...getUserDataFromLocalStorage(),
 };
 
@@ -47,10 +48,15 @@ export const changeLoginCredentialsField = createAction<{
 export const registerUser = createAsyncThunk(
   'user/registerUser',
   async (formData: Inputs) => {
-    await axiosInstance.post('/users', {
-      ...formData,
-      role: '5754603f-add3-4823-9c77-a2f9789074fc',
-    });
+    try {
+      const {data } = await axiosInstance.post('/users', {
+        ...formData,
+        role: '5754603f-add3-4823-9c77-a2f9789074fc',
+      });
+      return data.data
+    } catch (error) {
+      return error
+    }
   }
 );
 
@@ -162,6 +168,10 @@ export default createReducer(initialState, (builder) => {
       state.isLogged = action.payload.isLogged;
     })
     .addCase(registerUser.fulfilled, (state) => {
-      state.message = 'un administrateur va vérifier votre demande';
-    });
+      state.isLoading = false;
+      state.message = 'Votre inscription à bien été prise en compte et va être vérifiée';
+    }).addCase(registerUser.rejected, (state) => {
+      state.isLoading = false;
+      state.message = 'Erreur lors de la création du compte';
+    })
 });

@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Inputs } from '../../@types/formInputs';
 import { registerUser } from '../../store/reducers/user';
 import './Login.scss';
+import { useState } from 'react';
+import { validateEmail } from '../../utils/form/form';
 
 function AccountRequest() {
   const {
@@ -15,10 +17,21 @@ function AccountRequest() {
 
   const dispatch = useAppDispatch();
   const zones = useAppSelector((state) => state.admin.zones);
+  const message = useAppSelector((state) => state.user.message);
+  const [mess, setMess] = useState<string | null>();
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    await dispatch(registerUser(formData));
+    const response = await dispatch(registerUser(formData))
+/*     if(response.status === 400) {
+      setMess("Une erreur s'est produite")
+    } */
+    setMess(message)
+    console.log(response)
   };
+
+  if (mess) {
+    return <p>{mess}</p>;
+  }
 
   return (
     <div className="login accountRequest">
@@ -29,7 +42,8 @@ function AccountRequest() {
       >
         <fieldset>
           <legend>Prénom</legend>
-          <input type="text" placeholder="Prénom" {...register('first_name')} />
+          <input type="text" placeholder="Prénom" {...register('first_name', {required: "Ce champs est requis"})} />
+            {errors.first_name && <small>{errors.first_name.message}</small>}
         </fieldset>
         <fieldset>
           <legend>Nom de famille</legend>
@@ -42,6 +56,7 @@ function AccountRequest() {
         <fieldset>
           <legend>Adresse email</legend>
           <input type="text" placeholder="Email" {...register('email')} />
+          {errors.mail?.message && <small>{errors.mail.message}</small>}
         </fieldset>
         <fieldset>
           <legend>Mot de passe</legend>
