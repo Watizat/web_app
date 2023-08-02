@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../store/reducers/organisms';
 import ResultatsCardSkeleton from '../../Skeleton/ResultatCard/ResultatCard';
@@ -13,10 +13,11 @@ function Panel() {
   const filteredOrganisms = useAppSelector(
     (state) => state.organism.filteredOrganisms
   );
-  const isLoading = useAppSelector((state) => state.organism.isLoading);
   const categoryFilter = useAppSelector(
     (state) => state.organism.categoryFilter
   );
+
+  const [loader, setLoader] = useState<boolean>(true);
 
   const [isPmr, setIsPmr] = useState<boolean>(false);
   const [isAnimalsAccepted, setIsAnimalsAccepted] = useState<boolean>(false);
@@ -50,7 +51,7 @@ function Panel() {
         (matchesNameFilter || matchesNameFilterWithAccents)
       );
     });
-
+    setLoader(false);
     dispatch(setFilteredOrganisms(setFilter));
   }, [organisms, categoryFilter, isPmr, isAnimalsAccepted, search, dispatch]);
 
@@ -85,11 +86,11 @@ function Panel() {
         setSearch={setSearch}
       />
       <div className="resultsPanel-ContentCard" ref={resultsContainerRef}>
-        {isLoading &&
+        {loader &&
           Array(5)
             .fill(null)
             .map((e, i) => <ResultatsCardSkeleton key={i} />)}
-        {!isLoading &&
+        {!loader &&
           (filteredOrganisms.length > 0 ? (
             filteredOrganisms.map((organism, index) => (
               <Card
