@@ -54,7 +54,7 @@ export const registerUser = createAsyncThunk(
         ...formData,
         role: '5754603f-add3-4823-9c77-a2f9789074fc',
       })      
-    } catch (err: any | AxiosError) {
+    } catch (err: any) {
       console.log(err)
       return rejectWithValue(err.message);
     }

@@ -22,18 +22,19 @@ function AccountRequest() {
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     const response = await dispatch(registerUser(formData));
-    console.log(response);
-    if(response.meta.requestStatus === 'fulfilled') {
-      return setConfirmationMessage('Votre compte a bien été crée, il est en attente de validation')
-    }
-    if(response.meta.requestStatus === 'rejected') {
-      return setConfirmationMessage(`Une erreur s'est produite lors de la création de votre compte`)
+    switch (response.meta.requestStatus) {
+      case 'fulfilled':
+        return setConfirmationMessage(`Votre compte a bien été créée, il est en attente de validation.`);
+      case 'rejected':
+        return setConfirmationMessage(`Une erreur s'est produite lors de la création de votre compte.`);
+      default:
+        return 'Error'
     }
   };
 
   if (confirmationMessage) {
-    return     (<div className="login accountRequest">
-<p>{confirmationMessage}</p></div>);
+    return (<div className="login accountRequestMessage">
+    <p>{confirmationMessage}</p></div>);
   }
 
   return (
@@ -58,7 +59,7 @@ function AccountRequest() {
         </fieldset>
         <fieldset>
           <legend>Adresse email</legend>
-          <input type="text" placeholder="Email" {...register('mail', {
+          <input type="text" placeholder="Email" {...register('email', {
             validate: validateEmail,
           })}
               />
