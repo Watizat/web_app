@@ -67,7 +67,7 @@ function Resultats() {
         {(isDesktop || !isActiveMap) && (
           <Panel onFilterChange={handleFilterChange} />
         )}
-        {(isDesktop || isActiveMap) && <Map />}
+        {(isDesktop || isActiveMap) && <Map cityPosition={cityPosition} />}
         {isTouch && (
           <Menu isActiveMap={isActiveMap} setIsActiveMap={setIsActiveMap} />
         )}
