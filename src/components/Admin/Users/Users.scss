@@ -32,7 +32,9 @@
     thead {
       font-weight: 600;
       color: v.$grey-700;
-      background-color: rgba(v.$grey-100, 0.6);
+      background-color: v.$grey-100;
+      position: sticky;
+      top: 6vh;
     }
 
     tbody {
@@ -50,78 +52,4 @@
     }
   }
 
-  .txt-align-left,
-  .userstable-name,
-  .userstable-antenne {
-    padding-left: 2rem;
-  }
-
-  .txt-align-center,
-  .userstable-checkbox,
-  .userstable-email,
-  .userstable-connexion,
-  .userstable-roles,
-  .userstable-action {
-    text-align: center;
-  }
-
-  .userstable-checkbox {
-    [type='checkbox'] {
-      width: 1.1rem;
-      height: 1.1rem;
-    }
-
-    @include m.widescreen {
-      [type='checkbox'] {
-        width: 1.3rem;
-        height: 1.3rem;
-      }
-    }
-
-    @include m.fullhd {
-      [type='checkbox'] {
-        width: 1.5rem;
-        height: 1.5rem;
-      }
-    }
-  }
-
-  .userstable-roles {
-    @include m.tablet-only {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 0.5rem;
-      min-height: 100%;
-    }
-
-    .role {
-      margin: 0 0.5rem;
-      padding: 0.2rem 0.5rem;
-      border-radius: 20px;
-      color: v.$white;
-      @include m.tablet-only {
-        padding: 0.05rem 0.35rem;
-        font-size: 0.85rem;
-      }
-    }
-    .newrole {
-      background-color: v.$warning;
-      color: v.$grey-700;
-    }
-    .editor {
-      background-color: v.$info;
-    }
-    .localref {
-      background-color: v.$sucess;
-    }
-    .admin {
-      background-color: v.$danger;
-    }
-  }
-  .userstable-action {
-    font-size: 1.2rem;
-    font-weight: 900;
-    color: v.$grey-900;
-  }
 }

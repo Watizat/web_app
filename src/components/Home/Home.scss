@@ -3,8 +3,9 @@
 @use '../../styles/elements';
 
 #homepage {
+  padding-bottom: 50px; /* Footer height */
   @include m.max-height {
-    min-height: calc(100vh - 75px - 50px);
+    min-height: calc(100% - 75px - calc(50px *2));
   }
 
   #hero {

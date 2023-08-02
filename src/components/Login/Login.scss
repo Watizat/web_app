@@ -3,34 +3,53 @@
 @use '../../styles/elements';
 
 .login {
-  min-height: calc(100vh - 75px - 50px);
+  min-height: calc(100% - 75px - calc(50px *2));
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: center;
-  gap: 3rem;
+  gap: 1rem;
 
   font-family: 'Roboto', sans-serif;
+  padding-bottom: calc(50px + 2vh); /* Footer height */
+
+  @include m.desktop {
+    gap: 1.5rem;
+  }
+
+  @include m.widescreen {
+    gap: 2rem;
+  }
+
+  @include m.fullhd {
+    gap: 3rem;
+  }
 
   h1 {
     color: v.$primary;
     font-weight: 500;
-    margin: 15vh 0 5vh;
+    margin: 10vh 0 5vh;
     font-size: 2.5rem;
   }
-  
+
   &-form {
-    width: 20vw;
+    width: 50vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
-  
+    gap: 1rem;
+
+    @include m.widescreen {
+      width: 30vw;
+    }
+
     fieldset {
       width: 75%;
+
       input {
         width: 100%;
       }
+
       select {
         width: 100%;
       }
@@ -66,6 +85,12 @@
     font-size: 1.1rem;
   }
 
+  &-links {
+    a {
+      font-size: 1rem;
+    }
+  }
+
   &-newAccount {
     margin-top: 3rem;
     text-align: center;
@@ -78,7 +103,6 @@
 
 .accountRequest {
   &-form {
-    width: 45vw;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
@@ -86,6 +110,20 @@
     align-items: center;
     gap: 3rem;
     font-weight: 800;
+    width: 80vw;
+
+    @include m.desktop {
+      width: 70vw;
+    }
+
+    @include m.widescreen {
+      width: 60vw;
+    }
+
+    @include m.fullhd {
+      gap: 3rem;
+      width: 50vw;
+    }
 
     &__text {
       width: 75%;

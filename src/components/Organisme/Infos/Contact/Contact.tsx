@@ -20,7 +20,7 @@ function Contact() {
           <p>{organism.phone}</p>
         </Link>
         <Link to="tel:+3300" className="organisme-infos--link">
-          <p>mail@mail.com</p>
+          <p>{organism.mail}</p>
         </Link>
       </div>
       {organism.contacts.length > 0 &&
