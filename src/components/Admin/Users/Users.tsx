@@ -1,5 +1,5 @@
 import jwt_decode from 'jwt-decode';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { UserSession } from '../../../@types/user';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUsers } from '../../../store/reducers/admin';
@@ -11,6 +11,7 @@ import UsersDetails from './UsersDetails/UsersDetails';
 function Users() {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.admin.users);
+  const [admin, setAdmin] = useState<boolean>(false);
 
   /*   const localUser = getUserDataFromLocalStorage();
   const decodedUser = localUser?.token
@@ -35,6 +36,7 @@ function Users() {
           localUser.token.access_token
         ) as UserSession;
         if (decodedUser.role === '53de6ec2-6d70-48c8-8532-61f96133f139') {
+          setAdmin(true);
           await dispatch(fetchUsers(null));
         } else {
           await dispatch(fetchUsers(zone.toString()));
@@ -89,7 +91,7 @@ function Users() {
             </thead>
             <tbody>
               {users.map((user) => (
-                <UsersDetails key={user.id} user={user} />
+                <UsersDetails key={user.id} user={user} admin={admin} />
               ))}
             </tbody>
           </table>

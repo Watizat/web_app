@@ -3,6 +3,7 @@ export interface Inputs {
   name: string;
   comment: string;
   mail: string;
+  email: string;
   job: string;
   visibility: boolean;
   actualisation: boolean;
