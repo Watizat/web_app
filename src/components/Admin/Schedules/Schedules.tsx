@@ -44,23 +44,32 @@ function Schedules({ schedule, displayAll }: SchedulesProps) {
     }
     return 'Fermé';
   }
+  // Créer une copie du tableau avant de trier
+  const orderedSchedule = schedule.map((objet) => ({ ...objet }));
+  // Trier les objets par le jour (day) en ordre croissant
+  orderedSchedule.sort((a, b) => a.day - b.day);
 
   return (
     <table className="schedules">
       <tbody>
-        {schedule.map(
-          (currentDay) =>
-            getOpeningHours(currentDay) !== null && (
-              <tr key={currentDay.day}>
-                <td>
-                  <div>
-                    {days.find((day) => day.numberday === currentDay.day)?.name}
-                  </div>
-                </td>
-                <td>{getOpeningHours(currentDay)}</td>
-              </tr>
-            )
-        )}
+        {orderedSchedule
+          .sort((a, b) => a.day - b.day)
+          .map(
+            (currentDay) =>
+              getOpeningHours(currentDay) !== null && (
+                <tr key={currentDay.day}>
+                  <td>
+                    <div>
+                      {
+                        days.find((day) => day.numberday === currentDay.day)
+                          ?.name
+                      }
+                    </div>
+                  </td>
+                  <td>{getOpeningHours(currentDay)}</td>
+                </tr>
+              )
+          )}
       </tbody>
     </table>
   );
