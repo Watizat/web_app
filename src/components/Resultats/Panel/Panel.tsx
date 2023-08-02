@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../store/reducers/organisms';
@@ -75,7 +76,7 @@ function Panel() {
   }, [organismToScroll]);
 
   return (
-    <section id="resultsPanel">
+    <section className="resultsPanel">
       <Settings
         isPmr={isPmr}
         setIsPmr={setIsPmr}
@@ -83,7 +84,7 @@ function Panel() {
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
       />
-      <div className="resultsContentCard" ref={resultsContainerRef}>
+      <div className="resultsPanel-ContentCard" ref={resultsContainerRef}>
         {isLoading &&
           Array(5)
             .fill(null)
@@ -99,7 +100,19 @@ function Panel() {
               />
             ))
           ) : (
-            <span>Il n&apos;y a aucun résultat.</span>
+            <div className="resultsPanel-noResult">
+              <p>Aucun résultat à afficher</p>
+
+              <Link to="/">
+                <button
+                  className="btn-flat btn-primary btn-slowRounded "
+                  type="button"
+                >
+                  <i className="las la-arrow-left" />
+                  Retourner vers la recherche
+                </button>
+              </Link>
+            </div>
           ))}
       </div>
     </section>

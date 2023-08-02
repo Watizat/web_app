@@ -35,8 +35,11 @@
     margin-bottom: 3rem;
     font-size: 1.75rem;
     color: v.$info;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 1.5rem;
+    text-transform: uppercase;
+    padding-bottom: .5rem;
+    border-bottom: .5px solid rgba(v.$info, .5);
   }
 
   &-list {
@@ -51,6 +54,12 @@
     &__case {
       width: 25rem;
     }
+  }
+
+  &-start {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5rem;
   }
 
   &-case {
@@ -200,7 +209,6 @@
 
       &:focus {
         outline: none;
-        // background-color: v.$white;
       }
     }
   }
@@ -223,11 +231,10 @@
       font-weight: 400;
       select {
         font-weight: 300;
-        margin-left: 1rem;
         background-color: v.$white;
-        border: 1px solid v.$grey-300;
         border-radius: 10px;
         padding: 0.2rem 0.4rem;
+        width: 100%;
       }
     }
 

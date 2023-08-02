@@ -45,20 +45,26 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
       <div className="modal-main">
         <h1 className="modal-title">Créer un organisme</h1>
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <select
-            value={select}
-            {...register('zone_id', { required: 'Ce champ est requis' })}
-            onChange={handleChange}
-          >
-            <option value="" disabled>
-              Selectionner une ville
-            </option>
-            {zones.map((zone) => (
-              <option key={zone.id} value={zone.id}>
-                {zone.name}
-              </option>
-            ))}
-          </select>
+          <div className="modal-double modal-start">
+            <h4 className="modal-case__title">Choisir l'antenne locale</h4>
+            <fieldset className="modal-contact__actu">
+              <select
+                value={select}
+                {...register('zone_id', { required: 'Ce champ est requis' })}
+                onChange={handleChange}
+              >
+                <option value="" disabled>
+                  Selectionner une ville
+                </option>
+                {zones.map((zone) => (
+                  <option key={zone.id} value={zone.id}>
+                    {zone.name}
+                  </option>
+                ))}
+              </select>
+              <legend>Antenne locale</legend>
+            </fieldset>
+          </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Nom de l&apos;organisme</h4>
             <input
@@ -242,29 +248,29 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
             </table>
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Info s & alertes</h4>
+            <h4 className="modal-case__title">Infos & alertes</h4>
             <textarea
               className="modal-case__textarea"
               {...register('infos_alerte')}
             />
           </div>
-          <div className="modal-actions">
-            <button
-              type="button"
-              className="btn btn-info-fill btn-flat modal-actions__close"
-              onClick={() => setIsActive(false)}
-            >
-              Annuler
-            </button>
-            <button
-              type="submit"
-              className="btn btn-sucess-fill btn-flat modal-actions__save"
-            >
-              {isSaving && <span>Sauvegarde en cours...</span>}
-              {!isSaving && <span>Sauvegarder</span>}
-            </button>
-          </div>
         </form>
+        <div className="modal-actions">
+          <button
+            type="button"
+            className="btn btn-info-fill btn-flat modal-actions__close"
+            onClick={() => setIsActive(false)}
+          >
+            Annuler
+          </button>
+          <button
+            type="submit"
+            className="btn btn-sucess-fill btn-flat modal-actions__save"
+          >
+            {isSaving && <span>Sauvegarde en cours...</span>}
+            {!isSaving && <span>Sauvegarder</span>}
+          </button>
+        </div>
       </div>
     </div>
   );

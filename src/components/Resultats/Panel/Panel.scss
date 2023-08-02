@@ -1,7 +1,7 @@
 @use '../../../styles/variables' as v;
 @use '../../../styles/medias' as m;
 
-#resultsPanel {
+.resultsPanel {
   display: inline-flex;
   z-index: 100;
   flex-direction: column;
@@ -23,13 +23,21 @@
   @include m.qhd {
     width: 50%;
   }
-}
 
-.resultsContentCard {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  overflow-y: auto;
-  padding: 1.5rem 0;
-  z-index: -1;
+  &-ContentCard {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+    padding: 1.5rem 0;
+    z-index: -1;
+  }
+
+  &-noResult {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 }
