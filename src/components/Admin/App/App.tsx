@@ -46,6 +46,7 @@ function App() {
     async function check() {
       setIsLoading(true);
       const { data } = await axiosInstance.get('/users/me');
+
       if (data.data.role === '5754603f-add3-4823-9c77-a2f9789074fc') {
         setIsLoading(false);
         return navigate('/new-user');
