@@ -22,7 +22,6 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
 
   const dispatch = useAppDispatch();
   const days = useAppSelector((state) => state.organism.days);
-  console.log(days);
 
   const organismId = useAppSelector(
     (state) => state.admin.organism?.id as number
