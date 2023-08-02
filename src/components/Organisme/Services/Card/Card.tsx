@@ -21,6 +21,12 @@ function Card({ service }: ServiceProps) {
     return <span>Erreur</span>;
   }
 
+  console.log(
+    service.schedules,
+    service.schedules.length,
+    service.schedules && service.schedules.length > 0
+  );
+
   return (
     <div
       className="organisme-services-contentcards--cards"
@@ -75,7 +81,16 @@ function Card({ service }: ServiceProps) {
               </p>
             </>
           ))}
-          {service.schedules.length > 0 && (
+          {service.schedules
+            .map((day) =>
+              day.opentime_am ||
+              day.opentime_pm ||
+              day.closetime_am ||
+              day.closetime_pm
+                ? 1
+                : 0
+            )
+            .find((e) => e === 1) && (
             <>
               <h5>Horaires</h5>
               <Schedules schedule={service.schedules} displayAll={false} />
@@ -88,3 +103,55 @@ function Card({ service }: ServiceProps) {
 }
 
 export default Card;
+
+[
+  {
+    day: 1,
+    opentime_am: '09:00:00',
+    closetime_am: '10:30:00',
+    opentime_pm: null,
+    closetime_pm: null,
+  },
+  {
+    day: 2,
+    opentime_am: '09:00:00',
+    closetime_am: '10:30:00',
+    opentime_pm: null,
+    closetime_pm: null,
+  },
+  {
+    day: 3,
+    opentime_am: '09:00:00',
+    closetime_am: '10:30:00',
+    opentime_pm: null,
+    closetime_pm: null,
+  },
+  {
+    day: 4,
+    opentime_am: '09:00:00',
+    closetime_am: '10:30:00',
+    opentime_pm: null,
+    closetime_pm: null,
+  },
+  {
+    day: 5,
+    opentime_am: '09:00:00',
+    closetime_am: '10:30:00',
+    opentime_pm: null,
+    closetime_pm: null,
+  },
+  {
+    day: 7,
+    opentime_am: null,
+    closetime_am: null,
+    opentime_pm: null,
+    closetime_pm: null,
+  },
+  {
+    day: 6,
+    opentime_am: null,
+    closetime_am: null,
+    opentime_pm: null,
+    closetime_pm: null,
+  },
+];

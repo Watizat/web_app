@@ -1,25 +1,42 @@
 import { Link, useNavigate } from 'react-router-dom';
 import './breadcrumb.scss';
 
-function Breadcrumb() {
-  const navigate = useNavigate();
+interface BreadcrumbProps {
+  searchParams: {
+    city: string;
+    category: string;
+  };
+}
 
+function Breadcrumb({ searchParams }: BreadcrumbProps) {
   return (
     <div className="breadcrumb">
-      <button
-        className="btn-flat btn-primary btn-slowRounded "
-        type="button"
-        onClick={() => navigate(-1)}
+      <Link
+        to={{
+          pathname: '/resultats',
+          search: `?city=${searchParams.city}&category=${searchParams.category}`,
+        }}
       >
-        <i className="las la-arrow-left" />
-        Retour aux résultats
-      </button>
+        <button
+          className="btn-flat btn-primary btn-slowRounded "
+          type="button"
+          // onClick={() => navigate(-1)}
+        >
+          <i className="las la-arrow-left" />
+          Retour aux résultats
+        </button>
+      </Link>
       <ul>
         <Link to="/">
           <li>Accueil</li>
         </Link>
         <i className="las la-angle-right" />
-        <Link to="/resultats">
+        <Link
+          to={{
+            pathname: '/resultats',
+            search: `?city=${searchParams.city}&category=${searchParams.category}`,
+          }}
+        >
           <li>Résultats de recherche</li>
         </Link>
         <i className="las la-angle-right" />
