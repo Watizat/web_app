@@ -52,7 +52,6 @@ function AccountRequest() {
           />
         </fieldset>
         <fieldset>
-          <legend>Antenne locale</legend>
           <select {...register('zone')}>
             <option value="" disabled>
               Groupe local
@@ -64,6 +63,7 @@ function AccountRequest() {
               </option>
             ))}
           </select>
+          <legend>Antenne locale</legend>
         </fieldset>
         <p className="accountRequest-form__text">
           La création de compte est réservée aux membres actifs des groupes

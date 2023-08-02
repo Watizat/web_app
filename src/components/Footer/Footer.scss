@@ -2,9 +2,12 @@
 @use '../../styles/medias' as m;
 
 .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
   display: none;
   flex-direction: column;
-  min-height: 50px;
+  height: 50px;
   background-color: v.$primary;
   color: v.$white;
   align-items: center;
