@@ -44,10 +44,10 @@ function ContactCard({ ...contact }: Contact) {
       <div className="orgaSheet-contact__details">
         <div className="orgaSheet-contact__details___infos">
           <p className="orgaSheet-contact__details___infos-job">
-            {contact.comment}
+            {contact.job}
           </p>
           <p className="orgaSheet-contact__details___infos-job">
-            {contact.job}
+            {contact.comment}
           </p>
           <p className="orgaSheet-contact__details___infos-phone">
             {contact.phone}

@@ -17,6 +17,7 @@ import { fetchCategories, fetchDays } from '../../../store/reducers/organisms';
 import { axiosInstance } from '../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
 import './App.scss';
+import { changeAdmin } from '../../../store/reducers/user';
 
 function App() {
   const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
@@ -51,11 +52,14 @@ function App() {
         setIsLoading(false);
         return navigate('/new-user');
       }
+      if (data.data.role === '53de6ec2-6d70-48c8-8532-61f96133f139') {
+        dispatch(changeAdmin(true));
+      }
       setIsLoading(false);
       return <Navigate to="/admin/dashboard" replace />;
     }
     check();
-  }, [navigate]);
+  }, [navigate, dispatch]);
 
   if (!user) {
     return <Navigate to="/login" replace />;

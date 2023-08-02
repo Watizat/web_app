@@ -3,7 +3,7 @@ import { Organism } from '../../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setAdminOrganism } from '../../../../store/reducers/admin';
 import './OrgaList.scss';
-import OrgaListSearch from './OrgaListSearch/OrgaListSearch';
+// import OrgaListSearch from './OrgaListSearch/OrgaListSearch';
 
 function OrgaList() {
   const organisms = useAppSelector((state) => state.admin.organisms);
@@ -20,7 +20,7 @@ function OrgaList() {
     <section className="orgaList">
       {/* <OrgaListSearch /> */}
       <ul className="orgaList-list">
-        {isLoading && <span>Is loading...</span>}
+        {isLoading && <span />}
         {organisms.map((organism) => (
           <li key={organism.id} className="orgaList-card">
             <button

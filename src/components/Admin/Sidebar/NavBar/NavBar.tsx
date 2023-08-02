@@ -11,13 +11,19 @@ function NavBar() {
     {
       name: 'Dashboard',
       to: '/admin/dashboard',
-      icon: 'las la-igloo',
+      icon: 'las la-shapes',
+      active: true,
+    },
+    {
+      name: 'Mon compte',
+      to: '/admin/account',
+      icon: 'las la-asterisk',
       active: true,
     },
     {
       name: 'Edition des données',
       to: '/admin/edition',
-      icon: 'las la-pen-fancy',
+      icon: 'las la-paragraph',
       active: true,
     },
     {
@@ -41,7 +47,7 @@ function NavBar() {
     {
       name: 'Utilisateteur·ice·s',
       to: '/admin/users',
-      icon: 'las la-user-secret',
+      icon: 'las la-user-friends',
       active: true,
     },
     {

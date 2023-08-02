@@ -6,7 +6,7 @@ function Dashboard() {
     {
       name: 'Edition des données',
       to: '/admin/edition',
-      icon: 'las la-pen-fancy',
+      icon: 'las la-paragraph',
       active: true,
     },
     {
@@ -30,7 +30,7 @@ function Dashboard() {
     {
       name: 'Utilisateteur·ice·s',
       to: '/admin/users',
-      icon: 'las la-user-secret',
+      icon: 'las la-user-friends',
       active: true,
     },
     {

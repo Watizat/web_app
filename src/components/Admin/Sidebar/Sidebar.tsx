@@ -6,17 +6,19 @@ import { fetchZones } from '../../../store/reducers/admin';
 import Container from '../../Container/Container';
 import NavBar from './NavBar/NavBar';
 import './Sidebar.scss';
+import { changeCity } from '../../../store/reducers/user';
 
 function Sidebar() {
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
+  const isAdmin = useAppSelector((state) => state.user.isAdmin);
+  const dispatch = useAppDispatch();
+  const zones = useAppSelector((state) => state.admin.zones);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     localStorage.setItem('city', event.target.value);
     setSelect(event.target.value);
+    dispatch(changeCity(event.target.value));
   };
-
-  const dispatch = useAppDispatch();
-  const zones = useAppSelector((state) => state.admin.zones);
 
   useEffect(() => {
     dispatch(fetchZones());
@@ -31,12 +33,13 @@ function Sidebar() {
           </Link>
         </div>
         <div className="adminsidebar-myInfos">
-          <h4 className="adminsidebar-myInfos__title">Mes informations</h4>
+          <h4 className="adminsidebar-myInfos__title">Antenne locale</h4>
           <label className="adminsidebar-myInfos__zone">
             <select
               value={select}
               onChange={handleChange}
               className="adminsidebar-myInfos__zone-select"
+              disabled={!isAdmin}
             >
               <option
                 value=""
@@ -56,9 +59,6 @@ function Sidebar() {
               ))}
             </select>
           </label>
-          <Link className="adminsidebar-myInfos__link" to="/admin/account">
-            Accéder à mon compte
-          </Link>
         </div>
         <NavBar />
       </Container>

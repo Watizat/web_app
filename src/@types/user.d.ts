@@ -13,6 +13,8 @@ export interface UserState {
   isActive: boolean;
   lastActionDate: number | null;
   isRegistered: boolean;
+  isAdmin: boolean;
+  city: string | null;
 }
 
 export interface UserSession {

@@ -5,23 +5,26 @@
 .organisme{
 
   &-infos {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 2rem;
+    grid-row-gap: 1rem;
 
     @include m.mobile{
       flex-wrap: wrap;
     }
-   
 
-    & article {
-      width: 33%;
-      flex: 0 0 auto;
-
-      @include m.mobile{
-        width: 100%;
-      }
+    @include m.tablet{
+      grid-template-columns: repeat(2, 1fr);
     }
 
-  }
+    @include m.widescreen{
+      grid-template-columns: repeat(3, 1fr);
+    }
 
+    & article {
+      width: 100%;
+      flex: 0 0 auto;
+    }
+  }
 }

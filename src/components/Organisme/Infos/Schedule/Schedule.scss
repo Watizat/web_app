@@ -4,12 +4,15 @@
 
 .organisme-infos--schedule{
 
-    font-size: 0.9em;
 
     &-day{
       color: v.$watigreen;
       font-weight: 600;
       margin-right: 0.3em;
+    }
+
+    .schedules {
+      font-size: 0.9em;
     }
 
 }

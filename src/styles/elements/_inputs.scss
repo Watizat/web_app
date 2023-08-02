@@ -18,17 +18,17 @@ form {
   fieldset {
     border-radius: 5px;
     width: max-content;
-    border: 1px solid #D4D4D5;   
-  
+    border: 1px solid #D4D4D5;
+
     &:focus-within {
       transition: margin 0.7s;
       border: 1px solid v.$primary;
-  
+
       legend {
         color: v.$primary;
         display: inline;
       }
-  
+
       input {
         margin-top: 0;
       }
@@ -40,7 +40,7 @@ form {
       display: none;
       margin-top: -20px;
       font-size: .75rem;
-    } 
+    }
 
 
     select {
@@ -48,29 +48,36 @@ form {
       padding: 0;
       margin: .3rem 0 0;
     }
-    
-    select + legend {
+
+    select+legend {
       display: inline;
     }
 
+    select,
     input {
-      font-size: 1rem;
-      box-shadow: none;
-      border: none;
-      font-weight: 400;
-      color: v.$grey-800;
-
-      &::placeholder {
-        color: v.$grey-700;
-        font-weight: 500;
-        font-size: .9rem;
-      }
-
-      &:focus {
-        outline: none;
+      &:disabled {
+        cursor: not-allowed;
       }
     }
-}
+  }
+
+  input {
+    font-size: 1rem;
+    box-shadow: none;
+    border: none;
+    font-weight: 400;
+    color: v.$grey-800;
+
+    &::placeholder {
+      color: v.$grey-700;
+      font-weight: 500;
+      font-size: .9rem;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 input {
@@ -78,6 +85,7 @@ input {
     color: v.$grey-600;
     font-weight: 300;
   }
+
   &:focus {
     &::placeholder {
       color: transparent;

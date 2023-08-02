@@ -7,22 +7,21 @@ import { axiosInstance } from '../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
 import './Users.scss';
 import UsersDetails from './UsersDetails/UsersDetails';
+import { changeAdmin } from '../../../store/reducers/user';
 
 function Users() {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.admin.users);
-
-  /*   const localUser = getUserDataFromLocalStorage();
-  const decodedUser = localUser?.token
-    ? (jwt_decode(localUser.token.access_token) as UserSession)
-    : null;
-  console.log(decodedUser?.role); */
-
-  // const { role } = jwt_decode(token.access_token);
-  // console.log(token);
+  const zones = useAppSelector((state) => state.admin.zones);
+  const city = useAppSelector((state) => state.user.city);
 
   useEffect(() => {
     const fetchData = async () => {
+      const cityLocal = localStorage.getItem('city');
+
+      const cityId = cityLocal
+        ? zones.find((zone) => zone.name === cityLocal)
+        : zones.find((zone) => zone.name === city);
       const localUser = getUserDataFromLocalStorage();
       const { data } = await axiosInstance.get('/users/me');
       const { zone } = data.data;
@@ -35,7 +34,12 @@ function Users() {
           localUser.token.access_token
         ) as UserSession;
         if (decodedUser.role === '53de6ec2-6d70-48c8-8532-61f96133f139') {
-          await dispatch(fetchUsers(null));
+          dispatch(changeAdmin(true));
+          if (cityId !== undefined) {
+            await dispatch(fetchUsers(cityId.id.toString()));
+          } else {
+            await dispatch(fetchUsers(null));
+          }
         } else {
           await dispatch(fetchUsers(zone.toString()));
         }
@@ -50,7 +54,7 @@ function Users() {
 
     fetchData();
     // };
-  }, [dispatch]);
+  }, [dispatch, zones, city]);
 
   return (
     <>

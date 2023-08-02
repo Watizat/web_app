@@ -1,5 +1,5 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
-import { Organism, Role, User, Zone } from '../../@types/organism';
+import { Organism, Role, Zone } from '../../@types/organism';
 import { DirectusUser } from '../../@types/user';
 import { axiosInstance } from '../../utils/axios';
 
@@ -29,7 +29,7 @@ export const initialState: AdminState = {
 
 export const fetchAdminOrganisms = createAsyncThunk(
   'admin-organisms/fetch-organisms',
-  async () => {
+  async (city: string) => {
     const { data } = await axiosInstance.get<{ data: Organism[] }>(
       '/items/organisme',
       {
@@ -37,7 +37,7 @@ export const fetchAdminOrganisms = createAsyncThunk(
           fields: ['id', 'name', 'address'].join(','),
           filter: {
             zone_id: {
-              name: 'Toulouse',
+              name: city,
             },
           },
         },
