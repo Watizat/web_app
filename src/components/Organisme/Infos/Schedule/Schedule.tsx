@@ -53,7 +53,7 @@ function Schedules({ schedule, displayAll }: SchedulesProps) {
             getOpeningHours(currentDay) !== null && (
               <tr key={currentDay.day}>
                 <td>
-                  <div>
+                  <div className="schedules-day">
                     {days.find((day) => day.numberday === currentDay.day)?.name}
                   </div>
                 </td>
