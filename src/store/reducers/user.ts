@@ -77,7 +77,8 @@ export const logout = createAsyncThunk('user/logout', async () => {
   const user = getUserDataFromLocalStorage();
 
   await axiosInstance.post('/auth/logout', {
-    refresh_token: user?.token.refresh_token,
+    refresh_token:
+      user?.token.refresh_token || initialState.token?.refresh_token,
   });
 });
 
@@ -134,7 +135,11 @@ export default createReducer(initialState, (builder) => {
     })
     .addCase(logout.rejected, (state) => {
       state.error = 'Une erreur est survenue, lors de la déconnexion';
+      state.isLogged = false;
+      state.token = null;
       state.isLoading = false;
+      state.isActive = false;
+      state.lastActionDate = null;
     })
     .addCase(logout.fulfilled, (state) => {
       state.isLoading = false;
