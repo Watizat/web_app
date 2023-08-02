@@ -9,14 +9,13 @@
   align-items: center;
   margin: auto;
   padding-bottom: 10vh;
-
+  width: 100%;
 
   h1 {
     color: v.$primary;
     font-size: 4rem;
     font-weight: 400;
     text-align: center;
-
   }
 
   .dashboardLinks {
@@ -56,7 +55,7 @@
       border-radius: 20px;
       border: 1.5px solid v.$primary;
       padding: 1rem;
-      
+
       text-decoration: none;
       font-weight: 700;
       font-size: 0.9rem;
@@ -67,7 +66,7 @@
 
       @include m.desktop {
         max-width: 15vw;
-        font-size: .9rem;
+        font-size: 0.9rem;
       }
 
       @include m.widescreen {
@@ -80,7 +79,7 @@
       }
 
       &:hover {
-        box-shadow: 0px 4px 24px 0px rgba(v.$primary-var4, .5);
+        box-shadow: 0px 4px 24px 0px rgba(v.$primary-var4, 0.5);
         transform: translateY(-1px);
       }
 
@@ -105,8 +104,8 @@
       opacity: 50%;
 
       background-color: v.$grey-100;
-      color: v.$grey-500;      
-      
+      color: v.$grey-500;
+
       &:hover {
         box-shadow: none;
         transform: none;
@@ -114,7 +113,7 @@
 
       .dashboardLinks-card {
         color: v.$grey-500;
-      border: 1.5px solid v.$grey-500;
+        border: 1.5px solid v.$grey-500;
       }
     }
   }
