@@ -2,6 +2,11 @@
 @use '../../../styles/medias' as m;
 @use '../../../styles/elements';
 
+#root, #bo-main {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .modal {
   z-index: 100;
   position: absolute;

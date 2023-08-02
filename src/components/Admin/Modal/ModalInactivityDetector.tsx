@@ -38,7 +38,7 @@ function ModalInactivityDetector({
     return <Navigate to="/login" />;
   }
   return (
-    <div className="modal">
+    <div className="modal" style={{ zIndex: 200 }}>
       <div className="modal-main modal-empty">
         <h1 className="modal-title">Toujours là&nbsp;?</h1>
         <form className="modal-list" onSubmit={handleSubmit}>
