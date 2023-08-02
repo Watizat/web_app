@@ -28,6 +28,7 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
   const zones = useAppSelector((state) => state.admin.zones);
   const roles = useAppSelector((state) => state.admin.roles);
   const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
+  const admin = useAppSelector((state) => state.user.isAdmin);
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     await dispatch(editUser(formData));
