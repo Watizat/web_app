@@ -21,11 +21,11 @@ function Card({ service }: ServiceProps) {
     return <span>Erreur</span>;
   }
 
-  console.log(
-    service.schedules,
-    service.schedules.length,
-    service.schedules && service.schedules.length > 0
-  );
+  // console.log(
+  //   service.schedules,
+  //   service.schedules.length,
+  //   service.schedules && service.schedules.length > 0
+  // );
 
   return (
     <div

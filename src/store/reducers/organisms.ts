@@ -260,7 +260,7 @@ const organismReducer = createReducer(initialState, (builder) => {
     .addCase(fetchOrganisms.rejected, (state, action) => {
       state.isLoading = false;
       // eslint-disable-next-line no-console
-      console.log(action.payload);
+      // console.log(action.payload);
     })
     .addCase(fetchOrganism.pending, (state) => {
       state.isLoading = true;

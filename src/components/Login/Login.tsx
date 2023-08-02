@@ -61,7 +61,12 @@ function Login() {
                 value={password}
               />
             </fieldset>
-            <button type="submit">Login</button>
+            <button
+              className="btn btn-flat btn-primary btn-slowRounded "
+              type="submit"
+            >
+              Login
+            </button>
           </form>
           <div className="login-links">
             <Link to="/forgotten-password">Mot de passe oublié</Link>

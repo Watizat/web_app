@@ -11,14 +11,23 @@ interface OrganismProps {
 
 function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   const { services } = organism;
-  const tags = [
-    ...new Set(services.map((service) => service.categorie_id.tag)),
+
+  const categoriesTagName = [
+    ...new Set(
+      services.map((service) => {
+        return {
+          name: service.categorie_id.translations[0].name,
+          tag: service.categorie_id.tag,
+        };
+      })
+    ),
   ].sort();
 
-  const categories = tags.map((tag, index) => ({
+  const categories = categoriesTagName.map((tag, index) => ({
     id: index + 1,
-    value: tag,
-    isCheck: categoryFilter.includes(tag),
+    value: tag.tag,
+    name: tag.name,
+    isCheck: categoryFilter.includes(tag.tag),
   }));
 
   return (
@@ -50,17 +59,25 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
           </Link>
           <div className="Left-lower__categories">
             {categories.map((categorie) => (
-              <Icon
-                key={categorie.id}
-                className={`Left-lower__categories___item${
-                  categorie.isCheck ? '--check' : ''
-                }`}
-                icon={categorie.value}
-              />
+              <div className="tooltip" key={categorie.id}>
+                <Icon
+                  className={`Left-lower__categories___item${
+                    categorie.isCheck ? '--check' : ''
+                  }`}
+                  icon={categorie.value}
+                />
+                <span className="tooltiptext">{categorie.name}</span>
+              </div>
             ))}
           </div>
         </div>
-        <span>{organism.translations[0]?.infos_alerte}</span>
+
+        {organism.translations[0]?.infos_alerte && (
+          <fieldset className="Left-lower__infosalertes">
+            <span>{organism.translations[0]?.infos_alerte}</span>
+            <legend>Info & alertes</legend>
+          </fieldset>
+        )}
       </div>
       <div className="Right">
         <Link

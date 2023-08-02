@@ -10,7 +10,12 @@ function NewUser() {
       <h1>Nouveau membre</h1>
       <span>Votre compte est en attente de validation.</span>
       <Link to="/" onClick={() => dispatch(logout())}>
-        <button type="button">Se déconnecter</button>
+        <button
+          className="btn btn-flat btn-primary btn-slowRounded "
+          type="button"
+        >
+          Se déconnecter
+        </button>
       </Link>
     </div>
   );
