@@ -8,8 +8,17 @@ import Icon from '../../../ui/icon/icon';
 
 import './Map.scss';
 
-function Map() {
-  const [position, setPosition] = useState({ lat: 43.6, lng: 1.433333 });
+interface MapProps {
+  cityPosition:
+    | {
+        lat: number;
+        lng: number;
+      }
+    | undefined;
+}
+
+function Map({ cityPosition }: MapProps) {
+  const [position] = useState({ lat: 43.6, lng: 1.433333 });
   const [navigatorGps, setNavigatorGps] = useState(false);
   const organisms = useAppSelector((state) => state.organism.filteredOrganisms);
   const userPosition = useAppSelector((state) => state.organism.userPosition);
@@ -38,8 +47,12 @@ function Map() {
     iconAnchor: [15, 30],
   });
 
+  if (!cityPosition) {
+    return <div />;
+  }
+
   return (
-    <MapContainer center={position} zoom={13}>
+    <MapContainer center={cityPosition || position} zoom={13}>
       {/* <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

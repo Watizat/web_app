@@ -34,6 +34,24 @@ export const initialState: OrganismsState = {
 
 export const scrollCard = createAction<number>('organism/focus-card');
 
+export const fetchCityPosition = createAsyncThunk(
+  'city/position',
+  async (city: string | null) => {
+    let cityRequest = city;
+    if (!city) {
+      cityRequest = 'Toulouse';
+    }
+    const { data } = await axiosInstance.get('/items/zone', {
+      params: {
+        filter: {
+          name: cityRequest,
+        },
+      },
+    });
+    return data.data[0];
+  }
+);
+
 export const fetchOrganisms = createAsyncThunk(
   'organisms/fetch-organisms',
   async (city: string) => {

@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux';
-import { fetchOrganisms } from '../../store/reducers/organisms';
+import {
+  fetchCityPosition,
+  fetchOrganisms,
+} from '../../store/reducers/organisms';
 import Header from '../Header/Header';
 import Map from './Map/Map';
 import Menu from './Menu/Menu';
@@ -14,6 +17,13 @@ function Resultats() {
   const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' });
 
   const [isActiveMap, setIsActiveMap] = useState(false);
+  const [cityPosition, setCityPosition] = useState<
+    | {
+        lat: number;
+        lng: number;
+      }
+    | undefined
+  >();
 
   const [queryParamaters] = useSearchParams();
   const city = queryParamaters.get('city');
@@ -21,7 +31,15 @@ function Resultats() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchOrganisms(city as string));
+    async function fetchCity() {
+      const { payload } = await dispatch(
+        fetchCityPosition(localStorage.getItem('city'))
+      );
+      const { latitude, longitude } = payload;
+      setCityPosition({ lat: latitude, lng: longitude });
+      await dispatch(fetchOrganisms(city as string));
+    }
+    fetchCity();
   }, [dispatch, city]);
 
   return (
@@ -29,7 +47,7 @@ function Resultats() {
       <Header />
       <main className="results">
         {(isDesktop || !isActiveMap) && <Panel />}
-        {(isDesktop || isActiveMap) && <Map />}
+        {(isDesktop || isActiveMap) && <Map cityPosition={cityPosition} />}
         {isTouch && (
           <Menu isActiveMap={isActiveMap} setIsActiveMap={setIsActiveMap} />
         )}
