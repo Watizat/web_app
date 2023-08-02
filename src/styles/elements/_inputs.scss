@@ -61,7 +61,6 @@ form {
       color: v.$grey-800;
 
       &::placeholder {
-        /* Chrome, Firefox, Opera, Safari 10.1+ */
         color: v.$grey-700;
         font-weight: 500;
         font-size: .9rem;
@@ -69,12 +68,19 @@ form {
 
       &:focus {
         outline: none;
-
-        &::placeholder {
-          /* Chrome, Firefox, Opera, Safari 10.1+ */
-          color: transparent;
-        }
       }
     }
 }
+}
+
+input {
+  &::placeholder {
+    color: v.$grey-600;
+    font-weight: 300;
+  }
+  &:focus {
+    &::placeholder {
+      color: transparent;
+    }
+  }
 }

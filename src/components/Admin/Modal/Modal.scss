@@ -96,6 +96,13 @@
       font-size: 1.1rem;
     }
 
+    &__legend {
+      margin-left: 2rem;
+      font-size: .9rem;
+      font-weight: 400;
+      color: v.$grey-600;
+    }
+
     input,
     textarea {
       border: none;
@@ -108,9 +115,10 @@
 
       &:focus {
         outline: none;
-        background-color: rgba(v.$primary-var2, 0.05);
+        background-color: rgba(v.$info, 0.05);
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
+        border-color: rgba(v.$info, 0.5);
       }
 
       &[type='number'] {

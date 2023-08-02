@@ -43,11 +43,10 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
             hidden
             {...register('organisme_id')}
           />
-          <div className="modal-case">
-            <h4 className="modal-case__title">Catégorie</h4>
+          <div className="modal-double modal-start">
+            <h4 className="modal-case__title">Catégorie du service</h4>
 
-            <label className="modal-contact__actu">
-              Catégorie du service
+            <fieldset className="modal-contact__actu">
               <select {...register('categorie_id')}>
                 {categoriesList.map((category) => (
                   <option
@@ -58,7 +57,8 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                   </option>
                 ))}
               </select>
-            </label>
+              <legend>Catégorie</legend>
+            </fieldset>
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Nom du service</h4>
@@ -71,14 +71,19 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Type de service·s proposé·s</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
+            <textarea
+              className="modal-case__textarea"
               {...register('description')}
             />
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Horaires</h4>
+            <h4 className="modal-case__title">
+              Horaires
+              <span className="modal-case__legend">
+                (formats horaire acceptés: 10h, 10h00, 10:00)
+              </span>
+            </h4>
+
             <table className="modal-data__hours">
               <thead className="modal-data__hoursHead">
                 <tr>
@@ -162,7 +167,7 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
             </table>
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Info s & alertes</h4>
+            <h4 className="modal-case__title">Infos & alertes</h4>
             <textarea
               className="modal-case__textarea"
               {...register('infos_alerte')}

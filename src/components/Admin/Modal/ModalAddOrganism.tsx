@@ -70,6 +70,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
+              placeholder="ex : Pôle infos services"
               {...register('name', { required: 'Ce champs est requis' })}
             />
             {errors.name && <small>{errors.name.message}</small>}
@@ -79,6 +80,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
+              placeholder="ex : 1 rue des champs"
               {...register('address', { required: 'Ce champs est requis' })}
             />
             {errors.address && <small>{errors.address.message}</small>}
@@ -88,6 +90,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
+              placeholder="ex : Bangui"
               {...register('city', { required: 'Ce champs est requis' })}
             />
             {errors.city && <small>{errors.city.message}</small>}
@@ -97,6 +100,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="number"
+              placeholder="ex: 31100 (sans espace)"
               {...register('zipcode', { required: 'Ce champs est requis' })}
             />
             {errors.zipcode && <small>{errors.zipcode.message}</small>}
@@ -106,6 +110,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="number"
+              placeholder="ex: 0645784598 (sans espace)"
               {...register('phone', {
                 minLength: {
                   value: 10,
@@ -126,6 +131,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
             <input
               className="modal-case__inputTxt"
               type="text"
+              placeholder="ex : www.poleinfos.fr"
               {...register('website')}
             />
           </div>
@@ -152,9 +158,8 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
           <div className="modal-case">
             <h4 className="modal-case__title">
               Horaires
-              <span>
-                {' '}
-                (Formats d&apos;horaires acceptés: 10h, 10h00, 10:00)
+              <span className="modal-case__legend">
+                (formats horaire acceptés: 10h, 10h00, 10:00)
               </span>
             </h4>
             <table className="modal-data__hours">

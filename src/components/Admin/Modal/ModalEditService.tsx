@@ -61,10 +61,9 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
             defaultValue={organismId}
             {...register('organisme_id')}
           />
-          <div className="modal-case">
-            <h4 className="modal-case__title">Catégorie</h4>
-            <label className="modal-contact__actu">
-              Catégorie du service
+          <div className="modal-double modal-start">
+            <h4 className="modal-case__title">Catégorie du service</h4>
+            <fieldset className="modal-contact__actu">
               <select
                 {...register('categorie_id')}
                 defaultValue={service.categorie_id.id}
@@ -79,7 +78,8 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
                   </option>
                 ))}
               </select>
-            </label>
+              <legend>Catégorie</legend>
+            </fieldset>
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Nom du service</h4>
@@ -93,15 +93,19 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
           </div>
           <div className="modal-case">
             <h4 className="modal-case__title">Type de service·s proposé·s</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
+            <textarea
+              className="modal-case__textarea"
               defaultValue={service.translations[0].description}
               {...register('description')}
             />
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Horaires</h4>
+            <h4 className="modal-case__title">
+              Horaires
+              <span className="modal-case__legend">
+                (formats horaire acceptés: 10h, 10h00, 10:00)
+              </span>
+            </h4>
             <table className="modal-data__hours">
               <thead className="modal-data__hoursHead">
                 <tr>
@@ -196,7 +200,7 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
             </table>
           </div>
           <div className="modal-case">
-            <h4 className="modal-case__title">Info s & alertes</h4>
+            <h4 className="modal-case__title">Infos & alertes</h4>
             <textarea
               className="modal-case__textarea"
               defaultValue={service.translations[0].infos_alerte}
