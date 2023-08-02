@@ -78,6 +78,27 @@ function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
             {errors.zipcode && <small>{errors.zipcode.message}</small>}
           </div>
           <div className="modal-case">
+            <h4 className="modal-case__title">Telephone</h4>
+            <input
+              className="modal-case__inputTxt"
+              type="number"
+              defaultValue={organism.phone}
+              {...register('phone', {
+                minLength: {
+                  value: 10,
+                  message:
+                    'Le numéro de téléphone doit comporter au moins 10 chiffres.',
+                },
+                maxLength: {
+                  value: 10,
+                  message:
+                    'Le numéro de téléphone ne peut pas comporter plus de 10 chiffres.',
+                },
+              })}
+            />
+            {errors.phone?.message && <small>{errors.phone.message}</small>}
+          </div>
+          <div className="modal-case">
             <h4 className="modal-case__title">Site web</h4>
             <input
               className="modal-case__inputTxt"
