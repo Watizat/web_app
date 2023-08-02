@@ -38,7 +38,7 @@ const initialState: UserState = {
   lastActionDate: null,
   ...getUserDataFromLocalStorage(),
   isAdmin: false,
-  city: '',
+  city: localStorage.getItem('city') || null,
 };
 
 export const changeAdmin = createAction<boolean>('admin/check-admin');
