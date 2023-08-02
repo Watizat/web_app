@@ -5,7 +5,7 @@
 .adminsidebar {
   position: sticky;
   top: 0;
-  height: 100vh;
+  max-height: 100vh;
   width: 40vw;
   background-color: v.$primary;
   overflow-y: auto;

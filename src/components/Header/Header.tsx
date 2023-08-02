@@ -17,7 +17,7 @@ function Header() {
 
   return (
     <header id="header">
-      {pathname === '/resultats/' ? (
+      {pathname === '/resultats' || pathname === '/resultats/' ? (
         <div className="header-reasultsContainer">
           <Link className="header-logo" to="/">
             <img src={logo} alt="watizat logo" />
@@ -31,7 +31,7 @@ function Header() {
               toggle={() => dispatch(toggleHamburger(!isOpen))}
             />
           </div>
-          {isOpen && <BurgerMenu />}
+          {isOpen && !isTablet && <BurgerMenu />}
         </div>
       ) : (
         <Container>
