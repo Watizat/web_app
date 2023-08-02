@@ -11,6 +11,14 @@ function Breadcrumb() {
 
   return (
     <div className="breadcrumb">
+      <button
+        className="btn-flat btn-primary btn-slowRounded "
+        type="button"
+        onClick={() => navigate(targetPath)}
+      >
+        <i className="las la-arrow-left" />
+        {'   '}Retour aux résultats
+      </button>
       <ul>
         <Link to="/">
           <li>Accueil</li>
@@ -24,14 +32,6 @@ function Breadcrumb() {
           <li>{organism?.name}</li>
         </Link>
       </ul>
-      <button
-        className="btn-flat btn-primary btn-slowRounded "
-        type="button"
-        onClick={() => navigate(targetPath)}
-      >
-        <i className="las la-arrow-left" />
-        {'   '}Retour aux résultats
-      </button>
     </div>
   );
 }
