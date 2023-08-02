@@ -2,49 +2,47 @@
 @use '../../../styles/medias' as m;
 @use '../../../styles/elements';
 
-.breadcrumb{
+.breadcrumb {
   display: flex;
 
-    @include m.mobile{
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+  @include m.mobile {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-  & ul{
+  & ul {
     display: flex;
     list-style: none;
     flex-grow: 1;
-    justify-content: center;
+    // justify-content: center;
+    padding-left: 0;
 
-    @include m.mobile{
+    @include m.mobile {
       margin-top: 1em;
       padding: 0;
     }
-    
-    & a{
+
+    & a {
       color: v.$grey-600;
 
-      @include m.mobile{
+      @include m.mobile {
         text-align: center;
         line-height: 0.8em;
       }
     }
 
-    & .link-active{
+    & .link-active {
       color: v.$watigreen;
     }
 
-    & li{
+    & li {
       font-size: 0.8em;
       margin: 0.5rem;
       font-weight: 600;
     }
 
-    & .las{
-      line-height: 2 ;
+    & .las {
+      line-height: 2;
     }
-
-    
   }
-
 }

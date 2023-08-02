@@ -1,25 +1,16 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Organism } from '../../../@types/organism';
 import Icon from '../../../ui/icon/icon';
 import './Card.scss';
-import { useState } from 'react';
 
 interface OrganismProps {
   organism: Organism;
   map_id: number;
   categoryFilter: string[];
-  searchParams: {
-    city: string;
-    category: string[];
-  };
 }
 
-function Card({
-  organism,
-  map_id,
-  categoryFilter,
-  searchParams,
-}: OrganismProps) {
+function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   const { services } = organism;
   const tags = [
     ...new Set(services.map((service) => service.categorie_id.tag)),
@@ -30,11 +21,6 @@ function Card({
     value: tag,
     isCheck: categoryFilter.includes(tag),
   }));
-
-  const queryParams = new URLSearchParams();
-  queryParams.append('city', searchParams.city);
-  searchParams.category.forEach((cat) => queryParams.append('category', cat));
-  const queryParamsString = queryParams.toString();
 
   return (
     <div className="resultsCard" id={organism.id.toString()}>
@@ -58,7 +44,7 @@ function Card({
         <div className="Left-lower">
           <Link
             className="Left-lower__moreInfos"
-            to={`/organisme/${organism.slug}?${queryParamsString}`}
+            to={`/organisme/${organism.slug}`}
           >
             <Icon icon="plus" className="Left-lower__moreInfos-icon" /> En
             savoir plus

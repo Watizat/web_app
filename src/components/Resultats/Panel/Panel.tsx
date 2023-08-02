@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../store/reducers/organisms';
 import ResultatsCardSkeleton from '../../Skeleton/ResultatCard/ResultatCard';
@@ -22,6 +22,10 @@ function Panel() {
   const [isPmr, setIsPmr] = useState<boolean>(false);
   const [isAnimalsAccepted, setIsAnimalsAccepted] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
+
+  const location = useLocation();
+
+  localStorage.setItem('last_search', location.pathname + location.search);
 
   useEffect(() => {
     const setFilter = organisms.filter((organism) => {
@@ -87,9 +91,7 @@ function Panel() {
       />
       <div className="resultsPanel-ContentCard" ref={resultsContainerRef}>
         {loader &&
-          Array(5)
-            .fill(null)
-            .map((e, i) => <ResultatsCardSkeleton key={i} />)}
+          [1, 2, 3, 4, 5].map((e) => <ResultatsCardSkeleton key={e} />)}
         {!loader &&
           (filteredOrganisms.length > 0 ? (
             filteredOrganisms.map((organism, index) => (
@@ -98,10 +100,6 @@ function Panel() {
                 organism={organism}
                 map_id={index + 1}
                 categoryFilter={categoryFilter}
-                searchParams={{
-                  city: search.toLowerCase(),
-                  category: categoryFilter,
-                }}
               />
             ))
           ) : (
@@ -114,7 +112,8 @@ function Panel() {
                   type="button"
                 >
                   <i className="las la-arrow-left" />
-                  Retourner vers la recherche
+                  {'   '}Retour aux résultats Retourner vers la page
+                  d&apos;accueil
                 </button>
               </Link>
             </div>

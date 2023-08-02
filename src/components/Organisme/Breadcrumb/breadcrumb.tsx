@@ -1,49 +1,37 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../../hooks/redux';
 import './breadcrumb.scss';
 
-interface BreadcrumbProps {
-  searchParams: {
-    city: string;
-    category: string;
-  };
-}
+function Breadcrumb() {
+  const navigate = useNavigate();
+  const lastSearch = localStorage.getItem('last_search');
+  const targetPath = lastSearch !== null ? lastSearch : '/';
+  const organism = useAppSelector((state) => state.organism.organism);
+  const location = useLocation();
 
-function Breadcrumb({ searchParams }: BreadcrumbProps) {
   return (
     <div className="breadcrumb">
-      <Link
-        to={{
-          pathname: '/resultats',
-          search: `?city=${searchParams.city}&category=${searchParams.category}`,
-        }}
-      >
-        <button
-          className="btn-flat btn-primary btn-slowRounded "
-          type="button"
-          // onClick={() => navigate(-1)}
-        >
-          <i className="las la-arrow-left" />
-          Retour aux résultats
-        </button>
-      </Link>
       <ul>
         <Link to="/">
           <li>Accueil</li>
         </Link>
         <i className="las la-angle-right" />
-        <Link
-          to={{
-            pathname: '/resultats',
-            search: `?city=${searchParams.city}&category=${searchParams.category}`,
-          }}
-        >
+        <Link to={targetPath}>
           <li>Résultats de recherche</li>
         </Link>
         <i className="las la-angle-right" />
-        <Link to="/resultats/#" className="link-active">
-          <li>Nom de l&apos;organisme</li>
+        <Link to={`${location.pathname}`} className="link-active">
+          <li>{organism?.name}</li>
         </Link>
       </ul>
+      <button
+        className="btn-flat btn-primary btn-slowRounded "
+        type="button"
+        onClick={() => navigate(targetPath)}
+      >
+        <i className="las la-arrow-left" />
+        {'   '}Retour aux résultats
+      </button>
     </div>
   );
 }
