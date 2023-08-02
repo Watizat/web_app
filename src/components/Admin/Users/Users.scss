@@ -3,7 +3,7 @@
 @use '../../../styles/elements';
 
 #users {
-  min-height: 94vh;
+  min-height: calc(100vh - 5rem);
   font-family: 'Inter', sans-serif;
 
   table {
@@ -34,12 +34,13 @@
       color: v.$grey-700;
       background-color: v.$grey-100;
       position: sticky;
-      top: 6vh;
+      top: 5rem;
     }
 
     tbody {
       font-weight: 400;
       color: v.$grey-700;
+      overflow-y: hidden;
 
       tr {
         &:hover {

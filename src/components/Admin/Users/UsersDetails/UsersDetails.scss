@@ -3,7 +3,7 @@
 @use '../../../../styles/elements';
 
 #users {
-  min-height: 94vh;
+  min-height: calc(100vh - 5rem);
   font-family: 'Inter', sans-serif;
 
   table {

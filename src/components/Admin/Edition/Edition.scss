@@ -4,7 +4,7 @@
 
 #edition {
   display: flex;
-  height: 94vh;
+  height: calc(100vh - 5rem);
   background-color: v.$bgadmin;
   font-family: 'Roboto', sans-serif;
 }
