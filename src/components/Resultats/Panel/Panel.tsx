@@ -114,7 +114,7 @@ function Panel({ onFilterChange }: PanelProps) {
 
               <Link to="/">
                 <button
-                  className="btn-flat btn-primary btn-slowRounded "
+                  className="btn btn-flat btn-primary btn-slowRounded "
                   type="button"
                 >
                   <i className="las la-arrow-left" />

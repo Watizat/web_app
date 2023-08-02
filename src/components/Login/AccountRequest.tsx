@@ -18,23 +18,41 @@ function AccountRequest() {
   const dispatch = useAppDispatch();
   const zones = useAppSelector((state) => state.admin.zones);
   // const message = useAppSelector((state) => state.user.message);
-  const [confirmationMessage, setConfirmationMessage] = useState<string | null>();
+  const [confirmationMessage, setConfirmationMessage] = useState<
+    string | null
+  >();
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     const response = await dispatch(registerUser(formData));
     switch (response.meta.requestStatus) {
       case 'fulfilled':
-        return setConfirmationMessage(`Votre compte a bien été créée, il est en attente de validation.`);
+        return setConfirmationMessage(
+          `Votre compte a bien été créée, il est en attente de validation.`
+        );
       case 'rejected':
-        return setConfirmationMessage(`Une erreur s'est produite lors de la création de votre compte.`);
+        return setConfirmationMessage(
+          `Une erreur s'est produite lors de la création de votre compte.`
+        );
       default:
-        return 'Error'
+        return 'Error';
     }
   };
 
   if (confirmationMessage) {
-    return (<div className="login accountRequestMessage">
-    <p>{confirmationMessage}</p></div>);
+    return (
+      <div className="login accountRequestMessage">
+        <p>{confirmationMessage}</p>
+        <Link to="/">
+          <button
+            className="btn btn-flat btn-primary btn-slowRounded "
+            type="button"
+          >
+            <i className="las la-arrow-left" />
+            Retourner vers la recherche
+          </button>
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -46,8 +64,12 @@ function AccountRequest() {
       >
         <fieldset>
           <legend>Prénom</legend>
-          <input type="text" placeholder="Prénom" {...register('first_name', {required: "Ce champs est requis"})} />
-            {errors.first_name && <small>{errors.first_name.message}</small>}
+          <input
+            type="text"
+            placeholder="Prénom"
+            {...register('first_name', { required: 'Ce champs est requis' })}
+          />
+          {errors.first_name && <small>{errors.first_name.message}</small>}
         </fieldset>
         <fieldset>
           <legend>Nom de famille</legend>
@@ -59,11 +81,14 @@ function AccountRequest() {
         </fieldset>
         <fieldset>
           <legend>Adresse email</legend>
-          <input type="text" placeholder="Email" {...register('email', {
-            validate: validateEmail,
-          })}
-              />
-              {errors.mail?.message && <small>{errors.mail.message}</small>}
+          <input
+            type="text"
+            placeholder="Email"
+            {...register('email', {
+              validate: validateEmail,
+            })}
+          />
+          {errors.mail?.message && <small>{errors.mail.message}</small>}
         </fieldset>
         <fieldset>
           <legend>Mot de passe</legend>
@@ -94,7 +119,12 @@ function AccountRequest() {
           <br />
           Toute demande devra être confirmée par un·e référent·e local
         </p>
-        <button type="submit">Confirmer la demande</button>
+        <button
+          className="btn btn-flat btn-primary btn-slowRounded "
+          type="submit"
+        >
+          Confirmer la demande
+        </button>
       </form>
 
       <div className="login-newAccount">

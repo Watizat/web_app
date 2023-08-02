@@ -111,7 +111,7 @@ function Transport() {
       </article>
     );
   }
-  console.log(data);
+  // console.log(data);
 
   return (
     <article>

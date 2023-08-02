@@ -37,7 +37,12 @@ function ForgottenPassword() {
             placeholder="Email"
           />
         </fieldset>
-        <button type="submit">Demander la réinitialisation</button>
+        <button
+          className="btn btn-flat btn-primary btn-slowRounded "
+          type="submit"
+        >
+          Demander la réinitialisation
+        </button>
       </form>
       <div className="login-newAccount">
         Pas encore de compte ?

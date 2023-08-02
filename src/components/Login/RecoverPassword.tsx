@@ -14,7 +14,13 @@ function RecoverPassword() {
           <legend>Confirmer le mot de pass</legend>
           <input type="text" placeholder="Confirmer le mot de passe" />
         </fieldset>
-        <button type="button">Confirmer</button>
+        <butto
+          className="btn btn-flat btn-primary btn-slowRounded "
+          n
+          type="button"
+        >
+          Confirmer
+        </butto>
       </form>
     </div>
   );

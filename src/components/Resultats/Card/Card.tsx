@@ -20,14 +20,23 @@ function Card({
   searchParams,
 }: OrganismProps) {
   const { services } = organism;
-  const tags = [
-    ...new Set(services.map((service) => service.categorie_id.tag)),
+
+  const categoriesTagName = [
+    ...new Set(
+      services.map((service) => {
+        return {
+          name: service.categorie_id.translations[0].name,
+          tag: service.categorie_id.tag,
+        };
+      })
+    ),
   ].sort();
 
-  const categories = tags.map((tag, index) => ({
+  const categories = categoriesTagName.map((tag, index) => ({
     id: index + 1,
-    value: tag,
-    isCheck: categoryFilter.includes(tag),
+    value: tag.tag,
+    name: tag.name,
+    isCheck: categoryFilter.includes(tag.tag),
   }));
 
   const queryParams = new URLSearchParams();
@@ -71,7 +80,7 @@ function Card({
                   }`}
                   icon={categorie.value}
                 />
-                <span className="tooltiptext">{categorie.value}</span>
+                <span className="tooltiptext">{categorie.name}</span>
               </div>
             ))}
           </div>
