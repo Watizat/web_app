@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { Organism } from '../../../@types/organism';
 import Icon from '../../../ui/icon/icon';
 import './Card.scss';
-import { useState } from 'react';
 
 interface OrganismProps {
   organism: Organism;
@@ -65,17 +64,25 @@ function Card({
           </Link>
           <div className="Left-lower__categories">
             {categories.map((categorie) => (
-              <Icon
-                key={categorie.id}
-                className={`Left-lower__categories___item${
-                  categorie.isCheck ? '--check' : ''
-                }`}
-                icon={categorie.value}
-              />
+              <div className="tooltip" key={categorie.id}>
+                <Icon
+                  className={`Left-lower__categories___item${
+                    categorie.isCheck ? '--check' : ''
+                  }`}
+                  icon={categorie.value}
+                />
+                <span className="tooltiptext">{categorie.value}</span>
+              </div>
             ))}
           </div>
         </div>
-        <span>{organism.translations[0]?.infos_alerte}</span>
+
+        {organism.translations[0]?.infos_alerte && (
+          <fieldset className="Left-lower__infosalertes">
+            <span>{organism.translations[0]?.infos_alerte}</span>
+            <legend>Info & alertes</legend>
+          </fieldset>
+        )}
       </div>
       <div className="Right">
         <Link

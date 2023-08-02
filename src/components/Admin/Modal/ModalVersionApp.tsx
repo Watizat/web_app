@@ -1,6 +1,6 @@
 import './Modal.scss';
 
-function ModalAppVersions() {
+function ModalVersionApp() {
   return (
     <div className="modal">
       <div className="modal-main">
@@ -26,4 +26,4 @@ function ModalAppVersions() {
   );
 }
 
-export default ModalAppVersions;
+export default ModalVersionApp;
