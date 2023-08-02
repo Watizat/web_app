@@ -39,7 +39,7 @@ function ModalInactivityDetector({
   }
   return (
     <div className="modal">
-      <div className="modal-main">
+      <div className="modal-main modal-empty">
         <h1 className="modal-title">Toujours là&nbsp;?</h1>
         <form className="modal-list" onSubmit={handleSubmit}>
           <div className="modal-actions">

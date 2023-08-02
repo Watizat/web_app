@@ -28,6 +28,7 @@ export const addOrganism = createAsyncThunk(
           zone_id: data.zone_id,
           pmr: !!data.pmr,
           animals: !!data.animals,
+          mail: data.mail,
         },
         translation: {
           description: data.description,

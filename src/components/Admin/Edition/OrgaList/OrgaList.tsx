@@ -18,7 +18,7 @@ function OrgaList() {
 
   return (
     <section className="orgaList">
-      <OrgaListSearch />
+      {/* <OrgaListSearch /> */}
       <ul className="orgaList-list">
         {isLoading && <span>Is loading...</span>}
         {organisms.map((organism) => (

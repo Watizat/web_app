@@ -48,6 +48,14 @@ function Infos() {
           <h4 className="orgaSheet-infos__list___title">Site web</h4>
           <p className="orgaSheet-infos__list___text">{organism.website}</p>
         </li>
+        <li className="orgaSheet-case">
+          <h4 className="orgaSheet-infos__list___title">Télephone</h4>
+          <p className="orgaSheet-infos__list___text">{organism.phone}</p>
+        </li>
+        <li className="orgaSheet-case">
+          <h4 className="orgaSheet-infos__list___title">Email</h4>
+          <p className="orgaSheet-infos__list___text">{organism.mail}</p>
+        </li>
       </ul>
     </article>
   );

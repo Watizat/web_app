@@ -63,13 +63,15 @@ function Login() {
             </fieldset>
             <button type="submit">Login</button>
           </form>
-          <Link to="/forgotten-password">Mot de passe oublié</Link>
-          <div className="login-newAccount">
-            Pas de compte ?
-            <Link to="/account-request">
-              <br />
-              Faire une demande
-            </Link>
+          <div className="login-links">
+            <Link to="/forgotten-password">Mot de passe oublié</Link>
+            <div className="login-newAccount">
+              Pas de compte ?
+              <Link to="/account-request">
+                <br />
+                Faire une demande
+              </Link>
+            </div>
           </div>
         </div>
       )}

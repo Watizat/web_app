@@ -45,64 +45,70 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
-        <h1 className="modal-title">Informations organisme</h1>
+        <h1 className="modal-title">Informations utilisateur·ice</h1>
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <div className="modal-double">
-            <div className="modal-case modal-double__case">
-              <input type="text" hidden value={user.id} {...register('id')} />
-              <h4 className="modal-case__title">Prénom</h4>
-              <input
-                className="modal-case__inputTxt"
-                type="text"
-                {...register('first_name')}
-                defaultValue={user.first_name}
-              />
+          <div className="modal-overflow">
+            <div className="modal-double">
+              <div className="modal-case modal-double__case">
+                <input type="text" hidden value={user.id} {...register('id')} />
+                <h4 className="modal-case__title">Prénom</h4>
+                <input
+                  className="modal-case__inputTxt"
+                  type="text"
+                  {...register('first_name')}
+                  defaultValue={user.first_name}
+                />
+              </div>
+              <div className="modal-case modal-double__case">
+                <h4 className="modal-case__title">Nom de famille</h4>
+                <input
+                  className="modal-case__inputTxt"
+                  type="text"
+                  {...register('last_name')}
+                  defaultValue={user.last_name}
+                />
+              </div>
             </div>
-            <div className="modal-case modal-double__case">
-              <h4 className="modal-case__title">Nom de famille</h4>
-              <input
-                className="modal-case__inputTxt"
-                type="text"
-                {...register('last_name')}
-                defaultValue={user.last_name}
-              />
+            <div className="modal-double">
+              <div className="modal-case modal-double__case">
+                <h4 className="modal-case__title">Antenne local</h4>
+                <fieldset>
+                  <select {...register('zone')} defaultValue={user.zone}>
+                    {zones.map((zone) => (
+                      <option key={zone.id} value={zone.id}>
+                        {zone.name}
+                      </option>
+                    ))}
+                  </select>
+                </fieldset>
+              </div>
+              <div className="modal-case modal-double__case">
+                <h4 className="modal-case__title">Adresse email</h4>
+                <input
+                  className="modal-case__inputTxt"
+                  type="text"
+                  {...register('email')}
+                  defaultValue={user.email}
+                />
+              </div>
             </div>
-          </div>
-          <div className="modal-double">
-            <div className="modal-case modal-double__case">
-              <h4 className="modal-case__title">Antenne local</h4>
-              <select {...register('zone')} defaultValue={user.zone}>
-                {zones.map((zone) => (
-                  <option key={zone.id} value={zone.id}>
-                    {zone.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="modal-case modal-double__case">
-              <h4 className="modal-case__title">Adresse email</h4>
-              <input
-                className="modal-case__inputTxt"
-                type="text"
-                {...register('email')}
-                defaultValue={user.email}
-              />
-            </div>
-          </div>
-          <div className="modal-double">
-            <div className="modal-case modal-double__case">
-              <h4 className="modal-case__title">Rôles</h4>
-              <select defaultValue={user.role} {...register('role')}>
-                {roles.map((role) => (
-                  <option key={role.id} value={role.id}>
-                    {role.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="modal-case modal-double__case">
-              <h4 className="modal-case__title">Dernière connexion</h4>
-              {dayjs(user.last_access).format('DD  MMMM  YYYY')}
+            <div className="modal-double">
+              <div className="modal-case modal-double__case">
+                <h4 className="modal-case__title">Rôles</h4>
+                <fieldset>
+                  <select defaultValue={user.role} {...register('role')}>
+                    {roles.map((role) => (
+                      <option key={role.id} value={role.id}>
+                        {role.name}
+                      </option>
+                    ))}
+                  </select>
+                </fieldset>
+              </div>
+              <div className="modal-case modal-double__case">
+                <h4 className="modal-case__title">Dernière connexion</h4>
+                {dayjs(user.last_access).format('DD  MMMM  YYYY')}
+              </div>
             </div>
           </div>
           <div className="modal-actions">
