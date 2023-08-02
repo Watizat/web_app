@@ -55,157 +55,159 @@ function ModalEditService({ service, setIsActive }: ServiceModalProps) {
       <div className="modal-main">
         <h1 className="modal-title">Modifier un service</h1>
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="number"
-            hidden
-            defaultValue={organismId}
-            {...register('organisme_id')}
-          />
-          <div className="modal-double modal-start">
-            <h4 className="modal-case__title">Catégorie du service</h4>
-            <fieldset className="modal-contact__actu">
-              <select
-                {...register('categorie_id')}
-                defaultValue={service.categorie_id.id}
-              >
-                <option disabled>Selectionnez une catégorie</option>
-                {categoriesList.map((category) => (
-                  <option
-                    key={category.translations[0].name}
-                    value={`${category.id}`}
-                  >
-                    {category.translations[0].name}
-                  </option>
-                ))}
-              </select>
-              <legend>Catégorie</legend>
-            </fieldset>
-          </div>
-          <div className="modal-case">
-            <h4 className="modal-case__title">Nom du service</h4>
+          <div className="modal-overflow">
             <input
-              className="modal-case__inputTxt"
-              type="text"
-              defaultValue={service.translations[0].name}
-              {...register('name', { required: 'Ce champs est requis' })}
+              type="number"
+              hidden
+              defaultValue={organismId}
+              {...register('organisme_id')}
             />
-            {errors.name && <small>{errors.name.message}</small>}
-          </div>
-          <div className="modal-case">
-            <h4 className="modal-case__title">Type de service·s proposé·s</h4>
-            <textarea
-              className="modal-case__textarea"
-              defaultValue={service.translations[0].description}
-              {...register('description')}
-            />
-          </div>
-          <div className="modal-case">
-            <h4 className="modal-case__title">
-              Horaires
-              <span className="modal-case__legend">
-                (formats horaire acceptés: 10h, 10h00, 10:00)
-              </span>
-            </h4>
-            <table className="modal-data__hours">
-              <thead className="modal-data__hoursHead">
-                <tr>
-                  <td>Jours</td>
-                  <td colSpan={3}>Matin</td>
-                  <td />
-                  <td colSpan={3}>Aprés-midi</td>
-                </tr>
-              </thead>
-              <tbody>
-                {service.schedules.map((day, index) => (
-                  <tr key={day.day} className="modal-data__hoursLine">
-                    <td className="modal-data__hoursDay">
-                      <span>{day.day}</span>
-                      <input
-                        type="hidden"
-                        {...register(`schedule_id_${index + 1}`, {
-                          value: day.id,
-                        })}
-                      />
-                    </td>
-                    <td className="modal-data__hoursHour">
-                      <input
-                        defaultValue={day.opentime_am
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
-                        className={classNames(
-                          'modal-data__hoursInput',
-                          errors[`schedule_openam_${index + 1}`] &&
-                            'modal-data__hoursInput--error'
-                        )}
-                        {...register(`schedule_openam_${index + 1}`, {
-                          validate: (value) =>
-                            validateScheduleFormat(value as string),
-                        })}
-                      />
-                    </td>
-                    <td className="modal-data__hoursSeparater">-</td>
-                    <td className="modal-data__hoursTd">
-                      <input
-                        defaultValue={day.closetime_am
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
-                        className={classNames(
-                          'modal-data__hoursInput',
-                          errors[`schedule_closeam_${index + 1}`] &&
-                            'modal-data__hoursInput--error'
-                        )}
-                        {...register(`schedule_closeam_${index + 1}`, {
-                          validate: (value) =>
-                            validateScheduleFormat(value as string),
-                        })}
-                      />
-                    </td>
-                    <td className="modal-data__hoursSeparater">/</td>
-                    <td className="modal-data__hoursTd">
-                      <input
-                        defaultValue={day.opentime_pm
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
-                        className={classNames(
-                          'modal-data__hoursInput',
-                          errors[`schedule_openpm_${index + 1}`] &&
-                            'modal-data__hoursInput--error'
-                        )}
-                        {...register(`schedule_openpm_${index + 1}`, {
-                          validate: (value) =>
-                            validateScheduleFormat(value as string),
-                        })}
-                      />
-                    </td>
-                    <td className="modal-data__hoursSeparater">-</td>
-                    <td className="modal-data__hoursTd">
-                      <input
-                        defaultValue={day.closetime_pm
-                          ?.slice(0, -3)
-                          .replace(':', 'h')}
-                        className={classNames(
-                          'modal-data__hoursInput',
-                          errors[`schedule_closepm_${index + 1}`] &&
-                            'modal-data__hoursInput--error'
-                        )}
-                        {...register(`schedule_closepm_${index + 1}`, {
-                          validate: (value) =>
-                            validateScheduleFormat(value as string),
-                        })}
-                      />
-                    </td>
+            <div className="modal-double modal-start">
+              <h4 className="modal-case__title">Catégorie du service</h4>
+              <fieldset className="modal-contact__actu">
+                <select
+                  {...register('categorie_id')}
+                  defaultValue={service.categorie_id.id}
+                >
+                  <option disabled>Selectionnez une catégorie</option>
+                  {categoriesList.map((category) => (
+                    <option
+                      key={category.translations[0].name}
+                      value={`${category.id}`}
+                    >
+                      {category.translations[0].name}
+                    </option>
+                  ))}
+                </select>
+                <legend>Catégorie</legend>
+              </fieldset>
+            </div>
+            <div className="modal-case">
+              <h4 className="modal-case__title">Nom du service</h4>
+              <input
+                className="modal-case__inputTxt"
+                type="text"
+                defaultValue={service.translations[0].name}
+                {...register('name', { required: 'Ce champs est requis' })}
+              />
+              {errors.name && <small>{errors.name.message}</small>}
+            </div>
+            <div className="modal-case">
+              <h4 className="modal-case__title">Type de service·s proposé·s</h4>
+              <textarea
+                className="modal-case__textarea"
+                defaultValue={service.translations[0].description}
+                {...register('description')}
+              />
+            </div>
+            <div className="modal-case">
+              <h4 className="modal-case__title">
+                Horaires
+                <span className="modal-case__legend">
+                  (formats horaire acceptés: 10h, 10h00, 10:00)
+                </span>
+              </h4>
+              <table className="modal-data__hours">
+                <thead className="modal-data__hoursHead">
+                  <tr>
+                    <td>Jours</td>
+                    <td colSpan={3}>Matin</td>
+                    <td />
+                    <td colSpan={3}>Aprés-midi</td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="modal-case">
-            <h4 className="modal-case__title">Infos & alertes</h4>
-            <textarea
-              className="modal-case__textarea"
-              defaultValue={service.translations[0].infos_alerte}
-              {...register('infos_alerte')}
-            />
+                </thead>
+                <tbody>
+                  {service.schedules.map((day, index) => (
+                    <tr key={day.day} className="modal-data__hoursLine">
+                      <td className="modal-data__hoursDay">
+                        <span>{day.day}</span>
+                        <input
+                          type="hidden"
+                          {...register(`schedule_id_${index + 1}`, {
+                            value: day.id,
+                          })}
+                        />
+                      </td>
+                      <td className="modal-data__hoursHour">
+                        <input
+                          defaultValue={day.opentime_am
+                            ?.slice(0, -3)
+                            .replace(':', 'h')}
+                          className={classNames(
+                            'modal-data__hoursInput',
+                            errors[`schedule_openam_${index + 1}`] &&
+                              'modal-data__hoursInput--error'
+                          )}
+                          {...register(`schedule_openam_${index + 1}`, {
+                            validate: (value) =>
+                              validateScheduleFormat(value as string),
+                          })}
+                        />
+                      </td>
+                      <td className="modal-data__hoursSeparater">-</td>
+                      <td className="modal-data__hoursTd">
+                        <input
+                          defaultValue={day.closetime_am
+                            ?.slice(0, -3)
+                            .replace(':', 'h')}
+                          className={classNames(
+                            'modal-data__hoursInput',
+                            errors[`schedule_closeam_${index + 1}`] &&
+                              'modal-data__hoursInput--error'
+                          )}
+                          {...register(`schedule_closeam_${index + 1}`, {
+                            validate: (value) =>
+                              validateScheduleFormat(value as string),
+                          })}
+                        />
+                      </td>
+                      <td className="modal-data__hoursSeparater">/</td>
+                      <td className="modal-data__hoursTd">
+                        <input
+                          defaultValue={day.opentime_pm
+                            ?.slice(0, -3)
+                            .replace(':', 'h')}
+                          className={classNames(
+                            'modal-data__hoursInput',
+                            errors[`schedule_openpm_${index + 1}`] &&
+                              'modal-data__hoursInput--error'
+                          )}
+                          {...register(`schedule_openpm_${index + 1}`, {
+                            validate: (value) =>
+                              validateScheduleFormat(value as string),
+                          })}
+                        />
+                      </td>
+                      <td className="modal-data__hoursSeparater">-</td>
+                      <td className="modal-data__hoursTd">
+                        <input
+                          defaultValue={day.closetime_pm
+                            ?.slice(0, -3)
+                            .replace(':', 'h')}
+                          className={classNames(
+                            'modal-data__hoursInput',
+                            errors[`schedule_closepm_${index + 1}`] &&
+                              'modal-data__hoursInput--error'
+                          )}
+                          {...register(`schedule_closepm_${index + 1}`, {
+                            validate: (value) =>
+                              validateScheduleFormat(value as string),
+                          })}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="modal-case">
+              <h4 className="modal-case__title">Infos & alertes</h4>
+              <textarea
+                className="modal-case__textarea"
+                defaultValue={service.translations[0].infos_alerte}
+                {...register('infos_alerte')}
+              />
+            </div>
           </div>
           <div className="modal-actions">
             <button

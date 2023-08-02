@@ -37,54 +37,56 @@ function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
           Modifier les informations de l&apos;organisme
         </h1>
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <div className="modal-case">
-            <h4 className="modal-case__title">Organisme</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
-              defaultValue={organism.name}
-              {...register('name', { required: 'Ce champs est requis' })}
-            />
-            {errors.name && <small>{errors.name.message}</small>}
-          </div>
-          <div className="modal-case">
-            <h4 className="modal-case__title">Adresse</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
-              defaultValue={organism.address}
-              {...register('address', { required: 'Ce champs est requis' })}
-            />
-            {errors.address && <small>{errors.address.message}</small>}
-          </div>
-          <div className="modal-case">
-            <h4 className="modal-case__title">Ville</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
-              defaultValue={organism.city}
-              {...register('city', { required: 'Ce champs est requis' })}
-            />
-            {errors.city && <small>{errors.city.message}</small>}
-          </div>
-          <div className="modal-case">
-            <h4 className="modal-case__title">Code postal</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="number"
-              defaultValue={organism.zipcode}
-              {...register('zipcode', { required: 'Ce champs est requis' })}
-            />
-            {errors.zipcode && <small>{errors.zipcode.message}</small>}
-          </div>
-          <div className="modal-case">
-            <h4 className="modal-case__title">Site web</h4>
-            <input
-              className="modal-case__inputTxt"
-              type="text"
-              defaultValue={organism.website}
-              {...register('website')}
-            />
+          <div className="modal-overflow">
+            <div className="modal-case">
+              <h4 className="modal-case__title">Organisme</h4>
+              <input
+                className="modal-case__inputTxt"
+                type="text"
+                defaultValue={organism.name}
+                {...register('name', { required: 'Ce champs est requis' })}
+              />
+              {errors.name && <small>{errors.name.message}</small>}
+            </div>
+            <div className="modal-case">
+              <h4 className="modal-case__title">Adresse</h4>
+              <input
+                className="modal-case__inputTxt"
+                type="text"
+                defaultValue={organism.address}
+                {...register('address', { required: 'Ce champs est requis' })}
+              />
+              {errors.address && <small>{errors.address.message}</small>}
+            </div>
+            <div className="modal-case">
+              <h4 className="modal-case__title">Ville</h4>
+              <input
+                className="modal-case__inputTxt"
+                type="text"
+                defaultValue={organism.city}
+                {...register('city', { required: 'Ce champs est requis' })}
+              />
+              {errors.city && <small>{errors.city.message}</small>}
+            </div>
+            <div className="modal-case">
+              <h4 className="modal-case__title">Code postal</h4>
+              <input
+                className="modal-case__inputTxt"
+                type="number"
+                defaultValue={organism.zipcode}
+                {...register('zipcode', { required: 'Ce champs est requis' })}
+              />
+              {errors.zipcode && <small>{errors.zipcode.message}</small>}
+            </div>
+            <div className="modal-case">
+              <h4 className="modal-case__title">Site web</h4>
+              <input
+                className="modal-case__inputTxt"
+                type="text"
+                defaultValue={organism.website}
+                {...register('website')}
+              />
+            </div>
           </div>
           <div className="modal-actions">
             <button
