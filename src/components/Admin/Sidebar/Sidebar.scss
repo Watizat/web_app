@@ -31,20 +31,24 @@
   }
 
   &-logo {
-    min-height: 6vh;
-    min-height: 6vh;
+    height: 5rem;
     background-color: rgba(v.$primary-var3, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    align-content: center;
     margin: auto;
-    padding: 0.4em 0;
     padding: 0.4em 0;
 
     &--img {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
       img {
-        max-height: 5vh;
+        height: 75%;
         aspect-ratio: original;
         margin: auto;
       }
