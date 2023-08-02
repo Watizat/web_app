@@ -117,24 +117,28 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
               <h4 className="modal-case__title">Rôles</h4>
               <div className=" modal-contact__roles">
                 <label className="modal-contact__private">
-                  Publicité du contact
-                  <select
-                    {...register('visibility', { required: true })}
-                    defaultValue={`${contact.visibility}`}
-                  >
-                    <option value="false">Privé</option>
-                    <option value="true">Public</option>
-                  </select>
+                  <fieldset>
+                    <select
+                      {...register('visibility', { required: true })}
+                      defaultValue={`${contact.visibility}`}
+                    >
+                      <option value="false">Privé</option>
+                      <option value="true">Public</option>
+                    </select>
+                    <legend>Publicité du contact</legend>
+                  </fieldset>
                 </label>
                 <label className="modal-contact__actu">
-                  Contact pour actualisation
-                  <select
-                    {...register('actualisation', { required: true })}
-                    defaultValue={`${contact.actualisation}`}
-                  >
-                    <option value="false">Non</option>
-                    <option value="true">Oui</option>
-                  </select>
+                  <fieldset>
+                    <select
+                      {...register('actualisation', { required: true })}
+                      defaultValue={`${contact.actualisation}`}
+                    >
+                      <option value="false">Non</option>
+                      <option value="true">Oui</option>
+                    </select>
+                    <legend>Contact pour actualisation</legend>
+                  </fieldset>
                 </label>
               </div>
             </div>

@@ -34,7 +34,7 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
   return (
     <div className="modal">
       <div className="modal-main">
-        <h1 className="modal-title">Informations organisme</h1>
+        <h1 className="modal-title">Informations utilisateur·ice</h1>
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
           <div className="modal-overflow">
             <div className="modal-double">
@@ -61,13 +61,15 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
             <div className="modal-double">
               <div className="modal-case modal-double__case">
                 <h4 className="modal-case__title">Antenne local</h4>
-                <select {...register('zone')} defaultValue={user.zone}>
-                  {zones.map((zone) => (
-                    <option key={zone.id} value={zone.id}>
-                      {zone.name}
-                    </option>
-                  ))}
-                </select>
+                <fieldset>
+                  <select {...register('zone')} defaultValue={user.zone}>
+                    {zones.map((zone) => (
+                      <option key={zone.id} value={zone.id}>
+                        {zone.name}
+                      </option>
+                    ))}
+                  </select>
+                </fieldset>
               </div>
               <div className="modal-case modal-double__case">
                 <h4 className="modal-case__title">Adresse email</h4>
@@ -82,13 +84,15 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
             <div className="modal-double">
               <div className="modal-case modal-double__case">
                 <h4 className="modal-case__title">Rôles</h4>
-                <select defaultValue={user.role} {...register('role')}>
-                  {roles.map((role) => (
-                    <option key={role.id} value={role.id}>
-                      {role.name}
-                    </option>
-                  ))}
-                </select>
+                <fieldset>
+                  <select defaultValue={user.role} {...register('role')}>
+                    {roles.map((role) => (
+                      <option key={role.id} value={role.id}>
+                        {role.name}
+                      </option>
+                    ))}
+                  </select>
+                </fieldset>
               </div>
               <div className="modal-case modal-double__case">
                 <h4 className="modal-case__title">Dernière connexion</h4>

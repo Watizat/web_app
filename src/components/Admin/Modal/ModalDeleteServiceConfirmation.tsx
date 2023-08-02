@@ -29,7 +29,7 @@ function ModalDeleteServiceConfirmation({
 
   return (
     <div className="modal">
-      <div className="modal-main">
+      <div className="modal-main modal-empty">
         <h1 className="modal-title">
           Êtes-vous sûr de vouloir supprimer&nbsp;?
         </h1>

@@ -75,6 +75,15 @@
     padding-left: 4rem;
   }
 
+  &-empty {
+    box-shadow: none;  
+    .modal-title {box-shadow: none;
+      border-bottom-color: transparent;  }
+    .modal-actions {
+      box-shadow: none; 
+      border-top-color: transparent; }
+  }
+
   &-double {
     display: flex;
     justify-content: space-around;
@@ -262,6 +271,7 @@
 
     &__roles {
       gap: 30%;
+      padding-top: 1rem;
     }
 
     &__private,
