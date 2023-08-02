@@ -23,8 +23,9 @@ function Home() {
     (category: string): MouseEventHandler<HTMLButtonElement> =>
     () => {
       if (select) {
+        const encodedCategory = encodeURIComponent(category);
         navigate(
-          `resultats/?city=${select.toLowerCase()}&category=${category}`
+          `resultats/?city=${select.toLowerCase()}&category=${encodedCategory}`
         );
       }
     };
