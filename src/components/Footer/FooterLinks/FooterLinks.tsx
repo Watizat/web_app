@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks/redux';
 import { toggleHamburger } from '../../../store/reducers/hamburger';
 import './FooterLinks.scss';
+import { getUserDataFromLocalStorage } from '../../../utils/user';
 
 function FooterLinks() {
   const dispatch = useAppDispatch();
+  const user = getUserDataFromLocalStorage();
   return (
     <div className="footerlinks">
       <Link
@@ -18,7 +20,7 @@ function FooterLinks() {
       </Link>
       <Link
         className="important"
-        to="/admin/dashboard"
+        to={`${user ? '/admin/dashboard' : '/login'}`}
         onClick={() => dispatch(toggleHamburger(false))}
       >
         Membres Watizat

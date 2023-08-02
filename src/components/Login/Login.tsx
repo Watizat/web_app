@@ -6,6 +6,7 @@ import logo from '../../assets/logo.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeLoginCredentialsField, login } from '../../store/reducers/user';
 import './Login.scss';
+import { getUserDataFromLocalStorage } from '../../utils/user';
 
 function Login() {
   const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
@@ -14,7 +15,7 @@ function Login() {
   const password = useAppSelector(
     (state) => state.user.loginCredentials.password
   );
-  const isLogged = useAppSelector((state) => state.user.isLogged);
+  const user = getUserDataFromLocalStorage();
   const error = useAppSelector((state) => state.user.error);
 
   const handleChangeField =
@@ -30,7 +31,7 @@ function Login() {
     await dispatch(login({ email, password }));
   };
 
-  if (isLogged) {
+  if (user) {
     return <Navigate to="/admin/dashboard" />;
   }
 

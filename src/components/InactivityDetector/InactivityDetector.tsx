@@ -16,10 +16,15 @@ function InactivityDetector() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (
-      lastActionDate &&
-      Date.now() - lastActionDate > timeout + 2 * 1000 * 60
-    ) {
+    const user = getUserDataFromLocalStorage();
+    const currentTime = new Date();
+
+    const lastestUpdate = Math.max(
+      lastActionDate || 0,
+      user?.lastActionDate || 0
+    );
+
+    if (isActive && currentTime.getTime() - lastestUpdate > timeout) {
       dispatch(logout());
     }
     let timeoutID: number | undefined;
@@ -32,20 +37,30 @@ function InactivityDetector() {
     };
 
     const trackAction = () => {
-      const user = getUserDataFromLocalStorage();
-      if (user) user.lastActionDate = Date.now();
-      localStorage.setItem('user', JSON.stringify({ ...user }));
+      const userLS = getUserDataFromLocalStorage();
+      if (isActive && !userLS) {
+        dispatch(logout());
+      }
+      if (userLS) {
+        const actionDate = new Date();
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ ...userLS, lastActionDate: actionDate.getTime() })
+        );
+      }
     };
 
     if (isActive) {
       window.addEventListener('mousemove', showModal);
       window.addEventListener('mousedown', trackAction);
+      window.addEventListener('keydown', trackAction);
     }
 
     return () => {
       clearTimeout(timeoutID);
       window.removeEventListener('mousemove', showModal);
       window.removeEventListener('mousedown', trackAction);
+      window.removeEventListener('keydown', trackAction);
     };
   }, [isActive, answerCount, lastActionDate, timeout, dispatch]);
 
