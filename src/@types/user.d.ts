@@ -22,6 +22,7 @@ export interface UserSession {
   iat: number;
   exp: number;
   iss: string;
+  role: string;
 }
 
 export interface AuthResponse {

@@ -42,31 +42,29 @@ function UsersDetails({ user }: UsersDetailsProps) {
       {isActiveService && (
         <ModalUsers setIsActive={setIsActiveService} user={user} />
       )}
-      <tbody>
-        <tr>
-          <td className="userstable-name">
-            {user.first_name} {user.last_name}
-          </td>
+      <tr>
+        <td className="userstable-name">
+          {user.first_name} {user.last_name}
+        </td>
 
-          <td className="userstable-antenne">
-            {zones.find((zone) => zone.id === user.zone)?.name}
-          </td>
+        <td className="userstable-antenne">
+          {zones.find((zone) => zone.id === user.zone)?.name}
+        </td>
 
-          <td className="userstable-email">{user.email}</td>
+        <td className="userstable-email">{user.email}</td>
 
-          <td className="userstable-connexion">
-            {dayjs(user.last_access).format('DD MMMM YYYY')}
-          </td>
+        <td className="userstable-connexion">
+          {dayjs(user.last_access).format('DD MMMM YYYY')}
+        </td>
 
-          <td className="userstable-roles">{renderRoles(user)}</td>
+        <td className="userstable-roles">{renderRoles(user)}</td>
 
-          <td className="userstable-action">
-            <button type="button" onClick={() => setIsActiveService(true)}>
-              <i className="las la-edit" />
-            </button>
-          </td>
-        </tr>
-      </tbody>
+        <td className="userstable-action">
+          <button type="button" onClick={() => setIsActiveService(true)}>
+            <i className="las la-edit" />
+          </button>
+        </td>
+      </tr>
     </>
   );
 }

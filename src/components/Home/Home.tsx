@@ -22,7 +22,11 @@ function Home() {
   const handleClick =
     (category: string): MouseEventHandler<HTMLButtonElement> =>
     () => {
-      navigate(`resultats/?city=${select.toLowerCase()}&category=${category}`);
+      if (select) {
+        navigate(
+          `resultats/?city=${select.toLowerCase()}&category=${category}`
+        );
+      }
     };
 
   const zones = useAppSelector((state) => state.admin.zones);
