@@ -12,6 +12,8 @@ export interface UserState {
   timeout: number;
   isActive: boolean;
   lastActionDate: number | null;
+  isAdmin: boolean;
+  city: string;
 }
 
 export interface UserSession {

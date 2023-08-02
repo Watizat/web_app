@@ -13,10 +13,9 @@ import { getUserDataFromLocalStorage } from '../../../utils/user';
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
   user: DirectusUser;
-  admin: boolean;
 }
 
-function ModalUsers({ setIsActive, user, admin }: ModalProps) {
+function ModalUsers({ setIsActive, user }: ModalProps) {
   const {
     register,
     handleSubmit,
@@ -26,8 +25,7 @@ function ModalUsers({ setIsActive, user, admin }: ModalProps) {
   const dispatch = useAppDispatch();
   const zones = useAppSelector((state) => state.admin.zones);
   const roles = useAppSelector((state) => state.admin.roles);
-  console.log(roles);
-
+  const admin = useAppSelector((state) => state.user.isAdmin);
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     await dispatch(editUser(formData));
     const localUser = getUserDataFromLocalStorage();

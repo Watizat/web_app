@@ -38,7 +38,6 @@ function Account() {
   useEffect(() => {
     async function getUserInfos() {
       const { data } = await axiosInstance.get('/users/me');
-      console.log(data.data);
       setMe(data.data);
     }
     getUserInfos();

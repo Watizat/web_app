@@ -133,9 +133,10 @@
     gap: .75rem;
 
     &__title {
-      color: v.$primary-var2;
-      font-weight: 500;
-      font-size: 1.1rem;
+      color: v.$grey-600;
+      font-weight: 600;
+      font-size: .9rem;
+      text-transform: uppercase;
     }
 
     &__legend {

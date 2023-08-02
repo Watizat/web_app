@@ -1,5 +1,9 @@
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
-import { Organism, Role, User, Zone } from '../../@types/organism';
+import {
+  createAsyncThunk,
+  createReducer,
+  createAction,
+} from '@reduxjs/toolkit';
+import { Organism, Role, Zone } from '../../@types/organism';
 import { DirectusUser } from '../../@types/user';
 import { axiosInstance } from '../../utils/axios';
 

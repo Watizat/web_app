@@ -7,10 +7,9 @@ import './UsersDetails.scss';
 
 interface UsersDetailsProps {
   user: DirectusUser;
-  admin: boolean;
 }
 
-function UsersDetails({ user, admin }: UsersDetailsProps) {
+function UsersDetails({ user }: UsersDetailsProps) {
   const [isActiveService, setIsActiveService] = useState(false);
   const zones = useAppSelector((state) => state.admin.zones);
 
@@ -41,11 +40,7 @@ function UsersDetails({ user, admin }: UsersDetailsProps) {
   return (
     <>
       {isActiveService && (
-        <ModalUsers
-          setIsActive={setIsActiveService}
-          user={user}
-          admin={admin}
-        />
+        <ModalUsers setIsActive={setIsActiveService} user={user} />
       )}
       <tr>
         <td className="userstable-name">

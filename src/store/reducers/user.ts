@@ -37,7 +37,13 @@ const initialState: UserState = {
   isActive: false,
   lastActionDate: null,
   ...getUserDataFromLocalStorage(),
+  isAdmin: false,
+  city: '',
 };
+
+export const changeAdmin = createAction<boolean>('admin/check-admin');
+
+export const changeCity = createAction<string>('city/change-city');
 
 export const changeLoginCredentialsField = createAction<{
   field: KeyOfloginCredentials;
@@ -98,6 +104,12 @@ export const setIsLogged = createAction<{
 
 export default createReducer(initialState, (builder) => {
   builder
+    .addCase(changeAdmin, (state, action) => {
+      state.isAdmin = action.payload;
+    })
+    .addCase(changeCity, (state, action) => {
+      state.city = action.payload;
+    })
     .addCase(changeLoginCredentialsField, (state, action) => {
       const { field, value } = action.payload;
       state.loginCredentials[field] = value;
@@ -129,6 +141,7 @@ export default createReducer(initialState, (builder) => {
           lastActionDate: state.lastActionDate,
         })
       );
+      state.isAdmin = false;
     })
     .addCase(logout.pending, (state) => {
       state.isLoading = true;
