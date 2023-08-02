@@ -12,6 +12,7 @@ import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { fetchRoles, fetchZones } from '../../../store/reducers/admin';
 import { fetchCategories, fetchDays } from '../../../store/reducers/organisms';
 import { axiosInstance } from '../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
@@ -35,6 +36,11 @@ function App() {
   useEffect(() => {
     dispatch(fetchDays(1));
   }, [dispatch, langue]);
+
+  useEffect(() => {
+    dispatch(fetchZones());
+    dispatch(fetchRoles());
+  }, [dispatch]);
 
   useEffect(() => {
     async function check() {
@@ -63,7 +69,7 @@ function App() {
       {isTablet && !isLoading && (
         <div id="bo-app">
           {(isWidescreen || isOpen) && <Sidebar />}
-
+          {/* <Sidebar /> */}
           <main
             id={`${pathname !== '/admin/dashboard' ? 'bo-main' : 'dashboard'}`}
           >
