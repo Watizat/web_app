@@ -46,7 +46,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
         <h1 className="modal-title">Créer un organisme</h1>
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
           <div className="modal-double modal-start">
-            <h4 className="modal-case__title">Choisir l'antenne locale</h4>
+            <h4 className="modal-case__title">Choisir l&apos;antenne locale</h4>
             <fieldset className="modal-contact__actu">
               <select
                 value={select}
@@ -162,7 +162,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                 <tr>
                   <td>Jours</td>
                   <td colSpan={3}>Matin</td>
-                  <td />
+                  <td> / </td>
                   <td colSpan={3}>Aprés-midi</td>
                 </tr>
               </thead>

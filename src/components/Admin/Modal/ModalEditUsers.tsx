@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
 import { DirectusUser } from '../../../@types/user';
@@ -6,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUsers } from '../../../store/reducers/admin';
 import { editUser } from '../../../store/reducers/user';
 import './Modal.scss';
+import ModalDeleteConfirmation from './ModalDeleteUserConfirmation';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,14 +24,23 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
   const dispatch = useAppDispatch();
   const zones = useAppSelector((state) => state.admin.zones);
   const roles = useAppSelector((state) => state.admin.roles);
-
-  console.log(user);
+  const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     await dispatch(editUser(formData));
     setIsActive(false);
     await dispatch(fetchUsers(null));
   };
+
+  if (isActiveConfirmation) {
+    return (
+      <ModalDeleteConfirmation
+        id={user.id}
+        setIsActiveConfirmation={setIsActiveConfirmation}
+        setIsActive={setIsActive}
+      />
+    );
+  }
 
   return (
     <div className="modal">
@@ -98,6 +109,7 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
             <button
               type="button"
               className="btn btn-danger-fill btn-flat modal-actions__close"
+              onClick={() => setIsActiveConfirmation(true)}
             >
               Supprimer
             </button>
