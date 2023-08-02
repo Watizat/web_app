@@ -7,11 +7,7 @@ import Card from '../Card/Card';
 import Settings from '../Settings/Settings';
 import './Panel.scss';
 
-interface PanelProps {
-  onFilterChange: (newCity: string, newCategory: string[]) => void;
-}
-
-function Panel({ onFilterChange }: PanelProps) {
+function Panel() {
   const dispatch = useAppDispatch();
   const organisms = useAppSelector((state) => state.organism.organisms);
   const filteredOrganisms = useAppSelector(
