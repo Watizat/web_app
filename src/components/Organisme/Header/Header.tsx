@@ -35,6 +35,12 @@ function Header() {
             />
           ))}
         </div>
+        {organism.translations[0]?.infos_alerte && (
+          <fieldset className="organisme-details__infosalertes">
+            <span>{organism.translations[0]?.infos_alerte}</span>
+            <legend>Info & alertes</legend>
+          </fieldset>
+        )}
       </div>
       <MapContainer
         center={
