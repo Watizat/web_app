@@ -7,7 +7,11 @@ import Card from '../Card/Card';
 import Settings from '../Settings/Settings';
 import './Panel.scss';
 
-function Panel() {
+interface PanelProps {
+  onFilterChange: (newCity: string, newCategory: string[]) => void;
+}
+
+function Panel({ onFilterChange }: PanelProps) {
   const dispatch = useAppDispatch();
   const organisms = useAppSelector((state) => state.organism.organisms);
   const filteredOrganisms = useAppSelector(
@@ -98,6 +102,10 @@ function Panel() {
                 organism={organism}
                 map_id={index + 1}
                 categoryFilter={categoryFilter}
+                searchParams={{
+                  city: search.toLowerCase(),
+                  category: categoryFilter,
+                }}
               />
             ))
           ) : (

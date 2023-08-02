@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchOrganism } from '../../store/reducers/organisms';
 import Container from '../Container/Container';
@@ -11,6 +11,7 @@ import Services from './Services/Services';
 
 function Organisme() {
   const { slug } = useParams();
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const organism = useAppSelector((state) => state.organism.organism);
   const [loading, setLoading] = useState(true);
@@ -23,11 +24,15 @@ function Organisme() {
     fetchData();
   }, [dispatch, slug]);
 
+  const searchParams = new URLSearchParams(location.search);
+  const city = searchParams.get('city') || '';
+  const category = (searchParams.get('category') || '').split(',');
+
   if (organism === null && !loading) {
     return (
       <main className="organisme-container">
         <Container>
-          <Breadcrumb />
+          <Breadcrumb searchParams={{ city, category }} />
           <span>Cet organisme n&apos;éxiste pas.</span>
         </Container>
       </main>
@@ -38,7 +43,7 @@ function Organisme() {
     !loading && (
       <main className="organisme-container">
         <Container>
-          <Breadcrumb />
+          <Breadcrumb searchParams={{ city, category }} />
           <section className="organisme">
             <Header />
             <Infos />
