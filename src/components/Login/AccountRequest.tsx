@@ -17,20 +17,23 @@ function AccountRequest() {
 
   const dispatch = useAppDispatch();
   const zones = useAppSelector((state) => state.admin.zones);
-  const message = useAppSelector((state) => state.user.message);
-  const [mess, setMess] = useState<string | null>();
+  // const message = useAppSelector((state) => state.user.message);
+  const [confirmationMessage, setConfirmationMessage] = useState<string | null>();
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    const response = await dispatch(registerUser(formData))
-/*     if(response.status === 400) {
-      setMess("Une erreur s'est produite")
-    } */
-    setMess(message)
-    console.log(response)
+    const response = await dispatch(registerUser(formData));
+    console.log(response);
+    if(response.meta.requestStatus === 'fulfilled') {
+      return setConfirmationMessage('Votre compte a bien été crée, il est en attente de validation')
+    }
+    if(response.meta.requestStatus === 'rejected') {
+      return setConfirmationMessage(`Une erreur s'est produite lors de la création de votre compte`)
+    }
   };
 
-  if (mess) {
-    return <p>{mess}</p>;
+  if (confirmationMessage) {
+    return     (<div className="login accountRequest">
+<p>{confirmationMessage}</p></div>);
   }
 
   return (
@@ -55,8 +58,11 @@ function AccountRequest() {
         </fieldset>
         <fieldset>
           <legend>Adresse email</legend>
-          <input type="text" placeholder="Email" {...register('email')} />
-          {errors.mail?.message && <small>{errors.mail.message}</small>}
+          <input type="text" placeholder="Email" {...register('mail', {
+            validate: validateEmail,
+          })}
+              />
+              {errors.mail?.message && <small>{errors.mail.message}</small>}
         </fieldset>
         <fieldset>
           <legend>Mot de passe</legend>

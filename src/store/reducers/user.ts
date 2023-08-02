@@ -18,6 +18,7 @@ import {
   getUserDataFromLocalStorage,
   removeUserDataFromLocalStorage,
 } from '../../utils/user';
+import { AxiosError } from 'axios';
 
 const timeout = 5 * 1000 * 60;
 
@@ -47,15 +48,15 @@ export const changeLoginCredentialsField = createAction<{
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
-  async (formData: Inputs) => {
+  async (formData: Inputs, { rejectWithValue }) => {
     try {
-      const {data } = await axiosInstance.post('/users', {
+      await axiosInstance.post('/users', {
         ...formData,
         role: '5754603f-add3-4823-9c77-a2f9789074fc',
-      });
-      return data.data
-    } catch (error) {
-      return error
+      })      
+    } catch (err: any | AxiosError) {
+      console.log(err)
+      return rejectWithValue(err.message);
     }
   }
 );
