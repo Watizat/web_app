@@ -49,11 +49,11 @@
 
     @include m.desktop {
       padding: 0 1rem;
-      min-height: 5vh;
+      min-height: 4rem;
     }
 
     @include m.widescreen {
-      min-height: 6vh;
+      min-height: 4rem;
     }
   }
 
