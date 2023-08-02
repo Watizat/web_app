@@ -20,7 +20,11 @@
         color: v.$info;
         font-weight: 600;
         font-size: 1.5rem;
-        text-transform: uppercase;
+        text-transform: lowercase;
+
+        &:first-letter {
+          text-transform: capitalize;
+        }
       }
     }
 

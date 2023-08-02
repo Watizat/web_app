@@ -67,6 +67,11 @@
       font-weight: 500;
       font-size: 0.9rem;
       color: v.$grey-800;
+      text-transform: lowercase;
+
+      &:first-letter {
+        text-transform: capitalize;
+      }
     }
 
     &__adress {
