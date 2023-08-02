@@ -4,6 +4,7 @@ import { Organism } from '../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { editOrganismInfos } from '../../../store/reducers/crud';
+import { validateEmail } from '../../../utils/form/form';
 import './Modal.scss';
 
 interface ModalProps {
@@ -86,6 +87,39 @@ function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
                 defaultValue={organism.website}
                 {...register('website')}
               />
+            </div>
+            <div className="modal-double modal-start">
+              <div className="modal-case">
+                <h4 className="modal-case__title">Phone</h4>
+                <input
+                  className="modal-case__inputTxt"
+                  type="number"
+                  defaultValue={organism.phone}
+                  {...register('phone', {
+                    minLength: {
+                      value: 10,
+                      message:
+                        'Le numéro de téléphone doit comporter au moins 10 chiffres.',
+                    },
+                    maxLength: {
+                      value: 10,
+                      message:
+                        'Le numéro de téléphone ne peut pas comporter plus de 10 chiffres.',
+                    },
+                  })}
+                />
+              </div>
+              <div className="modal-case">
+                <h4 className="modal-case__title">Mail</h4>
+                <input
+                  className="modal-case__inputTxt modal-contact__mail"
+                  type="text"
+                  defaultValue={organism.mail}
+                  {...register('mail', {
+                    validate: validateEmail,
+                  })}
+                />
+              </div>
             </div>
           </div>
           <div className="modal-actions">

@@ -8,7 +8,10 @@ import {
   setAdminOrganism,
 } from '../../../store/reducers/admin';
 import { addOrganism } from '../../../store/reducers/crud';
-import { validateScheduleFormat } from '../../../utils/form/form';
+import {
+  validateScheduleFormat,
+  validateEmail,
+} from '../../../utils/form/form';
 import './Modal.scss';
 
 interface ModalProps {
@@ -47,7 +50,9 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
         <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
           <div className="modal-overflow">
             <div className="modal-double modal-start">
-              <h4 className="modal-case__title">Choisir l'antenne locale</h4>
+              <h4 className="modal-case__title">
+                Choisir l&apos;antenne locale
+              </h4>
               <fieldset className="modal-contact__actu">
                 <select
                   value={select}
@@ -105,6 +110,18 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                 {...register('zipcode', { required: 'Ce champs est requis' })}
               />
               {errors.zipcode && <small>{errors.zipcode.message}</small>}
+            </div>
+            <div className="modal-case">
+              <h4 className="modal-case__title">Adresse email</h4>
+              <input
+                className="modal-case__inputTxt"
+                type="text"
+                placeholder="ex: secretariat@gmail.com"
+                {...register('mail', {
+                  validate: validateEmail,
+                })}
+              />
+              {errors.mail?.message && <small>{errors.mail.message}</small>}
             </div>
             <div className="modal-case">
               <h4 className="modal-case__title">Telephone</h4>
