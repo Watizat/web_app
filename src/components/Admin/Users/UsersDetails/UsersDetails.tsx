@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import 'dayjs/locale/fr'; // Importez le fichier de localisation français
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { useState } from 'react';
 import { DirectusUser } from '../../../../@types/user';
 import { useAppSelector } from '../../../../hooks/redux';
@@ -8,6 +10,8 @@ import './UsersDetails.scss';
 interface UsersDetailsProps {
   user: DirectusUser;
 }
+dayjs.locale('fr');
+dayjs.extend(localizedFormat); // Activer le plugin localizedFormat
 
 function UsersDetails({ user }: UsersDetailsProps) {
   const [isActiveService, setIsActiveService] = useState(false);
@@ -54,7 +58,9 @@ function UsersDetails({ user }: UsersDetailsProps) {
         <td className="userstable-email">{user.email}</td>
 
         <td className="userstable-connexion">
-          {dayjs(user.last_access).format('DD MMMM YYYY')}
+          {dayjs(user.last_access).format('DD MMMM YYYY') !== 'Invalid Date'
+            ? dayjs(user.last_access).format('DD MMMM YYYY')
+            : 'Jamais connecté'}
         </td>
 
         <td className="userstable-roles">{renderRoles(user)}</td>
