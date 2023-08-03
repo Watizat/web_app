@@ -60,9 +60,9 @@ export const registerUser = createAsyncThunk(
         role: '5754603f-add3-4823-9c77-a2f9789074fc',
       });
       return data.data;
-    } catch (err) {
-      console.log(err);
-      return rejectWithValue(err.message);
+    } catch (err: unknown) {
+      const error = err as Error;
+      return rejectWithValue(error.message);
     }
   }
 );
