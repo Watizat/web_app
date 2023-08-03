@@ -47,6 +47,12 @@
       flex-direction: column;
       gap: 1.2rem;
 
+      &-sub { 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      gap: 1.2rem;}
+
       a {
         color: v.$grey-500;
         text-decoration: none;
