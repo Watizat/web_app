@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  column-gap: 1.5rem;
+  gap: 1.5rem 1rem;
   padding: 1.5rem 1rem .5rem;
   margin: 0 0.5rem;
   background-color: v.$white;
@@ -129,7 +129,7 @@
 
       &__infosalertes {
         border-radius: 5px;
-        width: 75%;
+        width: 100%;
         border: 1px solid v.$danger;
         & legend {
           color: v.$danger;

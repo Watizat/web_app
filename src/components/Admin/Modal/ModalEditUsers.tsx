@@ -113,7 +113,7 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
                 <h4 className="modal-case__title">Adresse email</h4>
                 <input
                   className="modal-case__inputTxt"
-                  type="text"
+                  type="email"
                   {...register('email')}
                   defaultValue={user.email}
                 />

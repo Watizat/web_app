@@ -11,7 +11,6 @@ import ModalAddOrganism from '../Modal/ModalAddOrganism';
 import './Header.scss';
 
 function Header() {
-  const isWidescreen = useMediaQuery({ query: '(min-width: 1216px)' });
   const { pathname } = useLocation();
   const [isActiveOrganism, setIsActiveOrganism] = useState(false);
   const isOpen = useAppSelector((state) => state.hamburger.isOpen);

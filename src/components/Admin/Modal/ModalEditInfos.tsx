@@ -113,7 +113,7 @@ function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
                 <h4 className="modal-case__title">Mail</h4>
                 <input
                   className="modal-case__inputTxt modal-contact__mail"
-                  type="text"
+                  type="email"
                   defaultValue={organism.mail}
                   {...register('mail', {
                     validate: validateEmail,

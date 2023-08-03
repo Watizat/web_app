@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -5,7 +6,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Inputs } from '../../@types/formInputs';
 import { registerUser } from '../../store/reducers/user';
 import './Login.scss';
-import { useState } from 'react';
 import { validateEmail } from '../../utils/form/form';
 
 function AccountRequest() {
@@ -82,7 +82,7 @@ function AccountRequest() {
         <fieldset>
           <legend>Adresse email</legend>
           <input
-            type="text"
+            type="email"
             placeholder="Email"
             {...register('email', {
               validate: validateEmail,

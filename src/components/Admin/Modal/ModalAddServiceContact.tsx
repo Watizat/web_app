@@ -73,7 +73,7 @@ function ModalAddServiceContact({ service, setIsActive }: ModalProps) {
                 <h4 className="modal-case__title">Adresse email</h4>
                 <input
                   className="modal-case__inputTxt modal-contact__mail"
-                  type="text"
+                  type="email"
                   {...register('mail', {
                     validate: validateEmail,
                   })}

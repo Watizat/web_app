@@ -19,9 +19,8 @@
     width: 50%;
 
     &__infosalertes {
-      margin: 1rem 0 0;
       border-radius: 5px;
-      width: 75%;
+      width: 100%;
       border: 1px solid v.$danger;
       & legend {
         color: v.$danger;

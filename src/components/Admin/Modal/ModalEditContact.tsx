@@ -83,7 +83,7 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
                 <h4 className="modal-case__title">Adresse email</h4>
                 <input
                   className="modal-case__inputTxt modal-contact__mail"
-                  type="text"
+                  type="email"
                   defaultValue={contact.mail}
                   {...register('mail', {
                     validate: validateEmail,

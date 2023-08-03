@@ -97,7 +97,7 @@ function Account() {
                 <legend>Adresse email</legend>
                 <input
                   className="account-case__inputTxt account-contact__mail"
-                  type="text"
+                  type="email"
                   {...register('email', {
                     validate: validateEmail,
                   })}
