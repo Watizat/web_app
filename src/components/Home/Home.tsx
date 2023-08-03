@@ -89,7 +89,7 @@ function Home() {
         <Container>
           <article className="info-hero">
             <div className="info-hero__img">
-              <img src="/img/bghome-guide.jpeg" alt="distribution d'un guide" />
+              <img src="/img/bghome-guide.webp" alt="distribution d'un guide" />
             </div>
             <div className="info-hero__text">
               <h2 className="info-hero__text___title">
