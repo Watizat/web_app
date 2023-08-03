@@ -25,6 +25,9 @@ function FooterLinks() {
       >
         Membres Watizat
       </Link>
+      <Link to="https://feedback.watizat.app" target="_blank">
+        Bugs et suggestions
+      </Link>
     </div>
   );
 }
