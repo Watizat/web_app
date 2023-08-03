@@ -33,19 +33,21 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   return (
     <div className="resultsCard" id={organism.id.toString()}>
       <div className="Left">
-        <div className="Left-upper">
-          <div className="Left-upper__position-id">
-            <p>{map_id}</p>
-          </div>
-          <div className="Left-upper__organizationInfos">
-            <div className="Left-upper__organizationInfos___title">
-              {organism.name}
+        <Link to={`/organisme/${organism.slug}`}>
+          <div className="Left-upper">
+            <div className="Left-upper__position-id">
+              <p>{map_id}</p>
             </div>
-            <span className="Left-upper__organizationInfos___address">
-              {organism.address}
-            </span>
+            <div className="Left-upper__organizationInfos">
+              <div className="Left-upper__organizationInfos___title">
+                {organism.name}
+              </div>
+              <span className="Left-upper__organizationInfos___address">
+                {organism.address}
+              </span>
+            </div>
           </div>
-        </div>
+        </Link>
         <div className="Left-upper__description">
           {organism.translations[0]?.description}
         </div>

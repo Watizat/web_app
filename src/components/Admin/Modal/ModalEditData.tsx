@@ -76,7 +76,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
               <h4 className="modal-case__title">
                 Horaires
                 <span className="modal-case__legend">
-                  (formats horaire acceptés: 10h, 10h00, 10:00)
+                  (Formats horaire acceptés: 10h, 10h00, 10:00)
                 </span>
               </h4>
               <table className="modal-data__hours">

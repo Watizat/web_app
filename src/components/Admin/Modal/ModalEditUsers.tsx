@@ -29,9 +29,15 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
   const roles = useAppSelector((state) => state.admin.roles);
   const [isActiveConfirmation, setIsActiveConfirmation] = useState(false);
   const admin = useAppSelector((state) => state.user.isAdmin);
+  const city = useAppSelector((state) => state.user.city);
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     await dispatch(editUser(formData));
+    const cityLocal = localStorage.getItem('city');
+
+    const cityId = cityLocal
+      ? zones.find((zone) => zone.name === cityLocal)
+      : zones.find((zone) => zone.name === city);
     const localUser = getUserDataFromLocalStorage();
     const { data } = await axiosInstance.get('/users/me');
     const { zone } = data.data;
@@ -44,7 +50,11 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
         localUser.token.access_token
       ) as UserSession;
       if (decodedUser.role === '53de6ec2-6d70-48c8-8532-61f96133f139') {
-        await dispatch(fetchUsers(null));
+        if (cityId !== undefined) {
+          await dispatch(fetchUsers(cityId.id.toString()));
+        } else {
+          await dispatch(fetchUsers(null));
+        }
       } else {
         await dispatch(fetchUsers(zone.toString()));
       }

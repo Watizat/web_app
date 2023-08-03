@@ -27,7 +27,7 @@ function AccountRequest() {
     switch (response.meta.requestStatus) {
       case 'fulfilled':
         return setConfirmationMessage(
-          `Votre compte a bien été créée, il est en attente de validation.`
+          `Votre compte a bien été créé, il est en attente de validation.`
         );
       case 'rejected':
         return setConfirmationMessage(
