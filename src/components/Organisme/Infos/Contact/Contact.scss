@@ -1,0 +1,68 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/medias' as m;
+@use '../../../../styles/elements';
+
+.organisme-infos {
+
+  &--articlecontact { 
+    display: flex;
+    flex-direction: column;
+
+    @include m.tablet{
+      grid-column: 1 / 3;
+      grid-column-gap: 1rem;
+      grid-row-gap: 1rem;
+    }
+    
+    @include m.widescreen{
+      grid-column: auto;
+    }
+  }
+
+  &--allcontact {
+    display: grid;
+    grid-template-rows: auto;
+    gap: 0 3rem; 
+    
+    @include m.tablet{
+      grid-template-rows: auto;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @include m.widescreen{
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--maincontact {
+    font-size: 0.9em;
+    padding-left: 1em;
+  }
+
+  &--link {
+    display: block;
+    color: v.$grey-700
+  }
+
+  &--othercontact {
+    padding-left: 1em;
+    font-size: 0.9em;
+
+    &-job {
+      color: v.$watigreen;
+      font-weight: 600;
+      margin-top: 1em;
+      @include m.tablet{
+        margin-top: 0;
+      }
+      @include m.widescreen{
+        margin-top: 1em;
+      }
+    }
+
+    & a {
+      display: block;
+      color: v.$grey-700
+    }
+  }
+}

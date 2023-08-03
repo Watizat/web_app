@@ -1,0 +1,60 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
+
+#bo-app {
+  min-height: 100vh;
+  display: none;
+
+  @include m.tablet {
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+
+    #bo-main {
+      // max-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+  }
+
+  #mobileOut {
+    min-height: 100vh;
+    padding: 0 10vw;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba(v.$bghome, 0.8), rgba(v.$bghome, 0.5)),
+      url('/img/404mobile.jpg');
+    background-size: cover;
+    color: v.$white;
+    text-align: center;
+    font-size: 1.35rem;
+
+    .mobileOut__logo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      padding: auto;
+      margin: 7.5rem 0 5rem;
+
+      img {
+        margin: auto;
+      }
+    }
+
+    .mobileOut__returnToHome {
+      margin-top: 4rem;
+      color: v.$white;
+      border: 1px solid v.$white;
+      border-radius: 20px;
+      padding: 1rem;
+    }
+
+    @include m.tablet {
+      display: none;
+    }
+  }
+}

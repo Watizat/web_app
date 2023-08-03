@@ -1,4 +1,11 @@
-.resultats {
-  flex-grow: 1
-  ;
+@use '../../styles/medias' as m;
+
+.results {
+  display: flex;
+  justify-content: center;
+    height: calc(100vh - 75px); 
+
+    @include m.touch {
+    height: calc(100vh - 50px); 
+    }
 }

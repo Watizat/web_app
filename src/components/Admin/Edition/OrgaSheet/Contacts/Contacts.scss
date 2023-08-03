@@ -1,0 +1,36 @@
+@use '../../../../../styles/variables' as v;
+@use '../../../../../styles/medias' as m;
+@use '../../../../../styles/elements';
+
+.orgaSheet {
+
+  &-contacts {
+    &__list {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-content: space-between;
+      padding: 0;
+
+      @include m.desktop {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @include m.qhd {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+    .orgaSheet-case {
+      min-height: 7rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &__noContacts {
+      padding: 1rem 1rem;
+      font-size: .9rem;
+      font-weight: 500;
+    }
+
+  }
+}

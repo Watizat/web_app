@@ -1,4 +1,56 @@
+@use '../../styles/variables' as v;
+@use '../../styles/medias' as m;
+
 .footer {
-  padding: 20px;
-  background-color: #ba5092;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  display: none;
+  flex-direction: column;
+  height: 50px;
+  background-color: v.$primary;
+  color: v.$white;
+  align-items: center;
+
+  @include m.tablet {
+    display: flex;
+  }
+  
+  & .container {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+  }
+
+  a {
+    font-weight: 500;
+    color: v.$white;
+
+    &:hover {
+      font-weight: 500;
+      color: v.$warning;
+    }
+  }
+
+  .important{
+    font-weight: 900;
+
+    &:hover {
+      font-weight: 900;
+    }
+  }
+  &-links {
+    .footerlinks {
+      display: flex;
+      gap: 2rem;
+      gap: 30px;
+      a {
+        color: v.$white;
+        font-weight: 500;
+    
+        &:hover {
+          font-weight: 500;
+          color: v.$warning;
+        }
+      }}}
 }

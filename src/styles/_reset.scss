@@ -1,6 +1,6 @@
 /*
-  Josh's Custom CSS Reset
-  https://www.joshwcomeau.com/css/custom-css-reset/
+Josh's Custom CSS Reset
+https://www.joshwcomeau.com/css/custom-css-reset/
 */
 *,
 *::before,
@@ -10,6 +10,7 @@
 * {
 	margin: 0;
 }
+
 html,
 body {
 	height: 100%;
@@ -44,4 +45,8 @@ h6 {
 #root,
 #__next {
 	isolation: isolate;
+}
+
+a{
+	text-decoration: none;
 }

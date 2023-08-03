@@ -1,0 +1,103 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
+
+.organisme {
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 5em;
+    margin-bottom: 1em;
+
+    @include m.mobile {
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+  }
+
+  &-details {
+    width: 50%;
+
+    &__infosalertes {
+      border-radius: 5px;
+      width: 100%;
+      border: 1px solid v.$danger;
+      & legend {
+        color: v.$danger;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      & span {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: v.$grey-800;
+      }
+    }
+
+    & h2 {
+      margin-bottom: 0.8em;
+    }
+
+    &-categories {
+      margin-top: 1em;
+
+      &-item {
+        margin-right: 0.8em;
+        width: 40px !important;
+        height: 30px !important;
+      }
+    }
+
+    @include m.mobile {
+      width: 100%;
+    }
+
+    & h2 {
+      color: v.$grey-800;
+      font-size: 1.2em;
+    }
+
+    & p {
+      font-size: 0.9em;
+      text-align: justify;
+    }
+  }
+
+  .custom-icon {
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    border: 5px solid v.$primary;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform-style: preserve-3d;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -14px; /* Ajustez la valeur ici pour contrôler la position de la pointe vers le bas */
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 18px 14px 0;
+      border-color: v.$primary transparent transparent transparent;
+      transform: translateX(-50%) translateZ(-1px);
+    }
+  }
+
+  & .leaflet-container {
+    max-width: 580px;
+    width: 50%;
+    height: 300px;
+
+    @include m.mobile {
+      width: 100%;
+    }
+  }
+}

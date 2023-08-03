@@ -1,9 +1,11 @@
+@use '../../styles/medias' as m;
+
 .container {
-  max-width: 1440px;
+  max-width: 80vw;
   width: 100%;
   margin: 0 auto;
-  padding: 0 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  
+  @include m.until-widescreen { 
+  max-width: 95vw;
+  }
 }

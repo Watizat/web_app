@@ -1,0 +1,154 @@
+@use '../../../styles/variables' as v;
+
+.leaflet-container {
+  width: 100%;
+  z-index: 0;
+}
+
+.leaflet-bottom.leaflet-left {
+  display: none;
+}
+
+.leaflet-top.leaflet-right {
+  display: none;
+}
+
+.leaflet-popup-close-button {
+  display: none;
+}
+
+.leaflet-popup-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-weight: 800;
+  min-width: 200px !important;
+
+  .popup-text {
+    color: v.$info;
+  }
+
+  .popup-button {
+    min-width: 50%;
+    // display: flex;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    background-color: rgba(v.$primary, 0.75);
+    color: v.$white;
+    border: 1px solid v.$primary;
+    border-radius: 20px;
+
+    &:hover {
+      background-color: v.$white;
+      color: v.$primary;
+      border: 1.5px solid v.$primary;
+
+      .popup-button__text {
+        color: v.$primary;
+      }
+    }
+
+    &__text {
+      color: v.$white;
+      margin: 0;
+      padding: 0.4rem 0rem;
+    }
+  }
+}
+
+.leaflet-top .leaflet-control,
+.leaflet-bottom .leaflet-control,
+.leaflet-left .leaflet-control,
+.leaflet-right .leaflet-control {
+  margin: 0;
+}
+
+.leaflet-top,
+.leaflet-left {
+  z-index: 1000;
+  margin: 0.75rem 1rem;
+  padding: 1rem 1.25rem;
+  // background-color: #fff9;
+  background-color: rgba(v.$white, 0.7);
+  border-radius: 12px;
+}
+
+.leaflet-bar a {
+  z-index: 100;
+  background-color: v.$black;
+  color: v.$white;
+
+  &:hover {
+    background-color: v.$black;
+    color: v.$white;
+  }
+}
+
+.leaflet-touch .leaflet-bar {
+  border: none;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-touch .leaflet-bar a:first-child {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.leaflet-control-zoom-out,
+.leaflet-touch .leaflet-bar a:last-child {
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.custom-icon,
+.custom-me {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
+  border-radius: 50%;
+  border: 4px solid v.$primary;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transform-style: preserve-3d;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    /* Ajustez la valeur ici pour contrôler la position de la pointe vers le bas */
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 18px 14px 0;
+    border-color: v.$primary transparent transparent transparent;
+    transform: translateX(-50%) translateZ(-1px);
+  }
+}
+
+.custom-icon {
+  background-color: v.$white;
+  color: v.$grey-800;
+}
+
+.custom-me {
+  background-color: v.$primary;
+  color: v.$white;
+
+  transform-style: preserve-3d;
+  background-image: url('../../../assets/location.svg');
+  background-size: 100%;
+  /* Par exemple, 50% de la taille de la div */
+}

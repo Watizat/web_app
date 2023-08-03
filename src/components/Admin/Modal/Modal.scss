@@ -1,0 +1,297 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
+
+#root, #bo-main {
+  // height: 100vh;
+}
+
+
+.modal {
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(v.$grey-900, 0.85);
+  contain: content;
+
+  &-main {
+    width: 75vw;
+    max-height: 90%;
+    background-color: v.$white;
+    border-radius: 20px;
+
+    @include m.fullhd {
+      width: 50vw;
+    }
+  }
+
+  &-title {
+    padding: 2rem 0 1rem;
+    font-size: 1.75rem;
+    color: v.$info;
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    border-bottom: .5px solid rgba(v.$info, .25);
+    box-shadow: rgba(0, 0, 0, 0.15) 1rem 0rem 0.3rem;
+  }
+
+  &-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  &-overflow {
+    z-index: 1;
+    max-height: 50vh;
+    overflow-y:scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2.5rem 0 0;
+  }
+
+  &-actions {
+    padding: 3rem 0;
+    display: flex;
+    justify-content: end;
+    gap: 3rem;
+    margin-top: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(v.$info, 0.25);
+    box-shadow: rgba(0, 0, 0, 0.15) -1rem 0rem 0.3rem;
+  }
+
+  &-overflow,
+  &-title,
+  &-actions {
+    padding-right: 4rem;
+    padding-left: 4rem;
+  }
+
+  &-empty {
+    box-shadow: none;  
+    .modal-title {box-shadow: none;
+      border-bottom-color: transparent;  }
+    .modal-actions {
+      box-shadow: none; 
+      border-top-color: transparent; }
+  }
+
+  &-double {
+    display: flex;
+    justify-content: space-around;
+    gap: 5rem;
+
+    &__case {
+      width: 25rem;
+    }
+  }
+
+  &-start {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5rem;
+  }
+
+  &-case {
+    &.test {
+      position: relative;
+
+      & .suggestion {
+        position: absolute;
+        background-color: white;
+        border: 1px solid black;
+        transform: translateY(30px);
+        width: 100%;
+        padding: 5px;
+
+        & li {
+          list-style: none;
+        }
+
+        & button {
+          width: 100%;
+          text-align: left;
+
+          &:hover {
+            background-color: gray;
+          }
+        }
+      }
+    }
+
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+
+    &__title {
+      color: v.$grey-600;
+      font-weight: 600;
+      font-size: .9rem;
+      text-transform: uppercase;
+    }
+
+    &__legend {
+      margin-left: 2rem;
+      font-size: .9rem;
+      font-weight: 400;
+      color: v.$grey-600;
+    }
+
+    input,
+    textarea {
+      border: none;
+      border-bottom: 1px solid v.$grey-400;
+      background-color: transparent;
+    }
+
+    &__inputTxt,
+    textarea {
+      padding: 0.2rem;
+
+      &:focus {
+        outline: none;
+        background-color: rgba(v.$info, 0.05);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-color: rgba(v.$info, 0.5);
+      }
+
+      &[type='number'] {
+        appearance: textfield;
+        /* Firefox */
+        -moz-appearance: textfield;
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    &__textarea {
+      resize: vertical;
+      min-height: 5vh;
+    }
+  }
+
+  // Entrées spécifiques
+
+  &-data {
+    &__accessDetails {
+      display: flex;
+      gap: 2rem;
+
+      [type='checkbox'] {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-right: 1rem;
+      }
+    }
+
+    &__hours {
+      input {
+        border: none;
+      }
+    }
+
+    &__hoursHead {
+      text-align: center;
+      font-weight: 500;
+      background-color: rgba(v.$sucess, 0.4);
+      color: v.$grey-800;
+    }
+
+    &__hoursLine {
+      border-bottom: 1px solid v.$grey-800;
+
+      &:hover {
+        background-color: rgba(v.$sucess, 0.2);
+      }
+    }
+
+    &__hoursDay {
+      width: 10%;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    &__hoursSeparater {
+      text-align: center;
+      width: 2%;
+    }
+
+    &__hoursHour {
+      width: 15%;
+      text-align: center;
+      border: none;
+    }
+
+    &__hoursInput {
+      width: 100%;
+      text-align: center;
+      border: none;
+      background-color: rgba(v.$sucess, 0.02);
+
+      &--error {
+        background-color: rgba(v.$danger, 0.3);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &-contact {
+
+    &__modes,
+    &__roles {
+      display: flex;
+      gap: 25%;
+    }
+
+    &__modes {
+      gap: 40%;
+    }
+
+    &__roles {
+      gap: 30%;
+      padding-top: 1rem;
+    }
+
+    &__private,
+    &__actu {
+      font-weight: 400;
+
+      select {
+        font-weight: 300;
+        background-color: v.$white;
+        border-radius: 10px;
+        padding: 0.2rem 0.4rem;
+        width: 100%;
+      }
+    }
+
+  }
+}
