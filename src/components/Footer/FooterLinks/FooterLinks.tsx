@@ -9,22 +9,29 @@ function FooterLinks() {
   const user = getUserDataFromLocalStorage();
   return (
     <div className="footerlinks">
-      <Link
-        to="/mentions-legales"
-        onClick={() => dispatch(toggleHamburger(false))}
-      >
-        Mentions légales
-      </Link>
-      <Link to="/contact" onClick={() => dispatch(toggleHamburger(false))}>
-        Nous contacter
-      </Link>
-      <Link
-        className="important"
-        to={`${user ? '/admin/dashboard' : '/login'}`}
-        onClick={() => dispatch(toggleHamburger(false))}
-      >
-        Membres Watizat
-      </Link>
+      <div className="footerlinks-sub">
+        <Link
+          to="/mentions-legales"
+          onClick={() => dispatch(toggleHamburger(false))}
+        >
+          Mentions légales
+        </Link>
+        <Link to="/contact" onClick={() => dispatch(toggleHamburger(false))}>
+          Nous contacter
+        </Link>
+      </div>
+      <div className="footerlinks-sub">
+        <Link to="https://feedback.watizat.app" target="_blank">
+          Bugs et suggestions
+        </Link>
+        <Link
+          className="important"
+          to={`${user ? '/admin/dashboard' : '/login'}`}
+          onClick={() => dispatch(toggleHamburger(false))}
+        >
+          Membres Watizat
+        </Link>
+      </div>
     </div>
   );
 }

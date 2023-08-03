@@ -112,8 +112,7 @@ function Panel() {
                   type="button"
                 >
                   <i className="las la-arrow-left" />
-                  {'   '}Retour aux résultats Retourner vers la page
-                  d&apos;accueil
+                  Retourner vers la page d&apos;accueil
                 </button>
               </Link>
             </div>

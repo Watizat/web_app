@@ -1,6 +1,6 @@
 import jwt_decode from 'jwt-decode';
 import { UserSession } from '../../../@types/user';
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUsers } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
@@ -19,10 +19,18 @@ function ModalDeleteConfirmation({
 }: ModalProps) {
   const dispatch = useAppDispatch();
 
+  const zones = useAppSelector((state) => state.admin.zones);
+  const city = useAppSelector((state) => state.user.city);
+
   async function handleDelete(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     await axiosInstance.delete(`/users/${id}`);
     const fetchData = async () => {
+      const cityLocal = localStorage.getItem('city');
+
+      const cityId = cityLocal
+        ? zones.find((zone) => zone.name === cityLocal)
+        : zones.find((zone) => zone.name === city);
       const localUser = getUserDataFromLocalStorage();
       const { data } = await axiosInstance.get('/users/me');
       const { zone } = data.data;
@@ -35,7 +43,11 @@ function ModalDeleteConfirmation({
           localUser.token.access_token
         ) as UserSession;
         if (decodedUser.role === '53de6ec2-6d70-48c8-8532-61f96133f139') {
-          await dispatch(fetchUsers(null));
+          if (cityId !== undefined) {
+            await dispatch(fetchUsers(cityId.id.toString()));
+          } else {
+            await dispatch(fetchUsers(null));
+          }
         } else {
           await dispatch(fetchUsers(zone.toString()));
         }
