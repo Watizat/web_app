@@ -5,7 +5,7 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
-
+import { AxiosError } from 'axios';
 import { Inputs } from '../../@types/formInputs';
 import {
   AuthResponse,
@@ -18,7 +18,6 @@ import {
   getUserDataFromLocalStorage,
   removeUserDataFromLocalStorage,
 } from '../../utils/user';
-import { AxiosError } from 'axios';
 
 const timeout = 5 * 1000 * 60;
 
@@ -56,12 +55,13 @@ export const registerUser = createAsyncThunk(
   'user/registerUser',
   async (formData: Inputs, { rejectWithValue }) => {
     try {
-      await axiosInstance.post('/users', {
+      const data = await axiosInstance.post('/users', {
         ...formData,
         role: '5754603f-add3-4823-9c77-a2f9789074fc',
-      })      
-    } catch (err: any) {
-      console.log(err)
+      });
+      return data.data;
+    } catch (err) {
+      console.log(err);
       return rejectWithValue(err.message);
     }
   }
@@ -100,7 +100,7 @@ export const askPassword = createAsyncThunk(
   async (email: string) => {
     await axiosInstance.post('/auth/password/request', {
       email,
-      reset_url: 'http://localhost:5173/recover-password',
+      reset_url: 'https://watizat.aliceout.io/recover-password',
     });
   }
 );
@@ -188,9 +188,11 @@ export default createReducer(initialState, (builder) => {
     })
     .addCase(registerUser.fulfilled, (state) => {
       state.isLoading = false;
-      state.message = 'Votre inscription à bien été prise en compte et va être vérifiée';
-    }).addCase(registerUser.rejected, (state) => {
+      state.message =
+        'Votre inscription à bien été prise en compte et va être vérifiée';
+    })
+    .addCase(registerUser.rejected, (state) => {
       state.isLoading = false;
       state.message = 'Erreur lors de la création du compte';
-    })
+    });
 });
