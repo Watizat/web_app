@@ -6,13 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-yarn.lock
-package-lock.json
-
-node_modules
-dist
-dist-ssr
-*.local
 
 # Editor directories and files
 .vscode/*
@@ -25,5 +18,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-yarn.lock
-.gitignore
+
+# Others
+node_modules
+dist
+dist-ssr
+*.local
+.env

@@ -1,55 +1,95 @@
-# **Watizat webguide-webapp**
+# Guide web Watizat
 
-Interface web du "webguide" de Watizat
+## Le projet
 
-### Version 1.0
+L'association [Watizat](https://watizat.org) édite un guide d'informations en plusieurs langues à destination des personnes exilées.
 
-Développée durant 'l'apothéose" de la formation "Développeur·se FullStack JS"
+Cet espace correspond à l'interface de consultation et d'administration du guide web
 
-#### Contributeur·ices initiaux·ales
+## Contribuer
 
-- @LauraBrizard
-- @KevinLeleux
-- @josearmandodias
-- @JoelGenest
-- @aliceout
+### Informations
 
-#### Choix techniques
+Prendre connaissance du [guide de contribution](https://github.com/Watizat/webguide-webapp/blob/main/docs/CODE_OF_CONDUCT.md)
 
-##### Langages
+### Installer le projet
 
-- Typescript
-- Sass
+- Cloner le repo sur votre poste de travail
+
+- Installer le projet et ses dépendances, avec une des commandes suivantes :
+
+  ````bash
+  npm install
+  ````
+
+  ```bash
+  yarn
+  ```
+
+### Utiliser le projet
+
+- Utiliser une des commandes suivantes :
+
+  ```bash
+  npm run dev
+  ```
+
+  ```bash
+  yarn dev
+  ```
+
+- Rendez vous sur <http://localhost:5173>
+
+## Documentations
+
+- [Code de conduite](https://github.com/Watizat/webguide-webapp/blob/main/docs/CODE_OF_CONDUCT.md)
+- [Documentation utilisateur·ice·s](https://docs.watizat.app) (en construction🛠️)
+
+## Informations techniques
+
+### Stack technique
+
+#### Langages
+
+- [Typescript](https://www.typescriptlang.org/)
+- [Sass](https://sass-lang.com/)
+
+#### Technologies
 
 ##### Frontend
 
-- React
-- Redux
-- Vite
+- [React](https://react.dev/)
+- [Redux](https://redux.js.org/)
+- [Vite](https://vitejs.dev/)
 
 ##### Backend
 
-- CMS Headless : Directus
-- Base de données : PostgreSQL
+- CMS Headless : [Directus](https://directus.io/)
+- Base de données : [PostgreSQL](https://www.postgresql.org)
 
-#### Fonctionnalités
+NB : Backend déployé au travers d'un container Docker : [lien vers la configuration](https://docs.directus.io/self-hosted/quickstart.html)
 
-##### Front-office
+### Status
 
-- Consultation des données
-  - Affichage dynamique des points sur une map
-  - Responsive web-design
-- Filtrage des données
-  - Par catégorie
-  - Pas accès
-  - Par nom d'organisme
+**Version actuelle : 1.0**
 
-###### Back-office
+- Version 1.0.0 publiée le 03 août 2023
 
-- Login
-  - Quatre rôle d'utilisateur·ices
-  - Demande de création de comtpe
-  - Réinitialisation de mot de passe
-- Sélection dynamique de la zone de l'utilisateur·ice
-- Modification des données
-- Modification des utilisateur·ices
+### Liens vers les différentes versions
+
+- Production : <https://guide.watizat.app>
+- Dévellopement : <https://dev.watizat.app>
+
+### Contributeur·ices initiaux·ales
+
+Application développée (par une super équipe motivée et rigolote) durant le projet de fin de formation : "Développeur·se FullStack JS" de l'école O'Clock
+
+- [@LauraBrizard](https://github.com/LauraBrizard)
+- [@KevinLeleux](https://github.com/KevinLeleux)
+- [@josearmandodias](https://github.com/josearmandodias)
+- [@JoelGenest](https://github.com/JoelGenest)
+- [@aliceout](https://github.com/aliceout)
+
+## Licence
+
+- [Licence : Mozilla Public License 2.0](https://github.com/Watizat/webguide-webapp/blob/main/LICENSE)
