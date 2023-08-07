@@ -80,9 +80,7 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
             {uniqueCategoriesArray.map((categorie) => (
               <div className="tooltip" key={categorie.id}>
                 <Icon
-                  className={`Left-lower__categories___item${
-                    categorie.isCheck ? '--check' : ''
-                  }`}
+                  className="Left-lower__categories___item"
                   icon={categorie.value}
                 />
                 <span className="tooltiptext">{categorie.name}</span>

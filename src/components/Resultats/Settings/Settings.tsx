@@ -1,6 +1,6 @@
-import { useMediaQuery } from 'react-responsive';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
@@ -234,5 +234,3 @@ function Settings({
 }
 
 export default Settings;
-
-('dbaeumer.vscode-eslint');
