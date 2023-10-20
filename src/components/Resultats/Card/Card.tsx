@@ -9,6 +9,13 @@ interface OrganismProps {
   categoryFilter: string[];
 }
 
+interface Categories {
+  id: number;
+  value: string;
+  name: string;
+  isCheck: boolean;
+}
+
 function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   const { services } = organism;
 
@@ -29,6 +36,16 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
     name: tag.name,
     isCheck: categoryFilter.includes(tag.tag),
   }));
+
+  const uniqueCategories: { [key: string]: Categories } = {};
+
+  categories.forEach((obj) => {
+    if (!uniqueCategories[obj.name]) {
+      uniqueCategories[obj.name] = obj;
+    }
+  });
+
+  const uniqueCategoriesArray = Object.values(uniqueCategories);
 
   return (
     <div className="resultsCard" id={organism.id.toString()}>
@@ -60,12 +77,10 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
             savoir plus
           </Link>
           <div className="Left-lower__categories">
-            {categories.map((categorie) => (
+            {uniqueCategoriesArray.map((categorie) => (
               <div className="tooltip" key={categorie.id}>
                 <Icon
-                  className={`Left-lower__categories___item${
-                    categorie.isCheck ? '--check' : ''
-                  }`}
+                  className="Left-lower__categories___item"
                   icon={categorie.value}
                 />
                 <span className="tooltiptext">{categorie.name}</span>

@@ -4,6 +4,7 @@ import './Contact.scss';
 
 function Contact() {
   const organism = useAppSelector((state) => state.organism.organism);
+  console.log('organism', organism);
 
   if (organism === null) {
     return <span>Erreur</span>;
@@ -24,8 +25,9 @@ function Contact() {
             <p>{organism.mail}</p>
           </Link>
         </div>
-        {organism.contacts.length > 0 &&
-          organism.contacts.map((contact) => (
+        {organism.contacts
+          .filter((contact) => contact.visibility === true)
+          .map((contact) => (
             <div className="organisme-infos--othercontact" key={contact.name}>
               <p className="organisme-infos--othercontact-job">{contact.job}</p>
               <p>{contact.name}</p>
