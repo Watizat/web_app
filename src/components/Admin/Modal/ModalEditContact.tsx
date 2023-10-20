@@ -95,7 +95,7 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
                 <h4 className="modal-case__title">Telephone</h4>
                 <input
                   className="modal-case__inputTxt"
-                  type="number"
+                  type="tel"
                   defaultValue={contact.phone}
                   {...register('phone', {
                     minLength: {
