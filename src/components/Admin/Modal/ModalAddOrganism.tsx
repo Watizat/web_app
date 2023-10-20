@@ -129,7 +129,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
               <h4 className="modal-case__title">Telephone</h4>
               <input
                 className="modal-case__inputTxt"
-                type="number"
+                type="tel"
                 placeholder="ex: 0645784598 (sans espace)"
                 {...register('phone', {
                   minLength: {

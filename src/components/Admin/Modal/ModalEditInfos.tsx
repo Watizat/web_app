@@ -93,7 +93,7 @@ function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
                 <h4 className="modal-case__title">Phone</h4>
                 <input
                   className="modal-case__inputTxt"
-                  type="number"
+                  type="tel"
                   defaultValue={organism.phone}
                   {...register('phone', {
                     minLength: {
