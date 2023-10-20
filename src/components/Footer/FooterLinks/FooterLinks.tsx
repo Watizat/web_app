@@ -10,14 +10,20 @@ function FooterLinks() {
   return (
     <div className="footerlinks">
       <div className="footerlinks-sub">
+        <Link to="/" onClick={() => dispatch(toggleHamburger(false))}>
+          Watizat 2023
+        </Link>
+        <Link to="https://watizat.org/qui-sommes-nous/" target="_blank">
+          Qui sonnes-nous ?
+        </Link>
+        <Link to="https://watizat.org/nous-contacter/" target="_blank">
+          Nous contacter
+        </Link>
         <Link
           to="/mentions-legales"
           onClick={() => dispatch(toggleHamburger(false))}
         >
           Mentions légales
-        </Link>
-        <Link to="/contact" onClick={() => dispatch(toggleHamburger(false))}>
-          Nous contacter
         </Link>
       </div>
       <div className="footerlinks-sub">

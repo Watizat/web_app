@@ -9,7 +9,6 @@ import Dashboard from './components/Admin/Dashboard/Dashboard';
 import Edition from './components/Admin/Edition/Edition';
 import Users from './components/Admin/Users/Users';
 import App from './components/App/App';
-import Contact from './components/Contact/Contact';
 import NotFound from './components/Errors/NotFound/NotFound';
 import Home from './components/Home/Home';
 import InactivityDetector from './components/InactivityDetector/InactivityDetector';
@@ -18,7 +17,7 @@ import ForgottenPassword from './components/Login/ForgottenPassword';
 import Login from './components/Login/Login';
 import NewUser from './components/Login/NewUser';
 import RecoverPassword from './components/Login/RecoverPassword';
-import MentionsLegales from './components/MentionsLegales/MentionsLegales';
+import MentionsLegales from './components/StaticsPages/MentionsLegales';
 import Organisme from './components/Organisme/Organisme';
 import Orientation from './components/Orientation/Orientation';
 import Resultats from './components/Resultats/Resultats';
@@ -32,7 +31,6 @@ const router = createBrowserRouter(
         <Route path="/forgotten-password" element={<ForgottenPassword />} />
         <Route path="/recover-password" element={<RecoverPassword />} />
         <Route path="/account-request" element={<AccountRequest />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/organisme/:slug" element={<Organisme />} />
         <Route path="/login" element={<Login />} />
