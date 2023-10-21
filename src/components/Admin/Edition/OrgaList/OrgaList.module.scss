@@ -1,0 +1,89 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/medias' as m;
+@use '../../../../styles/elements';
+
+.organisms {
+  display: flex;
+  flex-direction: column;
+
+  background-color: v.$white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0.2rem 0rem 0.5rem;
+
+  min-width: 30vw;
+
+  @include m.desktop {
+    min-width: 27vw;
+  }
+
+  @include m.widescreen {
+    min-width: 24vw;
+  }
+
+  @include m.fullhd {
+    min-width: 21vw;
+  }
+
+  @include m.qhd {
+    min-width: 17vw;
+  }
+
+  &_list {
+    overflow-y: auto;
+    padding: 0;
+  }
+
+  &_button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    text-align: left;
+
+    &:hover {
+      background-color: rgba(v.$info, 0.1);
+    }
+
+    &.selected {
+      background-color: rgba(v.$info, 0.2);
+      box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    }
+
+    @include m.desktop {
+      padding: 0 1rem;
+      min-height: 4rem;
+    }
+
+    @include m.widescreen {
+      min-height: 4rem;
+    }
+  }
+
+  &_card {
+    padding: 0;
+
+    background-color: v.$white;
+    border-bottom: 1px solid v.$grey-200;
+
+    &__name {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: v.$grey-800;
+      text-transform: lowercase;
+
+      &:first-letter {
+        text-transform: capitalize;
+      }
+    }
+
+    &__adress {
+      font-weight: 500;
+      font-size: 0.8rem;
+      color: v.$grey-500;
+    }
+  }
+
+  &_orgaCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1rem;
+  }
+}

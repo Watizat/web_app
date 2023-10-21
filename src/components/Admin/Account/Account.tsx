@@ -5,7 +5,7 @@ import { fetchRoles, fetchZones } from '../../../store/reducers/admin';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { DirectusUser } from '../../../@types/user';
 import { axiosInstance } from '../../../utils/axios';
-import './Account.scss';
+import styles from './Account.module.scss';
 import { Inputs } from '../../../@types/formInputs';
 import { validateEmail } from '../../../utils/form/form';
 import { editUser } from '../../../store/reducers/user';
@@ -50,17 +50,17 @@ function Account() {
   }
 
   return (
-    <div className="account">
-      <div className="account-main">
-        <h1 className="account-title">Informations du compte</h1>
-        <form className="account-list" onSubmit={handleSubmit(onSubmit)}>
+    <div className={styles.account}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>Informations du compte</h1>
+        <form className={styles.list} onSubmit={handleSubmit(onSubmit)}>
           <input type="text" hidden {...register('id')} defaultValue={me.id} />
-          <div className="account-double">
-            <div className="account-case">
+          <div className={styles.double}>
+            <div className={styles.case}>
               <fieldset>
                 <legend>Prénom</legend>
                 <input
-                  className="account-case__inputTxt"
+                  className={styles.case_case__inputTxt}
                   type="text"
                   {...register('first_name', {
                     required: 'Ce champs est requis',
@@ -73,11 +73,11 @@ function Account() {
                 <small className="required">{errors.first_name.message}</small>
               )}
             </div>
-            <div className="account-case">
+            <div className={styles.case}>
               <fieldset>
                 <legend>Nom</legend>
                 <input
-                  className="account-case__inputTxt"
+                  className={styles.case_case__inputTxt}
                   type="text"
                   {...register('last_name', {
                     required: 'Ce champs est requis',
@@ -91,12 +91,12 @@ function Account() {
               )}
             </div>
           </div>
-          <div className="account-double">
-            <div className="account-case">
+          <div className={styles.double}>
+            <div className={styles.case}>
               <fieldset>
                 <legend>Adresse email</legend>
                 <input
-                  className="account-case__inputTxt account-contact__mail"
+                  className={styles.case_inputTxt}
                   type="email"
                   {...register('email', {
                     validate: validateEmail,
@@ -106,11 +106,11 @@ function Account() {
                 />
               </fieldset>
             </div>
-            <div className="account-case">
+            <div className={styles.case}>
               <fieldset>
                 <legend>Nouveau mot de passe</legend>
                 <input
-                  className="account-case__inputTxt account-contact__mail"
+                  className={styles.case_inputTxt}
                   type="password"
                   {...register('password')}
                   placeholder="Nouveau mot de passe"
@@ -118,8 +118,8 @@ function Account() {
               </fieldset>
             </div>
           </div>
-          <div className="account-double">
-            <div className="account-case">
+          <div className={styles.double}>
+            <div className={styles.case}>
               <fieldset>
                 <select defaultValue={me.role} disabled>
                   {roles.map((role) => (
@@ -131,7 +131,7 @@ function Account() {
                 <legend>Rôle</legend>
               </fieldset>
             </div>
-            <div className="account-case">
+            <div className={styles.case}>
               <fieldset>
                 <select defaultValue={me.zone} disabled>
                   {zones.map((zone) => (
@@ -144,7 +144,7 @@ function Account() {
               </fieldset>
             </div>
           </div>
-          <div className="account-actions">
+          <div className={styles.actions}>
             <Link to="/admin">
               <button
                 type="button"

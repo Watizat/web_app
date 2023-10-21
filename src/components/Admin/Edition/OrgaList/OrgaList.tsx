@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Organism } from '../../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setAdminOrganism } from '../../../../store/reducers/admin';
-import './OrgaList.scss';
-// import OrgaListSearch from './OrgaListSearch/OrgaListSearch';
+import styles from './OrgaList.module.scss';
+// import OrgaListSearch from './Search/Search';
 
 function OrgaList() {
   const organisms = useAppSelector((state) => state.admin.organisms);
@@ -17,23 +17,25 @@ function OrgaList() {
   }
 
   return (
-    <section className="orgaList">
+    <section className={styles.organisms}>
       {/* <OrgaListSearch /> */}
-      <ul className="orgaList-list">
+      <ul className={styles.organisms_list}>
         {isLoading && <span />}
         {organisms.map((organism) => (
-          <li key={organism.id} className="orgaList-card">
+          <li key={organism.id} className={styles.organisms_card}>
             <button
               type="button"
               onClick={() => handleClick(organism)}
               className={
                 isActive === organism.id
-                  ? 'orgaList-button selected'
-                  : 'orgaList-button'
+                  ? `${styles.organisms_button} ${styles.selected}`
+                  : styles.organisms_button
               }
             >
-              <div className="orgaList-card__name">{organism.name}</div>
-              <div className="orgaList-card__adress">{organism.address}</div>
+              <div className={styles.organisms_card__name}>{organism.name}</div>
+              <div className={styles.organisms_card__adress}>
+                {organism.address}
+              </div>
             </button>
           </li>
         ))}

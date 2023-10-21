@@ -1,0 +1,35 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+
+  &_sub {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  a {
+    color: v.$white;
+    font-weight: 500;
+
+    &:hover {
+      font-weight: 500;
+      color: v.$warning;
+    }
+  }
+  & span {
+    width: min-content;
+    white-space: nowrap;
+  }
+}
+
+.important {
+  font-weight: 900;
+
+  &:hover {
+    font-weight: 900;
+  }
+}

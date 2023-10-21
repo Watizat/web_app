@@ -1,0 +1,53 @@
+@use '../../styles/variables' as v;
+@use '../../styles/medias' as m;
+
+.header {
+  display: flex;
+  min-height: 75px;
+  background-color: v.$primary;
+  color: v.$white;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  min-height: 100%;
+  font-size: 1rem;
+  font-weight: 200;
+  width: 80vw;
+}
+
+.logo {
+  display: flex;
+  height: 55px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.navbar {
+  display: none;
+
+  @include m.tablet {
+    display: flex;
+  }
+}
+
+.hamburger {
+  font-size: 2.5rem;
+
+  @include m.tablet {
+    display: none;
+  }
+}
+
+.resultsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 95vw;
+  width: 100%;
+  margin: 0 auto;
+}

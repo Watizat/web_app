@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo-grey.svg';
-import FooterLinks from '../Footer/FooterLinks/FooterLinks';
-import NavBar from '../Header/NavBar/NavBar';
+import FooterLinks from '../Footer/Links/Links';
+import NavBar from '../Header/Links/Links';
 import './BurgerMenu.scss';
 
 function BurgerMenu() {

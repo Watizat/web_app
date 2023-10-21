@@ -1,0 +1,16 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+
+.navbar {
+  display: flex;
+  gap: 30px;
+  a {
+    color: v.$white;
+    font-weight: 600;
+
+    &:hover {
+      font-weight: 600;
+      color: v.$warning;
+    }
+  }
+}

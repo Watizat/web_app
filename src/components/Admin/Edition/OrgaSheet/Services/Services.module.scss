@@ -1,0 +1,21 @@
+@use '../../../../../styles/variables' as v;
+@use '../../../../../styles/medias' as m;
+@use '../../../../../styles/elements';
+
+.services {
+  &_list {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @include m.desktop {
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 2rem;
+    }
+
+    @include m.fullhd {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-column-gap: 2rem;
+    }
+  }
+}

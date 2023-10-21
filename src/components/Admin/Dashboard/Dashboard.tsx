@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './Dashboard.scss';
+import styles from './Dashboard.module.scss';
 
 function Dashboard() {
   const links = [
@@ -43,26 +43,26 @@ function Dashboard() {
   ];
 
   return (
-    <>
+    <div className={styles.dashboard}>
       <h1>Dashboard</h1>
-      <ul className="dashboardLinks">
+      <ul className={styles.links}>
         {links.map((e) => (
           <Link
             key={e.name}
             to={e.to}
             target={e.target}
-            className={`${e.active ? '' : 'dashboardLinks-forbidden'}`}
+            className={`${e.active ? '' : styles.links_forbidden}`}
           >
-            <li className="dashboardLinks-card">
-              <div className="dashboardLinks-card__logo">
+            <li className={styles.links_card}>
+              <div className={styles.links_card__logo}>
                 <i className={e.icon} />
               </div>
-              <p className="dashboardLinks-card__text">{e.name}</p>
+              <p className={styles.lins_card__text}>{e.name}</p>
             </li>
           </Link>
         ))}
       </ul>
-    </>
+    </div>
   );
 }
 

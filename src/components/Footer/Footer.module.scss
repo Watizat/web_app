@@ -1,0 +1,33 @@
+@use '../../styles/variables' as v;
+@use '../../styles/medias' as m;
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  display: none;
+  flex-direction: column;
+  height: 50px;
+  background-color: v.$primary;
+  color: v.$white;
+  align-items: center;
+  justify-content: center;
+
+  @include m.tablet {
+    display: flex;
+  }
+
+  & .container {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    gap: 2rem;
+  }
+
+}
+
+.links {
+  width: 100%;
+}
+
+

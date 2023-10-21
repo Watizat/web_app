@@ -10,7 +10,7 @@ import Header from '../Header/Header';
 import Map from './Map/Map';
 import Menu from './Menu/Menu';
 import Panel from './Panel/Panel';
-import './Resultats.scss';
+import styles from './Resultats.module.scss';
 
 function Resultats() {
   const isTouch = useMediaQuery({ query: '(max-width: 1023px)' });
@@ -47,7 +47,7 @@ function Resultats() {
   return (
     <>
       <Header />
-      <main className="results">
+      <main className={styles.results}>
         {(isDesktop || !isActiveMap) && !loader && <Panel />}
         {(isDesktop || isActiveMap) && !loader && (
           <Map cityPosition={cityPosition} />

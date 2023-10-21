@@ -19,7 +19,7 @@ function ModalInactivityDetector({
     setIsModalActive(false);
     setAnswerCount((prev) => prev + 1);
   };
-  const [countdown, setCountdown] = useState(10);
+  const [countdown, setCountdown] = useState(30);
 
   useEffect(() => {
     const intervalID = setInterval(() => {

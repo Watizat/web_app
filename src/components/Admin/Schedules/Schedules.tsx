@@ -1,6 +1,5 @@
 import { Schedule } from '../../../@types/organism';
 import { useAppSelector } from '../../../hooks/redux';
-import './Schedules.scss';
 
 interface SchedulesProps {
   schedule: Schedule[];

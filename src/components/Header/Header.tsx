@@ -5,9 +5,8 @@ import logo from '../../assets/logo.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleHamburger } from '../../store/reducers/hamburger';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
-import Container from '../Container/Container';
-import NavBar from './NavBar/NavBar';
-import './Header.scss';
+import Links from './Links/Links';
+import styles from './Header.module.scss';
 
 function Header() {
   const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
@@ -16,16 +15,16 @@ function Header() {
   const { pathname } = useLocation();
 
   return (
-    <header id="header">
+    <header className={styles.header}>
       {pathname === '/resultats' || pathname === '/resultats/' ? (
-        <div className="header-reasultsContainer">
-          <Link className="header-logo" to="/">
+        <div className={styles.resultsContainer}>
+          <Link className={styles.logo} to="/">
             <img src={logo} alt="watizat logo" />
           </Link>
-          <div className="header-navbar">
-            <NavBar />
+          <div className={styles.navbar}>
+            <Links />
           </div>
-          <div className="header-hamburger">
+          <div className={styles.hamburger}>
             <Hamburger
               toggled={isOpen}
               toggle={() => dispatch(toggleHamburger(!isOpen))}
@@ -34,21 +33,21 @@ function Header() {
           {isOpen && !isTablet && <BurgerMenu />}
         </div>
       ) : (
-        <Container>
-          <Link className="header-logo" to="/">
+        <div className={styles.container}>
+          <Link className={styles.logo} to="/">
             <img src={logo} alt="watizat logo" />
           </Link>
-          <div className="header-navbar">
-            <NavBar />
+          <div className={styles.navbar}>
+            <Links />
           </div>
-          <div className="header-hamburger">
+          <div className={styles.hamburger}>
             <Hamburger
               toggled={isOpen}
               toggle={() => dispatch(toggleHamburger(!isOpen))}
             />
           </div>
           {isOpen && !isTablet && <BurgerMenu />}
-        </Container>
+        </div>
       )}
     </header>
   );

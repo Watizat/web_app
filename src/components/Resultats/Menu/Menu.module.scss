@@ -1,0 +1,45 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+
+.resultsMenu {
+  font-family: 'Roboto', sans-serif;
+  z-index: 100;
+
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.5rem;
+
+  position: fixed;
+  bottom: 3rem;
+
+  padding: 0.5rem 1rem;
+
+  border-radius: 20px;
+  border: 0.5px solid rgba(v.$white, 0.8);
+  color: v.$white;
+  background-color: v.$black;
+  box-shadow: 0 0 20px #2d5161;
+
+  font-size: 0.9rem;
+  font-weight: 800;
+
+  @include m.desktop {
+    display: none;
+  }
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  &_icon {
+    font-size: 1.2rem;
+  }
+}
+
+.left,
+.right {
+  background-color: transparent;
+}

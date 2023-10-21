@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../../../hooks/redux';
 import { toggleHamburger } from '../../../../store/reducers/hamburger';
 import { logout } from '../../../../store/reducers/user';
-import './NavBar.scss';
+import styles from './NavBar.module.scss';
 
 function NavBar() {
   const dispatch = useAppDispatch();
@@ -64,7 +64,7 @@ function NavBar() {
   };
 
   return (
-    <div className="adminNav">
+    <div className={styles.adminNav}>
       {links.map((e) => (
         <NavLink
           key={e.name}
@@ -72,16 +72,17 @@ function NavBar() {
           onClick={() => dispatch(toggleHamburger(false))}
           className={({ isActive }) =>
             isActive
-              ? 'adminNav-isActive'
-              : `${e.active ? '' : 'adminNav-forbidden'}`
+              ? styles.adminNav_isActive
+              : `${e.active ? '' : styles.adminNav_forbidden}`
           }
         >
-          <i className={e.icon} />
+          <i className={`${styles.adminNav_las} ${e.icon}`} />
           <li>{e.name}</li>
         </NavLink>
       ))}
       <Link to="/" onClick={handleLogout}>
-        <i className="las la-sign-out-alt" />
+        <i className={`${styles.adminNav_las} las la-sign-out-alt`} />
+
         <li>Se déconnecter</li>
       </Link>
     </div>
