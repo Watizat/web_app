@@ -5,8 +5,8 @@ import { KeyOfloginCredentials } from '../../@types/user';
 import logo from '../../assets/logo.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeLoginCredentialsField, login } from '../../store/reducers/user';
-import './Login.scss';
 import { getUserDataFromLocalStorage } from '../../utils/user';
+import styles from './Login.module.scss';
 
 function Login() {
   const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
@@ -38,10 +38,10 @@ function Login() {
   return (
     <>
       {isTablet && (
-        <div className="login">
+        <div className={styles.login}>
           <h1>Login</h1>
-          {error && <p className="login-error">{error}</p>}
-          <form className="login-form" onSubmit={handleSubmit}>
+          {error && <p className={styles.error}>{error}</p>}
+          <form className={styles.login_form} onSubmit={handleSubmit}>
             <fieldset>
               <legend>Email</legend>
               <input
@@ -68,9 +68,9 @@ function Login() {
               Login
             </button>
           </form>
-          <div className="login-links">
+          <div className={styles.login_links}>
             <Link to="/forgotten-password">Mot de passe oublié</Link>
-            <div className="login-newAccount">
+            <div className={styles.login_newAccount}>
               Pas de compte ?
               <Link to="/account-request">
                 <br />
@@ -81,8 +81,8 @@ function Login() {
         </div>
       )}
 
-      <div id="mobileOut">
-        <Link className="mobileOut__logo" to="/">
+      <div className={styles.mobileOut}>
+        <Link className={styles.mobileOut_logo} to="/">
           <img src={logo} alt="watizat logo" />
         </Link>
         <p>
@@ -94,7 +94,7 @@ function Login() {
           <br />
           <br /> Promis, ceci n&apos;est pas un caprice de dévellopeur.se 🤪
         </p>
-        <Link className="mobileOut__returnToHome" to="/">
+        <Link className={styles.mobileOut_returnToHome} to="/">
           <p>Retourner vers la page d&apos;accueil</p>
         </Link>
       </div>

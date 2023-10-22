@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import './Login.scss';
 import { ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   askPassword,
   changeLoginCredentialsField,
 } from '../../store/reducers/user';
+import styles from './Login.module.scss';
 
 function ForgottenPassword() {
   const dispatch = useAppDispatch();
@@ -24,10 +24,10 @@ function ForgottenPassword() {
   };
 
   return (
-    <div className="login">
+    <div className={styles.login}>
       <h1>Mot de passé oublié</h1>
-      {message && <p className="login-succes">{message}</p>}
-      <form onSubmit={handleSubmit} className="login-form">
+      {message && <p>{message}</p>}
+      <form onSubmit={handleSubmit} className={styles.login_form}>
         <fieldset>
           <legend>Email</legend>
           <input
@@ -44,7 +44,7 @@ function ForgottenPassword() {
           Demander la réinitialisation
         </button>
       </form>
-      <div className="login-newAccount">
+      <div className={styles.login_newAccount}>
         Pas encore de compte ?
         <Link to="/account-request">
           <br />

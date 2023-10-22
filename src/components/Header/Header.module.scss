@@ -3,9 +3,10 @@
 
 .header {
   display: flex;
-  min-height: 75px;
+  min-height: 65px;
   background-color: v.$primary;
   color: v.$white;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 .container {
@@ -22,9 +23,30 @@
 
 .logo {
   display: flex;
-  height: 55px;
+  justify-content: center;
+  align-items: center;
   margin-top: auto;
   margin-bottom: auto;
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  transition: filter ease-in-out 80ms;
+  &_img {
+    max-height: 40px;
+    margin-top: 0.2rem;
+  }
+  &_text {
+    margin-left: 0.75rem;
+    color: v.$white;
+    font-size: 1.7em;
+    color: #fff;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  &:hover {
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .navbar {

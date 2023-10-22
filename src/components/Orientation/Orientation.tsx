@@ -1,9 +1,9 @@
 import Container from '../Container/Container';
-import './Orientation.scss';
+import styles from './Orientation.module.scss';
 
 function Orientation() {
   return (
-    <div className="orientation">
+    <div className={styles.orientation}>
       <Container>Orientation</Container>
     </div>
   );

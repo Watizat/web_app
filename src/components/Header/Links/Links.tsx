@@ -3,28 +3,51 @@ import { useAppDispatch } from '../../../hooks/redux';
 import { toggleHamburger } from '../../../store/reducers/hamburger';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
 import styles from './Links.module.scss';
+import links from './linksData';
 
-function NavBar() {
+function Links() {
   const dispatch = useAppDispatch();
   const user = getUserDataFromLocalStorage();
+
+  const handleLinkClick = () => {
+    dispatch(toggleHamburger(false));
+  };
+
+  // const links = [
+  //   {
+  //     name: 'Accueil',
+  //     to: '/',
+  //     onclick: handleLinkClick,
+  //     mobile: true,
+  //   },
+  //   {
+  //     name: 'Watizat.org',
+  //     to: '/',
+  //     target: '_blank',
+  //     mobile: true,
+  //   },
+  //   {
+  //     name: 'Membres Watizat',
+  //     to: user ? '/admin/dashboard' : '/login',
+  //     onclick: handleLinkClick,
+  //   },
+  // ];
+
   return (
-    <div className={styles.navbar}>
-      <Link to="/" onClick={() => dispatch(toggleHamburger(false))}>
-        Accueil
-      </Link>
-      {/* <Link to="/orientation"  onClick={() => setMenuIsOpen(false)}>Fil d&apos;orientation</Link> */}
-      <Link to="https://watizat.org" target="_blank">
-        Watizat.org
-      </Link>
-      <Link
-        className={styles.important}
-        to={`${user ? '/admin/dashboard' : '/login'}`}
-        onClick={() => dispatch(toggleHamburger(false))}
-      >
-        Membres Watizat
-      </Link>
+    <div className={styles.links}>
+      {links.map((e) => (
+        <Link
+          key={e.name}
+          to={
+            e.needUser ? `${user ? '/admin/dashboard' : '/login'}` : e.to || '/'
+          }
+          target={e.target}
+        >
+          {e.name}
+        </Link>
+      ))}
     </div>
   );
 }
 
-export default NavBar;
+export default Links;

@@ -19,7 +19,8 @@ function Header() {
       {pathname === '/resultats' || pathname === '/resultats/' ? (
         <div className={styles.resultsContainer}>
           <Link className={styles.logo} to="/">
-            <img src={logo} alt="watizat logo" />
+            <img className={styles.logo_img} src={logo} alt="watizat logo" />
+            <span className={styles.logo_text}>Watizat</span>
           </Link>
           <div className={styles.navbar}>
             <Links />
@@ -35,7 +36,8 @@ function Header() {
       ) : (
         <div className={styles.container}>
           <Link className={styles.logo} to="/">
-            <img src={logo} alt="watizat logo" />
+            <img className={styles.logo_img} src={logo} alt="watizat logo" />
+            <span className={styles.logo_text}>Watizat</span>
           </Link>
           <div className={styles.navbar}>
             <Links />

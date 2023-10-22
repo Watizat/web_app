@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-
 import { Inputs } from '../../@types/formInputs';
 import { registerUser } from '../../store/reducers/user';
-import './Login.scss';
 import { validateEmail } from '../../utils/form/form';
+import styles from './Login.module.scss';
 
 function AccountRequest() {
   const {
@@ -40,7 +39,7 @@ function AccountRequest() {
 
   if (confirmationMessage) {
     return (
-      <div className="login accountRequestMessage">
+      <div className={`${styles.login} ${styles.accountRequestMessage}`}>
         <p>{confirmationMessage}</p>
         <Link to="/">
           <button
@@ -56,10 +55,10 @@ function AccountRequest() {
   }
 
   return (
-    <div className="login accountRequest">
+    <div className={`${styles.login} ${styles.accountRequest}`}>
       <h1>Demande de création de compte</h1>
       <form
-        className="login-form accountRequest-form"
+        className={`${styles.login_form} ${styles.accountRequest_form}`}
         onSubmit={handleSubmit(onSubmit)}
       >
         <fieldset>
@@ -112,7 +111,7 @@ function AccountRequest() {
           </select>
           <legend>Antenne locale</legend>
         </fieldset>
-        <p className="accountRequest-form__text">
+        <p className={styles.accountRequest_form__text}>
           La création de compte est réservée aux membres actifs des groupes
           locaux de l’association Watizat
           <br />
@@ -127,7 +126,7 @@ function AccountRequest() {
         </button>
       </form>
 
-      <div className="login-newAccount">
+      <div className={styles.login_newAccount}>
         Déja un compte ?
         <Link to="/login">
           <br />

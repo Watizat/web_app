@@ -1,11 +1,12 @@
 @use '../../styles/medias' as m;
+@use '../../styles/variables' as v;
 
 .results {
   display: flex;
   justify-content: center;
-    height: calc(100vh - 75px); 
+  height: calc(100vh - v.$headerHeight);
 
-    @include m.touch {
-    height: calc(100vh - 50px); 
-    }
+  @include m.touch {
+    height: calc(100vh - v.$headerHeight);
+  }
 }

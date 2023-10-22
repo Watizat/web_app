@@ -6,7 +6,7 @@ import Header from '../Header/Header';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchZones } from '../../store/reducers/admin';
 import { fetchCategories, fetchDays } from '../../store/reducers/organisms';
-import './App.scss';
+import styles from './App.module.scss';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ function App() {
   }, [dispatch, langue]);
 
   return (
-    <div className="app">
+    <div className={styles.app}>
       {!loading && (
         <>
           <Header />

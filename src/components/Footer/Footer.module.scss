@@ -7,11 +7,12 @@
   width: 100vw;
   display: none;
   flex-direction: column;
-  height: 50px;
+  height: v.$footerHeight;
   background-color: v.$primary;
   color: v.$white;
   align-items: center;
   justify-content: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
 
   @include m.tablet {
     display: flex;
@@ -23,11 +24,8 @@
     margin: auto;
     gap: 2rem;
   }
-
 }
 
 .links {
   width: 100%;
 }
-
-
