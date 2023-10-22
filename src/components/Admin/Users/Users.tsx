@@ -68,30 +68,48 @@ function Users() {
 
       {users.length > 0 && (
         <div className={styles.users}>
-          <table>
-            <thead>
-              <tr>
-                <th scope="col" className={styles.txtAlignLeft}>
+          <table className={styles.table}>
+            <thead className={styles.thead}>
+              <tr className={styles.tr}>
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignLeft}`}
+                >
                   Identité
                 </th>
-                <th scope="col" className={styles.txtAlignLeft}>
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignLeft}`}
+                >
                   Antenne
                 </th>
-                <th scope="col" className={styles.txtAlignCenter}>
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignCenter}`}
+                >
                   Adresse email
                 </th>
-                <th scope="col" className={styles.txtAlignCenter}>
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignCenter}`}
+                >
                   Dernière connexion
                 </th>
-                <th scope="col" className={styles.txtAlignCenter}>
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignCenter}`}
+                >
                   Rôles
                 </th>
-                <th scope="col" className={styles.txtAlignCenter}>
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignCenter}`}
+                >
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className={styles.tbody}>
               {users.map((user) => (
                 <UsersDetails key={user.id} user={user} />
               ))}

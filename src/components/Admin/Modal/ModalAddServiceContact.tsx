@@ -104,7 +104,7 @@ function ModalAddServiceContact({ service, setIsActive }: ModalProps) {
             </div>
             <div className={styles.case}>
               <h4 className={styles.case_title}>Rôles</h4>
-              <div className={styles.contact__roles}>
+              <div className={styles.contact_roles}>
                 <label className={styles.contact_private}>
                   <fieldset>
                     <select {...register('visibility', { required: true })}>

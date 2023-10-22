@@ -110,7 +110,7 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                           className={classNames(
                             styles.data_hoursInput,
                             errors[`schedule_openam_${index + 1}`] &&
-                              styles.data__hoursInput__error
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_openam_${index + 1}`, {
                             validate: (value) =>
@@ -124,7 +124,7 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                           className={classNames(
                             styles.data_hoursInput,
                             errors[`schedule_closeam_${index + 1}`] &&
-                              styles.data__hoursInput__error
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_closeam_${index + 1}`, {
                             validate: (value) =>
@@ -138,7 +138,7 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                           className={classNames(
                             styles.data_hoursInput,
                             errors[`schedule_openpm_${index + 1}`] &&
-                              styles.data__hoursInput__error
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_openpm_${index + 1}`, {
                             validate: (value) =>
@@ -152,7 +152,7 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                           className={classNames(
                             styles.data_hoursInput,
                             errors[`schedule_closepm_${index + 1}`] &&
-                              styles.data__hoursInput__error
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_closepm_${index + 1}`, {
                             validate: (value) =>

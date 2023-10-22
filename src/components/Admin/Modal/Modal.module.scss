@@ -2,11 +2,6 @@
 @use '../../../styles/medias' as m;
 @use '../../../styles/elements';
 
-#root,
-#bo-main {
-  // height: 100vh;
-}
-
 .modal {
   z-index: 100;
   position: absolute;
@@ -295,5 +290,11 @@
       padding: 0.2rem 0.4rem;
       width: 100%;
     }
+  }
+}
+
+.editUser {
+  &_table {
+    border-spacing: 7rem 2rem;
   }
 }

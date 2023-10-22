@@ -108,7 +108,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                           className={classNames(
                             styles.data_hoursInput,
                             errors[`schedule_openam_${day.day}`] &&
-                              styles.data__hoursInput__error
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_openam_${day.day}`, {
                             value: day.opentime_am
@@ -125,7 +125,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                           className={classNames(
                             styles.data_hoursInput,
                             errors[`schedule_closeam_${day.day}`] &&
-                              styles.data__hoursInput__error
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_closeam_${day.day}`, {
                             value: day.closetime_am
@@ -142,7 +142,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                           className={classNames(
                             styles.data_hoursInput,
                             errors[`schedule_openpm_${day.day}`] &&
-                              styles.data__hoursInput__error
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_openpm_${day.day}`, {
                             value: day.opentime_pm
@@ -159,7 +159,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                           className={classNames(
                             styles.data_hoursInput,
                             errors[`schedule_closepm_${day.day}`] &&
-                              styles.data__hoursInput__error
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_closepm_${day.day}`, {
                             value: day.closetime_pm

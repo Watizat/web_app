@@ -58,7 +58,7 @@ function UsersDetails({ user }: UsersDetailsProps) {
       {isActiveService && (
         <ModalUsers setIsActive={setIsActiveService} user={user} />
       )}
-      <tr>
+      <tr className={styles.tr}>
         <td className={styles.name}>
           {user.first_name} {user.last_name}
         </td>

@@ -6,16 +6,16 @@
   min-height: calc(100vh - 5rem);
   font-family: 'Inter', sans-serif;
 
-  table {
+  .table {
     min-width: 100%;
     text-align: left;
     font-size: 0.9rem;
 
-    tr {
+    .tr {
       height: 3.5rem;
 
-      th,
-      td {
+      .th,
+      .td {
         border-bottom: 1px solid v.$grey-200;
         padding-left: 0.25rem;
 
@@ -29,7 +29,7 @@
       }
     }
 
-    thead {
+    .thead {
       font-weight: 600;
       color: v.$grey-700;
       background-color: v.$grey-100;
@@ -37,12 +37,12 @@
       top: 5rem;
     }
 
-    tbody {
+    .tbody {
       font-weight: 400;
       color: v.$grey-700;
       overflow-y: hidden;
 
-      tr {
+      .tr {
         &:hover {
           background-color: rgba(v.$sucess, 0.2);
         }
