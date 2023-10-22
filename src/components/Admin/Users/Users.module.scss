@@ -1,0 +1,133 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
+
+.users {
+  min-height: calc(100vh - 5rem);
+  font-family: 'Inter', sans-serif;
+
+  .table {
+    min-width: 100%;
+    text-align: left;
+    font-size: 0.9rem;
+
+    .tr {
+      height: 3.5rem;
+
+      .th,
+      .td {
+        border-bottom: 1px solid v.$grey-200;
+        padding-left: 0.25rem;
+
+        @include m.widescreen {
+          padding-left: 0.5rem;
+        }
+
+        @include m.fullhd {
+          padding-left: 0.75rem;
+        }
+      }
+    }
+
+    .thead {
+      font-weight: 600;
+      color: v.$grey-700;
+      background-color: v.$grey-100;
+      position: sticky;
+      top: 5rem;
+    }
+
+    .tbody {
+      font-weight: 400;
+      color: v.$grey-700;
+      overflow-y: hidden;
+
+      .tr {
+        &:hover {
+          background-color: rgba(v.$sucess, 0.2);
+        }
+        &:active {
+          background-color: rgba(v.$sucess, 0.4);
+        }
+      }
+    }
+  }
+
+  .txtAlignLeft,
+  .name,
+  .antenne {
+    padding-left: 2rem;
+  }
+
+  .txtAlignCenter,
+  .checkbox,
+  .email,
+  .connexion,
+  .roles,
+  .action {
+    text-align: center;
+  }
+
+  .checkbox {
+    [type='checkbox'] {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    @include m.widescreen {
+      [type='checkbox'] {
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+    }
+
+    @include m.fullhd {
+      [type='checkbox'] {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+}
+
+.roles {
+  text-align: left;
+  @include m.tablet-only {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 100%;
+  }
+}
+
+.role {
+  margin: 0 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  color: v.$white;
+  @include m.tablet-only {
+    padding: 0.05rem 0.35rem;
+    font-size: 0.85rem;
+  }
+  &_newrole {
+    background-color: v.$warning;
+    color: v.$grey-600;
+    font-weight: 500;
+  }
+  &_editor {
+    background-color: v.$info;
+  }
+  &_localref {
+    background-color: v.$sucess;
+  }
+  &_admin {
+    background-color: v.$danger;
+  }
+}
+
+.action {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: v.$grey-900;
+}

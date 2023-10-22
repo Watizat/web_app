@@ -1,34 +1,35 @@
-import { Link } from 'react-router-dom';
-import Icon from '../../../ui/icon/icon';
+import styles from './ResultatCard.module.scss';
 import './ResultatCard.scss';
 
 import HomeCategorySkeleton from '../HomeCategory/HomeCategory';
 
 function ResultatsCardSkeleton() {
   return (
-    <div className="resultsCard--skeleton">
-      <div className="Left">
-        <div className="Left-upper">
-          <div className="Left-upper__position-id">
+    <div className={styles.resultCardSkeleton}>
+      <div className={styles.left}>
+        <div className={styles.left__upper}>
+          <div className={styles.left_upper__positionId}>
             <p>&nbsp;</p>
           </div>
-          <div className="Left-upper__organizationInfos">
-            <div className="Left-upper__organizationInfos___title">&nbsp;</div>
-            <span className="Left-upper__organizationInfos___address">
+          <div className={styles.left_upper__organizationInfos}>
+            <div className={styles.left_upper__organizationInfos___title}>
+              &nbsp;
+            </div>
+            <span className={styles.left_upper__organizationInfos___address}>
               &nbsp;
             </span>
           </div>
         </div>
-        <div className="Left-upper__description">
+        <div className={styles.left_upper__description}>
           <br />
           <br />
           <br />
           <br />
           <br />
         </div>
-        <div className="Left-lower">
-          <div className="Left-lower__moreInfos">&nbsp;</div>
-          <div className="Left-lower__categories">
+        <div className={styles.left_lower}>
+          <div className={styles.left_lower__moreInfos}>&nbsp;</div>
+          <div className={styles.left_lower__categories}>
             <HomeCategorySkeleton />
             <HomeCategorySkeleton />
             <HomeCategorySkeleton />
@@ -37,9 +38,9 @@ function ResultatsCardSkeleton() {
         </div>
         <span>&nbsp;</span>
       </div>
-      <div className="Right">
-        <div className="Right-btn">&nbsp;</div>
-        <div className="Right-btn">&nbsp;</div>
+      <div className={styles.right}>
+        <div className={styles.right_btn}>&nbsp;</div>
+        <div className={styles.right_btn}>&nbsp;</div>
       </div>
     </div>
   );

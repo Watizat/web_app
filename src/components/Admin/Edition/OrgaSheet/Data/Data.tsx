@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useAppSelector } from '../../../../../hooks/redux';
 import ModalEditData from '../../../Modal/ModalEditData';
 import Schedules from '../../../Schedules/Schedules';
-import './Data.scss';
+import styles from './Data.module.scss';
+import by from '../OrgaSheet.module.scss';
 
 function Data() {
   const organism = useAppSelector((state) => state.admin.organism);
@@ -12,46 +13,50 @@ function Data() {
   }
 
   return (
-    <article className="orgaSheet-card orgaSheet-data">
+    <article className={`${by.orgaSheet_card} ${styles.data}`}>
       {isActive && (
         <ModalEditData setIsActive={setIsActive} organism={organism} />
       )}
 
-      <span className="orgaSheet-card__titleBar">
-        <h3 className="orgaSheet-card__title">Informations génerales</h3>
+      <span className={by.orgaSheet_card__titleBar}>
+        <h3 className={by.orgaSheet_card__title}>Informations génerales</h3>
         <button
           type="button"
-          className="orgaSheet-card__menu"
+          className={by.orgaSheet_card__menu}
           onClick={() => setIsActive(true)}
         >
           <i className="las la-edit" />
         </button>
       </span>
 
-      <ul className="orgaSheet-data__list">
-        <fieldset className="orgaSheet-case orgaSheet-data__access">
+      <ul className={styles.data_list}>
+        <fieldset
+          className={`${by.orgaSheet_case} ${styles.data_case} ${styles.data__access}`}
+        >
           <legend>Accès</legend>
           <h4>Accés</h4>
-          <div className="orgaSheet-data__accessDetails">
-            <label className="orgaSheet-data__pmr">
+          <div className={styles.data_accessDetails}>
+            <label className={styles.data_pmr}>
               <input type="checkbox" disabled checked={organism.pmr} />
               Accessible PSH /PMR
             </label>
-            <label className="orgaSheet-data__pmr">
+            <label className={styles.data_pmr}>
               <input type="checkbox" disabled checked={organism.animals} />
               Animaux admis
             </label>
           </div>
         </fieldset>
-        <fieldset className="orgaSheet-case">
+        <fieldset className={`${by.orgaSheet_case} ${styles.data_case}`}>
           <legend>Description</legend>
           <h4>Description</h4>
           <p>{organism.translations[0]?.description}</p>
         </fieldset>
-        <fieldset className="orgaSheet-case orgaSheet-data__hours">
+        <fieldset
+          className={`${by.orgaSheet_case} ${styles.data_case} ${styles.data_hours}`}
+        >
           <legend>Horaires</legend>
           <h4>Horaires</h4>
-          <div className="orgaSheet-data__hoursDetails">
+          <div className={styles.data_hoursDetails}>
             {organism.schedules && organism.schedules.length > 0 ? (
               <Schedules schedule={organism.schedules} displayAll />
             ) : (
@@ -61,7 +66,7 @@ function Data() {
             )}
           </div>
         </fieldset>
-        <fieldset className="orgaSheet-case">
+        <fieldset className={`${by.orgaSheet_case} ${styles.data_case}`}>
           <legend>Infos, alerte</legend>
           <h4>Infos, alerte</h4>
           <p>{organism.translations[0]?.infos_alerte}</p>

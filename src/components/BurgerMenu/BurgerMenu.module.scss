@@ -1,0 +1,71 @@
+@use '../../styles/variables' as v;
+@use '../../styles/medias' as m;
+
+.burgerMenu {
+  z-index: 1000;
+  position: absolute;
+  left: 0;
+  $top: 65px;
+  top: v.$headerHeight;
+  min-height: calc(100% - v.$headerHeight);
+  width: 100vw;
+  background-color: rgba(v.$black, 0.75);
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  position: relative;
+  right: 0;
+  top: 0;
+  left: 30vw;
+  height: 100%;
+  width: 70vw;
+  background-color: v.$white;
+  flex-grow: 1;
+
+  &_container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 2.5rem;
+  }
+
+  &_logo {
+    display: flex;
+    height: 80px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  &_navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    font-size: 1.1rem;
+    font-weight: 700;
+
+    &__links {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 1.2rem;
+
+      &___sub {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 1.2rem;
+      }
+
+      a {
+        color: v.$grey-500 !important;
+        text-decoration: none !important;
+
+        &:hover {
+          color: v.$primary;
+        }
+      }
+    }
+  }
+}

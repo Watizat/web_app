@@ -1,5 +1,5 @@
 import { Fade as Hamburger } from 'hamburger-react';
-import { useMediaQuery } from 'react-responsive';
+// import { useMediaQuery } from 'react-responsive';
 
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { toggleHamburger } from '../../../store/reducers/hamburger';
 import ModalAddOrganism from '../Modal/ModalAddOrganism';
 // import Sidebar from '../Sidebar/Sidebar';
-import './Header.scss';
+import styles from './Header.module.scss';
 
 function Header() {
   const { pathname } = useLocation();
@@ -18,11 +18,11 @@ function Header() {
 
   return (
     <>
-      <header id="headerAdmin">
+      <header className={styles.headerAdmin}>
         {/* {!isWidescreen && isOpen === false} */}
 
         {!isOpen ? (
-          <div className="headerAdmin-hamburger">
+          <div className={styles.hamburger}>
             <Hamburger
               size={27}
               toggled={isOpen}
@@ -30,7 +30,7 @@ function Header() {
             />
           </div>
         ) : (
-          <div className="headerAdmin-hamburger headerAdmin-hamburger__open">
+          <div className={` ${styles.hamburger} ${styles.hamburger_open}`}>
             <Hamburger
               size={27}
               toggled={isOpen}

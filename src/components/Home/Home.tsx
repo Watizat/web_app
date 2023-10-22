@@ -5,7 +5,7 @@ import { changeCity } from '../../store/reducers/user';
 
 import Icon from '../../ui/icon/icon';
 import Container from '../Container/Container';
-import './Home.scss';
+import styles from './Home.module.scss';
 
 function Home() {
   const [select, setSelect] = useState<string>(
@@ -36,20 +36,22 @@ function Home() {
   const zones = useAppSelector((state) => state.admin.zones);
 
   return (
-    <main id="homepage">
-      <section id="hero">
+    <main className={styles.home}>
+      <section className={styles.hero}>
         <Container>
-          <div className="heroHeader">
-            <h1 className="heroHeader-title">
+          <div className={styles.heroHeader}>
+            <h1 className={styles.heroHeader__title}>
               Guide d&lsquo;information en ligne
-              <span className="heroHeader-subtitle">
+              <span className={styles.heroHeader__subtitle}>
                 pour les personnes exilées
               </span>
             </h1>
           </div>
-          <div className="choice">
-            <article className="choiceLeft">
-              <h2 className="choice-title">1. Sélectionner une région&nbsp;</h2>
+          <div className={styles.choices}>
+            <article className={styles.choiceLeft}>
+              <h2 className={styles.choices_title}>
+                1. Sélectionner une région&nbsp;
+              </h2>
               <select value={select} onChange={handleChange}>
                 <option value="" disabled>
                   Selectionner une ville...
@@ -61,21 +63,23 @@ function Home() {
                 ))}
               </select>
             </article>
-            <article className="choiceRight">
-              <h2 className="choice-title">2. Selectionner une catégorie</h2>
-              <div className="choiceRight-group">
+            <article className={styles.choiceRight}>
+              <h2 className={styles.choices_title}>
+                2. Selectionner une catégorie
+              </h2>
+              <div className={styles.choiceRight_group}>
                 {categories.map((categorie) => (
                   <button
                     type="button"
                     key={categorie.translations[0].slug}
                     onClick={handleClick(categorie.translations[0].slug)}
-                    className="choiceRight-button"
+                    className={styles.choiceRight_button}
                   >
                     <Icon
                       icon={categorie.tag}
-                      className="choiceRight-button__icon"
+                      className={styles.choiceRight_button__icon}
                     />
-                    <span className="text-button choiceRight-button__text">
+                    <span className={styles.choiceRight_button__text}>
                       {categorie.translations[0].name}
                     </span>
                   </button>
@@ -85,18 +89,18 @@ function Home() {
           </div>
         </Container>
       </section>
-      <section className="info">
+      <section className={styles.info}>
         <Container>
-          <article className="info-hero">
-            <div className="info-hero__img">
+          <article className={styles.info_hero}>
+            <div>
               <img src="/img/bghome-guide.webp" alt="distribution d'un guide" />
             </div>
-            <div className="info-hero__text">
-              <h2 className="info-hero__text___title">
+            <div className={styles.info_hero__text}>
+              <h2 className={styles.info_hero__title}>
                 Watizat milite pour l’accès à l’information des personnes
                 exilées
               </h2>
-              <p className="info-hero__text___txt">
+              <p className={styles.info_hero__text___content}>
                 L’association WATIZAT milite pour l’accès à l’information des
                 personnes exilées en France. Nous constatons que l’information
                 est une ressource vitale qui peut avoir des conséquences

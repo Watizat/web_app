@@ -1,6 +1,6 @@
-import { useMediaQuery } from 'react-responsive';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
@@ -8,7 +8,7 @@ import {
   filterCategories,
 } from '../../../store/reducers/organisms';
 import Icon from '../../../ui/icon/icon';
-import './Settings.scss';
+import styles from './Settings.module.scss';
 
 interface SettingsProps {
   isPmr: boolean;
@@ -100,74 +100,76 @@ function Settings({
     dispatch(filterCategories([categoryParams]));
   }, [dispatch, categoryParams]);
   return (
-    <div id="resultsSettings">
-      <div className="settingsTopBar">
-        <form onSubmit={handleSubmit} className="settingsTopBar-form">
+    <div className={styles.settings}>
+      <div className={styles.topBar}>
+        <form onSubmit={handleSubmit} className={styles.topBar_form}>
           <input
             type="text"
             placeholder="Recherchez un organisme..."
             id="search-panel"
             value={searchInputValue}
             onChange={handleSearch}
-            className="settingsTopBar-form__input"
+            className={styles.topBar_form__input}
           />
         </form>
         <button
           type="button"
-          className="settingsTopBar-dropdownBtn"
+          className={styles.topBar_dropdownBtn}
           onClick={handleOpenSettings}
         >
           {!isOpen ? (
-            <span className="settingsTopBar-dropdownBtn__filter">Filtrer</span>
+            <span className={styles.topBar_dropdownBtn__filter}>Filtrer</span>
           ) : (
-            <span className="settingsTopBar-dropdownBtn__valid">Valider</span>
+            <span className={styles.topBar_dropdownBtn__valid}>Valider</span>
           )}
         </button>
       </div>
 
       <div
-        className={classNames('settingsContent', {
-          'settingsContent-visible': isOpen,
+        className={classNames(styles.content, {
+          [styles.content_visible]: isOpen,
         })}
       >
-        <div className="settingsContent-filter">
-          <div className="settingsContent-filter__title">
+        <div className={styles.content_filter}>
+          <div className={styles.content_filter__title}>
             Filtrer par accessibilité
           </div>
-          <div className="settingsContent-filter__list settingsContent-filter__listAccess">
+          <div
+            className={`${styles.content_filter__list} ${styles.content_filter__listAccess}`}
+          >
             <div
-              className={`settingsContent-filter__list___div ${
-                isPmr ? 'settingsContent-filter__list___div-active' : ''
+              className={`${styles.content_filter__list___div} ${
+                isPmr ? styles.content_filter__list___div____active : ''
               }`}
             >
-              <label className="settingsContent-filter__list___div-label">
+              <label className={styles.content_filter__list___div____label}>
                 <input
                   type="checkbox"
                   name="pmr"
                   onChange={(event) => handlePmr(event)}
                 />
                 <i className="las la-wheelchair" />
-                <span className="settingsContent-filter__list___div-text">
+                <span className={styles.content_filter__list___div____text}>
                   Accessible PSH / PMR
                 </span>
               </label>
             </div>
 
             <div
-              className={`settingsContent-filter__list___div ${
+              className={`${styles.content_filter__list___div} ${
                 isAnimalsAccepted
-                  ? 'settingsContent-filter__list___div-active'
+                  ? styles.content_filter__list___div____active
                   : ''
               }`}
             >
-              <label className="settingsContent-filter__list___div-label">
+              <label className={styles.content_filter__list___div____label}>
                 <input
                   type="checkbox"
                   name="animals"
                   onChange={(event) => handleAnimals(event)}
                 />
                 <i className="las la-dog" />
-                <span className="settingsContent-filter__list___div-text">
+                <span className={styles.content_filter__list___div____text}>
                   Animaux acceptés
                 </span>
               </label>
@@ -175,32 +177,34 @@ function Settings({
           </div>
         </div>
 
-        <div className="settingsContent-filter">
-          <div className="settingsContent-filter__title">
+        <div className={styles.content_filter}>
+          <div className={styles.content_filter__title}>
             Affiner par catégories
           </div>
-          <div className="settingsContent-filter__list settingsContent-filter__listCategory">
+          <div
+            className={`${styles.content_filter__list} ${styles.content_filter__listCategory}`}
+          >
             {categories.map((category) => {
               return (
                 <div
                   key={category.tag}
-                  className={`settingsContent-filter__list___div settingsContent-filter__listCategory__div 
-                    ${
-                      !activeCategories.includes(category.tag)
-                        ? 'settingsContent-filter__list___div-disabled'
-                        : ''
-                    } 
-                  ${
+                  className={`${styles.content_filter__list___div} ${
+                    styles.content_filter__list___div
+                  } ${
+                    !activeCategories.includes(category.tag)
+                      ? styles.content_filter__list___div____disabled
+                      : ''
+                  } ${
                     categoryFilter.includes(category.tag)
-                      ? 'settingsContent-filter__list___div-active'
+                      ? styles.content_filter__list___div____active
                       : ''
                   }`}
                 >
-                  <label className="settingsContent-filter__list___div-label">
+                  <label className={styles.content_filter__list___div____label}>
                     {isTouch && (
                       <Icon
                         icon={category.tag}
-                        className="settingsContent-filter__list___div-icon"
+                        className={styles.content_filter__list___div____icon}
                       />
                     )}
 
@@ -210,16 +214,16 @@ function Settings({
                       name={category.translations[0].slug}
                       onChange={() => handleCategoryChange(category.tag)}
                       disabled={!activeCategories.includes(category.tag)}
-                      className="settingsContent-catFilter__listCategoryt___div-input"
+                      className={styles.content_filter__list___div____input}
                     />
 
                     {isDesktop && (
                       <Icon
                         icon={category.tag}
-                        className="settingsContent-filter__list___div-icon"
+                        className={styles.content_filter__list___div____icon}
                       />
                     )}
-                    <span className="settingsContent-filter__list___div-text">
+                    <span className={styles.content_filter__list___div____text}>
                       {category.translations[0].name}
                     </span>
                   </label>
@@ -234,5 +238,3 @@ function Settings({
 }
 
 export default Settings;
-
-('dbaeumer.vscode-eslint');

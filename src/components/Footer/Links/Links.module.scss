@@ -1,0 +1,39 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+
+  &_sub {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  a {
+    padding: 0.2rem 0.75rem;
+    color: v.$white;
+    font-weight: 500;
+    border-radius: 3px;
+    line-height: 1.6;
+    transition: filter ease-in-out 80ms;
+
+    &:hover {
+      text-decoration: none;
+      background-color: rgba(255, 255, 255, 0.075);
+    }
+  }
+  & span {
+    width: min-content;
+    white-space: nowrap;
+  }
+}
+
+.important {
+  font-weight: 900;
+
+  &:hover {
+    font-weight: 900;
+  }
+}

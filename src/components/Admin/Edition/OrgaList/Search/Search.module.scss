@@ -1,0 +1,129 @@
+@use '../../../../../styles/variables' as v;
+@use '../../../../../styles/medias' as m;
+@use '../../../../../styles/elements';
+
+.list {
+  &_searchCard {
+    position: sticky;
+    overflow-y: auto;
+    top: 5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    box-shadow: rgba(0, 0, 0, 0.075) 0rem 0.1rem 0.8rem;
+
+    &__search {
+      padding: 0.5rem 0.75rem;
+      border-radius: 5px;
+      color: v.$grey-700;
+      border: 1px solid v.$grey-500;
+      box-shadow: none;
+      appearance: none;
+
+      &:hover {
+        color: v.$sucess;
+        border: 1px solid v.$sucess;
+      }
+
+      &:active,
+      &:focus-visible {
+        color: v.$sucess;
+        font-weight: 8500;
+        border: 2x solid v.$sucess;
+      }
+    }
+
+    &__groupIcons {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__button {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    &__text {
+      display: none;
+      margin-right: 0.5rem;
+    }
+
+    &__logo {
+      border: 1px solid v.$grey-500;
+      border-radius: 5px;
+      color: v.$grey-700;
+      padding: 0;
+      font-size: 1.5rem;
+
+      &:hover {
+        color: v.$sucess;
+        border: 1.5px solid v.$sucess;
+      }
+    }
+
+    @include m.tablet {
+      padding: 0.75rem;
+
+      &__text {
+        display: flex;
+      }
+    }
+
+    @include m.desktop {
+      padding: 0.75rem;
+
+      &__text {
+        display: flex;
+      }
+
+      &__search,
+      &__logo {
+        padding: 0.1rem;
+      }
+
+      &__logo {
+        font-size: 1.5rem;
+      }
+    }
+
+    @include m.widescreen {
+      &__logo {
+        padding: 0.1rem;
+      }
+    }
+
+    @include m.fullhd {
+      padding: 1rem 0.75rem;
+      flex-direction: row;
+      gap: 0;
+
+      &__text {
+        display: none;
+      }
+
+      &__search,
+      &__logo {
+        padding: 0.25rem;
+      }
+
+      &__groupIcons {
+        justify-content: flex-end;
+      }
+
+      &__logo {
+        font-size: 1.5rem;
+      }
+    }
+
+    @include m.qhd {
+      &__search,
+      &__logo {
+        padding: 0.35rem;
+      }
+    }
+  }
+}

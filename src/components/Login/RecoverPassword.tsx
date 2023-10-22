@@ -1,10 +1,10 @@
-import './Login.scss';
+import styles from './Login.module.scss';
 
 function RecoverPassword() {
   return (
-    <div className="login">
+    <div className={styles.login}>
       <h1>Réinitialisation du mot de passe</h1>
-      <form className="login-form">
+      <form className={styles.login_form}>
         <fieldset>
           <legend>Nouveau mot de passe</legend>
           <input type="text" placeholder="Nouveau mot de passe" />

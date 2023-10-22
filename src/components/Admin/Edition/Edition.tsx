@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchAdminOrganisms } from '../../../store/reducers/admin';
-import './Edition.scss';
+import styles from './Edition.module.scss';
 import OrgaList from './OrgaList/OrgaList';
 import OrgaSheet from './OrgaSheet/OrgaSheet';
 
@@ -13,7 +13,7 @@ function Edition() {
     dispatch(fetchAdminOrganisms(city));
   }, [dispatch, city]);
   return (
-    <div id="edition">
+    <div className={styles.edition}>
       <OrgaList />
       <OrgaSheet />
     </div>

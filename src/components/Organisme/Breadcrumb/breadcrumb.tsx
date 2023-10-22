@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux';
-import './breadcrumb.scss';
+import styles from './breadcrumb.module.scss';
 
 function Breadcrumb() {
   const navigate = useNavigate();
@@ -10,25 +10,25 @@ function Breadcrumb() {
   const location = useLocation();
 
   return (
-    <div className="breadcrumb">
+    <div className={styles.breadcrumb}>
       <button
         className="btn-flat btn-primary btn-slowRounded "
         type="button"
         onClick={() => navigate(targetPath)}
       >
-        <i className="las la-arrow-left" />
-        {'   '}Retour aux résultats
+        <i className={`${styles.las} las la-arrow-left`} />
+        Retour aux résultats
       </button>
       <ul>
         <Link to="/">
           <li>Accueil</li>
         </Link>
-        <i className="las la-angle-right" />
+        <i className={`${styles.las} las la-angle-right`} />
         <Link to={targetPath}>
           <li>Résultats de recherche</li>
         </Link>
-        <i className="las la-angle-right" />
-        <Link to={`${location.pathname}`} className="link-active">
+        <i className={`${styles.las} las la-angle-right`} />
+        <Link to={`${location.pathname}`} className={styles.linkActive}>
           <li>{organism?.name}</li>
         </Link>
       </ul>

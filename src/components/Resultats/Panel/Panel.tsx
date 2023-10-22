@@ -5,7 +5,7 @@ import { setFilteredOrganisms } from '../../../store/reducers/organisms';
 import ResultatsCardSkeleton from '../../Skeleton/ResultatCard/ResultatCard';
 import Card from '../Card/Card';
 import Settings from '../Settings/Settings';
-import './Panel.scss';
+import styles from './Panel.module.scss';
 
 function Panel() {
   const dispatch = useAppDispatch();
@@ -81,7 +81,7 @@ function Panel() {
   }, [organismToScroll]);
 
   return (
-    <section className="resultsPanel">
+    <section className={styles.resultsPanel}>
       <Settings
         isPmr={isPmr}
         setIsPmr={setIsPmr}
@@ -89,7 +89,7 @@ function Panel() {
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
       />
-      <div className="resultsPanel-ContentCard" ref={resultsContainerRef}>
+      <div className={styles.contentCard} ref={resultsContainerRef}>
         {loader &&
           [1, 2, 3, 4, 5].map((e) => <ResultatsCardSkeleton key={e} />)}
         {!loader &&
@@ -103,7 +103,7 @@ function Panel() {
               />
             ))
           ) : (
-            <div className="resultsPanel-noResult">
+            <div className={styles.noResult}>
               <p>Aucun résultat à afficher</p>
 
               <Link to="/">

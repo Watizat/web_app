@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import '../Admin/Modal/Modal.scss';
+import '../Admin/Modal/Modal.module.scss';
 import { useEffect, useState } from 'react';
 import ModalInactivityDetector from '../Admin/Modal/ModalInactivityDetector';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';

@@ -6,7 +6,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { editOrganismData } from '../../../store/reducers/crud';
 import { validateScheduleFormat } from '../../../utils/form/form';
-import './Modal.scss';
+
+import styles from './Modal.module.scss';
 
 interface ModalDataProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -38,15 +39,15 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-main">
-        <h1 className="modal-title">Modifier les informations génerales</h1>
-        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <div className="modal-overflow">
-            <div className="modal-case">
-              <h4 className="modal-case__title">Accès</h4>
-              <div className="modal-data__accessDetails">
-                <label className="modal-data__pmr">
+    <div className={styles.modal}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>Modifier les informations génerales</h1>
+        <form className={styles.list} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.overflow}>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Accès</h4>
+              <div className={styles.data_accessDetails}>
+                <label className={styles.data_pmr}>
                   <input
                     type="checkbox"
                     defaultChecked={organism.pmr}
@@ -54,7 +55,7 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                   />
                   Accessible PSH / PMR
                 </label>
-                <label className="modal-data__pmr">
+                <label className={styles.data_pmr}>
                   <input
                     type="checkbox"
                     defaultChecked={organism.animals}
@@ -64,23 +65,23 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                 </label>
               </div>
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Description</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Description</h4>
               <textarea
-                className="modal-case__textarea"
+                className={styles.case_textarea}
                 defaultValue={organism.translations[0].description}
                 {...register('description')}
               />
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>
                 Horaires
-                <span className="modal-case__legend">
+                <span className={styles.case_legend}>
                   (Formats horaire acceptés: 10h, 10h00, 10:00)
                 </span>
               </h4>
-              <table className="modal-data__hours">
-                <thead className="modal-data__hoursHead">
+              <table className={styles.data_hours}>
+                <thead className={styles.data_hoursHead}>
                   <tr>
                     <td>Jours</td>
                     <td colSpan={3}>Matin</td>
@@ -90,8 +91,8 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                 </thead>
                 <tbody>
                   {organism.schedules.map((day) => (
-                    <tr key={day.day} className="modal-data__hoursLine">
-                      <td className="modal-data__hoursDay">
+                    <tr key={day.day} className={styles.data_hoursLine}>
+                      <td className={styles.data_hoursDay}>
                         <span>
                           {days.find((d) => d.numberday === day.day)?.name}
                         </span>
@@ -102,12 +103,12 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                           })}
                         />
                       </td>
-                      <td className="modal-data__hoursHour">
+                      <td className={styles.data_hoursHour}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_openam_${day.day}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_openam_${day.day}`, {
                             value: day.opentime_am
@@ -118,13 +119,13 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                           })}
                         />
                       </td>
-                      <td className="modal-data__hoursSeparater">-</td>
-                      <td className="modal-data__hoursTd">
+                      <td className={styles.data_hoursSeparater}>-</td>
+                      <td className={styles.data_hoursTd}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_closeam_${day.day}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_closeam_${day.day}`, {
                             value: day.closetime_am
@@ -135,13 +136,13 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                           })}
                         />
                       </td>
-                      <td className="modal-data__hoursSeparater">/</td>
-                      <td className="modal-data__hoursTd">
+                      <td className={styles.data_hoursSeparater}>/</td>
+                      <td className={styles.data_hoursTd}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_openpm_${day.day}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_openpm_${day.day}`, {
                             value: day.opentime_pm
@@ -152,13 +153,13 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                           })}
                         />
                       </td>
-                      <td className="modal-data__hoursSeparater">-</td>
-                      <td className="modal-data__hoursTd">
+                      <td className={styles.data_hoursSeparater}>-</td>
+                      <td className={styles.data_hoursTd}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_closepm_${day.day}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data_hoursInput__error
                           )}
                           {...register(`schedule_closepm_${day.day}`, {
                             value: day.closetime_pm
@@ -174,16 +175,16 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
                 </tbody>
               </table>
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Infos, alerte</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Infos, alerte</h4>
               <textarea
-                className="modal-case__textarea"
+                className={styles.case_textarea}
                 defaultValue={organism.translations[0].infos_alerte}
                 {...register('info_alerte')}
               />
             </div>
           </div>
-          <div className="modal-actions">
+          <div className={styles.actions}>
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"

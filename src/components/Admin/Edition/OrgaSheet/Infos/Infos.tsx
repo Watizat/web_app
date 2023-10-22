@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../hooks/redux';
 import ModalEditInfos from '../../../Modal/ModalEditInfos';
-import './Infos.scss';
+import styles from './Infos.module.scss';
+import orgaSheet from '../OrgaSheet.module.scss';
 
 function Infos() {
   const [isModalActive, setIsModalActive] = useState(false);
@@ -12,7 +13,7 @@ function Infos() {
   }
 
   return (
-    <article className="orgaSheet-card orgaSheet-infos">
+    <article className={`${orgaSheet.orgaSheet_card} ${styles.infos}`}>
       {isModalActive && (
         <ModalEditInfos
           setIsModalActive={setIsModalActive}
@@ -20,41 +21,41 @@ function Infos() {
         />
       )}
 
-      <span className="orgaSheet-infos__titleBar">
+      <span className={styles.infos_titleBar}>
         <h1>{organism.name}</h1>
         <button
           type="button"
-          className="orgaSheet-infos__menu"
+          className={orgaSheet.orgaSheet_card__menu}
           onClick={() => setIsModalActive(true)}
         >
           <i className="las la-edit" />
         </button>
       </span>
 
-      <ul className="orgaSheet-infos__list">
-        <li className="orgaSheet-case">
-          <h4 className="orgaSheet-infos__list___title">Adresse</h4>
-          <p className="orgaSheet-infos__list___text">{organism.address}</p>
+      <ul className={styles.infos_list}>
+        <li className={orgaSheet.orgaSheet_case}>
+          <h4 className={styles.infos_list__title}>Adresse</h4>
+          <p className={styles.infos_list__text}>{organism.address}</p>
         </li>
-        <li className="orgaSheet-case">
-          <h4 className="orgaSheet-infos__list___title">Ville</h4>
-          <p className="orgaSheet-infos__list___text">{organism.city}</p>
+        <li className={orgaSheet.orgaSheet_case}>
+          <h4 className={styles.infos_list__title}>Ville</h4>
+          <p className={styles.infos_list__text}>{organism.city}</p>
         </li>
-        <li className="orgaSheet-case">
-          <h4 className="orgaSheet-infos__list___title">Code postal</h4>
-          <p className="orgaSheet-infos__list___text">{organism.zipcode}</p>
+        <li className={orgaSheet.orgaSheet_case}>
+          <h4 className={styles.infos_list__title}>Code postal</h4>
+          <p className={styles.infos_list__text}>{organism.zipcode}</p>
         </li>
-        <li className="orgaSheet-case">
-          <h4 className="orgaSheet-infos__list___title">Site web</h4>
-          <p className="orgaSheet-infos__list___text">{organism.website}</p>
+        <li className={orgaSheet.orgaSheet_case}>
+          <h4 className={styles.infos_list__title}>Site web</h4>
+          <p className={styles.infos_list__text}>{organism.website}</p>
         </li>
-        <li className="orgaSheet-case">
-          <h4 className="orgaSheet-infos__list___title">Télephone</h4>
-          <p className="orgaSheet-infos__list___text">{organism.phone}</p>
+        <li className={orgaSheet.orgaSheet_case}>
+          <h4 className={styles.infos_list__title}>Télephone</h4>
+          <p className={styles.infos_list__text}>{organism.phone}</p>
         </li>
-        <li className="orgaSheet-case">
-          <h4 className="orgaSheet-infos__list___title">Email</h4>
-          <p className="orgaSheet-infos__list___text">{organism.mail}</p>
+        <li className={orgaSheet.orgaSheet_case}>
+          <h4 className={styles.infos_list__title}>Email</h4>
+          <p className={styles.infos_list__text}>{organism.mail}</p>
         </li>
       </ul>
     </article>

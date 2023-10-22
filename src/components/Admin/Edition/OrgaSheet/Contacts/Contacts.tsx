@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Contact } from '../../../../../@types/organism';
 import ModalAddContact from '../../../Modal/ModalAddContact';
-import ContactCard from './ContactCard/ContactCard';
-import './Contacts.scss';
+import ContactCard from './Card/Card';
+import styles from './Contacts.module.scss';
+import orgaSheet from '../OrgaSheet.module.scss';
 
 interface ContactProps {
   contacts: Contact[];
@@ -12,27 +13,27 @@ function Contacts({ contacts }: ContactProps) {
   const [isModalActive, setIsModalActive] = useState(false);
 
   return (
-    <article className="orgaSheet-card orgaSheet-contacts">
+    <article className={`${orgaSheet.orgaSheet_card} ${styles.contacts}`}>
       {isModalActive && <ModalAddContact setIsModalActive={setIsModalActive} />}
 
-      <span className="orgaSheet-card__titleBar">
-        <h3 className="orgaSheet-card__title">Contacts</h3>
+      <span className={orgaSheet.orgaSheet_card__titleBar}>
+        <h3 className={orgaSheet.orgaSheet_card__title}>Contacts</h3>
         <button
           type="button"
-          className="orgaSheet-card__menu"
+          className={orgaSheet.orgaSheet_card__menu}
           onClick={() => setIsModalActive(true)}
         >
           <i className="las la-plus-circle" />
         </button>
       </span>
 
-      <div className="orgaSheet-contacts__list">
+      <div className={styles.contacts_list}>
         {contacts && contacts.length > 0 ? (
           contacts.map((contact) => (
             <ContactCard key={contact.id} {...contact} />
           ))
         ) : (
-          <span className="orgaSheet-contacts__noContacts">
+          <span className={styles.contacts_noContacts}>
             Aucun contact à afficher
           </span>
         )}

@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux';
 import { logout } from '../../store/reducers/user';
-import './Login.scss';
+import styles from './Login.module.scss';
 
 function NewUser() {
   const dispatch = useAppDispatch();
   return (
-    <div className="login">
+    <div className={styles.login}>
       <h1>Nouveau membre</h1>
       <span>Votre compte est en attente de validation.</span>
       <Link to="/" onClick={() => dispatch(logout())}>

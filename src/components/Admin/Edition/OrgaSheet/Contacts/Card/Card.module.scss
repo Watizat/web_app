@@ -1,0 +1,134 @@
+@use '../../../../../../styles/variables' as v;
+@use '../../../../../../styles/medias' as m;
+@use '../../../../../../styles/elements';
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  &_list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  &_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @include m.fullhd {
+      align-items: center;
+    }
+
+    button {
+      width: 10%;
+    }
+  }
+
+  &_subheader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem 0;
+    justify-content: space-between;
+    width: 90%;
+
+    @include m.desktop {
+      flex-direction: row;
+    }
+
+    &__title {
+      vertical-align: bottom;
+      align-content: end;
+      align-items: end;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: v.$grey-900;
+      text-transform: uppercase;
+    }
+  }
+
+  &_details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    &__infos {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-right: 5rem;
+      font-weight: 200;
+
+      &___job {
+        font-weight: 500;
+        color: v.$grey-800;
+      }
+
+      &___phone,
+      &___mail {
+        font-weight: 400;
+        color: v.$grey-700;
+      }
+    }
+  }
+
+  &_roles {
+    font-weight: 500;
+    display: flex;
+    gap: 0.5rem;
+
+    @include m.fullhd {
+      margin-left: 1rem;
+    }
+
+    &__role {
+      padding: 0.2rem 0.5rem;
+      margin-top: -0.2rem;
+      border-radius: 20px;
+      color: v.$white;
+    }
+
+    &__public {
+      background-color: v.$info;
+    }
+
+    &__actualisation {
+      background-color: v.$sucess;
+    }
+
+    &__prive {
+      background-color: v.$danger;
+    }
+  }
+
+  &_case {
+    flex: 1 2 auto;
+    min-height: 5rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    border: 1px solid v.$grey-300;
+
+    @include m.desktop {
+      width: 50%;
+    }
+
+    @include m.qhd {
+      width: 25%;
+    }
+  }
+}
+
+.services {
+  &_case {
+    border: 1px solid v.$grey-300;
+    border-radius: 5px;
+  }
+}

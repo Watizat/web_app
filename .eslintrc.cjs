@@ -27,8 +27,19 @@ module.exports = {
       rules: { 'no-param-reassign': ['error', { props: false }] },
     },
   ],
-  plugins: ['react', '@typescript-eslint', 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'prettier', 'unused-imports'],
   rules: {
+    'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': [
       2,

@@ -1,13 +1,13 @@
 import Container from '../Container/Container';
-import './Footer.scss';
-import FooterLinks from './FooterLinks/FooterLinks';
+import Links from './Links/Links';
+import styles from './Footer.module.scss';
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className={styles.footer}>
       <Container>
-        <div className="footer-links">
-          <FooterLinks />
+        <div className={styles.links}>
+          <Links />
         </div>
       </Container>
     </footer>

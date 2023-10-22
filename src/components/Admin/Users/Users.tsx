@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUsers } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
-import './Users.scss';
-import UsersDetails from './UsersDetails/UsersDetails';
+import styles from './Users.module.scss';
+import UsersDetails from './UsersDetails';
 import { changeAdmin } from '../../../store/reducers/user';
 
 function Users() {
@@ -67,31 +67,49 @@ function Users() {
       )}
 
       {users.length > 0 && (
-        <div id="users">
-          <table className="userstable">
-            <thead>
-              <tr>
-                <th scope="col" className="txt-align-left hideForMenu">
+        <div className={styles.users}>
+          <table className={styles.table}>
+            <thead className={styles.thead}>
+              <tr className={styles.tr}>
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignLeft}`}
+                >
                   Identité
                 </th>
-                <th scope="col" className="txt-align-left hideForMenu">
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignLeft}`}
+                >
                   Antenne
                 </th>
-                <th scope="col" className="txt-align-center hideForMenu">
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignCenter}`}
+                >
                   Adresse email
                 </th>
-                <th scope="col" className="txt-align-center hideForMenu">
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignCenter}`}
+                >
                   Dernière connexion
                 </th>
-                <th scope="col" className="txt-align-center hideForMenu">
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignCenter}`}
+                >
                   Rôles
                 </th>
-                <th scope="col" className="txt-align-center hideForMenu">
+                <th
+                  scope="col"
+                  className={`${styles.th} ${styles.txtAlignCenter}`}
+                >
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className={styles.tbody}>
               {users.map((user) => (
                 <UsersDetails key={user.id} user={user} />
               ))}

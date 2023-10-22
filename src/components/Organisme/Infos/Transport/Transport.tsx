@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Organism } from '../../../../@types/organism';
 import { useAppSelector } from '../../../../hooks/redux';
 import navitiaInstance from '../../../../utils/navitia';
-import './Transport.scss';
+import styles from './Transport.module.scss';
+import orga from '../../Organisme.module.scss';
 
 interface TransportData {
   id: string;
@@ -111,23 +112,34 @@ function Transport() {
       </article>
     );
   }
-  // console.log(data);
+
+  const convertColorToRGB = (color: string): string => {
+    // Convert hex color to RGB
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+
+    return `${r}, ${g}, ${b}`;
+  };
 
   return (
     <article>
-      <h3>Accès en transports</h3>
+      <h3 className={orga.title}>Accès en transports</h3>
       {data.map((item) => (
-        <div className="transport" key={item.id}>
+        <div className={styles.transport} key={item.id}>
           <p>
             {item.name} à {item.distance} m
           </p>
-          <div className="transport-lines">
+          <div className={styles.transport_lines}>
             {item.lines.map((line) => (
               <React.Fragment key={line.id}>
                 <span
-                  className="transport-num"
+                  className={styles.transport_num}
                   style={{
-                    backgroundColor: `#${line.color}`,
+                    backgroundColor: `rgba(${convertColorToRGB(
+                      line.color
+                    )}, 0.8)`,
                     color: `#${line.text_color}`,
                   }}
                 >

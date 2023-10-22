@@ -2,7 +2,7 @@ import { useAppSelector } from '../../../../hooks/redux';
 import Contacts from './Contacts/Contacts';
 import Data from './Data/Data';
 import Infos from './Infos/Infos';
-import './OrgaSheet.scss';
+import styles from './OrgaSheet.module.scss';
 import Services from './Services/Services';
 
 function OrgaSheet() {
@@ -17,7 +17,7 @@ function OrgaSheet() {
   }
 
   return (
-    <section className="orgaSheet">
+    <section className={styles.orgaSheet}>
       <Infos />
       <Contacts contacts={organism.contacts} />
       <Data />

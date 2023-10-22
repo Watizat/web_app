@@ -10,13 +10,13 @@ import {
 import logo from '../../../assets/logo.svg';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
+import styles from './App.module.scss';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchRoles, fetchZones } from '../../../store/reducers/admin';
 import { fetchCategories, fetchDays } from '../../../store/reducers/organisms';
 import { axiosInstance } from '../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
-import './App.scss';
 import { changeAdmin } from '../../../store/reducers/user';
 
 function App() {
@@ -72,11 +72,13 @@ function App() {
   return (
     <>
       {isTablet && !isLoading && (
-        <div id="bo-app">
+        <div className={styles.boApp}>
           {(isWidescreen || isOpen) && <Sidebar />}
           {/* <Sidebar /> */}
           <main
-            id={`${pathname !== '/admin/dashboard' ? 'bo-main' : 'dashboard'}`}
+            className={`${styles.main} ${
+              pathname !== '/admin/dashboard' ? 'bo-main' : 'dashboard'
+            }`}
           >
             {pathname !== '/admin/dashboard' && <Header />}
             <Outlet />
@@ -84,23 +86,25 @@ function App() {
         </div>
       )}
 
-      <div id="mobileOut">
-        <Link className="mobileOut__logo" to="/">
-          <img src={logo} alt="watizat logo" />
-        </Link>
-        <p>
-          Cet espace n&apos;est pas adapté pour une consultation depuis un
-          terminal de type smartphone
-          <br />
-          <br /> Merci de bien vouloir le consulter à nouveau depuis une
-          tablette ou ordinateur
-          <br />
-          <br /> Promis, ceci n&apos;est pas un caprice de dévellopeur.se 🤪
-        </p>
-        <Link className="mobileOut__returnToHome" to="/">
-          <p>Retourner vers la page d&apos;accueil</p>
-        </Link>
-      </div>
+      {!isTablet && !isLoading && (
+        <div className={styles.mobileOut}>
+          <Link className={styles.mobileOut_logo} to="/">
+            <img src={logo} alt="watizat logo" />
+          </Link>
+          <p>
+            Cet espace n&apos;est pas adapté pour une consultation depuis un
+            terminal de type smartphone
+            <br />
+            <br /> Merci de bien vouloir le consulter à nouveau depuis une
+            tablette ou ordinateur
+            <br />
+            <br /> Promis, ceci n&apos;est pas un caprice de dévellopeur.se 🤪
+          </p>
+          <Link className={styles.mobileOut_links} to="/">
+            <p>Retourner vers la page d&apos;accueil</p>
+          </Link>
+        </div>
+      )}
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react';
-import './Modal.scss';
+
+import styles from './Modal.module.scss';
 import { Link, Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks/redux';
 import { logout } from '../../../store/reducers/user';
@@ -19,7 +20,7 @@ function ModalInactivityDetector({
     setIsModalActive(false);
     setAnswerCount((prev) => prev + 1);
   };
-  const [countdown, setCountdown] = useState(10);
+  const [countdown, setCountdown] = useState(30);
 
   useEffect(() => {
     const intervalID = setInterval(() => {
@@ -38,11 +39,11 @@ function ModalInactivityDetector({
     return <Navigate to="/login" />;
   }
   return (
-    <div className="modal" style={{ zIndex: 200 }}>
-      <div className="modal-main modal-empty">
-        <h1 className="modal-title">Toujours là&nbsp;?</h1>
-        <form className="modal-list" onSubmit={handleSubmit}>
-          <div className="modal-actions">
+    <div className={styles.modal} style={{ zIndex: 200 }}>
+      <div className={`${styles.main} ${styles.empty}`}>
+        <h1 className={styles.title}>Toujours là&nbsp;?</h1>
+        <form className={styles.list} onSubmit={handleSubmit}>
+          <div className={styles.actions}>
             <Link
               to="/"
               className="btn btn-info-fill btn-flat modal-actions__close"
