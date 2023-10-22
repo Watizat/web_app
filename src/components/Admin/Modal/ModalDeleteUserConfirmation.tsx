@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUsers } from '../../../store/reducers/admin';
 import { axiosInstance } from '../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
-import './Modal.scss';
+
+import styles from './Modal.module.scss';
 
 interface ModalProps {
   setIsActiveConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -67,13 +68,13 @@ function ModalDeleteConfirmation({
   }
 
   return (
-    <div className="modal">
-      <div className="modal-main">
-        <h1 className="modal-title">
+    <div className={styles.modal}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>
           Êtes-vous sûr de vouloir supprimer&nbsp;?
         </h1>
-        <form className="modal-list" onSubmit={handleDelete}>
-          <div className="modal-actions">
+        <form className={styles.list} onSubmit={handleDelete}>
+          <div className={styles.actions}>
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"

@@ -9,7 +9,8 @@ import { fetchUsers } from '../../../store/reducers/admin';
 import { editUser } from '../../../store/reducers/user';
 import { axiosInstance } from '../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
-import './Modal.scss';
+
+import styles from './Modal.module.scss';
 import ModalDeleteConfirmation from './ModalDeleteUserConfirmation';
 
 interface ModalProps {
@@ -76,35 +77,35 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
   }
 
   return (
-    <div className="modal">
-      <div className="modal-main">
-        <h1 className="modal-title">Informations utilisateur·ice</h1>
-        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <div className="modal-overflow">
-            <div className="modal-double">
-              <div className="modal-case modal-double__case">
+    <div className={styles.modal}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>Informations utilisateur·ice</h1>
+        <form className={styles.list} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.overflow}>
+            <div className={styles.double}>
+              <div className={`${styles.case} ${styles.double}`}>
                 <input type="text" hidden value={user.id} {...register('id')} />
-                <h4 className="modal-case__title">Prénom</h4>
+                <h4 className={styles.case_title}>Prénom</h4>
                 <input
-                  className="modal-case__inputTxt"
+                  className={styles.case_inputTxt}
                   type="text"
                   {...register('first_name')}
                   defaultValue={user.first_name}
                 />
               </div>
-              <div className="modal-case modal-double__case">
-                <h4 className="modal-case__title">Nom de famille</h4>
+              <div className={`${styles.case} ${styles.double}`}>
+                <h4 className={styles.case_title}>Nom de famille</h4>
                 <input
-                  className="modal-case__inputTxt"
+                  className={styles.case_inputTxt}
                   type="text"
                   {...register('last_name')}
                   defaultValue={user.last_name}
                 />
               </div>
             </div>
-            <div className="modal-double">
-              <div className="modal-case modal-double__case">
-                <h4 className="modal-case__title">Antenne local</h4>
+            <div className={styles.double}>
+              <div className={`${styles.case} ${styles.double}`}>
+                <h4 className={styles.case_title}>Antenne local</h4>
                 <fieldset>
                   <select
                     {...register('zone')}
@@ -119,19 +120,19 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
                   </select>
                 </fieldset>
               </div>
-              <div className="modal-case modal-double__case">
-                <h4 className="modal-case__title">Adresse email</h4>
+              <div className={`${styles.case} ${styles.double}`}>
+                <h4 className={styles.case_title}>Adresse email</h4>
                 <input
-                  className="modal-case__inputTxt"
+                  className={styles.case_inputTxt}
                   type="email"
                   {...register('email')}
                   defaultValue={user.email}
                 />
               </div>
             </div>
-            <div className="modal-double">
-              <div className="modal-case modal-double__case">
-                <h4 className="modal-case__title">Rôles</h4>
+            <div className={styles.double}>
+              <div className={`${styles.case} ${styles.double}`}>
+                <h4 className={styles.case_title}>Rôles</h4>
                 <fieldset>
                   <select defaultValue={user.role} {...register('role')}>
                     {admin &&
@@ -155,13 +156,13 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
                   </select>
                 </fieldset>
               </div>
-              <div className="modal-case modal-double__case">
-                <h4 className="modal-case__title">Dernière connexion</h4>
+              <div className={`${styles.case} ${styles.double}`}>
+                <h4 className={styles.case_title}>Dernière connexion</h4>
                 {dayjs(user.last_access).format('DD  MMMM  YYYY')}
               </div>
             </div>
           </div>
-          <div className="modal-actions">
+          <div className={styles.actions}>
             <button
               type="button"
               className="btn btn-danger-fill btn-flat modal-actions__close"

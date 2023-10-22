@@ -12,7 +12,8 @@ import {
   validateEmail,
   validateScheduleFormat,
 } from '../../../utils/form/form';
-import './Modal.scss';
+
+import styles from './Modal.module.scss';
 
 interface ModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,16 +47,16 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-main">
-        <h1 className="modal-title">Créer un organisme</h1>
-        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <div className="modal-overflow">
-            <div className="modal-double modal-start">
-              <h4 className="modal-case__title">
+    <div className={styles.modal}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>Créer un organisme</h1>
+        <form className={styles.list} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.overflow}>
+            <div className={`${styles.double} ${styles.start}`}>
+              <h4 className={styles.case_title}>
                 Choisir l&apos;antenne locale
               </h4>
-              <fieldset className="modal-contact__actu">
+              <fieldset className={styles.contact_actu}>
                 <select
                   value={select}
                   {...register('zone_id', { required: 'Ce champ est requis' })}
@@ -73,50 +74,50 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                 <legend>Antenne locale</legend>
               </fieldset>
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Nom de l&apos;organisme</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Nom de l&apos;organisme</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 placeholder="ex : Pôle infos services"
                 {...register('name', { required: 'Ce champs est requis' })}
               />
               {errors.name && <small>{errors.name.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Adresse</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Adresse</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 placeholder="ex : 1 rue des champs"
                 {...register('address', { required: 'Ce champs est requis' })}
               />
               {errors.address && <small>{errors.address.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Ville</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Ville</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 placeholder="ex : Bangui"
                 {...register('city', { required: 'Ce champs est requis' })}
               />
               {errors.city && <small>{errors.city.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Code postal</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Code postal</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="number"
                 placeholder="ex: 31100 (sans espace)"
                 {...register('zipcode', { required: 'Ce champs est requis' })}
               />
               {errors.zipcode && <small>{errors.zipcode.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Adresse email</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Adresse email</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="email"
                 placeholder="ex: secretariat@gmail.com"
                 {...register('mail', {
@@ -125,10 +126,10 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
               />
               {errors.mail?.message && <small>{errors.mail.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Telephone</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Telephone</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="tel"
                 placeholder="ex: 0645784598 (sans espace)"
                 {...register('phone', {
@@ -146,44 +147,44 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
               />
               {errors.phone && <small>{errors.phone.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Site web</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Site web</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 placeholder="ex : www.poleinfos.fr"
                 {...register('website')}
               />
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Accès</h4>
-              <div className="modal-data__accessDetails">
-                <label className="modal-data__pmr">
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Accès</h4>
+              <div className={styles.data_accessDetails}>
+                <label className={styles.data_pmr}>
                   <input type="checkbox" {...register('pmr')} />
                   Accessible PSH / PMR
                 </label>
-                <label className="modal-data__pmr">
+                <label className={styles.data_pmr}>
                   <input type="checkbox" {...register('animals')} />
                   Animaux admis
                 </label>
               </div>
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Description</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Description</h4>
               <textarea
-                className="modal-case__textarea"
+                className={styles.case_textarea}
                 {...register('description')}
               />
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>
                 Horaires
-                <span className="modal-case__legend">
+                <span className={styles.case_legend}>
                   (Formats horaire acceptés: 10h, 10h00, 10:00)
                 </span>
               </h4>
-              <table className="modal-data__hours">
-                <thead className="modal-data__hoursHead">
+              <table className={styles.data_hours}>
+                <thead className={styles.data_hoursHead}>
                   <tr>
                     <td>Jours</td>
                     <td colSpan={3}>Matin</td>
@@ -193,20 +194,20 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                 </thead>
                 <tbody>
                   {days.map((i, index) => (
-                    <tr key={i.name} className="modal-data__hoursLine">
-                      <td className="modal-data__hoursDay">
+                    <tr key={i.name} className={styles.data_hoursLine}>
+                      <td className={styles.data_hoursDay}>
                         <span>{i.name}</span>
                         <input
                           type="hidden"
                           {...register(`schedule_id_${index + 1}`)}
                         />
                       </td>
-                      <td className="modal-data__hoursHour">
+                      <td className={styles.data_hoursHour}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_openam_${index + 1}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data__hoursInput__error
                           )}
                           {...register(`schedule_openam_${index + 1}`, {
                             validate: (value) =>
@@ -214,13 +215,13 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                           })}
                         />
                       </td>
-                      <td className="modal-data__hoursSeparater">-</td>
-                      <td className="modal-data__hoursTd">
+                      <td className={styles.data_hoursSeparater}>-</td>
+                      <td className={styles.data_hoursTd}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_closeam_${index + 1}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data__hoursInput__error
                           )}
                           {...register(`schedule_closeam_${index + 1}`, {
                             validate: (value) =>
@@ -228,13 +229,13 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                           })}
                         />
                       </td>
-                      <td className="modal-data__hoursSeparater">/</td>
-                      <td className="modal-data__hoursTd">
+                      <td className={styles.data_hoursSeparater}>/</td>
+                      <td className={styles.data_hoursTd}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_openpm_${index + 1}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data__hoursInput__error
                           )}
                           {...register(`schedule_openpm_${index + 1}`, {
                             validate: (value) =>
@@ -242,13 +243,13 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                           })}
                         />
                       </td>
-                      <td className="modal-data__hoursSeparater">-</td>
-                      <td className="modal-data__hoursTd">
+                      <td className={styles.data_hoursSeparater}>-</td>
+                      <td className={styles.data_hoursTd}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_closepm_${index + 1}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data__hoursInput__error
                           )}
                           {...register(`schedule_closepm_${index + 1}`, {
                             validate: (value) =>
@@ -261,15 +262,15 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
                 </tbody>
               </table>
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Infos & alertes</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Infos & alertes</h4>
               <textarea
-                className="modal-case__textarea"
+                className={styles.case_textarea}
                 {...register('infos_alerte')}
               />
             </div>
           </div>
-          <div className="modal-actions">
+          <div className={styles.actions}>
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"

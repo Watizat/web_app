@@ -1,0 +1,107 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/medias' as m;
+@use '../../../styles/elements';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 5em;
+  margin-bottom: 1em;
+
+  @include m.mobile {
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  flex-grow: 1;
+  gap: 0.75rem;
+
+  @include m.mobile {
+    width: 100%;
+  }
+
+  & h2 {
+    color: v.$grey-800;
+    font-size: 1.2em;
+    margin-bottom: -0.75rem;
+  }
+
+  &_address {
+    font-weight: bold;
+    color: v.$sucess;
+    font-size: 0.85rem;
+  }
+
+  &_categories {
+    &__item {
+      margin-right: 0.8em;
+      width: 40px !important;
+      height: 30px !important;
+    }
+  }
+
+  &_infosalertes {
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid v.$danger;
+    margin-top: 1rem;
+    & legend {
+      color: v.$danger;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    & span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: v.$grey-800;
+    }
+  }
+
+  & p {
+    font-size: 0.9em;
+    text-align: justify;
+  }
+}
+
+.customIcon {
+  background-color: white;
+  color: black;
+  border-radius: 50%;
+  border: 5px solid v.$primary;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform-style: preserve-3d;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -14px; /* Ajustez la valeur ici pour contrôler la position de la pointe vers le bas */
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 18px 14px 0;
+    border-color: v.$primary transparent transparent transparent;
+    transform: translateX(-50%) translateZ(-1px);
+  }
+}
+
+.map {
+  display: flex;
+  width: 40% !important;
+  height: 300px !important;
+
+  @include m.mobile {
+    width: 100%;
+  }
+}

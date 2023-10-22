@@ -6,7 +6,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { editContact } from '../../../store/reducers/crud';
 import { validateEmail } from '../../../utils/form/form';
-import './Modal.scss';
+
+import styles from './Modal.module.scss';
 import ModalDeleteConfirmation from './ModalDeleteContactConfirmation';
 
 interface ModalProps {
@@ -45,44 +46,44 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
   }
 
   return (
-    <div className="modal">
-      <div className="modal-main">
-        <h1 className="modal-title">Modifier un contact</h1>
-        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <div className="modal-overflow">
-            <div className="modal-case">
-              <h4 className="modal-case__title">Nom du contact</h4>
+    <div className={styles.modal}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>Modifier un contact</h1>
+        <form className={styles.list} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.overflow}>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Nom du contact</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 {...register('name', { required: 'Ce champs est requis' })}
                 defaultValue={contact.name}
               />
               {errors.name && <small>{errors.name.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Commentaire </h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Commentaire </h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 {...register('comment')}
                 defaultValue={contact.comment}
               />
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Fonction</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Fonction</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 defaultValue={contact.job}
                 {...register('job')}
               />
             </div>
-            <div className="modal-contact__modes">
-              <div className="modal-case">
-                <h4 className="modal-case__title">Adresse email</h4>
+            <div className={styles.contact_modes}>
+              <div className={styles.case}>
+                <h4 className={styles.case_title}>Adresse email</h4>
                 <input
-                  className="modal-case__inputTxt modal-contact__mail"
+                  className={`${styles.case_inputTxt} ${styles.contact_mail}`}
                   type="email"
                   defaultValue={contact.mail}
                   {...register('mail', {
@@ -91,10 +92,10 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
                 />
                 {errors.mail?.message && <small>{errors.mail.message}</small>}
               </div>
-              <div className="modal-case">
-                <h4 className="modal-case__title">Telephone</h4>
+              <div className={styles.case}>
+                <h4 className={styles.case_title}>Telephone</h4>
                 <input
-                  className="modal-case__inputTxt"
+                  className={styles.case_inputTxt}
                   type="tel"
                   defaultValue={contact.phone}
                   {...register('phone', {
@@ -113,10 +114,10 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
                 {errors.phone?.message && <small>{errors.phone.message}</small>}
               </div>
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Rôles</h4>
-              <div className=" modal-contact__roles">
-                <label className="modal-contact__private">
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Rôles</h4>
+              <div className={styles.contact__roles}>
+                <label className={styles.contact_private}>
                   <fieldset>
                     <select
                       {...register('visibility', { required: true })}
@@ -128,7 +129,7 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
                     <legend>Publicité du contact</legend>
                   </fieldset>
                 </label>
-                <label className="modal-contact__actu">
+                <label className={styles.contact_actu}>
                   <fieldset>
                     <select
                       {...register('actualisation', { required: true })}
@@ -143,7 +144,7 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
               </div>
             </div>
           </div>
-          <div className="modal-actions">
+          <div className={styles.actions}>
             <button
               type="button"
               className="btn btn-danger-fill btn-flat modal-actions__close"

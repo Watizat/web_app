@@ -4,7 +4,7 @@ import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { Organism } from '../../../@types/organism';
 import { useAppSelector } from '../../../hooks/redux';
 import Icon from '../../../ui/icon/icon';
-import './Header.scss';
+import styles from './Header.module.scss';
 
 function Header() {
   const [position, setPosition] = useState({ lat: 43.6, lng: 1.433333 });
@@ -22,36 +22,39 @@ function Header() {
   }));
 
   return (
-    <div className="organisme-header">
-      <div className="organisme-details">
-        <h2>{organism.name}</h2>
-        <p>{organism.translations[0].description}</p>
-        <div className="organisme-details-categories">
+    <div className={styles.header}>
+      <div className={styles.details}>
+        <h2>{organism.name}</h2>{' '}
+        <p className={styles.details_address}>
+          {organism.address} - <span>{organism.zipcode}</span>{' '}
+          <span>{organism.city}</span>
+        </p>
+        <div className={styles.details_categories}>
           {categories.map((categorie) => (
             <Icon
               key={categorie.id}
-              className="organisme-details-categories-item"
+              className={styles.details_categories__item}
               icon={categorie.value}
             />
           ))}
         </div>
+        <p className={styles.details_description}>
+          {organism.translations[0].description}
+        </p>
         {organism.translations[0]?.infos_alerte && (
-          <fieldset className="organisme-details__infosalertes">
+          <fieldset className={styles.details_infosalertes}>
             <span>{organism.translations[0]?.infos_alerte}</span>
             <legend>Info & alertes</legend>
           </fieldset>
         )}
       </div>
       <MapContainer
+        className={styles.map}
         center={
           organism.latitude ? [organism.latitude, organism.longitude] : position
         }
         zoom={15}
       >
-        {/* <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        /> */}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png"
@@ -63,7 +66,7 @@ function Header() {
             position={[organism.latitude, organism.longitude]}
             icon={
               new L.DivIcon({
-                className: 'custom-icon',
+                className: styles.customIcon,
                 html: `<div></div>`,
                 iconSize: [30, 30],
                 iconAnchor: [15, 33.5],

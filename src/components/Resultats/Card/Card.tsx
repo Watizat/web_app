@@ -66,7 +66,13 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
           </div>
         </Link>
         <div className={styles.left_upper__description}>
-          {organism.translations[0]?.description}
+          {organism.translations[0]?.description?.length &&
+          organism.translations[0]?.description?.length > 250
+            ? `${organism.translations[0]?.description?.substring(
+                0,
+                250
+              )} (.....)`
+            : organism.translations[0]?.description}
         </div>
         <div className={styles.left_lower}>
           <Link

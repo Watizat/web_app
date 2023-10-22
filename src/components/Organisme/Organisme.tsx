@@ -6,8 +6,8 @@ import Container from '../Container/Container';
 import Breadcrumb from './Breadcrumb/breadcrumb';
 import Header from './Header/Header';
 import Infos from './Infos/Infos';
-import './Organisme.scss';
 import Services from './Services/Services';
+import styles from './Organisme.module.scss';
 
 function Organisme() {
   const { slug } = useParams();
@@ -29,10 +29,10 @@ function Organisme() {
 
   if (organism === null && !loading) {
     return (
-      <main className="organisme-container">
+      <main className={styles.organism}>
         <Container>
           <Breadcrumb />
-          <span>Cet organisme n&apos;éxiste pas.</span>
+          <span>Cet organisme n&apos;éxiste pas</span>
         </Container>
       </main>
     );
@@ -40,10 +40,10 @@ function Organisme() {
 
   return (
     !loading && (
-      <main className="organisme-container">
+      <main className={styles.organism}>
         <Container>
           <Breadcrumb />
-          <section className="organisme">
+          <section className={styles.content}>
             <Header />
             <Infos />
             <Services />

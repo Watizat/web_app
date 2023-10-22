@@ -10,7 +10,7 @@ Cet espace correspond à l'interface de consultation et d'administration du guid
 
 ### Informations
 
-Prendre connaissance du [guide de contribution](https://github.com/Watizat/webguide-webapp/blob/02863bf6e508b43209b2e6c78b32d1b269cf3236/docs/CONTRIBUTING.md)
+Prendre connaissance du [guide de contribution](https://github.com/Watizat/web_app/blob/main/docs/CONTRIBUTING.md)
 
 ### Installer le projet
 
@@ -18,9 +18,9 @@ Prendre connaissance du [guide de contribution](https://github.com/Watizat/webgu
 
 - Installer le projet et ses dépendances, avec une des commandes suivantes :
 
-  ````bash
+  ```bash
   npm install
-  ````
+  ```
 
   ```bash
   yarn
@@ -42,7 +42,7 @@ Prendre connaissance du [guide de contribution](https://github.com/Watizat/webgu
 
 ## Documentations
 
-- [Code de conduite](https://github.com/Watizat/webguide-webapp/blob/02863bf6e508b43209b2e6c78b32d1b269cf3236/docs/CODE_OF_CONDUCT.md)
+- [Code de conduite](https://github.com/Watizat/web_app/blob/main/docs/CODE_OF_CONDUCT.md)
 - [Documentation utilisateur·ice·s](https://docs.watizat.app) (en construction🛠️)
 
 ## Informations techniques
@@ -52,15 +52,15 @@ Prendre connaissance du [guide de contribution](https://github.com/Watizat/webgu
 #### Langages
 
 - [Typescript](https://www.typescriptlang.org/)
-- [Sass](https://sass-lang.com/)
+- [Sass](https://sass-lang.com/) et [CSS modules](https://github.com/css-modules/css-modules)
 
 #### Technologies
 
 ##### Frontend
 
-- [React](https://react.dev/)
+- [React.JS](https://react.dev/)
 - [Redux](https://redux.js.org/)
-- [Vite](https://vitejs.dev/)
+- [Vite.JS](https://vitejs.dev/)
 
 ##### Backend
 

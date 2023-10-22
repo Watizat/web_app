@@ -5,7 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { addService } from '../../../store/reducers/crud';
 import { validateScheduleFormat } from '../../../utils/form/form';
-import './Modal.scss';
+
+import styles from './Modal.module.scss';
 
 interface ServiceModalProps {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,21 +34,21 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-main">
-        <h1 className="modal-title">Ajouter un service</h1>
-        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <div className="modal-overflow">
+    <div className={styles.modal}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>Ajouter un service</h1>
+        <form className={styles.list} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.overflow}>
             <input
               type="number"
               defaultValue={organismId}
               hidden
               {...register('organisme_id')}
             />
-            <div className="modal-double modal-start">
-              <h4 className="modal-case__title">Catégorie du service</h4>
+            <div className={`${styles.double} ${styles.start}`}>
+              <h4 className={styles.case_title}>Catégorie du service</h4>
 
-              <fieldset className="modal-contact__actu">
+              <fieldset className={styles.contact_actu}>
                 <select {...register('categorie_id')}>
                   {categoriesList.map((category) => (
                     <option
@@ -61,32 +62,32 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                 <legend>Catégorie</legend>
               </fieldset>
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Nom du service</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Nom du service</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 {...register('name', { required: 'Ce champs est requis' })}
               />
               {errors.name && <small>{errors.name.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Type de service·s proposé·s</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Type de service·s proposé·s</h4>
               <textarea
-                className="modal-case__textarea"
+                className={styles.case_textarea}
                 {...register('description')}
               />
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>
                 Horaires
-                <span className="modal-case__legend">
+                <span className={styles.case_legend}>
                   (Formats horaire acceptés: 10h, 10h00, 10:00)
                 </span>
               </h4>
 
-              <table className="modal-data__hours">
-                <thead className="modal-data__hoursHead">
+              <table className={styles.data_hours}>
+                <thead className={styles.data_hoursHead}>
                   <tr>
                     <td>Jours</td>
                     <td colSpan={3}>Matin</td>
@@ -96,20 +97,20 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                 </thead>
                 <tbody>
                   {days.map((i, index) => (
-                    <tr key={i.name} className="modal-data__hoursLine">
-                      <td className="modal-data__hoursDay">
+                    <tr key={i.name} className={styles.data_hoursLine}>
+                      <td className={styles.data_hoursDay}>
                         <span>{i.name}</span>
                         <input
                           type="hidden"
                           {...register(`schedule_id_${index + 1}`)}
                         />
                       </td>
-                      <td className="modal-data__hoursHour">
+                      <td className={styles.data_hoursHour}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_openam_${index + 1}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data__hoursInput__error
                           )}
                           {...register(`schedule_openam_${index + 1}`, {
                             validate: (value) =>
@@ -117,13 +118,13 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                           })}
                         />
                       </td>
-                      <td className="modal-data__hoursSeparater">-</td>
-                      <td className="modal-data__hoursTd">
+                      <td className={styles.data_hoursSeparater}>-</td>
+                      <td className={styles.data_hoursTd}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_closeam_${index + 1}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data__hoursInput__error
                           )}
                           {...register(`schedule_closeam_${index + 1}`, {
                             validate: (value) =>
@@ -131,13 +132,13 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                           })}
                         />
                       </td>
-                      <td className="modal-data__hoursSeparater">/</td>
-                      <td className="modal-data__hoursTd">
+                      <td className={styles.data_hoursSeparater}>/</td>
+                      <td className={styles.data_hoursTd}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_openpm_${index + 1}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data__hoursInput__error
                           )}
                           {...register(`schedule_openpm_${index + 1}`, {
                             validate: (value) =>
@@ -145,13 +146,13 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                           })}
                         />
                       </td>
-                      <td className="modal-data__hoursSeparater">-</td>
-                      <td className="modal-data__hoursTd">
+                      <td className={styles.data_hoursSeparater}>-</td>
+                      <td className={styles.data_hoursTd}>
                         <input
                           className={classNames(
-                            'modal-data__hoursInput',
+                            styles.data_hoursInput,
                             errors[`schedule_closepm_${index + 1}`] &&
-                              'modal-data__hoursInput--error'
+                              styles.data__hoursInput__error
                           )}
                           {...register(`schedule_closepm_${index + 1}`, {
                             validate: (value) =>
@@ -164,15 +165,15 @@ function ModalAddService({ setIsActive }: ServiceModalProps) {
                 </tbody>
               </table>
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Infos & alertes</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Infos & alertes</h4>
               <textarea
-                className="modal-case__textarea"
+                className={styles.case_textarea}
                 {...register('infos_alerte')}
               />
             </div>
           </div>
-          <div className="modal-actions">
+          <div className={styles.actions}>
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"

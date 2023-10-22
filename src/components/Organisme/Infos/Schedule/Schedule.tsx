@@ -1,6 +1,6 @@
 import { Schedule } from '../../../../@types/organism';
 import { useAppSelector } from '../../../../hooks/redux';
-import './Schedule.scss';
+import styles from './Schedule.module.scss';
 
 interface SchedulesProps {
   schedule: Schedule[];
@@ -51,14 +51,14 @@ function Schedules({ schedule, displayAll }: SchedulesProps) {
   orderedSchedule.sort((a, b) => a.day - b.day);
 
   return (
-    <table className="schedules">
+    <table className={styles.schedules}>
       <tbody>
         {orderedSchedule.map(
           (currentDay) =>
             getOpeningHours(currentDay) !== null && (
               <tr key={currentDay.day}>
                 <td>
-                  <div className="schedules-day">
+                  <div className={styles.schedule_day}>
                     {days.find((day) => day.numberday === currentDay.day)?.name}
                   </div>
                 </td>

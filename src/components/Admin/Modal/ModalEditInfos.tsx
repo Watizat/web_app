@@ -5,7 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setAdminOrganism } from '../../../store/reducers/admin';
 import { editOrganismInfos } from '../../../store/reducers/crud';
 import { validateEmail } from '../../../utils/form/form';
-import './Modal.scss';
+
+import styles from './Modal.module.scss';
 
 interface ModalProps {
   setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,67 +33,67 @@ function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-main">
-        <h1 className="modal-title">
+    <div className={styles.modal}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>
           Modifier les informations de l&apos;organisme
         </h1>
-        <form className="modal-list" onSubmit={handleSubmit(onSubmit)}>
-          <div className="modal-overflow">
-            <div className="modal-case">
-              <h4 className="modal-case__title">Organisme</h4>
+        <form className={styles.list} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.overflow}>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Organisme</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 defaultValue={organism.name}
                 {...register('name', { required: 'Ce champs est requis' })}
               />
               {errors.name && <small>{errors.name.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Adresse</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Adresse</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 defaultValue={organism.address}
                 {...register('address', { required: 'Ce champs est requis' })}
               />
               {errors.address && <small>{errors.address.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Ville</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Ville</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 defaultValue={organism.city}
                 {...register('city', { required: 'Ce champs est requis' })}
               />
               {errors.city && <small>{errors.city.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Code postal</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Code postal</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="number"
                 defaultValue={organism.zipcode}
                 {...register('zipcode', { required: 'Ce champs est requis' })}
               />
               {errors.zipcode && <small>{errors.zipcode.message}</small>}
             </div>
-            <div className="modal-case">
-              <h4 className="modal-case__title">Site web</h4>
+            <div className={styles.case}>
+              <h4 className={styles.case_title}>Site web</h4>
               <input
-                className="modal-case__inputTxt"
+                className={styles.case_inputTxt}
                 type="text"
                 defaultValue={organism.website}
                 {...register('website')}
               />
             </div>
-            <div className="modal-double modal-start">
-              <div className="modal-case">
-                <h4 className="modal-case__title">Phone</h4>
+            <div className={`${styles.double} ${styles.start}`}>
+              <div className={styles.case}>
+                <h4 className={styles.case_title}>Phone</h4>
                 <input
-                  className="modal-case__inputTxt"
+                  className={styles.case_inputTxt}
                   type="tel"
                   defaultValue={organism.phone}
                   {...register('phone', {
@@ -109,10 +110,10 @@ function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
                   })}
                 />
               </div>
-              <div className="modal-case">
-                <h4 className="modal-case__title">Mail</h4>
+              <div className={styles.case}>
+                <h4 className={styles.case_title}>Mail</h4>
                 <input
-                  className="modal-case__inputTxt modal-contact__mail"
+                  className={`${styles.case_inputTxt} ${styles.contact_mail}`}
                   type="email"
                   defaultValue={organism.mail}
                   {...register('mail', {
@@ -122,7 +123,7 @@ function ModalEditInfos({ setIsModalActive, organism }: ModalProps) {
               </div>
             </div>
           </div>
-          <div className="modal-actions">
+          <div className={styles.actions}>
             <button
               type="button"
               className="btn btn-info-fill btn-flat modal-actions__close"
