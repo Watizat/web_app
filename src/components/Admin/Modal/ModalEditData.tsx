@@ -187,14 +187,14 @@ function ModalEditData({ organism, setIsActive }: ModalDataProps) {
           <div className={styles.actions}>
             <button
               type="button"
-              className="btn btn-info-fill btn-flat modal-actions__close"
+              className={`${styles.actions_close} btn btn-info-fill btn-flat`}
               onClick={() => setIsActive(false)}
             >
               Annuler
             </button>
             <button
               type="submit"
-              className="btn btn-sucess-fill btn-flat modal-actions__save"
+              className={`${styles.actions_save} btn btn-sucess btn-flat`}
             >
               {isSaving && <span>Sauvegarde en cours...</span>}
               {!isSaving && <span>Sauvegarder</span>}

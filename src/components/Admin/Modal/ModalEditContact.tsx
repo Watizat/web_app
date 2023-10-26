@@ -147,21 +147,21 @@ function ModalEditContact({ contact, setIsActive }: ModalProps) {
           <div className={styles.actions}>
             <button
               type="button"
-              className="btn btn-danger-fill btn-flat modal-actions__close"
+              className={`${styles.actions_delete} btn btn-danger-fill btn-flat`}
               onClick={() => setIsActiveConfirmation(true)}
             >
               Supprimer
             </button>
             <button
               type="button"
-              className="btn btn-info-fill btn-flat modal-actions__close"
+              className={`${styles.actions_close} btn btn-info-fill btn-flat`}
               onClick={() => setIsActive(false)}
             >
               Annuler
             </button>
             <button
               type="submit"
-              className="btn btn-sucess-fill btn-flat modal-actions__save"
+              className={`${styles.actions_save} btn btn-sucess btn-flat`}
             >
               {isSaving && <span>Sauvegarde en cours...</span>}
               {!isSaving && <span>Sauvegarder</span>}{' '}

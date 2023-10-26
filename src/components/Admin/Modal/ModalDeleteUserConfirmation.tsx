@@ -77,7 +77,7 @@ function ModalDeleteConfirmation({
           <div className={styles.actions}>
             <button
               type="button"
-              className="btn btn-info-fill btn-flat modal-actions__close"
+              className={`${styles.actions_close} btn btn-info-fill btn-flat`}
               onClick={() => setIsActiveConfirmation(false)}
             >
               Annuler

@@ -67,6 +67,17 @@
   padding-top: 2rem;
   border-top: 1px solid rgba(v.$info, 0.25);
   box-shadow: rgba(0, 0, 0, 0.15) -1rem 0rem 0.3rem;
+
+  &_close,
+  &_delete {
+    border: none !important;
+  }
+
+  &_save {
+    &:hover {
+      border-color: transparent !important;
+    }
+  }
 }
 
 .overflow,

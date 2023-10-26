@@ -47,14 +47,14 @@ function ModalInactivityDetector({
           <div className={styles.empty_actions}>
             <Link
               to="/"
-              className="btn btn-info-fill btn-flat modal-actions__close"
+              className={`${styles.actions_close} btn btn-info-fill btn-flat`}
               onClick={handleLogout}
             >
               {`Se déconnecter (${countdown}s)`}
             </Link>
             <button
               type="submit"
-              className="btn btn-sucess-fill btn-flat modal-actions__save"
+              className={`${styles.actions_save} btn btn-sucess btn-flat`}
             >
               Oui
             </button>
