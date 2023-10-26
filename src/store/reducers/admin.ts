@@ -3,53 +3,59 @@ import { Organism, Role, Zone } from '../../@types/organism';
 import { DirectusUser } from '../../@types/user';
 import { axiosInstance } from '../../utils/axios';
 
+// Définir la structure de l'état
 interface AdminState {
-  organisms: Organism[];
-  organism: Organism | null;
-  isLoading: boolean;
-  users: DirectusUser[];
-  user: DirectusUser | null;
-  zones: Zone[];
-  zone: Zone | null;
-  roles: Role[];
-  role: Role | null;
+  organisms: Organism[]; // Tableau d'objets Organism
+  organism: Organism | null; // Organisme sélectionné actuel ou null
+  isLoading: boolean; // Indicateur pour indiquer si les données sont en cours de chargement
+  users: DirectusUser[]; // Tableau d'objets DirectusUser
+  user: DirectusUser | null; // Utilisateur Directus sélectionné actuel ou null
+  zones: Zone[]; // Tableau d'objets Zone
+  zone: Zone | null; // Zone sélectionnée actuelle ou null
+  roles: Role[]; // Tableau d'objets Role
+  role: Role | null; // Rôle sélectionné actuel ou null
 }
 
+// Définir l'état initial
 export const initialState: AdminState = {
-  organisms: [],
-  organism: null,
-  isLoading: false,
-  users: [],
-  user: null,
-  zones: [],
-  zone: null,
-  roles: [],
-  role: null,
+  organisms: [], // Tableau vide d'objets Organism
+  organism: null, // Pas d'Organism sélectionné
+  isLoading: false, // Pas de chargement de données initialement
+  users: [], // Tableau vide d'objets DirectusUser
+  user: null, // Pas de DirectusUser sélectionné
+  zones: [], // Tableau vide d'objets Zone
+  zone: null, // Pas de Zone sélectionnée
+  roles: [], // Tableau vide d'objets Role
+  role: null, // Pas de Role sélectionné
 };
 
+// Créer une fonction asynchrone pour récupérer les Organismes de l'administration
 export const fetchAdminOrganisms = createAsyncThunk(
   'admin-organisms/fetch-organisms',
   async (city: string) => {
+    // Récupérer les données depuis le serveur en utilisant axiosInstance
     const { data } = await axiosInstance.get<{ data: Organism[] }>(
       '/items/organisme',
       {
         params: {
-          fields: ['id', 'name', 'address'].join(','),
+          fields: ['id', 'name', 'address'].join(','), // Spécifier les champs à récupérer
           filter: {
             zone_id: {
-              name: city,
+              name: city, // Filtrer les données en fonction du nom de la ville
             },
           },
         },
       }
     );
-    return data.data;
+    return data.data; // Retourner les données récupérées
   }
 );
 
+// Créer une fonction asynchrone pour récupérer les Utilisateurs
 export const fetchUsers = createAsyncThunk(
   'users/fetch-users',
   async (zone: string | null) => {
+    // Récupérer les données depuis le serveur en utilisant axiosInstance
     const { data } = await axiosInstance.get<{ data: DirectusUser[] }>(
       '/users',
       {
@@ -64,14 +70,14 @@ export const fetchUsers = createAsyncThunk(
         'role_id.name',
         'zone.name', */
             '*',
-          ].join(','),
+          ].join(','), // Récupérer tous les champs
           filter: {
-            zone,
+            zone, // Filtrer les données en fonction de la Zone
           },
         },
       }
     );
-    return data.data;
+    return data.data; // Retourner les données récupérées
   }
 );
 

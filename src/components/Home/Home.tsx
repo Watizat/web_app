@@ -40,9 +40,9 @@ function Home() {
       <section className={styles.hero}>
         <Container>
           <div className={styles.heroHeader}>
-            <h1 className={styles.heroHeader__title}>
-              Guide d&lsquo;information en ligne
-              <span className={styles.heroHeader__subtitle}>
+            <h1 className={styles.heroHeader_title}>
+              Guide d&lsquo;information en ligne&nbsp;
+              <span className={styles.heroHeader_subtitle}>
                 pour les personnes exilées
               </span>
             </h1>

@@ -3,10 +3,10 @@
 @use '../../styles/elements';
 
 .home {
-  height: calc(100vh - v.$headerHeight);
+  min-height: calc(100vh - v.$headerHeight - v.$footerHeight);
 
   @include m.touch {
-    height: calc(100vh - v.$headerHeight);
+    min-height: calc(100vh - v.$headerHeight);
   }
 }
 
@@ -262,6 +262,7 @@
 
 .info {
   display: none;
+  margin-bottom: v.$footerHeight;
 
   @include m.tablet {
     display: flex;
