@@ -17,22 +17,16 @@ function ContactCard({ ...contact }: Contact) {
           <h5 className={styles.contact_subheader__title}>{contact.name}</h5>
           <div className={styles.contact_roles}>
             {contact.actualisation ? (
-              <span
-                className={`${styles.contact_roles__role} ${styles.contact_roles__actualisation}`}
-              >
+              <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-purple-700 bg-purple-100 rounded-md">
                 Actualisation
               </span>
             ) : null}
             {contact.visibility === false ? (
-              <span
-                className={`${styles.contact_roles__role} ${styles.contact_roles__prive}`}
-              >
+              <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-red-700 bg-red-100 rounded-md">
                 Privé
               </span>
             ) : (
-              <span
-                className={`${styles.contact_roles__role} ${styles.contact_roles__public}`}
-              >
+              <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-md">
                 Public
               </span>
             )}

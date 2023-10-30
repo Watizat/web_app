@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
@@ -9,6 +10,7 @@ import { fetchCategories, fetchDays } from '../../store/reducers/organisms';
 import styles from './App.module.scss';
 
 function App() {
+  const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
   const langue = useAppSelector((state) => state.organism.langue);
@@ -35,7 +37,7 @@ function App() {
         <>
           <Header />
           <Outlet />
-          <Footer />
+          {isTablet && <Footer />}
         </>
       )}
     </div>

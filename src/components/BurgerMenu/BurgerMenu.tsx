@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/logo-grey.svg';
 import { useAppDispatch } from '../../hooks/redux';
 import { toggleHamburger } from '../../store/reducers/hamburger';
-import HeaderLinks from '../Header/Links/linksData';
-import FooterLinks from '../Footer/Links/linksData';
+import HeaderLinks from '../Header/linksData';
+import FooterLinks from '../Footer/linksData';
 // import FooterLinks from '../Footer/Links/Links';
 import styles from './BurgerMenu.module.scss';
 

@@ -1,24 +1,32 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux';
 import { logout } from '../../store/reducers/user';
-import styles from './Login.module.scss';
+import Login from './Login';
 
-function NewUser() {
+export default function NewUser() {
   const dispatch = useAppDispatch();
   return (
-    <div className={styles.login}>
-      <h1>Nouveau membre</h1>
-      <span>Votre compte est en attente de validation.</span>
-      <Link to="/" onClick={() => dispatch(logout())}>
-        <button
-          className="btn btn-flat btn-primary btn-slowRounded "
-          type="button"
+    <Login>
+      <div className="flex flex-col justify-center flex-1 mx-auto align-middle min-h-ful max-w-3/6">
+        <div className="text-center">
+          Votre demande de création de compte a bien été prise en compte <br />
+        </div>
+        <div className="mt-2 font-medium text-center">
+          Votre compte est en attente de validation
+        </div>
+        <Link
+          to="/"
+          onClick={() => dispatch(logout())}
+          className="mx-auto mt-6"
         >
-          Se déconnecter
-        </button>
-      </Link>
-    </div>
+          <button
+            className="flex w-full justify-center rounded-md bg-watizat-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-watizat-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-watizat-500 "
+            type="button"
+          >
+            Se déconnecter
+          </button>
+        </Link>
+      </div>
+    </Login>
   );
 }
-
-export default NewUser;

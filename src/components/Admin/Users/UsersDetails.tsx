@@ -20,36 +20,42 @@ function UsersDetails({ user }: UsersDetailsProps) {
   function renderRoles(data: DirectusUser) {
     if (data.role === '4a30876c-cea0-455f-92d0-593212918aaf') {
       return (
-        <>
-          <span className={`${styles.role} ${styles.role_editor}`}>
+        <div className="flex justify-center gap-2">
+          <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-md">
             edition
           </span>
-          <span className={`${styles.role} ${styles.role_localref}`}>
+          <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-md">
             ref-local
           </span>
-        </>
+        </div>
       );
     }
     if (data.role === '53de6ec2-6d70-48c8-8532-61f96133f139') {
       return (
-        <>
-          <span className={`${styles.role} ${styles.role_editor}`}>
+        <div className="flex justify-center gap-2">
+          <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-md">
             edition
           </span>
-          <span className={`${styles.role} ${styles.role_localref}`}>
+          <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-md">
             ref-local
           </span>
-          <span className={`${styles.role} ${styles.role_admin}`}>admin</span>
-        </>
+          <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-pink-700 bg-pink-100 rounded-md">
+            admin
+          </span>
+        </div>
       );
     }
     if (data.role === '5754603f-add3-4823-9c77-a2f9789074fc') {
       return (
-        <span className={`${styles.role} ${styles.role_newrole}`}>Nouveau</span>
+        <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-md">
+          nouveau·elle
+        </span>
       );
     }
     return (
-      <span className={`${styles.role} ${styles.role_editor}`}>edition</span>
+      <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-md">
+        edition
+      </span>
     );
   }
 

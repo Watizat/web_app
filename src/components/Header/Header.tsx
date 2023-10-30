@@ -1,58 +1,107 @@
-import { useMediaQuery } from 'react-responsive';
-import { Fade as Hamburger } from 'hamburger-react';
-import { Link, useLocation } from 'react-router-dom';
-import logo from '../../assets/logo.svg';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { toggleHamburger } from '../../store/reducers/hamburger';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
-import Links from './Links/Links';
-import styles from './Header.module.scss';
+import { Link } from 'react-router-dom';
+import { Dialog } from '@headlessui/react';
+import { useState } from 'react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import logo from '../../assets/logo-color.svg';
 
-function Header() {
-  const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
-  const isOpen = useAppSelector((state) => state.hamburger.isOpen);
-  const dispatch = useAppDispatch();
-  const { pathname } = useLocation();
+export default function Header() {
+  const navigation = [
+    { name: 'Accueil', href: '/' },
+    { name: 'Watizat.org', href: '/' },
+  ];
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <header className={styles.header}>
-      {pathname === '/resultats' || pathname === '/resultats/' ? (
-        <div className={styles.resultsContainer}>
-          <Link className={styles.logo} to="/">
-            <img className={styles.logo_img} src={logo} alt="watizat logo" />
-            <span className={styles.logo_text}>Watizat</span>
-          </Link>
-          <div className={styles.navbar}>
-            <Links />
+    <header className="z-10 bg-transparent">
+      <nav
+        className="flex items-center justify-between p-6 mx-auto max-w-7xl lg:px-8"
+        aria-label="Global"
+      >
+        <div className="flex flex-1">
+          <div className="hidden lg:flex lg:gap-x-12">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
-          <div className={styles.hamburger}>
-            <Hamburger
-              toggled={isOpen}
-              toggle={() => dispatch(toggleHamburger(!isOpen))}
-            />
+          <div className="flex lg:hidden">
+            <button
+              type="button"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              onClick={() => setMobileMenuOpen(true)}
+            >
+              <span className="sr-only">Open main menu</span>
+              <Bars3Icon className="w-6 h-6" aria-hidden="true" />
+            </button>
           </div>
-          {isOpen && !isTablet && <BurgerMenu />}
         </div>
-      ) : (
-        <div className={styles.container}>
-          <Link className={styles.logo} to="/">
-            <img className={styles.logo_img} src={logo} alt="watizat logo" />
-            <span className={styles.logo_text}>Watizat</span>
+        <Link to="/" className="-m-2.5 md:-m-1.5 p-1.5 relative left-0">
+          <span className="sr-only">Watizat</span>
+          <img className="w-auto h-10" src={logo} alt="watizat logo" />
+        </Link>
+        <div className="flex justify-end flex-1">
+          <Link
+            to="/login"
+            className="w-3/6 text-sm font-semibold leading-6 text-gray-900 md:w-fit"
+          >
+            Membres Watizat <span aria-hidden="true">&rarr;</span>
           </Link>
-          <div className={styles.navbar}>
-            <Links />
-          </div>
-          <div className={styles.hamburger}>
-            <Hamburger
-              toggled={isOpen}
-              toggle={() => dispatch(toggleHamburger(!isOpen))}
-            />
-          </div>
-          {isOpen && !isTablet && <BurgerMenu />}
         </div>
-      )}
+      </nav>
+      <Dialog
+        as="div"
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
+        <div className="fixed inset-0 z-10" />
+        <Dialog.Panel className="fixed inset-y-0 left-0 z-10 w-full px-6 py-6 overflow-y-auto bg-white">
+          <div className="flex items-center justify-between">
+            <div className="flex flex-1">
+              <button
+                type="button"
+                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="sr-only">Close menu</span>
+                <XMarkIcon className="w-6 h-6" aria-hidden="true" />
+              </button>
+            </div>
+            <Link to="/" className="-m-1.5 p-1.5">
+              <span className="sr-only">Watizat</span>
+              <img
+                className="w-auto h-8"
+                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                alt=""
+              />
+            </Link>
+            <div className="flex justify-end flex-1">
+              <Link
+                to="/"
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                Log in <span aria-hidden="true">&rarr;</span>
+              </Link>
+            </div>
+          </div>
+          <div className="mt-6 space-y-2">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50"
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+        </Dialog.Panel>
+      </Dialog>
     </header>
   );
 }
-
-export default Header;

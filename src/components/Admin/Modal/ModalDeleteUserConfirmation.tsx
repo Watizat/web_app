@@ -6,6 +6,7 @@ import { axiosInstance } from '../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../utils/user';
 
 import styles from './Modal.module.scss';
+import elements from '../../../styles/index.scss';
 
 interface ModalProps {
   setIsActiveConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -68,24 +69,24 @@ function ModalDeleteConfirmation({
   }
 
   return (
-    <div className={styles.modal}>
-      <div className={styles.main}>
-        <h1 className={styles.title}>
+    <div className="absolute top-0 left-0 z-[100] flex items-center content-center justify-center w-screen h-screen bg-gray-950/75">
+      <div className="w-4/6 bg-white 2xl:w-2/6 max-h-2/6 rounded-xl">
+        <h1 className="pt-8 pb-2 pl-16 text-2xl font-medium text-left text-slate-700">
           Êtes-vous sûr de vouloir supprimer&nbsp;?
         </h1>
-        <form className={styles.list} onSubmit={handleDelete}>
-          <div className={styles.actions}>
+        <form
+          className="relative flex flex-col gap-y-12"
+          onSubmit={handleDelete}
+        >
+          <div className="flex justify-end gap-12 px-16 py-4 bg-gray-50 rounded-b-xl">
             <button
               type="button"
-              className={`${styles.actions_close} btn btn-info-fill btn-flat`}
+              className={styles.actions_close2}
               onClick={() => setIsActiveConfirmation(false)}
             >
               Annuler
             </button>
-            <button
-              type="submit"
-              className="btn btn-danger-fill btn-flat modal-actions__save"
-            >
+            <button type="submit" className={styles.actions_delete1}>
               Oui
             </button>
           </div>

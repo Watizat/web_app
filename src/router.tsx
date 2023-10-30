@@ -9,12 +9,12 @@ import Dashboard from './components/Admin/Dashboard/Dashboard';
 import Edition from './components/Admin/Edition/Edition';
 import Users from './components/Admin/Users/Users';
 import App from './components/App/App';
-import NotFound from './components/Errors/NotFound/NotFound';
+import NotFound from './components/Errors/NotFound';
 import Home from './components/Home/Home';
 import InactivityDetector from './components/InactivityDetector/InactivityDetector';
 import AccountRequest from './components/Login/AccountRequest';
 import ForgottenPassword from './components/Login/ForgottenPassword';
-import Login from './components/Login/Login';
+import SignIn from './components/Login/SignIn';
 import NewUser from './components/Login/NewUser';
 import RecoverPassword from './components/Login/RecoverPassword';
 import MentionsLegales from './components/StaticsPages/MentionsLegales';
@@ -33,7 +33,7 @@ const router = createBrowserRouter(
         <Route path="/account-request" element={<AccountRequest />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/organisme/:slug" element={<Organisme />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<SignIn />} />
         <Route path="/new-user" element={<NewUser />} />
       </Route>
       <Route path="/resultats" element={<Resultats />} />

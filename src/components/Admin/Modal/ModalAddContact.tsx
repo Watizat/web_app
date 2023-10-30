@@ -6,8 +6,6 @@ import { setAdminOrganism } from '../../../store/reducers/admin';
 import { addOrganismContact } from '../../../store/reducers/crud';
 import { validateEmail } from '../../../utils/form/form';
 
-import styles from './Modal.module.scss';
-
 interface ModalProps {
   setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -39,115 +37,190 @@ function ModalAddContact({ setIsModalActive }: ModalProps) {
   };
 
   return (
-    <div className={styles.modal}>
-      <div className={styles.main}>
-        <h1 className={styles.title}>Ajouter un contact</h1>
+    <div className="absolute top-0 left-0 z-[100] flex items-center content-center justify-center w-screen h-screen bg-gray-950/75">
+      <div className="w-4/6 bg-white 2xl:w-2/6 max-h-2/6 rounded-xl">
+        <h1 className="pt-8 pb-2 pl-16 text-2xl font-medium text-left text-slate-700">
+          Ajouter un contact
+        </h1>
         {errorMessage && <span>{errorMessage}</span>}
-        <form className={styles.list} onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.overflow}>
+        <form
+          className="relative flex flex-col gap-y-12"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="flex flex-col gap-6 px-16 pt-4 overflow-y-scroll max-h-50">
             <input
               type="number"
               defaultValue={organismId}
               hidden
               {...register('organisme')}
             />
-            <div className={styles.case}>
-              <h4 className={styles.case_title}>Nom du contact</h4>
-              <input
-                className={
-                  errors.name
-                    ? `${styles.case_inputTxt} error`
-                    : styles.case_inputTxt
-                }
-                type="text"
-                {...register('name', { required: 'Ce champs est requis' })}
-              />
-              {errors.name && <small>{errors.name.message}</small>}
-            </div>
-            <div className={styles.case}>
-              <h4 className={styles.case_title}>Commentaire </h4>
-              <input
-                className={styles.case_inputTxt}
-                type="text"
-                {...register('comment')}
-              />
-            </div>
-            <div className={styles.case}>
-              <h4 className={styles.case_title}>Fonction</h4>
-              <input
-                className={styles.case_inputTxt}
-                type="text"
-                {...register('job')}
-              />
-            </div>
-            <div className={styles.contact_modes}>
-              <div className={styles.case}>
-                <h4 className={styles.case_title}>Adresse email</h4>
-                <input
-                  className={`${styles.case_inputTxt} ${styles.contact_mail}`}
-                  type="email"
-                  {...register('mail', {
-                    validate: validateEmail,
-                  })}
-                />
-                {errors.mail?.message && <small>{errors.mail.message}</small>}
+            <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium leading-6 text-teal-800"
+                >
+                  Nom du contact
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className={`block w-full rounded-md border-0 py-1.5  pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6 ${
+                      errors.name && 'ring-2 ring-red-500  focus:ring-red-500'
+                    }`}
+                    {...register('name', {
+                      required: 'Ce champs est requis',
+                    })}
+                  />
+                  {errors.name && (
+                    <small className="text-red-600">
+                      {errors.name.message}
+                    </small>
+                  )}
+                </div>
               </div>
-              <div className={styles.case}>
-                <h4 className={styles.case_title}>Telephone</h4>
-                <input
-                  className={styles.case_inputTxt}
-                  type="tel"
-                  {...register('phone', {
-                    minLength: {
-                      value: 10,
-                      message:
-                        'Le numéro de téléphone doit comporter au moins 10 chiffres.',
-                    },
-                    maxLength: {
-                      value: 10,
-                      message:
-                        'Le numéro de téléphone ne peut pas comporter plus de 10 chiffres.',
-                    },
-                  })}
-                />
-                {errors.phone?.message && <small>{errors.phone.message}</small>}
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="job"
+                  className="block text-sm font-medium leading-6 text-teal-800"
+                >
+                  Fonction / service
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+                    {...register('job')}
+                  />
+                </div>
               </div>
             </div>
-            <div className={styles.case}>
-              <h4 className={styles.case_title}>Rôles</h4>
-              <div className={styles.contact_roles}>
-                <label className={styles.contact_private}>
-                  <fieldset>
-                    <select {...register('visibility', { required: true })}>
-                      <option value="false">Privé</option>
-                      <option value="true">Public</option>
-                    </select>
-                    <legend>Publicité du contact</legend>
-                  </fieldset>
+
+            <div className="col-span-full">
+              <label
+                htmlFor="comment"
+                className="block text-sm font-medium leading-6 text-teal-800"
+              >
+                Commentaires
+              </label>
+              <div className="mt-2">
+                <textarea
+                  rows={2}
+                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+                  {...register('comment')}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-4">
+                <label
+                  htmlFor="mail"
+                  className="block text-sm font-medium leading-6 text-teal-800"
+                >
+                  Adresse email
                 </label>
-                <label className={styles.contact_actu}>
-                  <fieldset>
-                    <select {...register('actualisation', { required: true })}>
-                      <option value="false">Non</option>
-                      <option value="true">Oui</option>
-                    </select>
-                    <legend>Contact pour actualisation</legend>
-                  </fieldset>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className={`block w-full rounded-md border-0 py-1.5  pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6  ${
+                      errors.mail && 'ring-2 ring-red-500  focus:ring-red-500'
+                    }`}
+                    {...register('mail', {
+                      validate: validateEmail,
+                    })}
+                  />
+                  {errors.mail?.message && (
+                    <small className="text-red-600">
+                      {errors.mail.message}
+                    </small>
+                  )}
+                </div>
+              </div>
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium leading-6 text-teal-800"
+                >
+                  N° de télephone
                 </label>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className={`block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6  ${
+                      errors.phone && ` ring-2 ring-red-500 focus:ring-red-500`
+                    }`}
+                    {...register('phone', {
+                      minLength: {
+                        value: 10,
+                        message:
+                          'Le numéro de téléphone doit comporter au moins 10 chiffres.',
+                      },
+                      maxLength: {
+                        value: 10,
+                        message:
+                          'Le numéro de téléphone ne peut pas comporter plus de 10 chiffres.',
+                      },
+                    })}
+                  />
+
+                  {errors.phone?.message && (
+                    <small className="text-red-600">
+                      {errors.phone.message}
+                    </small>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="visibility"
+                  className="block text-sm font-medium leading-6 text-teal-800"
+                >
+                  Publicité du contact
+                </label>
+                <div className="mt-2">
+                  <select
+                    className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    {...register('visibility', { required: true })}
+                  >
+                    <option value="false">Privé</option>
+                    <option value="true">Public</option>
+                  </select>
+                </div>
+              </div>
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="actualisation"
+                  className="block text-sm font-medium leading-6 text-teal-800"
+                >
+                  Contact d&apos;actualisation
+                </label>
+                <div className="mt-2">
+                  <select
+                    className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    {...register('actualisation', { required: true })}
+                  >
+                    <option value="false">Non</option>
+                    <option value="true">Oui</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
-          <div className={styles.actions}>
+          <div className="flex justify-end gap-12 px-16 py-4 bg-gray-50 rounded-b-xl">
             <button
               type="button"
-              className={`${styles.actions_close} btn btn-info-fill btn-flat`}
+              className="px-3 py-2 text-sm font-semibold bg-white rounded-md shadow-sm shadow-smtext-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 "
               onClick={() => setIsModalActive(false)}
             >
               Annuler
             </button>
             <button
               type="submit"
-              className={`${styles.actions_save} btn btn-sucess btn-flat`}
+              className="px-3 py-2 text-sm font-semibold text-white bg-teal-600 rounded-md shadow-sm hover:bg-teal-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
             >
               {isSaving && <span>Sauvegarde en cours...</span>}
               {!isSaving && <span>Sauvegarder</span>}

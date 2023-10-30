@@ -34,7 +34,7 @@ function Data() {
           className={`${by.orgaSheet_case} ${styles.data_case} ${styles.data__access}`}
         >
           <legend>Accès</legend>
-          <h4>Accés</h4>
+          <h4 className={styles.h4}>Accés</h4>
           <div className={styles.data_accessDetails}>
             <label className={styles.data_pmr}>
               <input type="checkbox" disabled checked={organism.pmr} />
@@ -48,14 +48,14 @@ function Data() {
         </fieldset>
         <fieldset className={`${by.orgaSheet_case} ${styles.data_case}`}>
           <legend>Description</legend>
-          <h4>Description</h4>
+          <h4 className={styles.h4}>Description</h4>
           <p>{organism.translations[0]?.description}</p>
         </fieldset>
         <fieldset
           className={`${by.orgaSheet_case} ${styles.data_case} ${styles.data_hours}`}
         >
           <legend>Horaires</legend>
-          <h4>Horaires</h4>
+          <h4 className={styles.h4}>Horaires</h4>
           <div className={styles.data_hoursDetails}>
             {organism.schedules && organism.schedules.length > 0 ? (
               <Schedules schedule={organism.schedules} displayAll />
@@ -68,7 +68,7 @@ function Data() {
         </fieldset>
         <fieldset className={`${by.orgaSheet_case} ${styles.data_case}`}>
           <legend>Infos, alerte</legend>
-          <h4>Infos, alerte</h4>
+          <h4 className={styles.h4}>Infos, alerte</h4>
           <p>{organism.translations[0]?.infos_alerte}</p>
         </fieldset>
       </ul>
