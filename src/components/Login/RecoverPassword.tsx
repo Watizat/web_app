@@ -3,14 +3,9 @@ import Login from './Login';
 export default function RecoverPassword() {
   return (
     <Login>
-      <div className="flex flex-col justify-center flex-1 min-h-full px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          {/* <img
-          className="w-auto h-16 mx-auto"
-          src="https://watizat.org/wp-content/uploads/2022/04/logoSVG.svg"
-          alt="Watizat logo"
-        /> */}
-          <h2 className="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-watizat-500">
+      <div className="flex flex-col flex-1">
+        <div className="w-full max-w-sm mx-auto">
+          <h2 className="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-slate-600">
             Réinitialisation du mot de passe
           </h2>
         </div>

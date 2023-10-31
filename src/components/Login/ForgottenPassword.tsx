@@ -25,14 +25,9 @@ export default function ForgottenPassword() {
 
   return (
     <Login>
-      <div className="flex flex-col justify-center flex-1 min-h-full px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          {/* <img
-              className="w-auto h-16 mx-auto"
-              src="https://watizat.org/wp-content/uploads/2022/04/logoSVG.svg"
-              alt="Watizat logo"
-            /> */}
-          <h2 className="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-watizat-500">
+      <div className="flex flex-col flex-1">
+        <div className="w-full max-w-sm mx-auto">
+          <h2 className="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-slate-600">
             Mot de passé oublié
           </h2>
         </div>
@@ -72,16 +67,7 @@ export default function ForgottenPassword() {
               )}
             </div>
           </form>
-          <p className="mt-10 text-sm text-center text-gray-500">
-            Déjà membre ?<br />
-            <Link
-              to="/login"
-              className="font-semibold leading-6 text-watizat-500 hover:text-watizat-400"
-            >
-              Se connecter
-            </Link>
-          </p>
-          <p className="mt-4 text-sm text-center text-gray-500">
+          <p className="mt-6 text-sm text-center text-gray-500">
             Pas encore membre ?<br />
             <Link
               to="/account-request"

@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux';
 import {
   fetchCityPosition,
   fetchOrganisms,
 } from '../../store/reducers/organisms';
-import Header from '../Header/Header';
+
+import Sidebar from './SideBar/Sidebar';
+import Header from './Header/Header';
 import Map from './Map/Map';
-import Menu from './Menu/Menu';
-import Panel from './Panel/Panel';
-import styles from './Resultats.module.scss';
 
-function Resultats() {
-  const isTouch = useMediaQuery({ query: '(max-width: 1023px)' });
-  const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' });
+export default function Resultats() {
+  const dispatch = useAppDispatch();
+  const [searchParams] = useSearchParams();
+  const city = searchParams.get('city');
 
-  const [loader, setLoader] = useState<boolean>(true);
-  const [isActiveMap, setIsActiveMap] = useState(false);
   const [cityPosition, setCityPosition] = useState<
     | {
         lat: number;
@@ -25,11 +22,6 @@ function Resultats() {
       }
     | undefined
   >();
-
-  const dispatch = useAppDispatch();
-
-  const [searchParams] = useSearchParams();
-  const city = searchParams.get('city');
 
   useEffect(() => {
     async function fetchCity() {
@@ -39,25 +31,20 @@ function Resultats() {
       const { latitude, longitude } = payload;
       setCityPosition({ lat: latitude, lng: longitude });
       await dispatch(fetchOrganisms(city as string));
-      setLoader(false);
     }
     fetchCity();
   }, [dispatch, city]);
 
+  const [openFilters, setOpenFilters] = useState(false);
+  console.log('cityPosition', cityPosition);
+
   return (
-    <>
-      <Header />
-      <main className={styles.results}>
-        {(isDesktop || !isActiveMap) && !loader && <Panel />}
-        {(isDesktop || isActiveMap) && !loader && (
-          <Map cityPosition={cityPosition} />
-        )}
-        {isTouch && (
-          <Menu isActiveMap={isActiveMap} setIsActiveMap={setIsActiveMap} />
-        )}
-      </main>
-    </>
+    <main>
+      <Sidebar openFilters={openFilters} setOpenFilters={setOpenFilters} />
+      <Header setOpenFilters={setOpenFilters} />
+      <section className="absolute flex w-full min-h-mapHeight h-mapHeight py-auto lg:pl-[45rem]">
+        <Map cityPosition={cityPosition} />
+      </section>
+    </main>
   );
 }
-
-export default Resultats;

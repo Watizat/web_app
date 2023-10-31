@@ -8,7 +8,7 @@ import AdminApp from './components/Admin/App/App';
 import Dashboard from './components/Admin/Dashboard/Dashboard';
 import Edition from './components/Admin/Edition/Edition';
 import Users from './components/Admin/Users/Users';
-import App from './components/App/App';
+import App from './components/App/FrontApp';
 import NotFound from './components/Errors/NotFound';
 import Home from './components/Home/Home';
 import InactivityDetector from './components/InactivityDetector/InactivityDetector';

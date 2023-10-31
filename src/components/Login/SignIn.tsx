@@ -35,14 +35,9 @@ export default function SignIn() {
 
   return (
     <Login>
-      <div className="flex flex-col flex-1 px-6 m-auto lg:px-8 sm:mx-auto sm:w-full sm:max-w-sm">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="w-auto h-16 mx-auto"
-            src="https://watizat.org/wp-content/uploads/2022/04/logoSVG.svg"
-            alt="Watizat logo"
-          />
-          <h2 className="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-watizat-500">
+      <div className="flex flex-col flex-1">
+        <div className="w-full max-w-sm mx-auto">
+          <h2 className="text-2xl font-bold leading-9 tracking-tight text-center text-slate-700">
             Se connecter
           </h2>
         </div>

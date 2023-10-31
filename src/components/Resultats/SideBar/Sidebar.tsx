@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../store/reducers/organisms';
 import ResultatsCardSkeleton from '../../Skeleton/ResultatCard/ResultatCard';
 import Card from '../Card/Card';
-import Settings from '../Settings/Settings';
-import styles from './Panel.module.scss';
 
-function Panel() {
+import SlideFilters from '../SlideFilters/SlideFilters';
+
+interface SidebarProps {
+  openFilters: boolean;
+  setOpenFilters: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Sidebar({ openFilters, setOpenFilters }: SidebarProps) {
   const dispatch = useAppDispatch();
   const organisms = useAppSelector((state) => state.organism.organisms);
   const filteredOrganisms = useAppSelector(
@@ -79,47 +85,49 @@ function Panel() {
       }
     }
   }, [organismToScroll]);
-
   return (
-    <section className={styles.resultsPanel}>
-      <Settings
-        isPmr={isPmr}
+    <section className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[30rem] xl:w-[40rem] 2xl:w-[45rem] lg:flex-col mt-16">
+      <div className="flex flex-col h-16 overflow-y-auto bg-white border-r border-gray-200 grow ">
+        <div
+          className="inline-flex flex-col min-h-full gap-6 p-8 overflow-y-auto bg-zinc-100/30"
+          ref={resultsContainerRef}
+        >
+          {loader &&
+            [1, 2, 3, 4, 5].map((e) => <ResultatsCardSkeleton key={e} />)}
+          {!loader &&
+            (filteredOrganisms.length > 0 ? (
+              filteredOrganisms.map((organism, index) => (
+                <Card
+                  key={organism.id}
+                  organism={organism}
+                  map_id={index + 1}
+                  categoryFilter={categoryFilter}
+                />
+              ))
+            ) : (
+              <div className="">
+                <p>Aucun résultat à afficher</p>
+
+                <Link to="/">
+                  <button
+                    className="btn btn-flat btn-primary btn-slowRounded "
+                    type="button"
+                  >
+                    <i className="las la-arrow-left" />
+                    Retourner vers la page d&apos;accueil
+                  </button>
+                </Link>
+              </div>
+            ))}
+        </div>
+      </div>
+      <SlideFilters
         setIsPmr={setIsPmr}
-        isAnimalsAccepted={isAnimalsAccepted}
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
+        openFilters={openFilters}
+        setOpenFilters={setOpenFilters}
       />
-      <div className={styles.contentCard} ref={resultsContainerRef}>
-        {loader &&
-          [1, 2, 3, 4, 5].map((e) => <ResultatsCardSkeleton key={e} />)}
-        {!loader &&
-          (filteredOrganisms.length > 0 ? (
-            filteredOrganisms.map((organism, index) => (
-              <Card
-                key={organism.id}
-                organism={organism}
-                map_id={index + 1}
-                categoryFilter={categoryFilter}
-              />
-            ))
-          ) : (
-            <div className={styles.noResult}>
-              <p>Aucun résultat à afficher</p>
-
-              <Link to="/">
-                <button
-                  className="btn btn-flat btn-primary btn-slowRounded "
-                  type="button"
-                >
-                  <i className="las la-arrow-left" />
-                  Retourner vers la page d&apos;accueil
-                </button>
-              </Link>
-            </div>
-          ))}
-      </div>
     </section>
   );
 }
-
-export default Panel;

@@ -7,9 +7,8 @@ import Header from '../Header/Header';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchZones } from '../../store/reducers/admin';
 import { fetchCategories, fetchDays } from '../../store/reducers/organisms';
-import styles from './App.module.scss';
 
-function App() {
+export default function FrontApp() {
   const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
@@ -32,7 +31,7 @@ function App() {
   }, [dispatch, langue]);
 
   return (
-    <div className={styles.app}>
+    <main className="relative flex flex-col min-h-full">
       {!loading && (
         <>
           <Header />
@@ -40,8 +39,6 @@ function App() {
           {isTablet && <Footer />}
         </>
       )}
-    </div>
+    </main>
   );
 }
-
-export default App;

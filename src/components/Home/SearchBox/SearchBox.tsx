@@ -1,7 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Icon from '../../ui/icon/icon';
-import { useAppSelector } from '../../hooks/redux';
+import Icon from '../../../ui/icon/icon';
+import { useAppSelector } from '../../../hooks/redux';
+import FrontColor from '../../Container/FrontColor';
 
 export default function SearchBox() {
   const navigate = useNavigate();
@@ -57,20 +58,8 @@ export default function SearchBox() {
   };
 
   return (
-    <div className="relative ">
-      <div
-        className="absolute inset-x-0 overflow-hidden -top-40 -z-10 transform-gpu blur-3xl sm:-top-80"
-        aria-hidden="true"
-      >
-        <div
-          className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-          style={{
-            clipPath:
-              'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-          }}
-        />
-      </div>
-      <div className="flex flex-col items-center px-6 py-4 mx-auto md:py-24 sm:py-34 max-w-7xl">
+    <FrontColor>
+      <section className="flex flex-col items-center gap-8 px-6 mx-auto max-w-7xl lg:gap-20 xl:gap-32">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Watizat
@@ -79,8 +68,8 @@ export default function SearchBox() {
             Guide numérique
           </p>
         </div>
-        <div className="flex flex-col items-center justify-center w-full h-full gap-2 p-6 mx-auto mt-10 shadow-sm md:mt-32 sm:gap-4 md:w-4/6 md:bg-slate-100/20 rounded-xl ring-1 ring-inset ring-watizat-500/20 lg:rounded-2xl lg:p-8">
-          <div className="flex flex-col items-center justify-center text-center gap-y-2">
+        <div className="flex flex-col items-center justify-center w-full h-full gap-2 p-6 mx-auto shadow-sm sm:gap-4 md:w-4/6 md:bg-slate-100/20 rounded-xl ring-1 ring-inset ring-watizat-500/20 lg:rounded-2xl lg:p-8">
+          <div className="flex flex-col items-center justify-center w-4/5 text-center gap-y-4">
             <h3 className="mb-2 text-2xl font-semibold leading-6 text-gray-900 ">
               Rechercher un organisme
             </h3>
@@ -145,7 +134,7 @@ export default function SearchBox() {
                   ))}
                 </select>
               </div>
-            </div>{' '}
+            </div>
             {cityEmpty || categoryEmpty || allEmpty ? (
               <p className="text-sm font-medium text-center text-red-600">
                 {cityEmpty
@@ -166,26 +155,14 @@ export default function SearchBox() {
             <div className="flex flex-col items-center justify-center">
               <button
                 type="submit"
-                className="flex w-1/2 justify-center rounded-md bg-watizat-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-watizat-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-watizat-500"
+                className="flex  w-full md:w-2/5 justify-center rounded-md bg-watizat-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-watizat-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-watizat-500"
               >
                 Lancer la recherche
               </button>
             </div>
           </form>
         </div>
-      </div>
-      <div
-        className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-        aria-hidden="true"
-      >
-        <div
-          className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-          style={{
-            clipPath:
-              'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-          }}
-        />
-      </div>
-    </div>
+      </section>
+    </FrontColor>
   );
 }

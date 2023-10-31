@@ -7,7 +7,7 @@ export default function NewUser() {
   const dispatch = useAppDispatch();
   return (
     <Login>
-      <div className="flex flex-col justify-center flex-1 mx-auto align-middle min-h-ful max-w-3/6">
+      <div className="flex flex-col flex-1">
         <div className="text-center">
           Votre demande de création de compte a bien été prise en compte <br />
         </div>

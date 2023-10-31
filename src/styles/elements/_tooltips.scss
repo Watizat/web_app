@@ -20,7 +20,7 @@
 
   /* Position the tooltip text */
   position: absolute;
-  z-index: 1;
+  z-index: 100;
   bottom: 125%;
   left: 50%;
   margin-left: -60px;
@@ -47,4 +47,12 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-[100];
 }

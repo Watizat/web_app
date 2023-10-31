@@ -3,14 +3,13 @@ import { Dialog } from '@headlessui/react';
 import { useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import logo from '../../assets/logo-color.svg';
+import headerLinks from './source';
+import footerLinks from '../Footer/source';
 
 export default function Header() {
-  const navigation = [
-    { name: 'Accueil', href: '/' },
-    { name: 'Watizat.org', href: '/' },
-  ];
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileNav = headerLinks.concat(footerLinks);
+
   return (
     <header className="z-10 bg-transparent">
       <nav
@@ -19,10 +18,11 @@ export default function Header() {
       >
         <div className="flex flex-1">
           <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
+            {headerLinks.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
+                target={item.target}
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 {item.name}
@@ -47,9 +47,9 @@ export default function Header() {
         <div className="flex justify-end flex-1">
           <Link
             to="/login"
-            className="w-3/6 text-sm font-semibold leading-6 text-gray-900 md:w-fit"
+            className="hidden text-sm font-semibold leading-6 text-gray-900 md:flex"
           >
-            Membres Watizat <span aria-hidden="true">&rarr;</span>
+            Membres Watizat&nbsp;&nbsp;<span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
       </nav>
@@ -72,25 +72,22 @@ export default function Header() {
                 <XMarkIcon className="w-6 h-6" aria-hidden="true" />
               </button>
             </div>
-            <Link to="/" className="-m-1.5 p-1.5">
+            <Link to="/" className="-m-2.5 md:-m-1.5 p-1.5 relative left-0">
               <span className="sr-only">Watizat</span>
-              <img
-                className="w-auto h-8"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <img className="w-auto h-10" src={logo} alt="watizat logo" />
             </Link>
             <div className="flex justify-end flex-1">
               <Link
-                to="/"
-                className="text-sm font-semibold leading-6 text-gray-900"
+                to="/login"
+                className="hidden text-sm font-semibold leading-6 text-gray-900 md:flex"
               >
-                Log in <span aria-hidden="true">&rarr;</span>
+                Membres Watizat&nbsp;&nbsp;
+                <span aria-hidden="true">&rarr;</span>
               </Link>
             </div>
           </div>
           <div className="mt-6 space-y-2">
-            {navigation.map((item) => (
+            {mobileNav.map((item) => (
               <a
                 key={item.name}
                 href={item.href}

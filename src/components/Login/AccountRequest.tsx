@@ -56,14 +56,9 @@ export default function AccountRequest() {
 
   return (
     <Login>
-      <div className="flex flex-col justify-center flex-1 min-h-full px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-3xl">
-          {/* <img
-          className="w-auto h-16 mx-auto"
-          src="https://watizat.org/wp-content/uploads/2022/04/logoSVG.svg"
-          alt="Watizat logo"
-        /> */}
-          <h2 className="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-watizat-500">
+      <div className="flex flex-col flex-1">
+        <div className="w-full max-w-sm mx-auto">
+          <h2 className="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-slate-600">
             Demande de création de compte
           </h2>
         </div>
@@ -101,14 +96,17 @@ export default function AccountRequest() {
                     htmlFor="password"
                     className="block text-sm font-semibold leading-6 text-gray-600"
                   >
-                    Nom de famille / ou surnom
+                    Nom de famille / surnom / pseudo
                   </label>
                 </div>
                 <div className="mt-2">
                   <input
                     type="text"
                     placeholder="Nom de famille"
-                    {...register('last_name')}
+                    {...register('last_name', {
+                      required: 'Ce champs est requis',
+                    })}
+                    required
                     className="block w-full pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-watizat-500 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -198,7 +196,7 @@ export default function AccountRequest() {
               Confirmer la demande
             </button>
           </form>
-          <p className="mt-10 text-sm text-center text-gray-500">
+          <p className="mt-6 text-sm text-center text-gray-500">
             Déjà membre ? &nbsp;
             <Link
               to="/login"

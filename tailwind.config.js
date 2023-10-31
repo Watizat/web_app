@@ -7,6 +7,14 @@ export default {
         headerHeight: '65px',
         footerHeight: '50px',
         footerHeightMax: '70px',
+        mapHeight: 'calc(100vh - 65px)',
+      },
+      width: {
+        sideResultsWidth: '40rem',
+        mapWidth: 'calc(100% - 40rem)',
+      },
+      padding: {
+        sideResultsWidth: '40rem',
       },
       colors: {
         watizat: {

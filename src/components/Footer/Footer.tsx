@@ -1,15 +1,10 @@
 import { SVGProps } from 'react';
 import { Link } from 'react-router-dom';
 import { JSX } from 'react/jsx-runtime';
+import navigation from './source';
 
-const navigation = {
-  main: [
-    { name: 'Qui sommes-nous ?', href: 'https://watizat.org/qui-sommes-nous/' },
-    { name: 'Nous contacter', href: 'https://watizat.org/nous-contacter/' },
-    { name: 'Mentions légales', href: '/mentions-legales' },
-    { name: 'Bugs et suggestions', href: 'https://feedback.watizat.app' },
-  ],
-  social: [
+const social = {
+  data: [
     {
       name: 'Facebook',
       href: '#',
@@ -76,14 +71,14 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="bg-white">
-      <div className="px-6 py-10 mx-auto overflow-hidden max-w-7xl sm:pt-24 lg:px-8">
+    <footer className="bg-transparent">
+      <div className="flex flex-col items-center justify-center gap-4 px-6 py-10 mx-auto overflow-hidden xl:gap-10 max-w-7xl sm:pt-24 lg:px-8">
         <nav
-          className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"
+          className=" columns-2 sm:flex sm:justify-center sm:space-x-12"
           aria-label="Footer"
         >
-          {navigation.main.map((item) => (
-            <div key={item.name} className="pb-6">
+          {navigation.map((item) => (
+            <div key={item.name}>
               <Link
                 to={item.href}
                 className="text-sm leading-6 text-gray-600 hover:text-gray-900"
@@ -93,8 +88,8 @@ export default function Footer() {
             </div>
           ))}
         </nav>
-        <div className="flex justify-center mt-10 space-x-10">
-          {navigation.social.map((item) => (
+        <div className="flex justify-centerspace-x-10">
+          {social.data.map((item) => (
             <Link
               key={item.name}
               to={item.href}
@@ -105,7 +100,7 @@ export default function Footer() {
             </Link>
           ))}
         </div>
-        <p className="mt-10 text-xs leading-5 text-center text-gray-500">
+        <p className="text-xs leading-5 text-center text-gray-500">
           &copy; 2023 Watizat, Licence Mozilla 2.0
         </p>
       </div>
