@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom';
-import { MapPinIcon, PhoneIcon, PlusIcon } from '@heroicons/react/20/solid';
+import {
+  MapPinIcon,
+  PhoneIcon,
+  PlusIcon,
+  ExclamationTriangleIcon,
+} from '@heroicons/react/20/solid';
 import { Organism } from '../../../@types/organism';
 import Icon from '../../../ui/icon/icon';
 
@@ -49,7 +54,7 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
 
   return (
     <li className="flex flex-col items-center col-span-1 list-none">
-      <div className="z-10 col-span-1 list-none bg-white divide-y divide-gray-200 rounded-lg shadow-md hover:shadow-lg hover:shadow-watizat-800/10">
+      <div className="z-10 w-full col-span-1 list-none bg-white rounded-lg shadow-md hover:shadow-lg hover:shadow-watizat-800/10">
         <div className="flex items-center justify-between w-full p-6 space-x-6">
           <div className="flex flex-col flex-1 truncate gap-y-2">
             <div className="flex items-center space-x-3">
@@ -65,7 +70,7 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
                 </p>
               </div>
             </div>
-            <p className="text-sm whitespace-normal text-slate-700 font-base">
+            <p className="text-sm text-justify whitespace-normal text-slate-700 font-base">
               {organism.translations[0]?.description?.length &&
               organism.translations[0]?.description?.length > 250
                 ? `${organism.translations[0]?.description?.substring(
@@ -91,15 +96,47 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
                 </div>
               ))}
             </div>
+            {organism.translations[0]?.infos_alerte && (
+              <div className="flex px-4 pt-1 pb-5 mt-1 -mb-3 rounded-md bg-red-50/80">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <ExclamationTriangleIcon
+                      className="w-5 h-5 text-red-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="flex flex-col ml-3">
+                    <h3 className="text-sm font-semibold text-yellow-800">
+                      Infos / alertes
+                    </h3>
+                    <p className="mt-1 text-sm font-medium leading-tight text-yellow-800 truncate whitespace-normal lg:leading-tight">
+                      {organism.translations[0]?.infos_alerte}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
-        <div className="flex -mt-px divide-x divide-gray-200">
+        <div className="grid border-t grid-col-2 md:grid-col-3 md:divide-x md:divide-y-0">
+          <div className="flex flex-1 w-full lg:col-start-1">
+            <Link
+              to={`mailto:${organism.mail}`}
+              className="relative inline-flex items-center justify-center flex-1 w-0 py-2 text-sm font-semibold text-gray-900 border-transparent rounded-br-lg lg:py-4 gap-x-3"
+            >
+              <MapPinIcon
+                className="w-5 h-5 text-gray-400"
+                aria-hidden="true"
+              />
+              Aller vers
+            </Link>
+          </div>
           {organism.phone && (
-            <div className="flex flex-1 w-0 -ml-px">
+            <div className="flex flex-1 w-full border-l md:col-start-2">
               <Link
                 to={`tel:${organism.phone}`}
-                className="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-semibold border border-transparent rounded-br-lg text-slate-600 gap-x-3"
+                className="relative inline-flex items-center justify-center flex-1 w-0 py-2 text-sm font-semibold text-gray-900 border border-transparent rounded-br-lg lg:py-4 gap-x-3"
               >
                 <PhoneIcon
                   className="w-5 h-5 text-gray-400"
@@ -109,22 +146,10 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
               </Link>
             </div>
           )}
-          <div className="flex flex-1 w-0">
-            <Link
-              to={`mailto:${organism.mail}`}
-              className="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-semibold text-gray-900 border border-transparent rounded-bl-lg gap-x-3"
-            >
-              <MapPinIcon
-                className="w-5 h-5 text-gray-400"
-                aria-hidden="true"
-              />
-              Aller vers
-            </Link>
-          </div>
-          <div className="flex flex-1 w-0 -ml-px">
+          <div className="flex items-center justify-center flex-1 w-full col-span-2 border-t md:col-auto md:col-start-3">
             <Link
               to={`/organisme/${organism.slug}`}
-              className="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-semibold text-gray-900 border border-transparent rounded-br-lg gap-x-3"
+              className="relative inline-flex items-center justify-center flex-1 w-0 py-2 text-sm font-semibold text-gray-900 border border-transparent rounded-br-lg lg:py-4 gap-x-3"
             >
               <PlusIcon className="w-5 h-5 text-cyan-600" aria-hidden="true" />
               <span className="text-cyan-600">En savoir plus</span>
@@ -132,20 +157,6 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
           </div>
         </div>
       </div>
-      {organism.translations[0]?.infos_alerte && (
-        <div className="w-11/12 pt-8 -mt-10 list-none bg-white divide-y rounded-lg shadow-md shadow-watizat-600/10 pt-col-span-1">
-          <div className="flex items-center justify-between w-full p-4 space-x-6">
-            <div className="flex flex-col flex-1 truncate ">
-              <p className="text-sm font-semibold whitespace-normal text-watizat-600/80">
-                Infos & alertes
-              </p>
-              <p className="text-sm whitespace-normal text-slate-700 font-base">
-                {organism.translations[0]?.infos_alerte}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
     </li>
   );
 }

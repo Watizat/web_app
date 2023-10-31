@@ -11,6 +11,7 @@ import {
 import Category from './Category';
 import Search from './Search';
 import Accessibility from './Accessibility';
+import Others from './Others';
 
 interface FiltersProps {
   setIsPmr: React.Dispatch<React.SetStateAction<boolean>>;
@@ -60,9 +61,9 @@ export default function SlideFilters({
     setSearchInputValue(event.target.value);
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
+  // function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  //   event.preventDefault();
+  // }
 
   function handlePmr(event: React.ChangeEvent<HTMLInputElement>) {
     setIsPmr(event.target.checked);
@@ -114,10 +115,10 @@ export default function SlideFilters({
                   <form className="flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
                     <div className="flex-1">
                       {/* Header */}
-                      <div className="px-4 py-8 bg-watizat-500/90 sm:px-6">
+                      <div className="px-4 py-8 bg-gray-50 sm:px-6">
                         <div className="flex items-start justify-between space-x-3">
                           <div className="space-y-1">
-                            <Dialog.Title className="text-lg font-normal leading-6 text-white">
+                            <Dialog.Title className="text-lg font-normal leading-6 text-slate-900">
                               Filtrer les résultats
                             </Dialog.Title>
                             {/* <p className="text-sm font-medium text-slate-50">
@@ -127,7 +128,7 @@ export default function SlideFilters({
                           <div className="flex items-center h-7">
                             <button
                               type="button"
-                              className="relative text-white focus:outline-none "
+                              className="relative text-slate-900 focus:outline-none "
                               onClick={() => setOpenFilters(false)}
                             >
                               <span className="absolute -inset-2.5" />
@@ -154,8 +155,6 @@ export default function SlideFilters({
                         <Accessibility
                           // eslint-disable-next-line react/jsx-no-bind
                           handlePmr={handlePmr}
-                          // eslint-disable-next-line react/jsx-no-bind
-                          handleAnimals={handleAnimals}
                         />
 
                         {/* Categories */}
@@ -166,6 +165,12 @@ export default function SlideFilters({
                           categoryParams={categoryParams}
                           handleCategoryChange={handleCategoryChange}
                         />
+
+                        {/* Autres filtres */}
+                        <Others
+                          // eslint-disable-next-line react/jsx-no-bind
+                          handleAnimals={handleAnimals}
+                        />
                       </div>
                     </div>
 
@@ -175,7 +180,7 @@ export default function SlideFilters({
                         <button
                           type="button"
                           onClick={() => setOpenFilters(false)}
-                          className="inline-flex justify-center px-6 py-2 text-sm font-semibold text-white rounded-md shadow-sm bg-watizat-500 hover:bg-watizat-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-watizat-500"
+                          className="inline-flex justify-center w-7/12 px-6 py-2 text-sm font-semibold text-white rounded-md shadow-sm bg-watizat-500/90 hover:bg-watizat-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-watizat-500 lg:w-4/12"
                         >
                           Fermer
                         </button>

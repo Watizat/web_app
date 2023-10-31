@@ -60,7 +60,7 @@ export default function BetaPhase() {
                         <br />
                         <p className="mt-2 text-watizat-500">
                           Ne pas utiliser ce site à des fins d&apos;orientation
-                          sociale
+                          ou d&apos;accompagement social
                         </p>
                       </p>
                     </div>

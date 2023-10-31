@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import {
-  MagnifyingGlassIcon,
+  // MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,
 } from '@heroicons/react/20/solid';
 
@@ -9,36 +9,37 @@ import logo from '../../../assets/logo-color.svg';
 interface HeaderProps {
   setOpenFilters: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
+// TODO Barre de recherche masquée (pour fonctionner nécessite de passer fonctions de la sidebar dans le store Redux) - A faire plus tard
 export default function Header({ setOpenFilters }: HeaderProps) {
   return (
     <section>
-      <div className="sticky top-0 z-40 flex items-center h-16 px-4 bg-white border-b border-gray-200 shadow-sm shrink-0 gap-x-4 sm:gap-x-6 sm:px-6 lg:px-10">
-        <div className="flex self-stretch flex-1 gap-x-4 lg:gap-x-8">
-          <div className="flex items-center justify-between my-4">
+      <div className="sticky top-0 z-40 flex items-center h-16 px-8 bg-white border-b border-gray-200 shadow-sm shrink-0 gap-x-4 sm:gap-x-8 lg:px-10">
+        <div className="flex self-stretch justify-between flex-1 ">
+          <div className="flex items-center justify-between w-full gap-x-8 lg:w-6/12">
             <Link to="/" className="flex items-centershrink-0">
               <img className="w-auto h-10" src={logo} alt="watizat logo" />
             </Link>
-          </div>
-          <div className="flex items-center">
-            {/* Separator */}
-            <div
-              className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200"
-              aria-hidden="true"
-            />
-            <button
-              type="button"
-              onClick={() => setOpenFilters(true)}
-              className="flex gap-2  px-2.5 py-1.5 text-sm font-medium text-gray-700/90 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-200 hover:bg-slate-50/70"
-            >
-              <AdjustmentsHorizontalIcon
-                className="left-0 w-5 h-full pointer-events-none text-slate-700/60 "
+            <div className="flex items-center">
+              {/* Separator */}
+              <div
+                className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200"
                 aria-hidden="true"
               />
-              Filtrer les résultats
-            </button>
+              <button
+                type="button"
+                onClick={() => setOpenFilters(true)}
+                className="flex gap-2  px-2.5 py-1.5 text-sm font-medium text-gray-700/90 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-200 hover:bg-slate-50/70"
+              >
+                <AdjustmentsHorizontalIcon
+                  className="left-0 w-5 h-full pointer-events-none text-slate-700/60 "
+                  aria-hidden="true"
+                />
+                Filtrer les résultats
+              </button>
+            </div>
           </div>
-          <form className="relative flex flex-1" action="#" method="GET">
+
+          {/* <form className="relative flex flex-1" action="#" method="GET">
             <label htmlFor="search-field" className="sr-only">
               Search
             </label>
@@ -53,7 +54,7 @@ export default function Header({ setOpenFilters }: HeaderProps) {
               type="search"
               name="search"
             />
-          </form>
+          </form> */}
           <div className="flex items-center gap-x-4 lg:gap-x-6">
             {/* Separator */}
             <div

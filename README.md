@@ -52,7 +52,7 @@ Prendre connaissance du [guide de contribution](https://github.com/Watizat/web_a
 #### Langages
 
 - [Typescript](https://www.typescriptlang.org/)
-- [Sass](https://sass-lang.com/) et [CSS modules](https://github.com/css-modules/css-modules)
+- [Tailwind CSS](https://tailwindcss.com)
 
 #### Technologies
 

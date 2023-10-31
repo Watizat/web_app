@@ -14,7 +14,7 @@ export default function Search({
           htmlFor="project-name"
           className="block text-sm font-medium leading-6 text-gray-900 sm:mt-1.5"
         >
-          Rechercher un organnisme
+          Par nom
         </label>
       </div>
       <div className="sm:col-span-2">

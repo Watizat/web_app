@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../store/reducers/organisms';
@@ -11,9 +12,16 @@ import SlideFilters from '../SlideFilters/SlideFilters';
 interface SidebarProps {
   openFilters: boolean;
   setOpenFilters: React.Dispatch<React.SetStateAction<boolean>>;
+  isMobileMap: boolean;
 }
 
-export default function Sidebar({ openFilters, setOpenFilters }: SidebarProps) {
+export default function Sidebar({
+  openFilters,
+  setOpenFilters,
+  isMobileMap,
+}: SidebarProps) {
+  const isTouch = useMediaQuery({ query: '(max-width: 1023px)' });
+
   const dispatch = useAppDispatch();
   const organisms = useAppSelector((state) => state.organism.organisms);
   const filteredOrganisms = useAppSelector(
@@ -86,10 +94,14 @@ export default function Sidebar({ openFilters, setOpenFilters }: SidebarProps) {
     }
   }, [organismToScroll]);
   return (
-    <section className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[30rem] xl:w-[40rem] 2xl:w-[45rem] lg:flex-col mt-16">
-      <div className="flex flex-col h-16 overflow-y-auto bg-white border-r border-gray-200 grow ">
+    <section
+      className={`fixed inset-y-0 z-50 flex w-full lg:w-[30rem] xl:w-[40rem] 2xl:w-[45rem] lg:flex-col mt-16 ${
+        isTouch && isMobileMap ? 'hidden ' : 'w-full flex'
+      }`}
+    >
+      <div className="flex flex-col h-full overflow-y-auto bg-white border-r border-gray-200 grow">
         <div
-          className="inline-flex flex-col min-h-full gap-6 p-8 overflow-y-auto bg-zinc-100/30"
+          className="inline-flex flex-col min-h-full gap-6 p-8 pb-16 overflow-y-auto bg-zinc-100/30"
           ref={resultsContainerRef}
         >
           {loader &&
@@ -105,22 +117,27 @@ export default function Sidebar({ openFilters, setOpenFilters }: SidebarProps) {
                 />
               ))
             ) : (
-              <div className="">
-                <p>Aucun résultat à afficher</p>
+              <div className="flex flex-col items-center justify-center h-full align-middle gap-y-4">
+                <p className="font-semibold">Aucun résultat à afficher</p>
+                <p className="text-center">
+                  Réinitialisez les filtres ou retourner vers la page
+                  d&apos;accueil
+                </p>
 
                 <Link to="/">
                   <button
-                    className="btn btn-flat btn-primary btn-slowRounded "
                     type="button"
+                    className="rounded-md bg-watizat-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-watizat-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-watizat-400"
                   >
                     <i className="las la-arrow-left" />
-                    Retourner vers la page d&apos;accueil
+                    Retour
                   </button>
                 </Link>
               </div>
             ))}
         </div>
       </div>
+
       <SlideFilters
         setIsPmr={setIsPmr}
         setIsAnimalsAccepted={setIsAnimalsAccepted}
