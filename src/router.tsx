@@ -10,18 +10,18 @@ import Edition from './components/Admin/Edition/Edition';
 import Users from './components/Admin/Users/Users';
 import App from './components/App/FrontApp';
 import NotFound from './components/Errors/NotFound';
-import Home from './components/Home/Home';
+import Home from './components/FrontOffice/Home/Home';
 import InactivityDetector from './components/InactivityDetector/InactivityDetector';
 import AccountRequest from './components/Login/AccountRequest';
 import ForgottenPassword from './components/Login/ForgottenPassword';
 import SignIn from './components/Login/SignIn';
 import NewUser from './components/Login/NewUser';
 import RecoverPassword from './components/Login/RecoverPassword';
-import MentionsLegales from './components/StaticsPages/MentionsLegales/MentionsLegales';
-import Organisme from './components/Organisme/Organisme';
-import Orientation from './components/Orientation/Orientation';
-import Resultats from './components/Resultats/Resultats';
-import GuidesPapier from './components/StaticsPages/GuidesPapier/GuidesPapier';
+import MentionsLegales from './components/FrontOffice/StaticsPages/MentionsLegales/MentionsLegales';
+import Organisme from './components/FrontOffice/Organisme/Organisme';
+import Orientation from './components/FrontOffice/Orientation/Orientation';
+import Resultats from './components/FrontOffice/Resultats/Resultats';
+import GuidesPapier from './components/FrontOffice/StaticsPages/GuidesPapier/GuidesPapier';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
