@@ -8,7 +8,7 @@ export default function MobileToggle({
   setIsMobileMap,
 }: MobileToogleProps) {
   return (
-    <div className="absolute inset-x-0 z-50 flex justify-center bottom-4">
+    <div className="absolute inset-x-0 z-50 flex justify-center bottom-2">
       {isMobileMap ? (
         <span className="inline-flex rounded-md shadow-sm isolate ">
           <button

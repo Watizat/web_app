@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { Organism } from '../../../../@types/organism';
-import { useAppSelector } from '../../../../hooks/redux';
-import navitiaInstance from '../../../../utils/navitia';
+import { Organism } from '../../../@types/organism';
+import { useAppSelector } from '../../../hooks/redux';
+import navitiaInstance from '../../../utils/navitia';
 import styles from './Transport.module.scss';
-import orga from '../../Organisme.module.scss';
+
+import icon from '../../../assets/public-transports.svg';
 
 interface TransportData {
   id: string;
@@ -33,7 +34,7 @@ interface BusLine {
   }; // Modification de l'interface CommercialMode
 }
 
-function Transport() {
+export default function Transports() {
   const [data, setData] = useState<TransportData[]>([]);
   const organism = useAppSelector(
     (state) => state.organism.organism as Organism
@@ -124,41 +125,55 @@ function Transport() {
   };
 
   return (
-    <article>
-      <h3 className={orga.title}>Accès en transports</h3>
-      {data.map((item) => (
-        <div className={styles.transport} key={item.id}>
-          <p>
-            {item.name} à {item.distance} m
-          </p>
-          <div className={styles.transport_lines}>
-            {item.lines.map((line) => (
-              <React.Fragment key={line.id}>
-                <span
-                  className={styles.transport_num}
-                  style={{
-                    backgroundColor: `rgba(${convertColorToRGB(
-                      line.color
-                    )}, 0.8)`,
-                    color: `#${line.text_color}`,
-                  }}
-                >
-                  <i
-                    className={
-                      line.commercial_mode.name === 'Bus'
-                        ? classNames('las la-bus-alt')
-                        : classNames('las la-subway')
-                    }
-                  />
-                  {line.code}
-                </span>
-              </React.Fragment>
-            ))}
-          </div>
+    <div className="flex flex-col overflow-hidden border border-gray-200 xl:gap-x-8 rounded-xl">
+      <div className="flex items-center px-6 py-4 border-b gap-x-4 border-gray-900/5 bg-gray-50">
+        <img
+          src={icon}
+          alt="bus public"
+          className="flex-none object-cover w-8 h-8 "
+        />
+        <div className="text-sm font-medium leading-6 text-gray-900">
+          Accès en transports public
         </div>
-      ))}
-    </article>
+      </div>
+      <div className="px-6 py-4 -my-3 text-sm leading-6 divide-y divide-gray-100">
+        {data.map((item) => (
+          <div
+            key={item.id}
+            className="flex flex-wrap justify-between pt-1 pb-2 text-gray-500 gap-x-4"
+          >
+            <p className="w-full">
+              <span className="text-black">{item.name}</span> à {item.distance}{' '}
+              m
+            </p>
+            <p className="flex flex-wrap w-full gap-x-1 gap-y-1">
+              {item.lines.map((line) => (
+                <React.Fragment key={line.id}>
+                  <span
+                    className="font-semibold flex flex-nowrap justify-center items-center pt-0.5 pb-0.5 px-1.5 rounded
+"
+                    style={{
+                      backgroundColor: `rgba(${convertColorToRGB(
+                        line.color
+                      )}, 0.7)`,
+                      color: `rgba(${convertColorToRGB(line.text_color)}, 0.9)`,
+                    }}
+                  >
+                    <i
+                      className={
+                        line.commercial_mode.name === 'Bus'
+                          ? classNames('las la-bus-alt')
+                          : classNames('las la-subway')
+                      }
+                    />
+                    <span className="text-sm">{line.code}</span>
+                  </span>
+                </React.Fragment>
+              ))}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
-
-export default Transport;

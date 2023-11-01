@@ -82,7 +82,7 @@
   position: relative;
   transform-style: preserve-3d;
 
-  &::after {
+ customIcon::after {
     content: '';
     position: absolute;
     bottom: -14px; /* Ajustez la valeur ici pour contrôler la position de la pointe vers le bas */

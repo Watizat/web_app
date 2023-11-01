@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import HeaderSlim from '../Header/HeaderSlim';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchZones } from '../../store/reducers/admin';
@@ -13,6 +14,7 @@ export default function FrontApp() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
   const langue = useAppSelector((state) => state.organism.langue);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,10 +33,10 @@ export default function FrontApp() {
   }, [dispatch, langue]);
 
   return (
-    <main className="relative flex flex-col min-h-full">
+    <main className="relative flex flex-col overflow-y-hidden md:min-h-full md:overflow-auto">
       {!loading && (
         <>
-          <Header />
+          {pathname.startsWith('/organisme') ? <HeaderSlim /> : <Header />}
           <Outlet />
           {isTablet && <Footer />}
         </>

@@ -17,10 +17,11 @@ import ForgottenPassword from './components/Login/ForgottenPassword';
 import SignIn from './components/Login/SignIn';
 import NewUser from './components/Login/NewUser';
 import RecoverPassword from './components/Login/RecoverPassword';
-import MentionsLegales from './components/StaticsPages/MentionsLegales';
+import MentionsLegales from './components/StaticsPages/MentionsLegales/MentionsLegales';
 import Organisme from './components/Organisme/Organisme';
 import Orientation from './components/Orientation/Orientation';
 import Resultats from './components/Resultats/Resultats';
+import GuidesPapier from './components/StaticsPages/GuidesPapier/GuidesPapier';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
         <Route path="/recover-password" element={<RecoverPassword />} />
         <Route path="/account-request" element={<AccountRequest />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route path="/guides-papier" element={<GuidesPapier />} />
         <Route path="/organisme/:slug" element={<Organisme />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/new-user" element={<NewUser />} />

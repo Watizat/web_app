@@ -5,6 +5,8 @@ export default {
     extend: {
       height: {
         headerHeight: '65px',
+        fullScreenHome: 'calc(100vh - 88px)',
+        fullScreenHeight: 'calc(100vh - 88px - 285px)',
         footerHeight: '50px',
         footerHeightMax: '70px',
         mapHeight: 'calc(100vh - 65px)',

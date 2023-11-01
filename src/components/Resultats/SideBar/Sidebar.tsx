@@ -101,7 +101,7 @@ export default function Sidebar({
     >
       <div className="flex flex-col h-full overflow-y-auto bg-white border-r border-gray-200 grow">
         <div
-          className="inline-flex flex-col min-h-full gap-6 p-8 pb-16 overflow-y-auto bg-zinc-100/30"
+          className="inline-flex flex-col min-h-full gap-6 p-4 overflow-y-auto pb-14 md:p-8 bg-zinc-100/30"
           ref={resultsContainerRef}
         >
           {loader &&

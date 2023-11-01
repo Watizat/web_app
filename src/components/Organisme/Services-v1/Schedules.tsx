@@ -1,13 +1,12 @@
-import { Schedule } from '../../../../@types/organism';
-import { useAppSelector } from '../../../../hooks/redux';
-import styles from './Schedule.module.scss';
+import { Schedule } from '../../../@types/organism';
+import { useAppSelector } from '../../../hooks/redux';
 
 interface SchedulesProps {
   schedule: Schedule[];
   displayAll: boolean;
 }
 
-function Schedules({ schedule, displayAll }: SchedulesProps) {
+export default function Schedules({ schedule, displayAll }: SchedulesProps) {
   const days = useAppSelector((state) => state.organism.days);
 
   function getOpeningHours(day: Schedule) {
@@ -51,18 +50,18 @@ function Schedules({ schedule, displayAll }: SchedulesProps) {
   orderedSchedule.sort((a, b) => a.day - b.day);
 
   return (
-    <table className={styles.schedules}>
+    <table className="w-full">
       <tbody>
         {orderedSchedule.map(
           (currentDay) =>
             getOpeningHours(currentDay) !== null && (
               <tr key={currentDay.day}>
                 <td>
-                  <div className={styles.schedule_day}>
+                  <div>
                     {days.find((day) => day.numberday === currentDay.day)?.name}
                   </div>
                 </td>
-                <td>{getOpeningHours(currentDay)}</td>
+                <td className="text-end">{getOpeningHours(currentDay)}</td>
               </tr>
             )
         )}
@@ -70,5 +69,3 @@ function Schedules({ schedule, displayAll }: SchedulesProps) {
     </table>
   );
 }
-
-export default Schedules;
