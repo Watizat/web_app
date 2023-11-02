@@ -7,10 +7,10 @@ import {
   fetchOrganisms,
 } from '../../../store/reducers/organisms';
 
-import Sidebar from './SideBar/Sidebar';
-import Header from './Header/Header';
+import Sidebar from './Sidebar';
+import Header from '../../Header/Results';
 import Map from './Map/Map';
-import MobileToggle from './MobileToggle/MobileToggle';
+import MobileToggle from './MobileToggle';
 
 export default function Resultats() {
   const isTouch = useMediaQuery({ query: '(max-width: 1023px)' });
@@ -44,14 +44,14 @@ export default function Resultats() {
   return (
     <main>
       <Header setOpenFilters={setOpenFilters} />
-      {isTouch && isMobileMap && (
+      <Sidebar
+        openFilters={openFilters}
+        setOpenFilters={setOpenFilters}
+        isMobileMap={isMobileMap}
+      />
+      {isTouch ? (
         <>
-          <Sidebar
-            openFilters={openFilters}
-            setOpenFilters={setOpenFilters}
-            isMobileMap={isMobileMap}
-          />
-          <section className="absolute flex w-full min-h-mapHeight h-mapHeight py-auto lg:pl-[45rem]">
+          <section className="absolute inline-flex w-full min-h-mapHeight h-mapHeight py-auto">
             <Map cityPosition={cityPosition} />
           </section>
           <MobileToggle
@@ -59,32 +59,10 @@ export default function Resultats() {
             setIsMobileMap={setIsMobileMap}
           />
         </>
-      )}
-      {isTouch && !isMobileMap && (
-        <>
-          <Sidebar
-            openFilters={openFilters}
-            setOpenFilters={setOpenFilters}
-            isMobileMap={isMobileMap}
-          />
-          <MobileToggle
-            isMobileMap={isMobileMap}
-            setIsMobileMap={setIsMobileMap}
-          />
-        </>
-      )}
-
-      {!isTouch && (
-        <>
-          <Sidebar
-            openFilters={openFilters}
-            setOpenFilters={setOpenFilters}
-            isMobileMap={isMobileMap}
-          />
-          <section className="absolute flex w-full min-h-mapHeight h-mapHeight py-auto 2xl:pl-[45rem] xl:pl-[40rem] pl-[30rem]">
-            <Map cityPosition={cityPosition} />
-          </section>
-        </>
+      ) : (
+        <section className="absolute flex w-full min-h-mapHeight h-mapHeight py-auto 2xl:pl-[45rem] xl:pl-[40rem] pl-[30rem]">
+          <Map cityPosition={cityPosition} />
+        </section>
       )}
     </main>
   );

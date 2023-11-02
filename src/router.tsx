@@ -4,19 +4,19 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import Account from './components/Admin/Account/Account';
-import AdminApp from './components/Admin/App/App';
+import AdminApp from './components/App/BackOffice';
 import Dashboard from './components/Admin/Dashboard/Dashboard';
 import Edition from './components/Admin/Edition/Edition';
 import Users from './components/Admin/Users/Users';
-import App from './components/App/FrontApp';
+import App from './components/App/FrontOffice';
 import NotFound from './components/Errors/NotFound';
 import Home from './components/FrontOffice/Home/Home';
 import InactivityDetector from './components/InactivityDetector/InactivityDetector';
-import AccountRequest from './components/Login/AccountRequest';
-import ForgottenPassword from './components/Login/ForgottenPassword';
-import SignIn from './components/Login/SignIn';
-import NewUser from './components/Login/NewUser';
-import RecoverPassword from './components/Login/RecoverPassword';
+import AccountRequest from './components/FrontOffice/Login/AccountRequest';
+import ForgottenPassword from './components/FrontOffice/Login/ForgottenPassword';
+import SignIn from './components/FrontOffice/Login/SignIn';
+import NewUser from './components/FrontOffice/Login/NewUser';
+import RecoverPassword from './components/FrontOffice/Login/RecoverPassword';
 import MentionsLegales from './components/FrontOffice/StaticsPages/MentionsLegales/MentionsLegales';
 import Organisme from './components/FrontOffice/Organisme/Organisme';
 import Orientation from './components/FrontOffice/Orientation/Orientation';
@@ -34,11 +34,11 @@ const router = createBrowserRouter(
         <Route path="/account-request" element={<AccountRequest />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/guides-papier" element={<GuidesPapier />} />
-        <Route path="/organisme/:slug" element={<Organisme />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/new-user" element={<NewUser />} />
       </Route>
       <Route path="/resultats" element={<Resultats />} />
+      <Route path="/organisme/:slug" element={<Organisme />} />
       <Route path="/admin" element={<AdminApp />} errorElement={<App />}>
         <Route path="/admin/account" element={<Account />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />

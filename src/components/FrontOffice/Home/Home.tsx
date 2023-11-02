@@ -1,7 +1,7 @@
 import { useMediaQuery } from 'react-responsive';
 
-import SearchBox from './SearchBox/SearchBox';
-import Watizat from './Watizat/Watizat';
+import SearchBox from './SearchBox';
+import Infos from './Infos';
 import BetaPhase from '../../Alerts/BetaPhase';
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
       <div className="flex flex-col gap-20 mt-5 mb-20 lg:mb-0 lg:mt-10 xl:mt-20 lg:gap-20 xl:gap-80 isolate">
         <SearchBox />
 
-        {isTablet && <Watizat />}
+        {isTablet && <Infos />}
       </div>{' '}
       <BetaPhase />
     </article>

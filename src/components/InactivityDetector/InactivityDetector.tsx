@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import '../Admin/Modal/Modal.module.scss';
+import '../Modals/Modal.module.scss';
 import { useEffect, useState } from 'react';
-import ModalInactivityDetector from '../Admin/Modal/ModalInactivityDetector';
+import ModalInactivityDetector from '../Modals/ModalInactivityDetector';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getUserDataFromLocalStorage } from '../../utils/user';
 import { logout } from '../../store/reducers/user';

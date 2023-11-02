@@ -4,7 +4,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { useState } from 'react';
 import { DirectusUser } from '../../../@types/user';
 import { useAppSelector } from '../../../hooks/redux';
-import ModalUsers from '../Modal/ModalEditUsers';
+import ModalUsers from '../../Modals/ModalEditUsers';
 import styles from './Users.module.scss';
 
 interface UsersDetailsProps {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../hooks/redux';
-import ModalAddService from '../../../Modal/ModalAddService';
+import ModalAddService from '../../../../Modals/ModalAddService';
 import ServiceCard from './Card/Card';
 import styles from './Services.module.scss';
 import orgasheet from '../OrgaSheet.module.scss';

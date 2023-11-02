@@ -1,0 +1,59 @@
+@use '../../styles/variables' as v;
+@use '../../styles/medias' as m;
+@use '../../styles/elements';
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.boApp {
+  min-height: 100vh;
+  display: none;
+
+  @include m.tablet {
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+  }
+}
+
+.mobileOut {
+  min-height: 100vh;
+  padding: 0 10vw;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(rgba(v.$bghome, 0.8), rgba(v.$bghome, 0.5)),
+    url('/img/404mobile.webp');
+  background-size: cover;
+  color: v.$white;
+  text-align: center;
+  font-size: 1.35rem;
+
+  &_logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: auto;
+    margin: 7.5rem 0 5rem;
+
+    img {
+      margin: auto;
+    }
+  }
+
+  &_links {
+    margin-top: 4rem;
+    color: v.$white;
+    border: 1px solid v.$white;
+    border-radius: 20px;
+    padding: 1rem;
+  }
+
+  @include m.tablet {
+    display: none;
+  }
+}

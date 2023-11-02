@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Service } from '../../../../../../@types/organism';
-import ModalAddServiceContact from '../../../../Modal/ModalAddServiceContact';
-import ModalEditService from '../../../../Modal/ModalEditService';
+import ModalAddServiceContact from '../../../../../Modals/ModalAddServiceContact';
+import ModalEditService from '../../../../../Modals/ModalEditService';
 import Schedules from '../../../../Schedules/Schedules';
 import ContactCard from '../../Contacts/Card/Card';
 import styles from './Card.module.scss';

@@ -61,10 +61,6 @@ export default function SlideFilters({
     setSearchInputValue(event.target.value);
   }
 
-  // function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-  //   event.preventDefault();
-  // }
-
   function handlePmr(event: React.ChangeEvent<HTMLInputElement>) {
     setIsPmr(event.target.checked);
   }
@@ -128,7 +124,18 @@ export default function SlideFilters({
                           <div className="flex items-center h-7">
                             <button
                               type="button"
-                              className="relative text-slate-900 focus:outline-none "
+                              onClick={() => setOpenFilters(false)}
+                              className=" flex lg:hidden gap-2  px-2.5 py-1.5 text-sm font-medium text-gray-700/90 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-200 hover:bg-slate-50/70"
+                            >
+                              <XMarkIcon
+                                className="left-0 w-5 h-full pointer-events-none text-slate-700/70 "
+                                aria-hidden="true"
+                              />
+                              Fermer
+                            </button>
+                            <button
+                              type="button"
+                              className="relative hidden lg:inline-flex text-slate-900 focus:outline-none "
                               onClick={() => setOpenFilters(false)}
                             >
                               <span className="absolute -inset-2.5" />
@@ -180,8 +187,12 @@ export default function SlideFilters({
                         <button
                           type="button"
                           onClick={() => setOpenFilters(false)}
-                          className="inline-flex justify-center w-7/12 px-6 py-2 text-sm font-semibold text-white rounded-md shadow-sm bg-watizat-500/90 hover:bg-watizat-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-watizat-500 lg:w-4/12"
+                          className=" flex  gap-2 px-10 sm:px-5 py-1.5 text-sm font-medium text-gray-700/90 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-200 hover:bg-slate-50/70"
                         >
+                          <XMarkIcon
+                            className="left-0 w-5 h-full pointer-events-none text-slate-700/70 "
+                            aria-hidden="true"
+                          />
                           Fermer
                         </button>
                       </div>

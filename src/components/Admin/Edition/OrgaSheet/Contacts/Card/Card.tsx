@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Contact } from '../../../../../../@types/organism';
-import ModalEditContact from '../../../../Modal/ModalEditContact';
+import ModalEditContact from '../../../../../Modals/ModalEditContact';
 import styles from './Card.module.scss';
 import orgaSheet from '../../OrgaSheet.module.scss';
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../hooks/redux';
-import ModalEditData from '../../../Modal/ModalEditData';
+import ModalEditData from '../../../../Modals/ModalEditData';
 import Schedules from '../../../Schedules/Schedules';
 import styles from './Data.module.scss';
 import by from '../OrgaSheet.module.scss';

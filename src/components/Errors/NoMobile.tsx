@@ -37,7 +37,12 @@ export default function NoMobile() {
             to="/"
             className="text-sm font-semibold leading-7 text-gray-100"
           >
-            <span aria-hidden="true">&larr;</span> Retourner à l&apos;accueil
+            <button
+              type="button"
+              className="px-3 py-2 text-sm font-semibold text-gray-900 rounded-md shadow-sm bg-white/90 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            >
+              Retourner à l&apos;accueil
+            </button>
           </Link>
         </div>
       </div>
