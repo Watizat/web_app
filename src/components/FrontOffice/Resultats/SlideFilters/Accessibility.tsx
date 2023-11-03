@@ -4,7 +4,7 @@ interface AccessibilityProps {
 
 export default function Accessibility({ handlePmr }: AccessibilityProps) {
   return (
-    <div className="px-4 space-y-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:space-y-0 sm:px-6 sm:py-5">
+    <div className="px-4 space-y-2 select-none sm:grid sm:grid-cols-3 sm:gap-4 sm:space-y-0 sm:px-6 sm:py-5">
       <div>
         <label
           htmlFor="project-description"

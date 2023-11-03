@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { Dialog } from '@headlessui/react';
 import { useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import logo from '../../assets/logo-color.svg';
+import logo from '../../../assets/logo-color.svg';
 import headerLinks from './source';
 import footerLinks from '../Footer/source';
-import { getUserDataFromLocalStorage } from '../../utils/user';
+import { getUserDataFromLocalStorage } from '../../../utils/user';
 
 export default function Default() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

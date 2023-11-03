@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Default';
+import Footer from '../FrontOffice/Footer/Footer';
+import Header from '../FrontOffice/Header/Default';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchZones } from '../../store/reducers/admin';

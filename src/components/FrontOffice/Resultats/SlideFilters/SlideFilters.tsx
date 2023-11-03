@@ -114,7 +114,7 @@ export default function SlideFilters({
                       <div className="px-4 py-8 bg-gray-50 sm:px-6">
                         <div className="flex items-start justify-between space-x-3">
                           <div className="space-y-1">
-                            <Dialog.Title className="text-lg font-normal leading-6 text-slate-900">
+                            <Dialog.Title className="text-lg font-normal leading-6 select-none text-slate-900">
                               Filtrer les résultats
                             </Dialog.Title>
                             {/* <p className="text-sm font-medium text-slate-50">

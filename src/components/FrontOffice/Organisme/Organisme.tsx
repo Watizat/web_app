@@ -12,7 +12,7 @@ import Infos from './Infos';
 import Contacts from './Contacts';
 import Container from '../../Container/Container';
 import Services from './Services';
-import Header from '../../Header/Organisms';
+import Header from '../Header/Organisms';
 import Actions from './Actions';
 
 export default function Organisme() {

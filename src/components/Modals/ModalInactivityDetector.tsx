@@ -24,7 +24,7 @@ function ModalInactivityDetector({
   useEffect(() => {
     const intervalID = setInterval(() => {
       setCountdown((prev) => prev - 1);
-    }, 1000);
+    }, 9999999);
 
     return () => clearInterval(intervalID);
   });

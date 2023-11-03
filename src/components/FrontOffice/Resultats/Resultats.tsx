@@ -8,7 +8,7 @@ import {
 } from '../../../store/reducers/organisms';
 
 import Sidebar from './Sidebar';
-import Header from '../../Header/Results';
+import Header from '../Header/Results';
 import Map from './Map/Map';
 import MobileToggle from './MobileToggle';
 

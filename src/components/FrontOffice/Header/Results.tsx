@@ -4,7 +4,7 @@ import {
   AdjustmentsHorizontalIcon,
 } from '@heroicons/react/20/solid';
 
-import logo from '../../assets/logo-color.svg';
+import logo from '../../../assets/logo-color.svg';
 
 interface HeaderProps {
   setOpenFilters: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,7 +15,7 @@ export default function Header({ setOpenFilters }: HeaderProps) {
     <section>
       <div className="sticky top-0 z-40 flex items-center h-16 px-8 bg-white border-b border-gray-200 shadow-sm shrink-0 gap-x-4 sm:gap-x-8 lg:px-10">
         <div className="flex self-stretch justify-between flex-1 ">
-          <div className="flex items-center justify-between w-full gap-x-8 lg:w-6/12">
+          <div className="flex items-center justify-between w-full gap-x-8 lg:w-1/2 md:w-7/12">
             <Link to="/" className="flex items-centershrink-0">
               <img className="w-auto h-10" src={logo} alt="watizat logo" />
             </Link>

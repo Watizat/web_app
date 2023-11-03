@@ -30,7 +30,7 @@ export default function Category({
       </div>
 
       {/* Mobile */}
-      <div className="grid grid-cols-2 sm:col-span-2 lg:hidden">
+      <div className="grid grid-cols-2 select-none sm:col-span-2 lg:hidden">
         {categories.map((category, index) => {
           return (
             <label
@@ -73,7 +73,7 @@ export default function Category({
       </div>
 
       {/* Desktop */}
-      <div className="items-center justify-center hidden grid-cols-2 col-span-2 align-middle lg:grid gap-y-5">
+      <div className="items-center justify-center hidden grid-cols-2 col-span-2 align-middle select-none lg:grid gap-y-5">
         {categories.map((category) => {
           return (
             <div key={category.tag} className="relative flex items-center">

@@ -4,11 +4,11 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import Account from './components/Admin/Account/Account';
-import AdminApp from './components/App/BackOffice';
-import Dashboard from './components/Admin/Dashboard/Dashboard';
+import BackApp from './components/App/BackOffice';
+import Dashboard from './components/BackOffice/Dashboard';
 import Edition from './components/Admin/Edition/Edition';
 import Users from './components/Admin/Users/Users';
-import App from './components/App/FrontOffice';
+import FrontApp from './components/App/FrontOffice';
 import NotFound from './components/Errors/NotFound';
 import Home from './components/FrontOffice/Home/Home';
 import InactivityDetector from './components/InactivityDetector/InactivityDetector';
@@ -26,25 +26,30 @@ import GuidesPapier from './components/FrontOffice/StaticsPages/GuidesPapier/Gui
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<InactivityDetector />}>
-      <Route path="/" element={<App />}>
+      {/* Front-office */}
+      <Route path="/" element={<FrontApp />}>
         <Route index element={<Home />} />
         <Route path="/orientation" element={<Orientation />} />
-        <Route path="/forgotten-password" element={<ForgottenPassword />} />
-        <Route path="/recover-password" element={<RecoverPassword />} />
-        <Route path="/account-request" element={<AccountRequest />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/guides-papier" element={<GuidesPapier />} />
         <Route path="/login" element={<SignIn />} />
+        <Route path="/forgotten-password" element={<ForgottenPassword />} />
+        <Route path="/recover-password" element={<RecoverPassword />} />
+        <Route path="/account-request" element={<AccountRequest />} />
         <Route path="/new-user" element={<NewUser />} />
       </Route>
       <Route path="/resultats" element={<Resultats />} />
       <Route path="/organisme/:slug" element={<Organisme />} />
-      <Route path="/admin" element={<AdminApp />} errorElement={<App />}>
-        <Route path="/admin/account" element={<Account />} />
+
+      {/* Back-office */}
+      <Route path="/admin" element={<BackApp />} errorElement={<FrontApp />}>
         <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/edition" element={<Edition />} />
+        <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/account" element={<Account />} />
       </Route>
+
+      {/* Errors page */}
       <Route path="*" element={<NotFound />} />
     </Route>
   )
