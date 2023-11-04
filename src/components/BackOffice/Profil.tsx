@@ -25,7 +25,7 @@ export default function Profil() {
   }, [dispatch]);
 
   if (!me) {
-    return <div>Pas d&apos;infos</div>;
+    return <div />;
   }
 
   const updateUser = (updatedUser: DirectusUser) => {
@@ -35,7 +35,7 @@ export default function Profil() {
   return (
     <>
       <BackColor>
-        <main className="flex flex-col items-center justify-center flex-1 w-full h-full pb-10 select-none ">
+        <main className="flex flex-col items-center justify-center flex-1 w-full min-h-full pb-10 select-none ">
           <div className="w-full max-w-sm mx-auto">
             <h2 className="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-slate-600">
               Informations de profil

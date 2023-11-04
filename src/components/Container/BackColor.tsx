@@ -1,8 +1,8 @@
-interface PageProps {
+interface Props {
   children: React.ReactNode;
 }
 
-export default function BackColor({ children }: PageProps) {
+export default function BackColor({ children }: Props) {
   return (
     <div className="relative h-full">
       <div

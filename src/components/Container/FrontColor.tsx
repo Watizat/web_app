@@ -1,8 +1,8 @@
-interface PageProps {
+interface Props {
   children: React.ReactNode;
 }
 
-export default function FrontColor({ children }: PageProps) {
+export default function FrontColor({ children }: Props) {
   return (
     <div className="relative">
       <div

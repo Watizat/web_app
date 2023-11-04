@@ -60,7 +60,7 @@ export default function TopBar({ setSidebarOpen }: TopBarProps) {
   ];
 
   if (!me) {
-    return <div>Pas d&apos;infos</div>;
+    return <div />;
   }
 
   return (
@@ -84,7 +84,7 @@ export default function TopBar({ setSidebarOpen }: TopBarProps) {
             <select
               value={select}
               onChange={handleChange}
-              className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-200/80 focus:ring-2 focus:ring-pink-600 sm:text-sm sm:leading-6 bg-white  hover:bg-white disabled:cursor-not-allowed"
+              className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-200/80 sm:text-sm sm:leading-6 bg-white  hover:bg-white disabled:cursor-not-allowed"
               disabled={!isAdmin}
             >
               <option value="" disabled className="">
@@ -133,7 +133,7 @@ export default function TopBar({ setSidebarOpen }: TopBarProps) {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+              <Menu.Items className="absolute right-0 -z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
                 {actions.map((action) => (
                   <Menu.Item key={action.name}>
                     {({ active }) => (

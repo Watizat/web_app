@@ -79,8 +79,13 @@ function App() {
                 setSidebarOpen={setSidebarOpen}
               />
               <div
-                className={` flex flex-col flex-1 h-full min-h-full lg:pl-20 ${
+                className={` flex flex-col flex-1  lg:pl-20 ${
                   pathname !== '/admin/dashboard' && '2xl:pl-72 '
+                } ${
+                  pathname === '/admin/dashboard' ||
+                  pathname === '/admin/profil'
+                    ? 'h-full min-h-full'
+                    : 'h-max min-h-max'
                 }`}
               >
                 <Topbar setSidebarOpen={setSidebarOpen} />

@@ -46,7 +46,7 @@ function Account() {
   }, [dispatch]);
 
   if (!me) {
-    return <div>Pas d&apos;infos</div>;
+    return <div />;
   }
 
   return (
