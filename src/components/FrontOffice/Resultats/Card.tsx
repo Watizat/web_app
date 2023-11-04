@@ -140,7 +140,11 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
             </Link>
           </div>
         )}
-        <div className="flex items-center justify-center flex-1 w-full col-span-2 border-t md:col-auto md:col-start-3">
+        <div
+          className={`flex items-center justify-center flex-1 w-full col-span-2 border-t md:col-auto  ${
+            organism.phone ? 'md:col-start-3' : 'md:col-start-2'
+          }`}
+        >
           <Link
             to={`/organisme/${organism.slug}`}
             className="relative inline-flex items-center justify-center flex-1 w-0 py-3 text-sm font-semibold text-gray-900 border border-transparent rounded-br-lg gap-x-3"

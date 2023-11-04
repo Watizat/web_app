@@ -11,7 +11,7 @@ import { axiosInstance } from '../../../utils/axios';
 import { Inputs } from '../../../@types/formInputs';
 import { validateEmail } from '../../../utils/form/form';
 import { editUser, logout } from '../../../store/reducers/user';
-import DeleteAccount from '../Modals/DeleteAccount';
+import DeleteAccount from '../Alerts/DeleteAccount';
 
 interface Props {
   openSlide: boolean;

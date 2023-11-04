@@ -24,7 +24,7 @@ export default function BetaPhase() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
+          <div className="fixed inset-0 top-0 transition-opacity bg-gray-500 bg-opacity-75" />
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
@@ -53,7 +53,7 @@ export default function BetaPhase() {
                     >
                       Site en construction
                     </Dialog.Title>
-                    <div className="mt-6">
+                    <div className="px-10 mt-6">
                       <p className="text-sm font-semibold text-gray-400">
                         Les informations présente dans ce site le sont
                         uniquement à des fins de test

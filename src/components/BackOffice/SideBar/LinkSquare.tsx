@@ -1,5 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { axiosInstance } from '../../../utils/axios';
+import { useAppDispatch } from '../../../hooks/redux';
+import { DirectusUser } from '../../../@types/user';
 
 interface Props {
   item: {
@@ -13,9 +16,28 @@ interface Props {
   };
 }
 
-const { data } = await axiosInstance.get('/users/me');
+// const { data } = await axiosInstance.get('/users/me');
 export default function LinkSquare({ item }: Props) {
   const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
+  const [me, setMe] = useState<DirectusUser | null>(null);
+
+  useEffect(() => {
+    async function getUserInfos() {
+      try {
+        const { data } = await axiosInstance.get('/users/me');
+        setMe(data.data);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(
+          "Erreur lors de la récupération des données de l'utilisateur : ",
+          error
+        );
+        setMe(null);
+      }
+    }
+    getUserInfos();
+  }, [dispatch]);
 
   return (
     <li key={item.name}>
@@ -27,10 +49,9 @@ export default function LinkSquare({ item }: Props) {
                           // eslint-disable-next-line no-nested-ternary
                           item.active === false || // Si l'item est désactivé
                           ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
-                            data.data.role !==
+                            me?.role !==
                               '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
-                            data.data.role !==
-                              '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
+                            me?.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
                             ? ' text-watizat-100/40 pointer-events-none'
                             : pathname === item.href
                             ? ' text-white bg-watizat-400/70'
@@ -44,9 +65,9 @@ export default function LinkSquare({ item }: Props) {
                             // eslint-disable-next-line no-nested-ternary
                             item.active === false || // Si l'item est désactivé
                             ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
-                              data.data.role !==
+                              me?.role !==
                                 '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
-                              data.data.role !==
+                              me?.role !==
                                 '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
                               ? ' text-watizat-100/40 pointer-events-none'
                               : pathname === item.href
