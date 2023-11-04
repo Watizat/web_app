@@ -8,7 +8,8 @@ interface Props {
     href: string;
     active: boolean;
     icon: React.ElementType;
-    limitedForRefLocal: boolean;
+    refLocalOnly: boolean;
+    devOnly: boolean;
   };
 }
 const { data } = await axiosInstance.get('/users/me');
@@ -19,10 +20,10 @@ export default function Button({ item }: Props) {
       key={item.name}
       to={item.href}
       className={`flex flex-col items-center justify-center m-auto text-center divide-y divide-gray-200 shadow h-52 bg-white/40 rounded-xl aspect-square select-none  ${
-        item.active === false || // Si len lien est désactivé
-        (item.limitedForRefLocal && // Ou si le lien est maqué comme limité aux refs locaux
-          data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'user n'est ni admin ni ref-local
-          data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139')
+        item.active === false || // Si l'item est désactivé
+        ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
+          data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
+          data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
           ? 'pointer-events-none'
           : 'hover:shadow-md hover:shadow-watizat-200 group hover:bg-white/60'
       }`}
@@ -30,10 +31,10 @@ export default function Button({ item }: Props) {
       <div className="flex flex-col items-center justify-center p-8">
         <div
           className={`flex items-center justify-center w-20 h-auto p-5 overflow-hidden rounded-full aspect-square ${
-            item.active === false || // Si len lien est désactivé
-            (item.limitedForRefLocal && // Ou si le lien est maqué comme limité aux refs locaux
-              data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'user n'est ni admin ni ref-local
-              data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139')
+            item.active === false || // Si l'item est désactivé
+            ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
+              data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
+              data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
               ? 'text-gray-300'
               : ' text-indigo-900/70 ring-watizat-200 group-hover:text-watizat-400 '
           }`}
@@ -42,10 +43,10 @@ export default function Button({ item }: Props) {
         </div>
         <h3
           className={`mt-6 text-sm font-semibold  ${
-            item.active === false || // Si len lien est désactivé
-            (item.limitedForRefLocal && // Ou si le lien est maqué comme limité aux refs locaux
-              data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'user n'est ni admin ni ref-local
-              data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139')
+            item.active === false || // Si l'item est désactivé
+            ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
+              data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
+              data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
               ? 'text-gray-300'
               : ' text-indigo-900/70 group-hover:text-watizat-400'
           }`}
@@ -56,10 +57,10 @@ export default function Button({ item }: Props) {
           <dt className="sr-only">Description</dt>
           <dd
             className={`text-sm ${
-              item.active === false || // Si len lien est désactivé
-              (item.limitedForRefLocal && // Ou si le lien est maqué comme limité aux refs locaux
-                data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'user n'est ni admin ni ref-local
-                data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139')
+              item.active === false || // Si l'item est désactivé
+              ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
+                data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
+                data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
                 ? 'text-gray-300'
                 : ' text-slate-500 '
             }`}

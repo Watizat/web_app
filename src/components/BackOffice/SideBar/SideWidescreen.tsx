@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../../hooks/redux';
 import LinkLarge from './LinkLarge';
 import logo from '../../../assets/logo.svg';
 
@@ -9,7 +8,7 @@ interface NavigationItem {
   icon: React.ElementType;
   active: boolean;
   devOnly: boolean;
-  limitedForRefLocal: boolean;
+  refLocalOnly: boolean;
 }
 
 interface ActionItem {
@@ -26,8 +25,6 @@ interface Props {
 
 export default function Widescreen({ navigation, actions }: Props) {
   const { pathname } = useLocation();
-
-  const isAdmin = useAppSelector((state) => state.user.isAdmin);
 
   return (
     <div
@@ -47,27 +44,14 @@ export default function Widescreen({ navigation, actions }: Props) {
         <nav className="flex flex-col flex-1">
           <ul className="flex flex-col flex-1 gap-y-7">
             <li>
-              {isAdmin ? (
-                <ul className="-mx-2 space-y-1">
-                  {navigation.map((item) => (
-                    <LinkLarge
-                      key={item.name}
-                      item={{ ...item, onclick: () => {} }}
-                    />
-                  ))}
-                </ul>
-              ) : (
-                <ul className="-mx-2 space-y-1">
-                  {navigation
-                    .filter((item) => !item.devOnly) // Filtrer les éléments avec devOnly à false
-                    .map((item) => (
-                      <LinkLarge
-                        key={item.name}
-                        item={{ ...item, onclick: () => {} }}
-                      />
-                    ))}
-                </ul>
-              )}
+              <ul className="-mx-2 space-y-1">
+                {navigation.map((item) => (
+                  <LinkLarge
+                    key={item.name}
+                    item={{ ...item, onclick: () => {} }}
+                  />
+                ))}
+              </ul>
             </li>
             <li className="mt-auto ">
               <ul className="flex flex-col gap-y-2">

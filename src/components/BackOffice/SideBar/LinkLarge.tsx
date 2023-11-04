@@ -8,7 +8,8 @@ interface Props {
     icon: React.ElementType;
     active: boolean;
     onclick: () => void;
-    limitedForRefLocal: boolean;
+    refLocalOnly: boolean;
+    devOnly: boolean;
   };
 }
 const { data } = await axiosInstance.get('/users/me');
@@ -23,10 +24,10 @@ export default function LinkLarge({ item }: Props) {
         onClick={item.onclick}
         className={`group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold py-3 ${
           // eslint-disable-next-line no-nested-ternary
-          item.active === false || // Si len lien est désactivé
-          (item.limitedForRefLocal && // Ou si le lien est maqué comme limité aux refs locaux
-            data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'user n'est ni admin ni ref-local
-            data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139')
+          item.active === false || // Si l'item est désactivé
+          ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
+            data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
+            data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
             ? ' text-watizat-100/40 pointer-events-none'
             : pathname === item.href
             ? ' text-white bg-watizat-400/70'
@@ -36,10 +37,10 @@ export default function LinkLarge({ item }: Props) {
         <item.icon
           className={`h-6 w-6 shrink-0  ${
             // eslint-disable-next-line no-nested-ternary
-            item.active === false || // Si len lien est désactivé
-            (item.limitedForRefLocal && // Ou si le lien est maqué comme limité aux refs locaux
-              data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'user n'est ni admin ni ref-local
-              data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139')
+            item.active === false || // Si l'item est désactivé
+            ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
+              data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
+              data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
               ? ' text-watizat-100/40 pointer-events-none'
               : pathname === item.href
               ? ' text-white '

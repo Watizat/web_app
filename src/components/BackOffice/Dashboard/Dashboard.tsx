@@ -6,7 +6,6 @@ import {
   ArrowPathIcon,
   CircleStackIcon,
 } from '@heroicons/react/24/outline';
-import { useAppSelector } from '../../../hooks/redux';
 import Button from './Button';
 import BackColor from '../../Container/BackColor';
 
@@ -18,7 +17,7 @@ const navigation = [
     icon: PencilSquareIcon,
     active: true,
     devOnly: false,
-    limitedForRefLocal: false,
+    refLocalOnly: false,
   },
   {
     name: 'Traduction',
@@ -27,7 +26,7 @@ const navigation = [
     icon: LanguageIcon,
     active: false,
     devOnly: false,
-    limitedForRefLocal: false,
+    refLocalOnly: false,
   },
   {
     name: 'Print',
@@ -36,7 +35,7 @@ const navigation = [
     icon: PrinterIcon,
     active: false,
     devOnly: false,
-    limitedForRefLocal: false,
+    refLocalOnly: false,
   },
   {
     name: 'Actualisation',
@@ -45,7 +44,7 @@ const navigation = [
     icon: ArrowPathIcon,
     active: false,
     devOnly: false,
-    limitedForRefLocal: false,
+    refLocalOnly: false,
   },
   {
     name: 'Utilisateur·ice·s',
@@ -54,23 +53,21 @@ const navigation = [
     icon: UsersIcon,
     active: true,
     devOnly: false,
-    limitedForRefLocal: true,
+    refLocalOnly: true,
   },
   {
     name: 'Back-end',
     href: 'https://watizat.lunalink.nl/',
-    descript: 'Back-end (seulement pour les devs)',
+    descript: 'Back-end (Directus)',
     target: '_blank',
     icon: CircleStackIcon,
     active: true,
     devOnly: true,
-    limitedForRefLocal: false,
+    refLocalOnly: false,
   },
 ];
 
 export default function Dashboard() {
-  const isAdmin = useAppSelector((state) => state.user.isAdmin);
-
   return (
     <BackColor>
       <main className="flex flex-col items-center justify-center flex-1 w-full h-full gap-y-10">
@@ -78,11 +75,9 @@ export default function Dashboard() {
           Dashboard
         </h2>
         <ul className="flex flex-wrap items-center justify-center gap-10 p-10 md:9/12 xl:w-8/12 2xl:w-1/2">
-          {isAdmin
-            ? navigation.map((item) => <Button key={item.name} item={item} />)
-            : navigation
-                .filter((item) => !item.devOnly) // Filtrer les éléments qui ont devOnly à false
-                .map((item) => <Button key={item.name} item={item} />)}
+          {navigation.map((item) => (
+            <Button key={item.name} item={item} />
+          ))}
         </ul>
       </main>
     </BackColor>

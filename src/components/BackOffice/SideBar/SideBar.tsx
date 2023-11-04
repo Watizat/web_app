@@ -35,7 +35,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         active: true,
         onclick: () => setSidebarOpen(false),
         devOnly: false,
-        limitedForRefLocal: false,
+        refLocalOnly: false,
       },
       {
         name: 'Edition',
@@ -44,7 +44,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         active: true,
         onclick: () => setSidebarOpen(false),
         devOnly: false,
-        limitedForRefLocal: false,
+        refLocalOnly: false,
       },
       {
         name: 'Traduction',
@@ -53,7 +53,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         active: false,
         onclick: () => setSidebarOpen(false),
         devOnly: false,
-        limitedForRefLocal: false,
+        refLocalOnly: false,
       },
       {
         name: 'Print',
@@ -62,7 +62,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         active: false,
         onclick: () => setSidebarOpen(false),
         devOnly: false,
-        limitedForRefLocal: false,
+        refLocalOnly: false,
       },
       {
         name: 'Actualisation',
@@ -71,7 +71,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         active: false,
         onclick: () => setSidebarOpen(false),
         devOnly: false,
-        limitedForRefLocal: false,
+        refLocalOnly: false,
       },
       {
         name: 'Utilisateur·ice·s',
@@ -80,7 +80,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         active: true,
         onclick: () => setSidebarOpen(false),
         devOnly: false,
-        limitedForRefLocal: true,
+        refLocalOnly: true,
       },
       {
         name: 'Back-end',
@@ -90,7 +90,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         active: true,
         onclick: () => setSidebarOpen(false),
         devOnly: true,
-        limitedForRefLocal: false,
+        refLocalOnly: false,
       },
     ];
   }, [setSidebarOpen]);

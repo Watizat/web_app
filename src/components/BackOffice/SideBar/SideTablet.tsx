@@ -2,7 +2,6 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Dialog, Transition } from '@headlessui/react';
-import { useAppSelector } from '../../../hooks/redux';
 import LinkLarge from './LinkLarge';
 import logo from '../../../assets/logo.svg';
 
@@ -13,7 +12,7 @@ interface NavigationItem {
   active: boolean;
   onclick: () => void;
   devOnly: boolean;
-  limitedForRefLocal: boolean;
+  refLocalOnly: boolean;
 }
 
 interface ActionItem {
@@ -36,7 +35,6 @@ export default function Tablet({
   navigation,
   actions,
 }: Props) {
-  const isAdmin = useAppSelector((state) => state.user.isAdmin);
 
   return (
     <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -105,21 +103,11 @@ export default function Tablet({
                 <nav className="flex flex-col flex-1">
                   <ul className="flex flex-col flex-1 gap-y-7">
                     <li>
-                      {isAdmin ? (
-                        <ul className="-mx-2 space-y-1">
-                          {navigation.map((item) => (
-                            <LinkLarge key={item.name} item={item} />
-                          ))}
-                        </ul>
-                      ) : (
-                        <ul className="-mx-2 space-y-1">
-                          {navigation
-                            .filter((item) => !item.devOnly) // Filtrer les éléments avec devOnly à false
-                            .map((item) => (
-                              <LinkLarge key={item.name} item={item} />
-                            ))}
-                        </ul>
-                      )}
+                      <ul className="-mx-2 space-y-1">
+                        {navigation.map((item) => (
+                          <LinkLarge key={item.name} item={item} />
+                        ))}
+                      </ul>
                     </li>
                     <li className="mt-auto">
                       <ul>

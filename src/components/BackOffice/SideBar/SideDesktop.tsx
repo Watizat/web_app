@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../../hooks/redux';
 import logo from '../../../assets/logo.svg';
 import LinkSquare from './LinkSquare';
 
@@ -9,7 +8,7 @@ interface NavigationItem {
   icon: React.ElementType;
   active: boolean;
   devOnly: boolean;
-  limitedForRefLocal: boolean;
+  refLocalOnly: boolean;
 }
 
 interface ActionItem {
@@ -25,7 +24,6 @@ interface Props {
 }
 
 export default function Desktop({ navigation, actions }: Props) {
-  const isAdmin = useAppSelector((state) => state.user.isAdmin);
   const { pathname } = useLocation();
 
   return (
@@ -41,27 +39,14 @@ export default function Desktop({ navigation, actions }: Props) {
       <nav className="flex flex-col flex-1 mt-8">
         <ul className="flex flex-col justify-between flex-1">
           <li>
-            {isAdmin ? (
-              <ul className="flex flex-col items-center flex-1 space-y-1">
-                {navigation.map((item) => (
-                  <LinkSquare
-                    key={item.name}
-                    item={{ ...item, onclick: () => {} }}
-                  />
-                ))}
-              </ul>
-            ) : (
-              <ul className="flex flex-col items-center flex-1 space-y-1">
-                {navigation
-                  .filter((item) => !item.devOnly) // Filtrer les éléments avec devOnly à false
-                  .map((item) => (
-                    <LinkSquare
-                      key={item.name}
-                      item={{ ...item, onclick: () => {} }}
-                    />
-                  ))}
-              </ul>
-            )}
+            <ul className="flex flex-col items-center flex-1 space-y-1">
+              {navigation.map((item) => (
+                <LinkSquare
+                  key={item.name}
+                  item={{ ...item, onclick: () => {} }}
+                />
+              ))}
+            </ul>
           </li>
           <li className="flex flex-col items-center mt-auto ">
             <ul>
