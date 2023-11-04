@@ -18,6 +18,7 @@ function UsersDetails({ user }: UsersDetailsProps) {
   const zones = useAppSelector((state) => state.admin.zones);
 
   function renderRoles(data: DirectusUser) {
+    // Rôle éditeur·ice
     if (data.role === '4a30876c-cea0-455f-92d0-593212918aaf') {
       return (
         <div className="flex justify-center gap-2">
@@ -30,6 +31,7 @@ function UsersDetails({ user }: UsersDetailsProps) {
         </div>
       );
     }
+    // Rôle admin
     if (data.role === '53de6ec2-6d70-48c8-8532-61f96133f139') {
       return (
         <div className="flex justify-center gap-2">
@@ -48,10 +50,19 @@ function UsersDetails({ user }: UsersDetailsProps) {
     if (data.role === '5754603f-add3-4823-9c77-a2f9789074fc') {
       return (
         <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-md">
-          nouveau·elle
+          Nouveau·elle utilisateur·ice à valider
         </span>
       );
     }
+    // Rôle des users a supprimer
+    if (data.role === 'fd46fe69-2a5d-4742-a536-cfad86d3e81f') {
+      return (
+        <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-red-700 bg-red-100 rounded-md">
+          Utilisateur à supprimer
+        </span>
+      );
+    }
+    // Rôle utilisateur (par defaut)
     return (
       <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-md">
         edition

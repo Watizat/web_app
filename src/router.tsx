@@ -3,9 +3,9 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import Account from './components/Admin/Account/Account';
+import Profil from './components/BackOffice/Profil';
 import BackApp from './components/App/BackOffice';
-import Dashboard from './components/BackOffice/Dashboard';
+import Dashboard from './components/BackOffice/Dashboard/Dashboard';
 import Edition from './components/Admin/Edition/Edition';
 import Users from './components/Admin/Users/Users';
 import FrontApp from './components/App/FrontOffice';
@@ -46,7 +46,7 @@ const router = createBrowserRouter(
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/edition" element={<Edition />} />
         <Route path="/admin/users" element={<Users />} />
-        <Route path="/admin/account" element={<Account />} />
+        <Route path="/admin/profil" element={<Profil />} />
       </Route>
 
       {/* Errors page */}

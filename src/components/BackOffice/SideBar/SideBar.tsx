@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { useMemo } from 'react';
 import {
   HomeIcon,
@@ -15,9 +14,9 @@ import {
 import { useAppDispatch } from '../../../hooks/redux';
 import { logout } from '../../../store/reducers/user';
 
-import Tablet from './Tablet';
-import Desktop from './Desktop';
-import Widescreen from './Widescreen';
+import Tablet from './SideTablet';
+import Desktop from './SideDesktop';
+import Widescreen from './SideWidescreen';
 
 interface SideBarProps {
   sidebarOpen: boolean;
@@ -35,6 +34,8 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         icon: HomeIcon,
         active: true,
         onclick: () => setSidebarOpen(false),
+        devOnly: false,
+        limitedForRefLocal: false,
       },
       {
         name: 'Edition',
@@ -42,6 +43,8 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         icon: PencilSquareIcon,
         active: true,
         onclick: () => setSidebarOpen(false),
+        devOnly: false,
+        limitedForRefLocal: false,
       },
       {
         name: 'Traduction',
@@ -49,6 +52,8 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         icon: LanguageIcon,
         active: false,
         onclick: () => setSidebarOpen(false),
+        devOnly: false,
+        limitedForRefLocal: false,
       },
       {
         name: 'Print',
@@ -56,6 +61,8 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         icon: PrinterIcon,
         active: false,
         onclick: () => setSidebarOpen(false),
+        devOnly: false,
+        limitedForRefLocal: false,
       },
       {
         name: 'Actualisation',
@@ -63,6 +70,8 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         icon: ArrowPathIcon,
         active: false,
         onclick: () => setSidebarOpen(false),
+        devOnly: false,
+        limitedForRefLocal: false,
       },
       {
         name: 'Utilisateur·ice·s',
@@ -70,6 +79,8 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         icon: UsersIcon,
         active: true,
         onclick: () => setSidebarOpen(false),
+        devOnly: false,
+        limitedForRefLocal: true,
       },
       {
         name: 'Back-end',
@@ -77,6 +88,9 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
         target: '_blank',
         icon: CircleStackIcon,
         active: true,
+        onclick: () => setSidebarOpen(false),
+        devOnly: true,
+        limitedForRefLocal: false,
       },
     ];
   }, [setSidebarOpen]);
@@ -89,7 +103,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
     return [
       {
         name: 'Mon profil',
-        href: '/admin/account',
+        href: '/admin/profil',
         icon: UserCircleIcon,
         onclick: () => setSidebarOpen(false),
       },

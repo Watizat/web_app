@@ -9,10 +9,9 @@ import { fetchZones } from '../../store/reducers/admin';
 import { DirectusUser } from '../../@types/user';
 import { axiosInstance } from '../../utils/axios';
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
-
 interface TopBarProps {
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -46,6 +45,19 @@ export default function TopBar({ setSidebarOpen }: TopBarProps) {
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const actions = [
+    {
+      name: 'Mon profil',
+      href: '/admin/profil',
+      onclick: () => {}, // Fonction vide pour éviter le warning
+    },
+    {
+      name: 'Déconnexion',
+      href: '/',
+      onclick: handleLogout,
+    },
+  ];
 
   if (!me) {
     return <div>Pas d&apos;infos</div>;
@@ -122,33 +134,22 @@ export default function TopBar({ setSidebarOpen }: TopBarProps) {
               leaveTo="transform opacity-0 scale-95"
             >
               <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                <Menu.Item>
-                  {({ active }) => (
-                    <Link
-                      to="/admin/account"
-                      className={classNames(
-                        active ? 'bg-gray-50' : '',
-                        'block px-3 py-1 text-sm leading-6 text-gray-900'
-                      )}
-                    >
-                      Mon profil
-                    </Link>
-                  )}
-                </Menu.Item>
-                <Menu.Item>
-                  {({ active }) => (
-                    <Link
-                      to="/"
-                      onClick={handleLogout}
-                      className={classNames(
-                        active ? 'bg-gray-50' : '',
-                        'block px-3 py-1 text-sm leading-6 text-gray-900'
-                      )}
-                    >
-                      Déconnexion
-                    </Link>
-                  )}
-                </Menu.Item>
+                {actions.map((action) => (
+                  <Menu.Item key={action.name}>
+                    {({ active }) => (
+                      <Link
+                        to={action.href}
+                        onClick={action.onclick}
+                        className={classNames(
+                          active ? 'bg-gray-50' : '',
+                          'block px-3 py-1 text-sm leading-6 text-gray-900'
+                        )}
+                      >
+                        {action.name}
+                      </Link>
+                    )}
+                  </Menu.Item>
+                ))}
               </Menu.Items>
             </Transition>
           </Menu>
