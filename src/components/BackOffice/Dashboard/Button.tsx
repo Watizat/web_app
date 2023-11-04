@@ -23,7 +23,7 @@ export default function Button({ item }: Props) {
         item.active === false || // Si l'item est désactivé
         ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
           data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
-          data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
+          data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // o
           ? 'pointer-events-none'
           : 'hover:shadow-md hover:shadow-watizat-200 group hover:bg-white/60'
       }`}
@@ -34,7 +34,7 @@ export default function Button({ item }: Props) {
             item.active === false || // Si l'item est désactivé
             ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
               data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
-              data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
+              data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // o
               ? 'text-gray-300'
               : ' text-indigo-900/70 ring-watizat-200 group-hover:text-watizat-400 '
           }`}
@@ -46,7 +46,7 @@ export default function Button({ item }: Props) {
             item.active === false || // Si l'item est désactivé
             ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
               data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
-              data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
+              data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // o
               ? 'text-gray-300'
               : ' text-indigo-900/70 group-hover:text-watizat-400'
           }`}
@@ -60,7 +60,7 @@ export default function Button({ item }: Props) {
               item.active === false || // Si l'item est désactivé
               ((item.refLocalOnly || item.devOnly) && // Ou si l'item est refOnly ou devOnly
                 data.data.role !== '4a30876c-cea0-455f-92d0-593212918aaf' && // et que l'utilisateur n'est pas ref-local
-                data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // ou que l'utilisateur n'est pas admin
+                data.data.role !== '53de6ec2-6d70-48c8-8532-61f96133f139') // o
                 ? 'text-gray-300'
                 : ' text-slate-500 '
             }`}
