@@ -18,12 +18,12 @@ import Tablet from './SideTablet';
 import Desktop from './SideDesktop';
 import Widescreen from './SideWidescreen';
 
-interface SideBarProps {
+interface Props {
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Sidebar({ sidebarOpen, setSidebarOpen }: SideBarProps) {
+export default function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
   const dispatch = useAppDispatch();
 
   const memoizedNavigation = useMemo(() => {

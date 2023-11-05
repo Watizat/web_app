@@ -3,7 +3,7 @@ interface Props {
   handleValidation: () => void;
 }
 
-export default function ValidationDouble({
+export default function BtnCloseValid({
   handleCloseSlide,
   handleValidation,
 }: Props) {

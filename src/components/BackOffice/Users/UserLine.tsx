@@ -1,22 +1,20 @@
-import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr'; // Importez le fichier de localisation français
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { useState } from 'react';
 import { DirectusUser } from '../../../@types/user';
-import ModalUsers from '../../Modals/ModalEditUsers';
-
+import EditUser from '../../SlideOvers/EditUser/EditUser';
+// import ModalUsers from '../../Modals/ModalEditUsers';
 import { useAppSelector } from '../../../hooks/redux';
 
 interface Props {
   user: DirectusUser;
 }
-
 dayjs.locale('fr');
 dayjs.extend(localizedFormat); // Activer le plugin localizedFormat
 
-export default function Line({ user }: Props) {
-  const [isActiveService, setIsActiveService] = useState(false);
+export default function UserLine({ user }: Props) {
+  const [isOpenSlide, setIsOpenSlide] = useState(false);
   const zones = useAppSelector((state) => state.admin.zones);
   const uniqueQueryParam = Math.random();
 
@@ -41,6 +39,7 @@ export default function Line({ user }: Props) {
         </div>
       );
     }
+    // Rôle des nouveaux users a valider
     if (data.role === '5754603f-add3-4823-9c77-a2f9789074fc') {
       return (
         <div className="flex justify-center gap-2">
@@ -72,9 +71,11 @@ export default function Line({ user }: Props) {
 
   return (
     <>
-      {isActiveService && (
-        <ModalUsers setIsActive={setIsActiveService} user={user} />
-      )}
+      <EditUser
+        isOpenSlide={isOpenSlide}
+        setIsOpenSlide={setIsOpenSlide}
+        user={user}
+      />
       <tr key={user.email} className="select-none">
         <td className="py-2 pl-4 pr-3 text-sm whitespace-nowrap sm:pl-0">
           <div className="flex items-center">
@@ -113,12 +114,16 @@ export default function Line({ user }: Props) {
           {user.email}
         </td>
         <td className="relative py-5 pl-3 pr-4 text-sm font-medium text-right whitespace-nowrap sm:pr-0">
-          <Link to="/" className="text-indigo-600 hover:text-indigo-900">
+          <button
+            type="button"
+            onClick={() => setIsOpenSlide(true)}
+            className="text-indigo-600 hover:text-indigo-900"
+          >
             Edit
             <span className="sr-only">
               {user.first_name} {user.last_name}
             </span>
-          </Link>
+          </button>
         </td>
       </tr>
     </>

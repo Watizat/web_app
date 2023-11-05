@@ -6,11 +6,11 @@ import {
 
 import logo from '../../../assets/logo-color.svg';
 
-interface HeaderProps {
-  setOpenFilters: React.Dispatch<React.SetStateAction<boolean>>;
+interface Props {
+  setOpenSlide: React.Dispatch<React.SetStateAction<boolean>>;
 }
 // TODO Barre de recherche masquée (pour fonctionner nécessite de passer fonctions de la sidebar dans le store Redux) - A faire plus tard
-export default function Header({ setOpenFilters }: HeaderProps) {
+export default function Header({ setOpenSlide }: Props) {
   return (
     <section>
       <div className="sticky top-0 z-40 flex items-center h-16 px-8 bg-white border-b border-gray-200 shadow-sm shrink-0 gap-x-4 sm:gap-x-8 lg:px-10">
@@ -27,7 +27,7 @@ export default function Header({ setOpenFilters }: HeaderProps) {
               />
               <button
                 type="button"
-                onClick={() => setOpenFilters(true)}
+                onClick={() => setOpenSlide(true)}
                 className="flex gap-2  px-2.5 py-1.5 text-sm font-medium text-gray-700/90 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-200 hover:bg-slate-50/70"
               >
                 <AdjustmentsHorizontalIcon

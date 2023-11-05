@@ -7,17 +7,17 @@ import { setFilteredOrganisms } from '../../../store/reducers/organisms';
 import ResultatsCardSkeleton from '../Skeleton/ResultatCard/ResultatCard';
 import Card from './Card';
 
-import SlideFilters from './SlideFilters/SlideFilters';
+import SlideFilters from '../../SlideOvers/ResultFilters/SlideFilters';
 
 interface SidebarProps {
-  openFilters: boolean;
-  setOpenFilters: React.Dispatch<React.SetStateAction<boolean>>;
+  openSlide: boolean;
+  setOpenSlide: React.Dispatch<React.SetStateAction<boolean>>;
   isMobileMap: boolean;
 }
 
 export default function Sidebar({
-  openFilters,
-  setOpenFilters,
+  openSlide,
+  setOpenSlide,
   isMobileMap,
 }: SidebarProps) {
   const isTouch = useMediaQuery({ query: '(max-width: 1023px)' });
@@ -144,8 +144,8 @@ export default function Sidebar({
         setIsPmr={setIsPmr}
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
-        openFilters={openFilters}
-        setOpenFilters={setOpenFilters}
+        openSlide={openSlide}
+        setOpenSlide={setOpenSlide}
       />
     </section>
   );

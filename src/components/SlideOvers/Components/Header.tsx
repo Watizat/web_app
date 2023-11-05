@@ -3,10 +3,10 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface Props {
   title: string;
-  setOpenSlide: (open: boolean) => void;
+  setIsOpenSlide: (open: boolean) => void;
 }
 
-export default function Header({ title, setOpenSlide }: Props) {
+export default function Header({ title, setIsOpenSlide }: Props) {
   return (
     <div className="h-16 px-4 py-6 bg-gray-50 sm:px-6">
       <div className="flex items-center justify-between">
@@ -17,7 +17,7 @@ export default function Header({ title, setOpenSlide }: Props) {
           <button
             type="button"
             className="relative text-gray-400 hover:text-gray-500"
-            onClick={() => setOpenSlide(false)}
+            onClick={() => setIsOpenSlide(false)}
           >
             <span className="absolute -inset-2.5" />
             <span className="sr-only">Close panel</span>
