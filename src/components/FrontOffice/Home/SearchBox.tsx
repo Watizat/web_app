@@ -125,11 +125,7 @@ export default function SearchBox() {
                       key={categorie.translations[0].slug}
                       value={categorie.translations[0].slug}
                     >
-                      <Icon
-                        icon={categorie.tag}
-                        className="flex-shrink-0 block h-5 m-4 bg-black rounded-full stroke-1 y-8 aspect-square stroke-black fill-black"
-                      />
-                      <p>{categorie.translations[0].name}</p>
+                      {categorie.translations[0].name}
                     </option>
                   ))}
                 </select>

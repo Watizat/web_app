@@ -10,14 +10,14 @@ import Card from './Card';
 import SlideFilters from '../../SlideOvers/ResultFilters/SlideFilters';
 
 interface SidebarProps {
-  openSlide: boolean;
-  setOpenSlide: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenSlide: boolean;
+  setIsOpenSlide: React.Dispatch<React.SetStateAction<boolean>>;
   isMobileMap: boolean;
 }
 
 export default function Sidebar({
-  openSlide,
-  setOpenSlide,
+  isOpenSlide,
+  setIsOpenSlide,
   isMobileMap,
 }: SidebarProps) {
   const isTouch = useMediaQuery({ query: '(max-width: 1023px)' });
@@ -144,8 +144,8 @@ export default function Sidebar({
         setIsPmr={setIsPmr}
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}
-        openSlide={openSlide}
-        setOpenSlide={setOpenSlide}
+        isOpenSlide={isOpenSlide}
+        setIsOpenSlide={setIsOpenSlide}
       />
     </section>
   );

@@ -17,7 +17,7 @@ interface Props {
   };
 }
 
-export default function MyComponent({ data, formMethods }: Props) {
+export default function Input({ data, formMethods }: Props) {
   const { register, errors } = formMethods;
 
   return (

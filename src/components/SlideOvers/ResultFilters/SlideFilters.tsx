@@ -1,7 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { Fragment, useState, useEffect } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
@@ -20,13 +18,13 @@ interface Props {
   setIsPmr: React.Dispatch<React.SetStateAction<boolean>>;
   setIsAnimalsAccepted: React.Dispatch<React.SetStateAction<boolean>>;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
-  openSlide: boolean;
-  setOpenSlide: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenSlide: boolean;
+  setIsOpenSlide: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function SlideFilters({
-  openSlide,
-  setOpenSlide,
+  isOpenSlide,
+  setIsOpenSlide,
   setIsPmr,
   setIsAnimalsAccepted,
   setSearch,
@@ -94,18 +92,21 @@ export default function SlideFilters({
   }, [dispatch, categoryParams]);
 
   const handleCloseSlide = () => {
-    setOpenSlide(false);
+    setIsOpenSlide(false);
   };
 
   return (
     <Slide
-      openSlide={openSlide}
-      setOpenSlide={setOpenSlide}
+      isOpenSlide={isOpenSlide}
+      setIsOpenSlide={setIsOpenSlide}
       slideWidth="max-w-2xl"
     >
       <form className="flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
         <div className="flex-1">
-          <Header title="Filtrer les résultats" setOpenSlide={setOpenSlide} />
+          <Header
+            title="Filtrer les résultats"
+            setIsOpenSlide={setIsOpenSlide}
+          />
           {/* Divider container */}
           <div className="py-6 space-y-6 sm:space-y-0 sm:divide-y sm:divide-gray-200 sm:py-0">
             {/* Recherche */}
