@@ -1,6 +1,5 @@
-import dayjs from 'dayjs';
 import jwt_decode from 'jwt-decode';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../@types/formInputs';
 import { DirectusUser, UserSession } from '../../../@types/user';
@@ -222,26 +221,28 @@ export default function SlideEditUser({
                   </span>
                 </div>
               </div>
-              {user.status === 'suspended' && (
-                <div className="flex justify-start flex-shrink-0 px-4 py-4">
-                  <button
-                    type="button"
-                    className="px-3 py-2 text-sm font-semibold text-green-500"
-                    onClick={() => reActiveUser(user.id)}
-                  >
-                    Réactiver le compte utilisateur·ice
-                  </button>
-                </div>
-              )}
-              <div className="flex justify-start flex-shrink-0 px-4 py-4">
+            </div>
+          </div>
+          <div className="flex flex-col justify-end px-4 py-6 gap-y-5">
+            {user.status === 'suspended' && (
+              <div className="flex justify-start flex-shrink-0">
                 <button
                   type="button"
-                  className="px-3 py-2 text-sm font-semibold text-red-500"
-                  onClick={() => setIsOpenModal(true)}
+                  className="px-3 text-sm font-semibold text-green-500"
+                  onClick={() => reActiveUser(user.id)}
                 >
-                  Supprimer définitivement l&apos;utilisateur·ice
+                  Réactiver le compte utilisateur·ice
                 </button>
               </div>
+            )}
+            <div className="flex justify-start flex-shrink-0">
+              <button
+                type="button"
+                className="px-3 text-sm font-semibold text-red-500"
+                onClick={() => setIsOpenModal(true)}
+              >
+                Supprimer définitivement l&apos;utilisateur·ice
+              </button>
             </div>
           </div>
           <BtnCloseValid

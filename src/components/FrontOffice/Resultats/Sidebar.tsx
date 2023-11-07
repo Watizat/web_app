@@ -7,7 +7,7 @@ import { setFilteredOrganisms } from '../../../store/reducers/organisms';
 import ResultatsCardSkeleton from '../Skeleton/ResultatCard/ResultatCard';
 import Card from './Card';
 
-import SlideFilters from '../../SlideOvers/ResultFilters/SlideFilters';
+import SlideResultsFilters from '../../SlideOvers/SlideResultsFilters/SlideResultsFilters';
 
 interface SidebarProps {
   isOpenSlide: boolean;
@@ -140,7 +140,7 @@ export default function Sidebar({
         </div>
       </div>
 
-      <SlideFilters
+      <SlideResultsFilters
         setIsPmr={setIsPmr}
         setIsAnimalsAccepted={setIsAnimalsAccepted}
         setSearch={setSearch}

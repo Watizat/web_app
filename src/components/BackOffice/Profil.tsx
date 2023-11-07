@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { DirectusUser } from '../../@types/user';
 import { axiosInstance } from '../../utils/axios';
 import BackColor from '../Container/BackColor';
-import EditProfil from '../SlideOvers/EditProfil/EditProfil';
+import SlideEditProfil from '../SlideOvers/SliderEditProfil/SlideEditProfil';
 
 export default function Profil() {
   const dispatch = useAppDispatch();
@@ -148,7 +148,7 @@ export default function Profil() {
           </div>
         </main>
       </BackColor>
-      <EditProfil
+      <SlideEditProfil
         isOpenSlide={isOpenSlide}
         setIsOpenSlide={setIsOpenSlide}
         onUpdateUser={updateUser}
