@@ -1,4 +1,4 @@
-import Icon from '../../../../ui/icon/icon';
+import Icon from '../../../ui/icon/icon';
 
 interface CategoryProps {
   categories: {

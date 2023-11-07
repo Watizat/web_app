@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
-import Line from './Line';
+import UserLine from './UserLine';
 import { UserSession } from '../../../@types/user';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUsers } from '../../../store/reducers/admin';
@@ -102,7 +102,10 @@ export default function Users() {
             .slice() // Créez une copie du tableau pour éviter de modifier l'ordre d'origine
             .sort((a, b) => a.first_name.localeCompare(b.first_name)) // Triez le tableau par le prénom
             .map((user) => (
-              <Line key={user.email} user={user} />
+              <UserLine
+                key={user.email}
+                user={user}
+              />
             ))}
         </tbody>
       </table>

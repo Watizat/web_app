@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { DirectusUser } from '../../@types/user';
 import { axiosInstance } from '../../utils/axios';
 import BackColor from '../Container/BackColor';
-import EditSelfProfil from './SlideOvers/EditSelfProfil';
+import EditProfil from '../SlideOvers/EditProfil/EditProfil';
 
 export default function Profil() {
   const dispatch = useAppDispatch();
@@ -12,7 +12,7 @@ export default function Profil() {
   const roles = useAppSelector((state) => state.admin.roles);
   const [me, setMe] = useState<DirectusUser | null>(null);
 
-  const [openSlide, setOpenSlide] = useState(false);
+  const [isOpenSlide, setIsOpenSlide] = useState(false);
 
   useEffect(() => {
     async function getUserInfos() {
@@ -137,7 +137,7 @@ export default function Profil() {
                 <div className="flex justify-center sm:col-span-3">
                   <button
                     type="button"
-                    onClick={() => setOpenSlide(true)}
+                    onClick={() => setIsOpenSlide(true)}
                     className="rounded-md bg-transparent px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                   >
                     Modifier les informations
@@ -148,9 +148,9 @@ export default function Profil() {
           </div>
         </main>
       </BackColor>
-      <EditSelfProfil
-        openSlide={openSlide}
-        setOpenSlide={setOpenSlide}
+      <EditProfil
+        isOpenSlide={isOpenSlide}
+        setIsOpenSlide={setIsOpenSlide}
         onUpdateUser={updateUser}
       />
     </>

@@ -3,18 +3,21 @@ import { Dialog, Transition } from '@headlessui/react';
 
 interface Props {
   children: React.ReactNode;
-  openSlide: boolean;
-  setOpenSlide: (open: boolean) => void;
+  isOpenSlide: boolean;
+  setIsOpenSlide: (open: boolean) => void;
+  // eslint-disable-next-line react/require-default-props
+  slideWidth?: string; // Notez le ? pour indiquer que c'est optionnel
 }
 
-export default function EditSelfProfil({
+export default function Slide({
   children,
-  openSlide,
-  setOpenSlide,
+  isOpenSlide,
+  setIsOpenSlide,
+  slideWidth = 'max-w-md' as string, // Définissez la valeur par défaut ici
 }: Props) {
   return (
-    <Transition.Root show={openSlide} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpenSlide}>
+    <Transition.Root show={isOpenSlide} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={setIsOpenSlide}>
         <div className="fixed inset-0 bg-gray-400/50" />
 
         <div className="fixed inset-0 overflow-hidden">
@@ -29,7 +32,9 @@ export default function EditSelfProfil({
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="w-screen max-w-md pointer-events-auto">
+                <Dialog.Panel
+                  className={`w-screen  pointer-events-auto ${slideWidth}`}
+                >
                   {children}
                 </Dialog.Panel>
               </Transition.Child>

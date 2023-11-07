@@ -3,6 +3,7 @@ interface Props {
     type: string;
     defaultValue?: string;
     register: string;
+    label?: string;
     placeholder: string;
     required?: boolean;
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -25,7 +26,7 @@ export default function MyComponent({ data, formMethods }: Props) {
         htmlFor={data.register}
         className="block text-sm font-medium leading-6 text-gray-900"
       >
-        {data.placeholder}
+        {data.label ? data.label : data.placeholder}
       </label>
       <div>
         <input
@@ -46,13 +47,10 @@ export default function MyComponent({ data, formMethods }: Props) {
               }),
             })}
           {...(data.register &&
-            !data.required &&
-            !data.validate && {
-              ...register(data.register, {
-                required: 'Ce champ est requis',
-              }),
+            !data.required && {
+              ...register(data.register),
             })}
-          defaultValue={data.defaultValue} // Utilisez "as" pour le caster en string si nécessaire
+          defaultValue={data.defaultValue ? data.defaultValue : ''} // Utilisez "as" pour le caster en string si nécessaire
           className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-watizat-600 sm:text-sm sm:leading-6"
         />
       </div>
