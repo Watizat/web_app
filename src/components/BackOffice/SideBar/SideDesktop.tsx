@@ -31,11 +31,11 @@ export default function Desktop({ navigation, actions }: Props) {
       className={`hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:flex lg:flex-col lg:w-20 lg:overflow-y-auto lg:bg-watizat-500 lg:pb-4
         ${pathname === '/admin/dashboard' ? '2xl:fixed' : '2xl:hidden'}`}
     >
-      <Link to="/" className="flex items-center justify-center h-16 shrink-0">
+      <div className="flex items-center justify-center h-16 shrink-0">
         <Link to="/">
           <img className="w-auto h-10 mt-2" src={logo} alt="Watizat" />
         </Link>
-      </Link>
+      </div>
       <nav className="flex flex-col flex-1 mt-8">
         <ul className="flex flex-col justify-between flex-1">
           <li>

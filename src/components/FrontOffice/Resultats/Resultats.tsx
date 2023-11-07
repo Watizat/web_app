@@ -27,7 +27,7 @@ export default function Resultats() {
   >();
 
   const [isMobileMap, setIsMobileMap] = useState(false);
-  const [openSlide, setOpenSlide] = useState(false);
+  const [isOpenSlide, setIsOpenSlide] = useState(false);
 
   useEffect(() => {
     async function fetchCity() {
@@ -43,10 +43,10 @@ export default function Resultats() {
 
   return (
     <main>
-      <Header setOpenSlide={setOpenSlide} />
+      <Header setIsOpenSlide={setIsOpenSlide} />
       <Sidebar
-        openSlide={openSlide}
-        setOpenSlide={setOpenSlide}
+        isOpenSlide={isOpenSlide}
+        setIsOpenSlide={setIsOpenSlide}
         isMobileMap={isMobileMap}
       />
       {isTouch ? (

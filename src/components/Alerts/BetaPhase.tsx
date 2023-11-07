@@ -23,7 +23,7 @@ export default function BetaPhase() {
             Site en construction
           </Dialog.Title>
           <div className="px-10 mt-6">
-            <p className="text-sm font-semibold text-gray-400">
+            <div className="text-sm font-semibold text-gray-400">
               Les informations présente dans ce site le sont uniquement à des
               fins de test
               <br />
@@ -31,7 +31,7 @@ export default function BetaPhase() {
                 Ne pas utiliser ce site à des fins d&apos;orientation ou
                 d&apos;accompagement social
               </p>
-            </p>
+            </div>
           </div>
         </div>
       </div>

@@ -1,13 +1,12 @@
 import { Outlet } from 'react-router-dom';
-import '../Modals/Modal.module.scss';
 import { useEffect, useState } from 'react';
-import ModalInactivityDetector from '../Modals/ModalInactivityDetector';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getUserDataFromLocalStorage } from '../../utils/user';
 import { logout } from '../../store/reducers/user';
+import ModalInactivityDetector from '../Alerts/InactivityDisconnection';
 
 function InactivityDetector() {
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [answerCount, setAnswerCount] = useState(0);
   const isActive = useAppSelector((state) => state.user.isActive);
   const timeout = useAppSelector((state) => state.user.timeout);
@@ -31,7 +30,7 @@ function InactivityDetector() {
     const showModal = () => {
       if (timeoutID) clearTimeout(timeoutID);
       timeoutID = setTimeout(() => {
-        setIsModalActive(true);
+        setIsOpenModal(true);
         window.removeEventListener('mousemove', showModal);
       }, timeout);
     };
@@ -66,9 +65,9 @@ function InactivityDetector() {
 
   return (
     <>
-      {isModalActive && (
+      {isOpenModal && (
         <ModalInactivityDetector
-          setIsModalActive={setIsModalActive}
+          setIsOpenModal={setIsOpenModal}
           setAnswerCount={setAnswerCount}
         />
       )}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import UserLine from './UserLine';
 import { UserSession } from '../../../@types/user';
@@ -67,7 +67,7 @@ export default function Users() {
             </th>
             <th
               scope="col"
-              className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
             >
               Rôle
             </th>
@@ -99,13 +99,10 @@ export default function Users() {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {users
-            .slice() // Créez une copie du tableau pour éviter de modifier l'ordre d'origine
+            .filter((user) => user.status !== 'archived') // Filtrez les utilisateurs par statut "actif"
             .sort((a, b) => a.first_name.localeCompare(b.first_name)) // Triez le tableau par le prénom
             .map((user) => (
-              <UserLine
-                key={user.email}
-                user={user}
-              />
+              <UserLine key={user.email} user={user} />
             ))}
         </tbody>
       </table>

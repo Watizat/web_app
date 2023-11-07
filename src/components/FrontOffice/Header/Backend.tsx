@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { toggleHamburger } from '../../../store/reducers/hamburger';
-import ModalAddOrganism from '../../Modals/ModalAddOrganism';
+import ModalAddOrganism from '../../OldModals/ModalAddOrganism';
 // import Sidebar from '../Sidebar/Sidebar';
 import styles from './Header.module.scss';
 

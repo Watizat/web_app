@@ -71,33 +71,24 @@ export default function EditSelfProfil({
     setIsOpenSlide(false); // Ferme la slide
   };
 
-  // Fonction pour changer le rôle de l'utilisateur et déconnecter le compte
-  const handleDeleteConfirm = async () => {
+  async function suspendUser(userId: string) {
     try {
-      const updatedUserData = await getUserInfos();
-
-      if (updatedUserData) {
-        // Créez un objet avec les propriétés nécessaires
-        const updatedUser = {
-          id: updatedUserData.id,
-          role: 'fd46fe69-2a5d-4742-a536-cfad86d3e81f', // Remplacez par l'ID du rôle cible
-          // Vous pouvez ajouter d'autres propriétés si nécessaire
-        };
-
-        // Changer le rôle de l'utilisateur et déconnecter
-        await dispatch(editUser(updatedUser));
-        // dispatch(logout()); // This line is commented out because the 'logout' function is not defined in the code you provided
+      const response = await axiosInstance.patch(`/users/${userId}`, {
+        status: 'suspended',
+      });
+      if (response.status === 200) {
+        // L'utilisateur a été suspendu/désactivé avec succès
+        setIsOpenModal(false);
         dispatch(logout());
         navigate('/');
+      } else {
+        // Gérer les erreurs ici
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(
-        'Erreur lors de la mise à jour du rôle et de la déconnexion :',
-        error
-      );
+      // Gérer les erreurs ici
     }
-  };
+  }
+
   useEffect(() => {
     if (isOpenSlide) {
       // Appel de getUserInfos uniquement si la diapositive est ouverte
@@ -120,7 +111,7 @@ export default function EditSelfProfil({
       <DeleteConfirmation
         setIsOpenModal={setIsOpenModal}
         isOpenModal={isOpenModal}
-        handleDeleteConfirm={handleDeleteConfirm}
+        handleDeleteConfirm={() => suspendUser(me.id)}
         title="Suppression du compte"
         message="Êtes-vous sûr de vouloir demander la supression de votre compte ? Toutes vos données seront perdues."
         deleteBtnText="Confirmer ma demande"
