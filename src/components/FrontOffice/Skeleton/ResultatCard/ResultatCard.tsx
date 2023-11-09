@@ -1,9 +1,9 @@
 import styles from './ResultatCard.module.scss';
 import './ResultatCard.scss';
 
-import HomeCategorySkeleton from '../HomeCategory/HomeCategory';
+import HomeCategory from '../HomeCategory/HomeCategory';
 
-function ResultatsCardSkeleton() {
+export default function ResultatsCardSkeleton() {
   return (
     <div className={styles.resultCardSkeleton}>
       <div className={styles.left}>
@@ -30,10 +30,10 @@ function ResultatsCardSkeleton() {
         <div className={styles.left_lower}>
           <div className={styles.left_lower__moreInfos}>&nbsp;</div>
           <div className={styles.left_lower__categories}>
-            <HomeCategorySkeleton />
-            <HomeCategorySkeleton />
-            <HomeCategorySkeleton />
-            <HomeCategorySkeleton />
+            <HomeCategory />
+            <HomeCategory />
+            <HomeCategory />
+            <HomeCategory />
           </div>
         </div>
         <span>&nbsp;</span>
@@ -45,5 +45,3 @@ function ResultatsCardSkeleton() {
     </div>
   );
 }
-
-export default ResultatsCardSkeleton;

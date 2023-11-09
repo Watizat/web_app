@@ -3,7 +3,7 @@ import 'dayjs/locale/fr'; // Importez le fichier de localisation français
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { useState } from 'react';
 import { DirectusUser } from '../../../@types/user';
-import SlideEditUser from '../../SlideOvers/SlideEditUser/SlideEditUser';
+import SlideEditUser from '../../SlideOvers/EditUser';
 // import ModalUsers from '../../Modals/ModalEditUsers';
 import { useAppSelector } from '../../../hooks/redux';
 

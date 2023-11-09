@@ -91,7 +91,7 @@ export default function SearchBox() {
                   id="city"
                   value={selectedValues.city}
                   onChange={handleChangeCity}
-                  className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-watizat-500 sm:text-sm sm:leading-6 bg-white"
+                  className="block w-full py-2 pl-3 pr-10 mt-2 text-gray-900 bg-white border-0 rounded-md ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-watizat-500 sm:text-sm sm:leading-6"
                 >
                   <option value="" disabled>
                     Selectionner une zone...
@@ -114,7 +114,7 @@ export default function SearchBox() {
                   id="category"
                   value={selectedValues.category}
                   onChange={handleChangeCategory}
-                  className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-watizat-500 sm:text-sm sm:leading-6 bg-white"
+                  className="block w-full py-2 pl-3 pr-10 mt-2 text-gray-900 bg-white border-0 rounded-md ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-watizat-500 sm:text-sm sm:leading-6"
                 >
                   <option value="" disabled>
                     Selectionner une catégorie...

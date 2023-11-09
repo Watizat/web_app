@@ -20,7 +20,7 @@ interface MapProps {
     | undefined;
 }
 
-function Map({ cityPosition }: MapProps) {
+export default function Map({ cityPosition }: MapProps) {
   const [position] = useState({ lat: 43.6, lng: 1.433333 });
   const [navigatorGps, setNavigatorGps] = useState(false);
   const organisms = useAppSelector((state) => state.organism.filteredOrganisms);
@@ -117,5 +117,3 @@ function Map({ cityPosition }: MapProps) {
     </MapContainer>
   );
 }
-
-export default Map;

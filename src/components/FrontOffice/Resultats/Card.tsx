@@ -21,7 +21,11 @@ interface Categories {
   isCheck: boolean;
 }
 
-function Card({ organism, map_id, categoryFilter }: OrganismProps) {
+export default function Card({
+  organism,
+  map_id,
+  categoryFilter,
+}: OrganismProps) {
   const { services } = organism;
 
   const categoriesTagName = [
@@ -53,20 +57,29 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
   const uniqueCategoriesArray = Object.values(uniqueCategories);
 
   return (
-    <li className="z-10 flex flex-col w-full list-none bg-white rounded-lg shadow-md hover:shadow-lg hover:shadow-watizat-800/10">
+    <li className="z-10 flex flex-col w-full list-none bg-white rounded-lg shadow-md select-none hover:shadow-lg hover:shadow-watizat-800/10">
       <div className="flex items-center justify-between w-full p-6 md:p-6">
         <div className="flex flex-col flex-1 truncate gap-y-2">
           <div className="flex items-center space-x-3">
             <p className="flex items-center justify-center flex-shrink-0 w-8 h-8 font-semibold text-white align-middle rounded-full bg-watizat-500/90">
               {map_id}
             </p>
-            <div>
-              <h3 className="text-sm font-semibold text-gray-900 truncate">
-                {organism.name}
-              </h3>
-              <p className="text-sm font-semibold truncate text-cyan-700/80">
-                {organism.address}
-              </p>
+            <div className="flex justify-between flex-1">
+              <div>
+                <h3 className="text-sm font-semibold text-gray-900 truncate">
+                  {organism.name}
+                </h3>
+                <p className="text-sm font-semibold truncate text-cyan-700/80">
+                  {organism.address}
+                </p>
+              </div>
+              {organism.pmr && (
+                <div>
+                  <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-700 rounded-md bg-blue-50 ring-1 ring-inset ring-blue-700/10">
+                    Acessibilité PMR
+                  </span>
+                </div>
+              )}
             </div>
           </div>
           <p className="text-sm text-justify whitespace-normal text-slate-700 font-base">
@@ -157,5 +170,3 @@ function Card({ organism, map_id, categoryFilter }: OrganismProps) {
     </li>
   );
 }
-
-export default Card;

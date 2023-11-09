@@ -49,18 +49,16 @@ Prendre connaissance du [guide de contribution](https://github.com/Watizat/web_a
 
 ### Stack technique
 
-#### Langages
-
-- [Typescript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com)
-
 #### Technologies
 
 ##### Frontend
 
+- [Typescript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com)
 - [React.JS](https://react.dev/)
 - [Redux](https://redux.js.org/)
 - [Vite.JS](https://vitejs.dev/)
+- [Leaflet](https://leafletjs.com/)
 
 ##### Backend
 
@@ -69,20 +67,12 @@ Prendre connaissance du [guide de contribution](https://github.com/Watizat/web_a
 
 NB : Backend déployé au travers d'un container Docker : [lien vers la configuration](https://docs.directus.io/self-hosted/quickstart.html)
 
-### Status
-
-**Version actuelle : 1.0**
-
-- Version 1.0.0 publiée le 03 août 2023
-
-### Liens vers les différentes versions
-
-- Production : <https://guide.watizat.app>
-- Dévellopement : <https://dev.watizat.app>
-
-### Contributeur·ices initiaux·ales
+### Version initiale
 
 Application développée (par une super équipe motivée et rigolote) durant le projet de fin de formation : "Développeur·se FullStack JS" de l'école O'Clock
+Version 1.0.0 publiée le 03 août 2023
+
+#### Contributeur·ice·s initiaux·ales
 
 - [@LauraBrizard](https://github.com/LauraBrizard)
 - [@KevinLeleux](https://github.com/KevinLeleux)

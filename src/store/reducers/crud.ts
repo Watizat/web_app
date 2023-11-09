@@ -247,6 +247,25 @@ export const editOrganismData = createAsyncThunk(
   }
 );
 
+export const updateOrganismVisibility = createAsyncThunk(
+  'crud/update-organism-visibility',
+  async ({
+    organismId,
+    isVisible,
+  }: {
+    organismId: number;
+    isVisible: boolean;
+  }) => {
+    // Mise à jour de la visibilité
+    await axiosInstance.patch(`/items/organisme/${organismId}`, {
+      visible: isVisible,
+    });
+
+    // Vous pouvez renvoyer la nouvelle visibilité de l'organisme dans la réponse, ou simplement utiliser la valeur isVisible
+    return isVisible;
+  }
+);
+
 const crudReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addOrganism.pending, (state) => {
@@ -259,6 +278,12 @@ const crudReducer = createReducer(initialState, (builder) => {
       state.isSaving = true;
     })
     .addCase(editOrganismInfos.fulfilled, (state) => {
+      state.isSaving = false;
+    })
+    .addCase(updateOrganismVisibility.pending, (state) => {
+      state.isSaving = true;
+    })
+    .addCase(updateOrganismVisibility.fulfilled, (state) => {
       state.isSaving = false;
     })
     .addCase(editOrganismData.pending, (state) => {

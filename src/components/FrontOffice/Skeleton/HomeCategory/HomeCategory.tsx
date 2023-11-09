@@ -1,6 +1,6 @@
 import styles from './HomeCategory.module.scss';
 
-function HomeCategorySkeleton() {
+export default function HomeCategorySkeleton() {
   return (
     <button type="button" className={styles.choiceRight_button__skeleton}>
       <div className="choiceRight-button__icon--skeleton" />
@@ -8,5 +8,3 @@ function HomeCategorySkeleton() {
     </button>
   );
 }
-
-export default HomeCategorySkeleton;

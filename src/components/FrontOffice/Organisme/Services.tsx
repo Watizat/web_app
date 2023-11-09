@@ -1,10 +1,14 @@
 import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Popover, Transition } from '@headlessui/react';
-import { Organism } from '../../../@types/organism';
 import { useAppSelector } from '../../../hooks/redux';
+import { Service } from '../../../@types/organism';
 import Icon from '../../../ui/icon/icon';
-import Schedules from './Schedules';
+import Schedules from '../../Elements/Schedules';
+
+interface Organism {
+  services: Service[];
+}
 
 export default function Services() {
   const organism = useAppSelector(
@@ -13,7 +17,7 @@ export default function Services() {
 
   return (
     <section className="flex flex-col">
-      <h3 className="mb-4 ml-1 text-sm font-semibold text-slate-600/80">
+      <h3 className="mb-3 ml-1 text-sm font-semibold text-slate-600/80">
         Services proposés
       </h3>
       <div className="gap-x-4 gap-y-10 sm:columns-2">
@@ -87,10 +91,7 @@ export default function Services() {
                                   : 0
                               )
                               .find((e) => e === 1) && (
-                              <Schedules
-                                schedule={service.schedules}
-                                displayAll={false}
-                              />
+                              <Schedules schedule={service.schedules} />
                             )}
                           </div>
                         </Popover.Panel>

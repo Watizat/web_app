@@ -8,9 +8,7 @@ import by from '../OrgaSheet.module.scss';
 function Data() {
   const organism = useAppSelector((state) => state.admin.organism);
   const [isActive, setIsActive] = useState(false);
-  if (organism === null) {
-    return <span>Erreur</span>;
-  }
+
 
   return (
     <article className={`${by.orgaSheet_card} ${styles.data}`}>

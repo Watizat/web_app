@@ -6,7 +6,7 @@ import {
 import Profil from './components/BackOffice/Profil';
 import BackApp from './components/App/BackOffice';
 import Dashboard from './components/BackOffice/Dashboard/Dashboard';
-import Edition from './components/Admin/Edition/Edition';
+import Edition from './components/BackOffice/Edition/Edition';
 import Users from './components/BackOffice/Users/Users';
 import FrontApp from './components/App/FrontOffice';
 import NotFound from './components/Errors/NotFound';

@@ -11,9 +11,9 @@ import { getUserDataFromLocalStorage } from '../../utils/user';
 import { changeAdmin } from '../../store/reducers/user';
 import NoMobile from '../Errors/NoMobile';
 import Sidebar from '../BackOffice/Sidebar/Sidebar';
-import Topbar from '../BackOffice/Topbar';
+import Topbar from '../BackOffice/Header';
 
-function App() {
+export default function App() {
   const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
   const dispatch = useAppDispatch();
   const user = getUserDataFromLocalStorage();
@@ -101,4 +101,3 @@ function App() {
   );
 }
 
-export default App;

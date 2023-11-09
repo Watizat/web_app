@@ -10,19 +10,19 @@ function OrgaSheet() {
 
   if (organism === null) {
     return (
-      <div className="orgaSheet-empty">
+      <div className="flex flex-col w-full gap-8 sticky top-16 overflow-y-scroll h-full p-10 flex-1;">
         Veuillez sélectionner un organisme dans la barre latérale
       </div>
     );
   }
 
   return (
-    <section className={styles.orgaSheet}>
+    <article className="flex flex-col gap-8 sticky top-16 overflow-y-scroll h-full p-10 flex-1 max-h-screen overflow-y-auto;">
       <Infos />
       <Contacts contacts={organism.contacts} />
       <Data />
       <Services />
-    </section>
+    </article>
   );
 }
 

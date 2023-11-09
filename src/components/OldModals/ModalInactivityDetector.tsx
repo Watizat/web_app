@@ -9,7 +9,7 @@ interface ModalProps {
   setAnswerCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function ModalInactivityDetector({
+export default function ModalInactivityDetector({
   setIsModalActive,
   setAnswerCount,
 }: ModalProps) {
@@ -74,5 +74,3 @@ function ModalInactivityDetector({
     </div>
   );
 }
-
-export default ModalInactivityDetector;

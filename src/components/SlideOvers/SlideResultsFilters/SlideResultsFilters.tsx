@@ -22,7 +22,7 @@ interface Props {
   setIsOpenSlide: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function SlideFilters({
+export default function SlideResultsFilters({
   isOpenSlide,
   setIsOpenSlide,
   setIsPmr,

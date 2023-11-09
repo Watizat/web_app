@@ -8,7 +8,7 @@ import { fetchOrganism } from '../../../store/reducers/organisms';
 import SubHeader from './SubHeader';
 import Transports from './Transports';
 import Map from './Map';
-import Infos from './Infos';
+import Informations from './Informations';
 import Contacts from './Contacts';
 import Container from '../../Container/Container';
 import Services from './Services';
@@ -58,14 +58,14 @@ export default function Organisme() {
           <div className="grid items-start max-w-2xl grid-cols-1 grid-rows-1 mx-auto gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             <div className="flex flex-col gap-2 lg:gap-y-6 lg:col-span-2 lg:row-span-2 lg:row-end-2 xl:p-18">
               <Actions />
-              <Infos />
-              <div className="sm:rounded-lg sm:py-4 ">
-                <Contacts />
-              </div>
+              <Informations />
               <Services />
             </div>
-            <Map />
-            <Transports />
+            <div className="flex flex-col gap-2 lg:gap-y-6">
+              <Map />
+              <Contacts />
+              <Transports />
+            </div>
           </div>
         </div>
       </main>

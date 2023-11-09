@@ -10,6 +10,7 @@ export interface Organism {
   city: string;
   comment: string | undefined;
   visible: boolean;
+  visible_comment: string | undefined;
   pmr: boolean;
   animals: boolean;
   zone_id: Zone;

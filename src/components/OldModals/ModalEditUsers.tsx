@@ -18,7 +18,7 @@ interface ModalProps {
   user: DirectusUser;
 }
 
-function ModalUsers({ setIsActive, user }: ModalProps) {
+export default  function ModalUsers({ setIsActive, user }: ModalProps) {
   const {
     register,
     handleSubmit,
@@ -218,4 +218,4 @@ function ModalUsers({ setIsActive, user }: ModalProps) {
   );
 }
 
-export default ModalUsers;
+

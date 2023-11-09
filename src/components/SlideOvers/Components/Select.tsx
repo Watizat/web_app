@@ -2,7 +2,7 @@ interface Props {
   children: React.ReactNode;
   data: {
     label: string;
-    defaultValue?: string | number;
+    defaultValue?: string | number | boolean;
     register: string;
     required?: boolean;
     // eslint-disable-next-line @typescript-eslint/ban-types

@@ -1,6 +1,6 @@
 import styles from './Modal.module.scss';
 
-function ModalVersionApp() {
+export default function ModalVersionApp() {
   return (
     <div className="absolute top-0 left-0 z-[100] flex items-center content-center justify-center w-screen h-screen bg-gray-950/75">
       <div className="w-4/6 bg-white 2xl:w-2/6 max-h-2/6 rounded-xl">
@@ -27,5 +27,3 @@ function ModalVersionApp() {
     </div>
   );
 }
-
-export default ModalVersionApp;

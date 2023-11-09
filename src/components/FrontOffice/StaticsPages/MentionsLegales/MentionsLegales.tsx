@@ -1,7 +1,7 @@
 import FrontColor from '../../../Container/FrontColor';
 import mentions from './source';
 
-function MentionsLegales() {
+export default function MentionsLegales() {
   return (
     <FrontColor>
       <div className="max-w-2xl px-6 pb-8 mx-auto divide-y divide-gray-900/10 sm:pb-24 sm:pt-12 lg:max-w-7xl lg:px-8 lg:pb-32">
@@ -29,5 +29,3 @@ function MentionsLegales() {
     </FrontColor>
   );
 }
-
-export default MentionsLegales;

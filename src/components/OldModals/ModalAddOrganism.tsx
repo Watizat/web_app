@@ -40,7 +40,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
     const { payload: id } = await dispatch(addOrganism(formData));
     await dispatch(setAdminOrganism(id));
     setIsActive(false);
-    await dispatch(fetchAdminOrganisms(city));
+    await dispatch(fetchAdminOrganisms({ city }));
   };
 
   return (
@@ -284,7 +284,7 @@ function ModalAddOrganism({ setIsActive }: ModalProps) {
           <div className="flex justify-end gap-12 px-16 py-4 bg-gray-50 rounded-b-xl">
             <button
               type="button"
-              className="btn  btn-flat btn-close2"
+              className="btn btn-flat btn-close2"
               onClick={() => setIsActive(false)}
             >
               Annuler

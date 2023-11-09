@@ -2,7 +2,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import SearchBox from './SearchBox';
 import Infos from './Infos';
-import BetaPhase from '../../Alerts/BetaPhase';
+import BetaPhase from '../../Modals/BetaPhase';
 
 export default function Home() {
   const isTablet = useMediaQuery({ query: '(min-width: 769px)' });

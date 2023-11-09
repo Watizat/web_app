@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getUserDataFromLocalStorage } from '../../utils/user';
 import { logout } from '../../store/reducers/user';
-import ModalInactivityDetector from '../Alerts/InactivityDisconnection';
+import ModalInactivityDetector from '../Modals/InactivityDisconnection';
 
-function InactivityDetector() {
+export default function InactivityDetector() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [answerCount, setAnswerCount] = useState(0);
   const isActive = useAppSelector((state) => state.user.isActive);
@@ -75,5 +75,3 @@ function InactivityDetector() {
     </>
   );
 }
-
-export default InactivityDetector;
