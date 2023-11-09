@@ -46,7 +46,6 @@ export default function SignIn() {
         </div>
 
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
-          {error && <p>{error}</p>}
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
@@ -95,7 +94,9 @@ export default function SignIn() {
                 />
               </div>
             </div>
-
+            {error && (
+              <p className="text-sm text-center text-red-500">{error}</p>
+            )}
             <div>
               <button
                 type="submit"

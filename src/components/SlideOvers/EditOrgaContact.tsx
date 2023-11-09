@@ -19,7 +19,7 @@ interface Props {
   contact: Contact;
 }
 
-export default function SlideEditOrgaContact({
+export default function EditOrgaContact({
   isOpenSlide,
   setIsOpenSlide,
   contact,
@@ -86,7 +86,7 @@ export default function SlideEditOrgaContact({
                   label: 'Fonction, service, commission',
                   defaultValue: contact.job,
                   register: 'job',
-                  required: true,
+                  required: false,
                   placeholder: 'ex : Cheffe de service',
                 }}
                 formMethods={{ register, errors }}

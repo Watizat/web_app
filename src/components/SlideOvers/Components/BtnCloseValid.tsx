@@ -1,9 +1,11 @@
 interface Props {
+  isSaving?: boolean;
   handleCloseSlide: () => void;
   handleValidation: () => void;
 }
 
 export default function BtnCloseValid({
+  isSaving,
   handleCloseSlide,
   handleValidation,
 }: Props) {
@@ -21,8 +23,12 @@ export default function BtnCloseValid({
         onClick={handleValidation}
         className="inline-flex justify-center px-3 py-2 ml-4 text-sm font-semibold text-white bg-green-600 rounded-md shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
       >
-        Valider les modifications
+        {isSaving ? 'En cours...' : 'Valider les modifications'}
       </button>
     </div>
   );
 }
+
+BtnCloseValid.defaultProps = {
+  isSaving: false,
+};

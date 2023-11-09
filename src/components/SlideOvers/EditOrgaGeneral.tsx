@@ -17,7 +17,7 @@ interface Props {
   organism: Organism;
 }
 
-export default function SlideEditOrgaGeneral({
+export default function EditOrgaGeneral({
   isOpenSlide,
   setIsOpenSlide,
   organism,
@@ -152,6 +152,7 @@ export default function SlideEditOrgaGeneral({
           </div>
         </div>
         <BtnCloseValid
+          isSaving={isSaving}
           handleCloseSlide={handleCloseSlide}
           handleValidation={handleSubmit(onSubmit)}
         />

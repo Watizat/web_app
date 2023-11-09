@@ -23,6 +23,7 @@
 		"hamburger-react": "^2.5.0",
 		"jwt-decode": "^3.1.2",
 		"leaflet": "^1.9.4",
+		"nanoid": "^5.0.3",
 		"node-sass": "^9.0.0",
 		"postcss-modules": "^6.0.0",
 		"prop-types": "^15.8.1",
