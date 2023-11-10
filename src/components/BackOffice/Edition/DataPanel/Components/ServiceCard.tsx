@@ -9,19 +9,27 @@ import ContactCard from './ContactCard';
 import VerticalMenu from './VerticalMenu';
 import EditOrgaServices from '../../../../SlideOvers/EditOrgaServices';
 import DeleteConfirmation from '../../../../Modals/DeleteConfirmation';
+import NewContact from '../../../../SlideOvers/NewContact';
 
 interface Props {
   service: Service;
 }
 export default function ServiceCard({ service }: Props) {
   const dispatch = useAppDispatch();
-  const [isOpenSlide, setIsOpenSlide] = useState(false);
+  const [isOpenSlideEditService, setIsOpenSlideEditService] = useState(false);
+  const [isOpenSlideNewContact, setIsOpenSlideNewContact] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const menuChoices = [
     {
       title: 'Mofidier service',
       onClick: () => {
-        setIsOpenSlide(true);
+        setIsOpenSlideEditService(true);
+      },
+    },
+    {
+      title: 'Ajouter un contact',
+      onClick: () => {
+        setIsOpenSlideNewContact(true);
       },
     },
     {
@@ -39,16 +47,22 @@ export default function ServiceCard({ service }: Props) {
   async function handleDeleteConfirm(serviceId: number) {
     await axiosInstance.delete(`/items/service/${serviceId}`);
     await dispatch(setAdminOrganism(organismId));
-    setIsOpenSlide(false);
+    setIsOpenSlideEditService(false);
     setIsOpenModal(false);
   }
 
   return (
     <>
-      {/* Slide d'édition */}
+      {/* Slide d'ajout d'un contact */}
+      <NewContact
+        isOpenSlide={isOpenSlideNewContact}
+        setIsOpenSlide={setIsOpenSlideNewContact}
+        service={service}
+      />
+      {/* Slide d'édition du service */}
       <EditOrgaServices
-        isOpenSlide={isOpenSlide}
-        setIsOpenSlide={setIsOpenSlide}
+        isOpenSlide={isOpenSlideEditService}
+        setIsOpenSlide={setIsOpenSlideEditService}
         service={service}
       />
       {/* Modal de suppression */}

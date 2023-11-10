@@ -24,8 +24,8 @@ export default function Edition() {
   return (
     <main className="flex flex-1 h-full min-w-full min-h-full align-middle bg-slate-50 ">
       <NewOrganism
-        isOpenSlideNewOrga={isOpenSlideNewOrga}
-        setIsOpenSlideNewOrga={setIsOpenSlideNewOrga}
+        isOpenSlide={isOpenSlideNewOrga}
+        setIsOpenSlide={setIsOpenSlideNewOrga}
       />
       <Sidelist />
       <DataPanel />

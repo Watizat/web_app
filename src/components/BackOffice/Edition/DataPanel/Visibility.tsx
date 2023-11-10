@@ -35,10 +35,10 @@ export default function Visibility({
             className="flex items-center px-2 py-1 text-xs font-semibold text-red-600 bg-red-100 rounded shadow-sm hover:bg-red-200/60 group hover:text-red-700"
           >
             Annuler
-            <XMarkIcon
+            {/* <XMarkIcon
               className="w-5 h-5 ml-2 text-red-600 group-hover:text-red-700"
               aria-hidden="true"
-            />
+            /> */}
           </button>
         </div>
       </div>

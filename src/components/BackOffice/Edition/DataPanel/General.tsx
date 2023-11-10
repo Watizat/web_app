@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { updateOrganismVisibility } from '../../../../store/reducers/crud';
 import {
@@ -89,7 +90,7 @@ export default function General() {
       <DeleteConfirmation
         setIsOpenModal={setIsOpenModal}
         isOpenModal={isOpenModal}
-        ToggleOrganismVisibility={() => ToggleOrganismVisibility(organism.id)}
+        handleDeleteConfirm={() => ToggleOrganismVisibility(organism.id)}
         title="Archiver l'organisme"
         message="Êtes-vous sûr de vouloir archiver l'organisme ? Cette action peut être annulée à tout moment"
         deleteBtnText="Confirmer ma demande"

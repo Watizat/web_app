@@ -6,7 +6,7 @@ import { axiosInstance } from '../../../../../utils/axios';
 import { Contact } from '../../../../../@types/organism';
 import { formatPhoneNumber } from '../../../../../utils/format';
 import VerticalMenu from './VerticalMenu';
-import SlideEditOrgaContact from '../../../../SlideOvers/EditOrgaContact';
+import EditOrgaContact from '../../../../SlideOvers/EditOrgaContact';
 import DeleteConfirmation from '../../../../Modals/DeleteConfirmation';
 
 interface Props {
@@ -49,7 +49,7 @@ export default function ContactCard({ contact, index, serviceContact }: Props) {
   return (
     <>
       {/* Slide d'édition */}
-      <SlideEditOrgaContact
+      <EditOrgaContact
         isOpenSlide={isOpenSlide}
         setIsOpenSlide={setIsOpenSlide}
         contact={contact}

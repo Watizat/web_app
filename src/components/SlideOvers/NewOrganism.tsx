@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../@types/formInputs';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -20,17 +20,13 @@ import Textarea from './Components/Textarea';
 import SchedulesTable from './Components/SchedulesTable';
 
 interface Props {
-  isOpenSlideNewOrga: boolean;
-  setIsOpenSlideNewOrga: (open: boolean) => void;
+  isOpenSlide: boolean;
+  setIsOpenSlide: (open: boolean) => void;
 }
 
-export default function EditOrgaGeneral({
-  isOpenSlideNewOrga,
-  setIsOpenSlideNewOrga,
-}: Props) {
+export default function NewOrganism({ isOpenSlide, setIsOpenSlide }: Props) {
   const dispatch = useAppDispatch();
   const [me, setMe] = useState<DirectusUser | null>(null);
-  const [select, setSelect] = useState(localStorage.getItem('city') || '');
   const isSaving = useAppSelector((state) => state.crud.isSaving);
   const isAdmin = useAppSelector((state) => state.user.isAdmin);
 
@@ -56,28 +52,20 @@ export default function EditOrgaGeneral({
     return <div />;
   }
 
-  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    localStorage.setItem('city', event.target.value);
-    setSelect(event.target.value);
-  };
-
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     const { payload: id } = await dispatch(addOrganism(formData));
     await dispatch(setAdminOrganism(id));
-    setIsOpenSlideNewOrga(false);
+    setIsOpenSlide(false);
     await dispatch(fetchAdminOrganisms({ city }));
   };
 
   const handleCloseSlide = () => {
     reset(); // Réinitialise le formulaire à la fermeture de la slide
-    setIsOpenSlideNewOrga(false); // Ferme la slide
+    setIsOpenSlide(false); // Ferme la slide
   };
 
   return (
-    <Slide
-      isOpenSlide={isOpenSlideNewOrga}
-      setIsOpenSlide={setIsOpenSlideNewOrga}
-    >
+    <Slide isOpenSlide={isOpenSlide} setIsOpenSlide={setIsOpenSlide}>
       <form
         // onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col h-full bg-white divide-y divide-gray-200 shadow-xl select-none"
@@ -85,7 +73,7 @@ export default function EditOrgaGeneral({
         <div className="flex-1 overflow-y-auto">
           <Header
             title="Créer un nouvel organisme"
-            setIsOpenSlide={setIsOpenSlideNewOrga}
+            setIsOpenSlide={setIsOpenSlide}
           />
           <div className="flex flex-col justify-between flex-1">
             <div className="px-4 pt-6 pb-5 space-y-3 sm:px-6">
@@ -201,7 +189,7 @@ export default function EditOrgaGeneral({
               />
               <SchedulesTable
                 data={{
-                  days: days,
+                  days,
                   register: 'schedules',
                 }}
                 formMethods={{ register, errors }}
