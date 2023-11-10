@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useAppSelector } from '../../../../hooks/redux';
 import Card from './Components/Card';
 import SwitchToogle from './Components/SwitchToogle';
-import Schedules from '../../../Elements/Schedules';
-import EditOrgaInfos from '../../../SlideOvers/EditOrgaInfos';
+import Schedules from '../../../components/Schedules';
+import EditOrgaInfos from '../../SlideOvers/Edition/EditInfos';
 
 export default function Informations() {
   const [isOpenSlide, setIsOpenSlide] = useState(false);

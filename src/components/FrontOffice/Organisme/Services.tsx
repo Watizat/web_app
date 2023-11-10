@@ -4,7 +4,7 @@ import { Popover, Transition } from '@headlessui/react';
 import { useAppSelector } from '../../../hooks/redux';
 import { Service } from '../../../@types/organism';
 import Icon from '../../../ui/icon/icon';
-import Schedules from '../../Elements/Schedules';
+import Schedules from '../../components/Schedules';
 
 interface Organism {
   services: Service[];

@@ -7,7 +7,7 @@ import { setFilteredOrganisms } from '../../../store/reducers/organisms';
 import ResultatsCardSkeleton from '../Skeleton/ResultatCard/ResultatCard';
 import Card from './Card';
 
-import SlideResultsFilters from '../../SlideOvers/SlideResultsFilters/SlideResultsFilters';
+import SlideResultsFilters from '../SlideOvers/ResultsFilters/SlideResultsFilters';
 
 interface SidebarProps {
   isOpenSlide: boolean;

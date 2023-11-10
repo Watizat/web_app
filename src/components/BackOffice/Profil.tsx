@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { DirectusUser } from '../../@types/user';
 import { axiosInstance } from '../../utils/axios';
 import BackColor from '../Container/BackColor';
-import SlideEditProfil from '../SlideOvers/EditProfil';
+import SlideEditProfil from './SlideOvers/Profil/EditProfil';
 
 export default function Profil() {
   const dispatch = useAppDispatch();

@@ -6,7 +6,7 @@ import { axiosInstance } from '../../../../../utils/axios';
 import { Contact } from '../../../../../@types/organism';
 import { formatPhoneNumber } from '../../../../../utils/format';
 import VerticalMenu from './VerticalMenu';
-import EditOrgaContact from '../../../../SlideOvers/EditOrgaContact';
+import EditOrgaContact from '../../../SlideOvers/Edition/EditContact';
 import DeleteConfirmation from '../../../../Modals/DeleteConfirmation';
 
 interface Props {

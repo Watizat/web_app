@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAppSelector } from '../../../../hooks/redux';
 import Card from './Components/Card';
 import ServiceCard from './Components/ServiceCard';
+import NewService from '../../SlideOvers/Edition/NewService';
 
 export default function Services() {
   const [isOpenSlide, setIsOpenSlide] = useState(false);
@@ -20,6 +21,7 @@ export default function Services() {
   return (
     <>
       {/* Slide d'ajout d'un contact */}
+      <NewService isOpenSlide={isOpenSlide} setIsOpenSlide={setIsOpenSlide} />
 
       {/*  Modal de suppression du contact */}
       <Card

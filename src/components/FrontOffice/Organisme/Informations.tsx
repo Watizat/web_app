@@ -1,7 +1,7 @@
 import React from 'react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import { useAppSelector } from '../../../hooks/redux';
-import Schedules from '../../Elements/Schedules';
+import Schedules from '../../components/Schedules';
 
 export default function Informations() {
   const organism = useAppSelector((state) => state.organism.organism);

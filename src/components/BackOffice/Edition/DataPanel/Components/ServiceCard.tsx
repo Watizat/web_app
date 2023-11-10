@@ -4,12 +4,12 @@ import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 import { axiosInstance } from '../../../../../utils/axios';
 import { setAdminOrganism } from '../../../../../store/reducers/admin';
 import Icon from '../../../../../ui/icon/icon';
-import Schedules from '../../../../Elements/Schedules';
+import Schedules from '../../../../components/Schedules';
 import ContactCard from './ContactCard';
 import VerticalMenu from './VerticalMenu';
-import EditOrgaServices from '../../../../SlideOvers/EditOrgaServices';
+import EditOrgaServices from '../../../SlideOvers/Edition/EditServices';
 import DeleteConfirmation from '../../../../Modals/DeleteConfirmation';
-import NewContact from '../../../../SlideOvers/NewContact';
+import NewContact from '../../../SlideOvers/Edition/NewContact';
 
 interface Props {
   service: Service;

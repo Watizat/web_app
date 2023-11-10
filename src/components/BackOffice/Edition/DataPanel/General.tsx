@@ -9,7 +9,7 @@ import {
   removeURLPrefix,
 } from '../../../../utils/format';
 
-import EditOrgaGeneral from '../../../SlideOvers/EditOrgaGeneral';
+import EditOrgaGeneral from '../../SlideOvers/Edition/EditGeneral';
 import Card from './Components/Card';
 import DeleteConfirmation from '../../../Modals/DeleteConfirmation';
 import Visibility from './Visibility';

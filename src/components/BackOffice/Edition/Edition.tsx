@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchAdminOrganisms } from '../../../store/reducers/admin';
-import NewOrganism from '../../SlideOvers/NewOrganism';
+import NewOrganism from '../SlideOvers/Edition/NewOrganism';
 import Sidelist from './SideList';
 import DataPanel from './DataPanel/DataPanel';
 import { useAppContext } from '../../../context/BackOfficeContext';

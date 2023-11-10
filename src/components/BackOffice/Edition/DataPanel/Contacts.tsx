@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Contact } from '../../../../@types/organism';
-import NewContact from '../../../SlideOvers/NewContact';
+import NewContact from '../../SlideOvers/Edition/NewContact';
 import Card from './Components/Card';
 import ContactCard from './Components/ContactCard';
 
