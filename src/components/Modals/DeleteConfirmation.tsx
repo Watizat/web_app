@@ -6,7 +6,7 @@ import AlertBase from './ModalBase';
 interface Props {
   setIsOpenModal: (open: boolean) => void;
   isOpenModal: boolean;
-  handleDeleteConfirm: () => void;
+  ToggleOrganismVisibility: () => void;
   title: string;
   message: string;
   deleteBtnText: string;
@@ -15,7 +15,7 @@ interface Props {
 export default function DeleteConfirmation({
   setIsOpenModal,
   isOpenModal,
-  handleDeleteConfirm,
+  ToggleOrganismVisibility,
   title,
   message,
   deleteBtnText,
@@ -55,7 +55,7 @@ export default function DeleteConfirmation({
         <button
           type="button"
           className="inline-flex justify-center w-full px-3 py-2 text-sm font-semibold text-white bg-red-600 rounded-md shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-          onClick={handleDeleteConfirm}
+          onClick={ToggleOrganismVisibility}
         >
           {deleteBtnText}
         </button>

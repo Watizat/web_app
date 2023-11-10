@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchAdminOrganisms } from '../../../store/reducers/admin';
+import NewOrganism from '../../SlideOvers/NewOrganism';
 import Sidelist from './SideList';
 import DataPanel from './DataPanel/DataPanel';
+import { useAppContext } from '../../../context/BackOfficeContext';
 
 export default function Edition() {
   const dispatch = useAppDispatch();
@@ -12,8 +14,19 @@ export default function Edition() {
     dispatch(fetchAdminOrganisms({ city }));
   }, [dispatch, city]);
 
+  // Récupération du contexte
+  const appContext = useAppContext();
+  if (!appContext) {
+    return <div />; // Gérer le cas où le contexte n'est pas défini
+  }
+  const { isOpenSlideNewOrga, setIsOpenSlideNewOrga } = appContext; // On récupère les valeurs du contexte
+
   return (
     <main className="flex flex-1 h-full min-w-full min-h-full align-middle bg-slate-50 ">
+      <NewOrganism
+        isOpenSlideNewOrga={isOpenSlideNewOrga}
+        setIsOpenSlideNewOrga={setIsOpenSlideNewOrga}
+      />
       <Sidelist />
       <DataPanel />
     </main>

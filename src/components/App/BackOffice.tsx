@@ -10,8 +10,9 @@ import { axiosInstance } from '../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../utils/user';
 import { changeAdmin } from '../../store/reducers/user';
 import NoMobile from '../Errors/NoMobile';
-import Sidebar from '../BackOffice/Sidebar/Sidebar';
-import Topbar from '../BackOffice/Header';
+import Sidebar from '../BackOffice/Sidebar/SideBase';
+import Header from '../BackOffice/Header';
+import BackOfficeContext from '../../context/BackOfficeContext';
 
 export default function App() {
   const isTablet = useMediaQuery({ query: '(min-width: 769px)' });
@@ -69,7 +70,7 @@ export default function App() {
   }
 
   return (
-    <>
+    <BackOfficeContext>
       {isTablet ? (
         <>
           {!isLoading && (
@@ -88,7 +89,7 @@ export default function App() {
                     : 'h-max min-h-max'
                 }`}
               >
-                <Topbar setSidebarOpen={setSidebarOpen} />
+                <Header setSidebarOpen={setSidebarOpen} />
                 <Outlet />
               </div>
             </>
@@ -97,7 +98,6 @@ export default function App() {
       ) : (
         <NoMobile />
       )}
-    </>
+    </BackOfficeContext>
   );
 }
-

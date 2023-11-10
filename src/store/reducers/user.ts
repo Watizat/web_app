@@ -5,7 +5,6 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import { Inputs } from '../../@types/formInputs';
 import {
   AuthResponse,

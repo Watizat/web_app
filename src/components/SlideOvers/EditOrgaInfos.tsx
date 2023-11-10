@@ -118,22 +118,14 @@ export default function EditOrgaInfos({
               }}
               formMethods={{ register, errors }}
             />
-            <div>
-              <div className="block text-sm leading-6 text-gray-900 text-centerfont-medium">
-                Horaires
-              </div>
-              <SchedulesTable
-                data={{
-                  schedules: organism.schedules,
-                  days,
-                  register: 'schedules',
-                }}
-                formMethods={{ register, errors }}
-              />
-              <p className="text-sm text-gray-400">
-                Notice : Format horaire accepté : 10h, 10h00, 10:00
-              </p>
-            </div>
+            <SchedulesTable
+              data={{
+                schedules: organism.schedules,
+                days,
+                register: 'schedules',
+              }}
+              formMethods={{ register, errors }}
+            />
           </div>
         </div>
         <BtnCloseValid

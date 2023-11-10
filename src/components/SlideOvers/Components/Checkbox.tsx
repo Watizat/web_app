@@ -2,7 +2,7 @@ interface Props {
   data: {
     label: string;
     description: string;
-    defaultValue: boolean;
+    defaultValue?: boolean;
     register: string;
   };
   formMethods: {

@@ -1,27 +1,28 @@
 import { ChangeEvent, useEffect, useState, Fragment } from 'react';
-
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import { axiosInstance } from '../../utils/axios';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeCity, logout } from '../../store/reducers/user';
 import { fetchZones } from '../../store/reducers/admin';
 import { DirectusUser } from '../../@types/user';
-import { axiosInstance } from '../../utils/axios';
+import { useAppContext } from '../../context/BackOfficeContext';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
-interface TopBarProps {
+interface Props {
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Header({ setSidebarOpen }: TopBarProps) {
+export default function Header({ setSidebarOpen }: Props) {
   const [select, setSelect] = useState(localStorage.getItem('city') || '');
   const isAdmin = useAppSelector((state) => state.user.isAdmin);
   const dispatch = useAppDispatch();
   const zones = useAppSelector((state) => state.admin.zones);
   const [me, setMe] = useState<DirectusUser | null>(null);
+  const { pathname } = useLocation();
 
   const handleChangeCity = (event: ChangeEvent<HTMLSelectElement>) => {
     localStorage.setItem('city', event.target.value);
@@ -41,6 +42,17 @@ export default function Header({ setSidebarOpen }: TopBarProps) {
   useEffect(() => {
     dispatch(fetchZones());
   }, [dispatch]);
+
+  // Récupération du contexte
+  const appContext = useAppContext();
+
+  // Récupération du contexte du BackOffice
+  if (!appContext) {
+    // Gérer le cas où le contexte n'est pas défini
+    return <div />;
+  }
+  // On récupère les valeurs du contexte
+  const { setIsOpenSlideNewOrga, setIsOpenFiltersOrga } = appContext;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -70,14 +82,35 @@ export default function Header({ setSidebarOpen }: TopBarProps) {
         className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
         onClick={() => setSidebarOpen(true)}
       >
-        <span className="sr-only">Open sidebar</span>
+        <span className="sr-only">Ouvrir la sidebar</span>
         <Bars3Icon className="w-6 h-6" aria-hidden="true" />
       </button>
 
       {/* Separator */}
       <div className="w-px h-6 bg-gray-900/10 lg:hidden" aria-hidden="true" />
 
-      <div className="flex items-center self-stretch justify-end flex-1 gap-x-4 lg:gap-x-6">
+      <div className="flex items-center self-stretch justify-between flex-1 gap-x-4 lg:gap-x-6">
+        <div className="flex gap-10">
+          {/* Création organisme */}
+          {pathname === '/admin/edition' && (
+            <>
+              <button
+                type="button"
+                onClick={() => setIsOpenSlideNewOrga(true)}
+                className="px-2 py-1 text-xs font-semibold rounded shadow-sm text-sky-600 bg-sky-50 hover:bg-sky-100"
+              >
+                Créer un nouvel organisme
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsOpenFiltersOrga(true)}
+                className="px-2 py-1 text-xs font-semibold rounded shadow-sm text-zinc-600 bg-zinc-100 hover:bg-zinc-200"
+              >
+                Filtrer les organismes affichés
+              </button>
+            </>
+          )}
+        </div>
         <div className="flex items-center gap-x-4 lg:gap-x-6">
           {/* City select */}
           <div>
