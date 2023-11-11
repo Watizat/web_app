@@ -1,7 +1,11 @@
 import { ChangeEvent, useEffect, useState, Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import {
+  Bars3Icon,
+  ChevronDownIcon,
+  ArchiveBoxIcon,
+} from '@heroicons/react/24/outline';
 import { axiosInstance } from '../../utils/axios';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeCity, logout } from '../../store/reducers/user';
@@ -45,14 +49,11 @@ export default function Header({ setSidebarOpen }: Props) {
 
   // Récupération du contexte
   const appContext = useAppContext();
-
-  // Récupération du contexte du BackOffice
   if (!appContext) {
-    // Gérer le cas où le contexte n'est pas défini
-    return <div />;
+    return <div />; // Gérer le cas où le contexte n'est pas défini
   }
-  // On récupère les valeurs du contexte
-  const { setIsOpenSlideNewOrga, setIsOpenFiltersOrga } = appContext;
+  const { setIsOpenSlideNewOrga } = appContext;
+  const { isDisplayArchivedOrga, setIsDisplayArchivedOrga } = appContext;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -103,10 +104,12 @@ export default function Header({ setSidebarOpen }: Props) {
               </button>
               <button
                 type="button"
-                onClick={() => setIsOpenFiltersOrga(true)}
+                onClick={() => setIsDisplayArchivedOrga(!isDisplayArchivedOrga)}
                 className="px-2 py-1 text-xs font-semibold rounded shadow-sm text-zinc-600 bg-zinc-100 hover:bg-zinc-200"
               >
-                Filtrer les organismes affichés
+                {isDisplayArchivedOrga
+                  ? 'Afficher les organismes actifs'
+                  : 'Afficher les organismes archivés'}
               </button>
             </>
           )}

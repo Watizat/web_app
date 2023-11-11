@@ -7,6 +7,9 @@ type ContextType = {
   // Slide de filtrages des organismes dans module Edition
   isOpenFiltersOrga: boolean;
   setIsOpenFiltersOrga: React.Dispatch<React.SetStateAction<boolean>>;
+  // Affichage ou masquage des organismes archivés
+  isDisplayArchivedOrga: boolean;
+  setIsDisplayArchivedOrga: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 // Créez un contexte
@@ -18,6 +21,7 @@ interface Props {
 export default function BackOfficeContext({ children }: Props) {
   const [isOpenSlideNewOrga, setIsOpenSlideNewOrga] = useState(false); // Slide de creation d'organisme dans module Edition
   const [isOpenFiltersOrga, setIsOpenFiltersOrga] = useState(false); // Slide de filtrages des organismes dans module Edition
+  const [isDisplayArchivedOrga, setIsDisplayArchivedOrga] = useState(false); // Affichage ou masquage des organismes archivés
 
   // Utilisez useMemo pour s'assurer que l'objet ne change pas à chaque rendu
   const contextValue = useMemo(() => {
@@ -28,6 +32,9 @@ export default function BackOfficeContext({ children }: Props) {
       // Slide de filtrages des organismes dans module Edition
       isOpenFiltersOrga,
       setIsOpenFiltersOrga,
+      // Affichage ou masquage des organismes archivés
+      isDisplayArchivedOrga,
+      setIsDisplayArchivedOrga,
     };
   }, [
     // Slide de creation d'organisme dans module Edition
@@ -36,6 +43,9 @@ export default function BackOfficeContext({ children }: Props) {
     // Slide de filtrages des organismes dans module Edition
     isOpenFiltersOrga,
     setIsOpenFiltersOrga,
+    // Affichage ou masquage des organismes archivés
+    isDisplayArchivedOrga,
+    setIsDisplayArchivedOrga,
   ]);
 
   return (

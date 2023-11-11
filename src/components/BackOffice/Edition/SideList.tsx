@@ -5,6 +5,7 @@ import {
   fetchAdminOrganisms,
   setAdminOrganism,
 } from '../../../store/reducers/admin';
+import { useAppContext } from '../../../context/BackOfficeContext';
 
 export default function SideList() {
   const organisms = useAppSelector((state) => state.admin.organisms);
@@ -18,9 +19,18 @@ export default function SideList() {
     setIsActive(organism.id);
   }
 
+  // Récupération du contexte
+  const appContext = useAppContext();
   useEffect(() => {
-    dispatch(fetchAdminOrganisms({ city }));
-  }, [dispatch, city]);
+    if (appContext) {
+      dispatch(
+        fetchAdminOrganisms({
+          city,
+          isDisplayArchivedOrga: appContext.isDisplayArchivedOrga,
+        })
+      );
+    }
+  }, [dispatch, city, appContext]);
 
   return (
     <aside className="sticky flex flex-col w-4/12 h-[calc(100vh-4rem)] max-h-screen overflow-y-auto bg-white shadow top-16 2xl:w-3/12">
