@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { unwrapResult } from '@reduxjs/toolkit';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { updateOrganismVisibility } from '../../../../store/reducers/crud';
+import { useAppSelector } from '../../../../hooks/redux';
 import {
   formatPhoneNumber,
   addURLPrefix,
@@ -11,23 +9,19 @@ import {
 
 import EditOrgaGeneral from '../../SlideOvers/Edition/EditGeneral';
 import Card from './components/Card';
-import DeleteConfirmation from '../../../Modals/DeleteConfirmation';
-import Visibility from './Visibility';
+import ArchiveOrganism from '../../../Modals/ArchiveOrganism';
+import ArchivedCard from './ArchivedCard';
 
 export default function General() {
-  const dispatch = useAppDispatch();
   const [isOpenSlide, setIsOpenSlide] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const organism = useAppSelector((state) => state.admin.organism);
+
+
+
   if (organism === null) {
     return <span>Une erreur s&apos;est produite.</span>;
   }
-
-  const [visibility, setVisibility] = useState(organism.visible);
-  useEffect(() => {
-    // Mettre à jour visibility lorsque organism change
-    setVisibility(organism?.visible || false);
-  }, [organism]);
 
   const contactDetails = [
     ...(organism.website
@@ -54,19 +48,6 @@ export default function General() {
       : []),
   ];
 
-  const ToggleOrganismVisibility = async (organismId: number) => {
-    try {
-      const actionResult = await dispatch(
-        updateOrganismVisibility({ organismId, isVisible: !visibility })
-      ); // Inversez l'état de visibilité
-      setVisibility(unwrapResult(actionResult));
-      setIsOpenModal(false);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Erreur lors de la mise à jour de la visibilité:', error);
-    }
-  };
-
   const menuChoices = [
     {
       title: 'Modifier infos',
@@ -91,22 +72,22 @@ export default function General() {
         organism={organism}
       />
       {/* Modal de suppression */}
-      <DeleteConfirmation
+      <ArchiveOrganism
         setIsOpenModal={setIsOpenModal}
         isOpenModal={isOpenModal}
-        handleDeleteConfirm={() => ToggleOrganismVisibility(organism.id)}
         title="Archiver l'organisme"
         message="Êtes-vous sûr de vouloir archiver l'organisme ? Cette action peut être annulée à tout moment"
-        deleteBtnText="Confirmer ma demande"
+        organism={organism}
+        confirmBtnText="Confirmer ma demande"
       />
-      {/* Composant principal */}
-
-      {!visibility && (
-        <Visibility
+      {/* Message d'organisme archivé */}
+      {!organism.visible && (
+        <ArchivedCard
           message={organism.visible_comment}
-          ToggleOrganismVisibility={() => ToggleOrganismVisibility(organism.id)}
+          setIsOpenModal={setIsOpenModal}
         />
       )}
+      {/* Composant principal */}
       <Card
         title={organism.name}
         address={`${organism.address}, ${organism.zipcode} ${organism.city}`}

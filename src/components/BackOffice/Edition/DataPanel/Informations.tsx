@@ -4,7 +4,6 @@ import Card from './components/Card';
 import SwitchToogle from '../../components/ToggleDisplay';
 import Schedules from '../../../components/Schedules';
 import EditOrgaInfos from '../../SlideOvers/Edition/EditInfos';
-import Checkbox from '../../components/ToggleEdit';
 
 export default function Informations() {
   const [isOpenSlide, setIsOpenSlide] = useState(false);

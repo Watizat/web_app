@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import AlertBase from './ModalBase';
+import AlertBase from './components/ModalBase';
 
 export default function BetaPhase() {
   const [isOpenModal, setIsOpenModal] = useState(true);

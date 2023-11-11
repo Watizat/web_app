@@ -8,9 +8,9 @@ import Header from '../components/Header';
 import Textarea from '../../components/Textarea';
 import Checkbox from '../../components/ToggleEdit';
 import BtnCloseValid from '../components/BtnCloseValid';
+import SchedulesTable from '../../components/SchedulesTable';
 import { Organism } from '../../../../@types/organism';
 import { editOrganismData } from '../../../../store/reducers/crud';
-import SchedulesTable from '../../components/SchedulesTable';
 
 interface Props {
   isOpenSlide: boolean;
@@ -23,14 +23,14 @@ export default function EditOrgaInfos({
   setIsOpenSlide,
   organism,
 }: Props) {
-  const dispatch = useAppDispatch();
-
   const {
     register, // Récupère les fonctions register
     handleSubmit, // Récupère la fonction handleSubmit
     formState: { errors }, // Récupère les erreurs
     reset, // Ajoutez la fonction reset pour réinitialiser le formulaire
   } = useForm<Inputs>();
+
+  const dispatch = useAppDispatch();
 
   // Réinitialiser le formulaire à l'ouverture de la slide
   useEffect(() => {

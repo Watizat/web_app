@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { ClockIcon } from '@heroicons/react/24/outline';
 import { useAppDispatch } from '../../hooks/redux';
 import { logout } from '../../store/reducers/user';
-import AlertBase from './ModalBase';
+import AlertBase from './components/ModalBase';
 
 interface Props {
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;

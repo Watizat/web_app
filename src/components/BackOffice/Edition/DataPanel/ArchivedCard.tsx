@@ -2,13 +2,10 @@ import { ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 interface Props {
   message?: string;
-  ToggleOrganismVisibility: () => void;
+  setIsOpenModal: (open: boolean) => void;
 }
 
-export default function Visibility({
-  message,
-  ToggleOrganismVisibility,
-}: Props) {
+export default function ArchivedCard({ message, setIsOpenModal }: Props) {
   return (
     <div className="flex flex-col gap-4 p-4 rounded-lg shadow bg-red-50">
       <div className="flex items-center justify-between">
@@ -28,7 +25,7 @@ export default function Visibility({
         <div className="flex items-center">
           <button
             type="button"
-            onClick={ToggleOrganismVisibility}
+            onClick={() => setIsOpenModal(true)}
             className="flex items-center px-2 py-1 text-xs font-semibold text-red-600 bg-red-100 rounded shadow-sm hover:bg-red-200/60 group hover:text-red-700"
           >
             Annuler
@@ -43,7 +40,3 @@ export default function Visibility({
     </div>
   );
 }
-
-Visibility.defaultProps = {
-  message: '',
-};
