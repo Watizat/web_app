@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../store/reducers/organisms';
-import SkeletonCard from '../Skeleton/Resultats/Card';
+import SkeletonCard from '../../Skeleton/Resultats/Card';
 import Card from './Card';
 
 import SlideResultsFilters from '../SlideOvers/ResultsFilters/SlideResultsFilters';
@@ -69,8 +69,7 @@ export default function Sidebar({
         (matchesNameFilter || matchesNameFilterWithAccents)
       );
     });
-    //! Loader pour skeleton
-    setLoader(true);
+    setLoader(false); // Passer true pour tester les skeletons
     dispatch(setFilteredOrganisms(setFilter));
   }, [organisms, categoryFilter, isPmr, isAnimalsAccepted, search, dispatch]);
 
