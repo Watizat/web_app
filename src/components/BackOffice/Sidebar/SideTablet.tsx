@@ -19,6 +19,7 @@ interface ActionItem {
   name: string;
   href: string;
   icon: React.ElementType;
+  active: boolean;
   onclick: () => void;
 }
 
@@ -114,7 +115,7 @@ export default function Tablet({
                         {actions.map((item) => (
                           <LinkLarge
                             key={item.name}
-                            item={{ ...item, active: true }}
+                            item={item}
                           />
                         ))}
                       </ul>

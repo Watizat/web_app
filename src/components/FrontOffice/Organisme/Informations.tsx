@@ -32,23 +32,26 @@ export default function Informations() {
           </div>
         </div>
       )}
-      <div className="flex flex-1 gap-4">
-        <div className="flex flex-col flex-1">
-          <h3 className="mb-3 ml-1 text-sm font-semibold text-slate-600/80">
-            Description
-          </h3>
-          <div className="flex flex-col py-6 pl-4 text-sm text-justify text-gray-500 rounded-lg shadow-sm ring-1 ring-gray-900/5 sm:mx-0 sm:rounded-lg sm:px-6 gap-y-2 basis-8/12">
-            {/* <h3 className="text-sm font-semibold text-slate-600/80">Description</h3> */}
-            <p>{organism?.translations?.[0]?.description}</p>
-          </div>
-        </div>
-        <div className="basis-4/12 ">
-          <div className="flex flex-col">
-            <h3 className="mb-3 ml-1 text-sm font-semibold text-slate-600/80">
-              Horaires
-            </h3>
-            <div className="py-4 pl-4 rounded-lg shadow-sm ring-1 ring-gray-900/5 ">
-              <Schedules schedule={organism?.schedules} />
+      <div className="flex flex-col flex-1 ">
+        <h3 className="mb-3 ml-1 text-sm font-semibold text-slate-600/80">
+          Horaires & description
+        </h3>
+        <div className="flex flex-1 gap-4 rounded-lg shadow-sm ring-1 ring-gray-900/5 sm:rounded-lg sm:px-6 ">
+          <div className="flex flex-col flex-1">
+            <div className="flex flex-col py-6 text-sm text-justify text-gray-500 sm:mx-0 gap-y-2 basis-8/12">
+              <p>{organism?.translations?.[0]?.description}</p>
+            </div>
+          </div>{' '}
+          {/* Separator */}
+          <div
+            className="hidden m-auto lg:block lg:h-44 lg:w-px lg:bg-gray-100"
+            aria-hidden="true"
+          />
+          <div className="basis-4/12 ">
+            <div className="flex flex-col">
+              <div className="py-4 pl-4 text-sm">
+                <Schedules schedule={organism?.schedules} />
+              </div>
             </div>
           </div>
         </div>

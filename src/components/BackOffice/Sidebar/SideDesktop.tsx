@@ -15,6 +15,7 @@ interface ActionItem {
   name: string;
   href: string;
   icon: React.ElementType;
+  active: boolean;
   onclick: () => void;
 }
 
@@ -51,7 +52,7 @@ export default function Desktop({ navigation, actions }: Props) {
           <li className="flex flex-col items-center mt-auto ">
             <ul>
               {actions.map((item) => (
-                <LinkSquare key={item.name} item={{ ...item, active: true }} />
+                <LinkSquare key={item.name} item={item} />
               ))}
             </ul>
           </li>

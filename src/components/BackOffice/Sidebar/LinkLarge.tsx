@@ -11,8 +11,8 @@ interface Props {
     icon: React.ElementType;
     active: boolean;
     onclick: () => void;
-    refLocalOnly: boolean;
-    devOnly: boolean;
+    refLocalOnly?: boolean;
+    devOnly?: boolean;
   };
 }
 

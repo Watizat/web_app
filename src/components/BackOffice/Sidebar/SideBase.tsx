@@ -105,12 +105,14 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
         name: 'Mon profil',
         href: '/admin/profil',
         icon: UserCircleIcon,
+        active: true,
         onclick: () => setSidebarOpen(false),
       },
       {
         name: 'Déconnexion',
         href: '/',
         icon: ArrowRightOnRectangleIcon,
+        active: true,
         onclick: handleLogout,
       },
     ];
