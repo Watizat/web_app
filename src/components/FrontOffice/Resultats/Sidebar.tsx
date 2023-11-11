@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setFilteredOrganisms } from '../../../store/reducers/organisms';
-import ResultatsCardSkeleton from '../Skeleton/ResultatCard/ResultatCard';
+import SkeletonCard from '../Skeleton/Resultats/Card';
 import Card from './Card';
 
 import SlideResultsFilters from '../SlideOvers/ResultsFilters/SlideResultsFilters';
@@ -69,7 +69,8 @@ export default function Sidebar({
         (matchesNameFilter || matchesNameFilterWithAccents)
       );
     });
-    setLoader(false);
+    //! Loader pour skeleton
+    setLoader(true);
     dispatch(setFilteredOrganisms(setFilter));
   }, [organisms, categoryFilter, isPmr, isAnimalsAccepted, search, dispatch]);
 
@@ -93,6 +94,7 @@ export default function Sidebar({
       }
     }
   }, [organismToScroll]);
+
   return (
     <section
       className={
@@ -107,7 +109,7 @@ export default function Sidebar({
           ref={resultsContainerRef}
         >
           {loader &&
-            [1, 2, 3, 4, 5].map((e) => <ResultatsCardSkeleton key={e} />)}
+            Array.from({ length: 8 }, (_, i) => <SkeletonCard key={i + 1} />)}
           {!loader &&
             (filteredOrganisms.length > 0 ? (
               filteredOrganisms.map((organism, index) => (
