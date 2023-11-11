@@ -6,13 +6,13 @@ import {
   fetchCategories,
   filterCategories,
 } from '../../../../store/reducers/organisms';
-import Slide from '../../../BackOffice/SlideOvers/Components/Slide';
-import Header from '../../../BackOffice/SlideOvers/Components/Header';
+import Slide from '../../../BackOffice/SlideOvers/components/Slide';
+import Header from '../../../BackOffice/SlideOvers/components/Header';
 import Category from './Category';
 import Search from './Search';
 import Accessibility from './Accessibility';
 import Others from './Others';
-import BtnClose from '../../../BackOffice/SlideOvers/Components/BtnClose';
+import BtnClose from '../../../BackOffice/SlideOvers/components/BtnClose';
 
 interface Props {
   setIsPmr: React.Dispatch<React.SetStateAction<boolean>>;

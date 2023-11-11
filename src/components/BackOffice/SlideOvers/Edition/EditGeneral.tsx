@@ -9,10 +9,10 @@ import {
   validateEmail,
   validatePhoneNumber,
 } from '../../../../utils/form/form';
-import Slide from '../Components/Slide';
-import Header from '../Components/Header';
-import Input from '../Components/Input';
-import BtnCloseValid from '../Components/BtnCloseValid';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
+import Input from '../../components/Input';
+import BtnCloseValid from '../components/BtnCloseValid';
 
 interface Props {
   isOpenSlide: boolean;

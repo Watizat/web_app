@@ -5,7 +5,7 @@ import { setAdminOrganism } from '../../../../../store/reducers/admin';
 import { axiosInstance } from '../../../../../utils/axios';
 import { Contact } from '../../../../../@types/organism';
 import { formatPhoneNumber } from '../../../../../utils/format';
-import VerticalMenu from './VerticalMenu';
+import VerticalMenu from '../../../../components/VerticalMenu';
 import EditOrgaContact from '../../../SlideOvers/Edition/EditContact';
 import DeleteConfirmation from '../../../../Modals/DeleteConfirmation';
 
@@ -13,9 +13,15 @@ interface Props {
   contact: Contact;
   index: number;
   serviceContact?: boolean;
+  oneLine?: boolean;
 }
 
-export default function ContactCard({ contact, index, serviceContact }: Props) {
+export default function ContactCard({
+  contact,
+  index,
+  serviceContact,
+  oneLine,
+}: Props) {
   const [isOpenSlide, setIsOpenSlide] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -69,6 +75,9 @@ export default function ContactCard({ contact, index, serviceContact }: Props) {
           serviceContact ? 'border-gray-100 border-l' : 'border-gray-200'
         } ${
           !serviceContact && index % 2 === 0 && 'border-r ' // Elements impairs
+        }
+        ${
+          !serviceContact && oneLine && 'border-none ' // Elements impairs
         }
         `}
       >

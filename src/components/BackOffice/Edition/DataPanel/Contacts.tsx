@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Contact } from '../../../../@types/organism';
 import NewContact from '../../SlideOvers/Edition/NewContact';
-import Card from './Components/Card';
-import ContactCard from './Components/ContactCard';
+import Card from './components/Card';
+import ContactCard from './components/ContactCard';
 
 interface Props {
   contacts: Contact[];
@@ -31,12 +31,17 @@ export default function Contacts({ contacts }: Props) {
       >
         <div>
           <div
-            className={`grid grid-cols-1 ${
+            className={`grid grid-cols-1  pr-5 ${
               contacts.length === 1 ? 'xl:grid-cols-1' : 'xl:grid-cols-2'
             }`}
           >
             {contacts.map((contact, index) => (
-              <ContactCard key={contact.id} contact={contact} index={index} />
+              <ContactCard
+                key={contact.id}
+                contact={contact}
+                index={index}
+                oneLine={contacts.length === 1}
+              />
             ))}
           </div>
         </div>

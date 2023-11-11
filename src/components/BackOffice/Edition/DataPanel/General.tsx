@@ -10,7 +10,7 @@ import {
 } from '../../../../utils/format';
 
 import EditOrgaGeneral from '../../SlideOvers/Edition/EditGeneral';
-import Card from './Components/Card';
+import Card from './components/Card';
 import DeleteConfirmation from '../../../Modals/DeleteConfirmation';
 import Visibility from './Visibility';
 

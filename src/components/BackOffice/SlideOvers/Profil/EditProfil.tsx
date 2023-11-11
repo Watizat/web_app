@@ -9,10 +9,10 @@ import { Inputs } from '../../../../@types/formInputs';
 import { validateEmail } from '../../../../utils/form/form';
 import { editUser, logout } from '../../../../store/reducers/user';
 import DeleteConfirmation from '../../../Modals/DeleteConfirmation';
-import Slide from '../Components/Slide';
-import Header from '../Components/Header';
-import ValidationDouble from '../Components/BtnCloseValid';
-import Input from '../Components/Input';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
+import ValidationDouble from '../components/BtnCloseValid';
+import Input from '../../components/Input';
 
 interface Props {
   isOpenSlide: boolean;

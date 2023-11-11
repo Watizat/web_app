@@ -12,15 +12,15 @@ import {
   validatePhoneNumber,
 } from '../../../../utils/form/form';
 import { DirectusUser } from '../../../../@types/user';
-import Slide from '../Components/Slide';
-import Header from '../Components/Header';
-import Input from '../Components/Input';
-import Select from '../Components/Select';
-import BtnCloseValid from '../Components/BtnCloseValid';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
+import Input from '../../components/Input';
+import Select from '../../components/Select';
+import BtnCloseValid from '../components/BtnCloseValid';
 import { axiosInstance } from '../../../../utils/axios';
-import Checkbox from '../Components/Checkbox';
-import Textarea from '../Components/Textarea';
-import SchedulesTable from '../Components/SchedulesTable';
+import Checkbox from '../../components/ToggleEdit';
+import Textarea from '../../components/Textarea';
+import SchedulesTable from '../../components/SchedulesTable';
 
 interface Props {
   isOpenSlide: boolean;

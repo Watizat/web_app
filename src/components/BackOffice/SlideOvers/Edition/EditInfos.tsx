@@ -3,14 +3,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from '../../../../@types/formInputs';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setAdminOrganism } from '../../../../store/reducers/admin';
-import Slide from '../Components/Slide';
-import Header from '../Components/Header';
-import Textarea from '../Components/Textarea';
-import Checkbox from '../Components/Checkbox';
-import BtnCloseValid from '../Components/BtnCloseValid';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
+import Textarea from '../../components/Textarea';
+import Checkbox from '../../components/ToggleEdit';
+import BtnCloseValid from '../components/BtnCloseValid';
 import { Organism } from '../../../../@types/organism';
 import { editOrganismData } from '../../../../store/reducers/crud';
-import SchedulesTable from '../Components/SchedulesTable';
+import SchedulesTable from '../../components/SchedulesTable';
 
 interface Props {
   isOpenSlide: boolean;

@@ -4,13 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setAdminOrganism } from '../../../../store/reducers/admin';
 import { addService } from '../../../../store/reducers/crud';
 
-import Slide from '../Components/Slide';
-import Header from '../Components/Header';
-import Input from '../Components/Input';
-import Select from '../Components/Select';
-import BtnCloseValid from '../Components/BtnCloseValid';
-import Textarea from '../Components/Textarea';
-import SchedulesTable from '../Components/SchedulesTable';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
+import Input from '../../components/Input';
+import Select from '../../components/Select';
+import BtnCloseValid from '../components/BtnCloseValid';
+import Textarea from '../../components/Textarea';
+import SchedulesTable from '../../components/SchedulesTable';
 
 interface Props {
   isOpenSlide: boolean;

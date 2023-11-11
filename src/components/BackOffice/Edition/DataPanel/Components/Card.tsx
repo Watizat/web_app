@@ -1,4 +1,4 @@
-import VerticalMenu from './VerticalMenu';
+import VerticalMenu from '../../../../components/VerticalMenu';
 
 interface Props {
   children: React.ReactNode;

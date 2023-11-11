@@ -6,7 +6,7 @@ import { setAdminOrganism } from '../../../../../store/reducers/admin';
 import Icon from '../../../../../ui/icon/icon';
 import Schedules from '../../../../components/Schedules';
 import ContactCard from './ContactCard';
-import VerticalMenu from './VerticalMenu';
+import VerticalMenu from '../../../../components/VerticalMenu';
 import EditOrgaServices from '../../../SlideOvers/Edition/EditServices';
 import DeleteConfirmation from '../../../../Modals/DeleteConfirmation';
 import NewContact from '../../../SlideOvers/Edition/NewContact';

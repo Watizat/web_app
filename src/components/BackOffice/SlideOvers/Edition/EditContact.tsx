@@ -8,13 +8,13 @@ import {
   validateEmail,
   validatePhoneNumber,
 } from '../../../../utils/form/form';
-import Slide from '../Components/Slide';
-import Header from '../Components/Header';
-import Input from '../Components/Input';
-import Select from '../Components/Select';
-import Textarea from '../Components/Textarea';
-import BtnCloseValid from '../Components/BtnCloseValid';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
+import Input from '../../components/Input';
+import Textarea from '../../components/Textarea';
+import BtnCloseValid from '../components/BtnCloseValid';
 import { editContact } from '../../../../store/reducers/crud';
+import ToggleEdit from '../../components/ToggleEdit';
 
 interface Props {
   isOpenSlide: boolean;
@@ -118,30 +118,24 @@ export default function EditOrgaContact({
                 }}
                 formMethods={{ register, errors }}
               />
-              <Select
+              <ToggleEdit
                 data={{
-                  label: 'Antenne locale',
+                  label: 'Visibilité',
+                  description: 'Ce contact doit-il être rendu public ?',
                   defaultValue: contact.visibility,
                   register: 'visibility',
-                  required: false,
                 }}
-                formMethods={{ register, errors }}
-              >
-                <option value="false">Privé</option>
-                <option value="true">Public</option>
-              </Select>
-              <Select
+                formMethods={{ register }}
+              />
+              <ToggleEdit
                 data={{
-                  label: 'A utiliser pour actualisation',
+                  label: 'Actualisation',
+                  description: 'A contacter pour les actualisations ?',
                   defaultValue: contact.actualisation,
                   register: 'actualisation',
-                  required: false,
                 }}
-                formMethods={{ register, errors }}
-              >
-                <option value="false">Non</option>
-                <option value="true">Oui</option>
-              </Select>
+                formMethods={{ register }}
+              />
               <Textarea
                 data={{
                   type: 'string',

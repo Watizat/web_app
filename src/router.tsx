@@ -19,7 +19,6 @@ import NewUser from './components/FrontOffice/Login/NewUser';
 import RecoverPassword from './components/FrontOffice/Login/RecoverPassword';
 import MentionsLegales from './components/FrontOffice/StaticsPages/MentionsLegales/MentionsLegales';
 import Organisme from './components/FrontOffice/Organisme/Organisme';
-import Orientation from './components/FrontOffice/Orientation/Orientation';
 import Resultats from './components/FrontOffice/Resultats/Resultats';
 import GuidesPapier from './components/FrontOffice/StaticsPages/GuidesPapier/GuidesPapier';
 
@@ -29,7 +28,6 @@ const router = createBrowserRouter(
       {/* Front-office */}
       <Route path="/" element={<FrontApp />}>
         <Route index element={<Home />} />
-        <Route path="/orientation" element={<Orientation />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/guides-papier" element={<GuidesPapier />} />
         <Route path="/login" element={<SignIn />} />

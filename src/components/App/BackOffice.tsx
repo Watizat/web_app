@@ -10,7 +10,7 @@ import { axiosInstance } from '../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../utils/user';
 import { changeAdmin } from '../../store/reducers/user';
 import NoMobile from '../Errors/NoMobile';
-import Sidebar from '../BackOffice/Sidebar/SideBase';
+import Sidebar from '../BackOffice/Sidebareee/SideBase';
 import Header from '../BackOffice/Header';
 import BackOfficeContext from '../../context/BackOfficeContext';
 
