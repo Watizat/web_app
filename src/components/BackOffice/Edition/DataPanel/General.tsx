@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
@@ -19,11 +19,15 @@ export default function General() {
   const [isOpenSlide, setIsOpenSlide] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const organism = useAppSelector((state) => state.admin.organism);
-  const [visibility, setVisibility] = useState(organism?.visible || false);
-
   if (organism === null) {
     return <span>Une erreur s&apos;est produite.</span>;
   }
+
+  const [visibility, setVisibility] = useState(organism.visible);
+  useEffect(() => {
+    // Mettre à jour visibility lorsque organism change
+    setVisibility(organism?.visible || false);
+  }, [organism]);
 
   const contactDetails = [
     ...(organism.website
@@ -96,6 +100,7 @@ export default function General() {
         deleteBtnText="Confirmer ma demande"
       />
       {/* Composant principal */}
+
       {!visibility && (
         <Visibility
           message={organism.visible_comment}
