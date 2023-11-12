@@ -1,11 +1,16 @@
-import { ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 
 interface Props {
   message?: string;
   setIsOpenModal: (open: boolean) => void;
+  setVisibilityAnswer: (answer: [string, string]) => void;
 }
 
-export default function ArchivedCard({ message, setIsOpenModal }: Props) {
+export default function ArchivedCard({
+  message,
+  setIsOpenModal,
+  setVisibilityAnswer,
+}: Props) {
   return (
     <div className="flex flex-col gap-4 p-4 rounded-lg shadow bg-red-50">
       <div className="flex items-center justify-between">
@@ -25,10 +30,16 @@ export default function ArchivedCard({ message, setIsOpenModal }: Props) {
         <div className="flex items-center">
           <button
             type="button"
-            onClick={() => setIsOpenModal(true)}
+            onClick={() => {
+              setIsOpenModal(true);
+              setVisibilityAnswer([
+                "Désarchiver l'organisme ?",
+                "Êtes-vous sûr de vouloir désarchiver l'organisme ?",
+              ]);
+            }}
             className="flex items-center px-2 py-1 text-xs font-semibold text-red-600 bg-red-100 rounded shadow-sm hover:bg-red-200/60 group hover:text-red-700"
           >
-            Annuler
+            Editer / Annuler
           </button>
         </div>
       </div>

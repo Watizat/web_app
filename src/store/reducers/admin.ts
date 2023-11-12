@@ -46,17 +46,17 @@ export const fetchAdminOrganisms = createAsyncThunk(
         params: {
           fields: ['id', 'name', 'address', 'visible', 'visible_comment'].join(
             ','
-          ), // Spécifier les champs à récupérer
+          ),
           filter: {
             zone_id: {
-              name: city, // Filtrer les données en fonction du nom de la ville
+              name: city,
             },
-            visible: isDisplayArchivedOrga, // Utilisation de la valeur par défaut ou de celle fournie
+            ...(isDisplayArchivedOrga ? {} : { visible: true }),
           },
         },
       }
     );
-    return data.data; // Retourner les données récupérées
+    return data.data;
   }
 );
 

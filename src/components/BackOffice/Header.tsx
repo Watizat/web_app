@@ -108,7 +108,7 @@ export default function Header({ setSidebarOpen }: Props) {
                 className="px-2 py-1 text-xs font-semibold rounded shadow-sm text-zinc-600 bg-zinc-100 hover:bg-zinc-200"
               >
                 {isDisplayArchivedOrga
-                  ? 'Afficher les organismes actifs'
+                  ? 'Masquer les organismes archivés'
                   : 'Afficher les organismes archivés'}
               </button>
             </>

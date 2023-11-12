@@ -9,13 +9,16 @@ import Textarea from '../BackOffice/components/Textarea';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { editOrganismVisibility } from '../../store/reducers/crud';
 import { Organism } from '../../@types/organism';
-import { setAdminOrganism } from '../../store/reducers/admin';
+import {
+  fetchAdminOrganisms,
+  setAdminOrganism,
+} from '../../store/reducers/admin';
+import { useAppContext } from '../../context/BackOfficeContext';
 
 interface Props {
   setIsOpenModal: (open: boolean) => void;
   isOpenModal: boolean;
-  title: string;
-  message: string;
+  visibiltyAnswer: [string, string];
   organism: Organism;
   confirmBtnText: string;
 }
@@ -23,8 +26,7 @@ interface Props {
 export default function ArchiveOrganism({
   setIsOpenModal,
   isOpenModal,
-  title,
-  message,
+  visibiltyAnswer,
   organism,
   confirmBtnText,
 }: Props) {
@@ -47,6 +49,10 @@ export default function ArchiveOrganism({
     (state) => state.admin.organism?.id as number
   );
 
+  // Récupération du contexte
+  const appContext = useAppContext();
+  const city = useAppSelector((state) => state.user.city as string);
+
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     const updatedVisibility = !organism.visible;
     await dispatch(
@@ -59,6 +65,40 @@ export default function ArchiveOrganism({
     reset();
     setIsOpenModal(false);
     await dispatch(setAdminOrganism(organismId));
+    if (appContext) {
+      dispatch(
+        fetchAdminOrganisms({
+          city,
+        })
+      );
+    }
+  };
+
+  const updateVisibilityMessage: SubmitHandler<Inputs> = async (formData) => {
+    // Mise à jour du message sans changer la visibilité
+    await dispatch(
+      editOrganismVisibility({
+        formData,
+        organismId,
+        isVisible: organism.visible, // La visibilité reste inchangée
+      })
+    );
+
+    reset();
+    setIsOpenModal(false);
+
+    // Rafraîchissement des données de l'organisme
+    await dispatch(setAdminOrganism(organismId));
+
+    // Rafraîchissement de la liste des organismes
+    if (appContext) {
+      dispatch(
+        fetchAdminOrganisms({
+          city,
+          isDisplayArchivedOrga: appContext.isDisplayArchivedOrga,
+        })
+      );
+    }
   };
 
   const cancelButtonRef = useRef(null);
@@ -79,10 +119,10 @@ export default function ArchiveOrganism({
                 as="h3"
                 className="text-base font-semibold leading-6 text-gray-900"
               >
-                {title}
+                {visibiltyAnswer[0]}
               </Dialog.Title>
               <div className="mt-2">
-                <p className="text-sm text-gray-500">{message}</p>
+                <p className="text-sm text-gray-500">{visibiltyAnswer[1]}</p>
               </div>
             </div>
             <div className="pl-4 mt-4">
@@ -101,6 +141,13 @@ export default function ArchiveOrganism({
           </div>
         </div>
         <div className="flex justify-end mt-4">
+          <button
+            type="button"
+            onClick={handleSubmit(updateVisibilityMessage)}
+            className="px-2 py-1 mr-2 text-sm font-semibold text-gray-600 rounded"
+          >
+            Modifier le message
+          </button>
           <button
             type="button"
             className="inline-flex justify-center w-full px-3 py-2 mt-3 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"

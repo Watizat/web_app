@@ -22,21 +22,27 @@ export default function SideList() {
   // Récupération du contexte
   const appContext = useAppContext();
   useEffect(() => {
-    if (appContext) {
-      dispatch(
+    const fetchOrganisms = async () => {
+      await dispatch(
         fetchAdminOrganisms({
           city,
-          isDisplayArchivedOrga: appContext.isDisplayArchivedOrga,
+          isDisplayArchivedOrga: appContext?.isDisplayArchivedOrga,
         })
       );
-    }
-  }, [dispatch, city, appContext]);
+    };
+
+    fetchOrganisms();
+  }, [dispatch, city, appContext?.isDisplayArchivedOrga]);
+
+  const filteredOrganisms = appContext?.isDisplayArchivedOrga
+    ? organisms
+    : organisms.filter((org) => org.visible);
 
   return (
     <aside className="sticky flex flex-col w-4/12 h-[calc(100vh-4rem)] max-h-screen overflow-y-auto bg-white shadow top-16 2xl:w-3/12">
       <ul className=" p-0 divide-y divide-gray-200 h-full;">
         {isLoading && <span />}
-        {organisms.map((organism) => (
+        {filteredOrganisms.map((organism) => (
           <li key={organism.id}>
             <button
               type="button"
@@ -47,29 +53,35 @@ export default function SideList() {
                 'shadow-inner bg-slate-100/50 font-semibold'
               }`}
             >
-              <div
-                className={`text-sm lowercase first-letter:capitalize font-medium 
+              <div className="flex w-full flex-nowrap">
+                <div className="flex flex-col flex-1">
+                  <div
+                    className={`text-sm lowercase first-letter:capitalize font-medium 
               ${
                 isActive === organism.id ? ' text-teal-900 ' : 'text-gray-900'
               }`}
-              >
-                {organism.name}
-              </div>
-              <div className="flex justify-between flex-1">
-                <div
-                  className={`text-xs font-medium ${
-                    isActive === organism.id
-                      ? ' text-gray-500 '
-                      : 'text-gray-400'
-                  }`}
-                >
-                  {organism.address}
+                  >
+                    {organism.name}
+                  </div>
+                  <div className="flex items-center justify-between flex-1 ">
+                    <div
+                      className={`text-xs font-medium ${
+                        isActive === organism.id
+                          ? ' text-gray-500 '
+                          : 'text-gray-400'
+                      }`}
+                    >
+                      {organism.address}
+                    </div>
+                  </div>
                 </div>
-                {!organism.visible && (
-                  <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-red-700 rounded-md bg-red-50 ring-1 ring-inset ring-red-600/10">
-                    Archivé
-                  </span>
-                )}
+                <div>
+                  {!organism.visible && (
+                    <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-red-700 rounded-md bg-red-50 ring-1 ring-inset ring-red-600/10">
+                      Archivé
+                    </span>
+                  )}
+                </div>
               </div>
             </button>
           </li>

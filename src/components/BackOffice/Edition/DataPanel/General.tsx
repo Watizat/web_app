@@ -10,14 +10,13 @@ import {
 import EditOrgaGeneral from '../../SlideOvers/Edition/EditGeneral';
 import Card from './components/Card';
 import ArchiveOrganism from '../../../Modals/ArchiveOrganism';
-import ArchivedCard from './ArchivedCard';
+import ArchivedCard from './Visibility';
 
 export default function General() {
   const [isOpenSlide, setIsOpenSlide] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [visibilityAnswer, setVisibilityAnswer] = useState(['', '']);
   const organism = useAppSelector((state) => state.admin.organism);
-
-
 
   if (organism === null) {
     return <span>Une erreur s&apos;est produite.</span>;
@@ -59,6 +58,10 @@ export default function General() {
       title: 'Archiver organisme',
       onClick: () => {
         setIsOpenModal(true);
+        setVisibilityAnswer([
+          "Archiver l'organisme ?",
+          "Êtes-vous sûr de vouloir archiver l'organisme ? Cette action peut être annulée à tout moment",
+        ]);
       },
     },
   ];
@@ -75,8 +78,7 @@ export default function General() {
       <ArchiveOrganism
         setIsOpenModal={setIsOpenModal}
         isOpenModal={isOpenModal}
-        title="Archiver l'organisme"
-        message="Êtes-vous sûr de vouloir archiver l'organisme ? Cette action peut être annulée à tout moment"
+        visibiltyAnswer={visibilityAnswer}
         organism={organism}
         confirmBtnText="Confirmer ma demande"
       />
@@ -85,6 +87,8 @@ export default function General() {
         <ArchivedCard
           message={organism.visible_comment}
           setIsOpenModal={setIsOpenModal}
+          visibilyAnswer={visibilityAnswer}
+          setVisibilityAnswer={setVisibilityAnswer}
         />
       )}
       {/* Composant principal */}
