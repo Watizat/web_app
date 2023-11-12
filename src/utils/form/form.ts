@@ -56,3 +56,20 @@ export const validateEmail = (value: string) => {
   const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   return emailPattern.test(value) || `Cette adresse email n'est pas valide`;
 };
+
+// Fonction de validation pour un numéro de téléphone de 10 chiffres
+export const validatePhoneNumber = (value: string) => {
+  // Si la valeur est vide, la validation échoue
+  if (!value) {
+    return 'Le numéro de téléphone est requis.';
+  }
+
+  // Expression régulière pour valider un numéro de téléphone avec exactement 10 chiffres
+  const phoneNumberPattern = /^\d{10}$/;
+
+  if (phoneNumberPattern.test(value)) {
+    return true;
+  }
+
+  return 'Le numéro de téléphone doit comporter exactement 10 chiffres.';
+};

@@ -1,11 +1,9 @@
-import styles from './Container.module.scss';
-
-interface PageProps {
+interface Props {
   children: React.ReactNode;
 }
 
-function Container({ children }: PageProps) {
-  return <div className={styles.container}>{children}</div>;
+export default function Container({ children }: Props) {
+  return (
+    <div className="flex flex-col w-full h-full px-4 my-auto">{children}</div>
+  );
 }
-
-export default Container;

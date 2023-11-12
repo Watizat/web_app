@@ -32,22 +32,31 @@ export const initialState: AdminState = {
 // Créer une fonction asynchrone pour récupérer les Organismes de l'administration
 export const fetchAdminOrganisms = createAsyncThunk(
   'admin-organisms/fetch-organisms',
-  async (city: string) => {
+  async ({
+    city,
+    isDisplayArchivedOrga = true,
+  }: {
+    city: string;
+    isDisplayArchivedOrga?: boolean;
+  }) => {
     // Récupérer les données depuis le serveur en utilisant axiosInstance
     const { data } = await axiosInstance.get<{ data: Organism[] }>(
       '/items/organisme',
       {
         params: {
-          fields: ['id', 'name', 'address'].join(','), // Spécifier les champs à récupérer
+          fields: ['id', 'name', 'address', 'visible', 'visible_comment'].join(
+            ','
+          ),
           filter: {
             zone_id: {
-              name: city, // Filtrer les données en fonction du nom de la ville
+              name: city,
             },
+            ...(isDisplayArchivedOrga ? {} : { visible: true }),
           },
         },
       }
     );
-    return data.data; // Retourner les données récupérées
+    return data.data;
   }
 );
 
@@ -99,6 +108,7 @@ export const setAdminOrganism = createAsyncThunk(
             'longitude',
             'comment',
             'visible',
+            'visible_comment',
             'pmr',
             'animals',
             'phone',
