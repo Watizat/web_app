@@ -59,7 +59,7 @@ export default function SearchBox() {
 
   return (
     <FrontColor>
-      <section className="flex flex-col items-center gap-6 px-6 mx-auto max-w-7xl lg:gap-20 xl:gap-28">
+      <section className="flex flex-col items-center gap-6 px-6 mx-auto max-w-7xl lg:gap-14 ">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Watizat
@@ -159,7 +159,7 @@ export default function SearchBox() {
             </div>
           </form>
         </div>
-        <div className="flex items-center justify-center -mt-5 md:-mt-12 gap-x-6">
+        <div className="flex items-center justify-center gap-x-6">
           <Link
             to="/guides-papier"
             className="text-sm font-semibold leading-6 text-zincslate-700"

@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
+import ProgressiveImage from 'react-progressive-graceful-image';
 import antennes from './source';
 import FrontColor from '../../../Container/FrontColor';
 
 export default function GuidesPapier() {
   return (
     <FrontColor>
-      <section className="flex flex-col items-center justify-center gap-8 px-6 mx-auto align-middle h-fullScreenHeight lg:gap-20 max-w-7xl lg:px-8">
-        <div className="max-w-2xl mx-auto lg:text-center">
+      <section className="flex flex-col items-center justify-end gap-8 px-6 mx-auto align-middle h-fullScreenHeight lg:gap-20 max-w-7xl lg:px-8">
+        <div className="flex flex-col max-w-2xl gap-6 mx-auto lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-indigo-600">
             Guides papier
           </h2>
@@ -21,14 +22,23 @@ export default function GuidesPapier() {
                 key={guide.city}
                 to={guide.link}
                 target="_blank"
-                className="relative px-1 overflow-hidden bg-gray-900 shadow-xl py-15 rounded-2xl sm:rounded-3xl sm:px-10 sm:py-10"
+                className="relative px-1 overflow-hidden shadow-xl bg-gray-600/20 py-15 rounded-2xl sm:rounded-3xl sm:px-10 sm:py-10 group"
               >
-                <img
-                  className="absolute inset-0 object-cover w-full h-full "
-                  src={guide.picture}
-                  alt="{guide.city}"
-                />
-                <div className="absolute inset-0 bg-slate-600/70 mix-blend-multiply" />
+                <ProgressiveImage
+                  src={`${guide.picture}&w=320`}
+                  placeholder={`${guide.picture}&w=20`}
+                >
+                  {(src, loading) => (
+                    <img
+                      className={`image${
+                        loading ? ' loading' : ' loaded'
+                      } absolute inset-0 object-cover object-top w-full h-full -z-10`}
+                      src={src}
+                      alt={guide.city}
+                    />
+                  )}
+                </ProgressiveImage>
+                <div className="absolute inset-0 bg-slate-600/70 mix-blend-multiply group-hover:bg-slate-400/50" />
                 <div className="relative flex flex-col justify-center max-w-2xl p-4 mx-auto md:p-0 lg:mx-0 text-white/90">
                   <h3 className="font-serif text-lg font-semibold leading-6 md:text-4xl">
                     {guide.city}
