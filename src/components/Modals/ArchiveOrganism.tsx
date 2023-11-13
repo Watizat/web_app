@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Dialog } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import AlertBase from './components/ModalBase';
+import ModalBase from './components/ModalBase';
 import { Inputs } from '../../@types/formInputs';
 import Textarea from '../BackOffice/components/Textarea';
 
@@ -104,7 +104,7 @@ export default function ArchiveOrganism({
   const cancelButtonRef = useRef(null);
 
   return (
-    <AlertBase setIsOpenModal={setIsOpenModal} isOpenModal={isOpenModal}>
+    <ModalBase setIsOpenModal={setIsOpenModal} isOpenModal={isOpenModal}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="sm:flex sm:items-start">
           <div className="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-yellow-200 rounded-full sm:mx-0 sm:h-10 sm:w-10">
@@ -164,6 +164,6 @@ export default function ArchiveOrganism({
           </button>
         </div>
       </form>
-    </AlertBase>
+    </ModalBase>
   );
 }

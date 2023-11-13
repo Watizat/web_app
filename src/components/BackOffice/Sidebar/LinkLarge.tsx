@@ -7,7 +7,7 @@ import { DirectusUser } from '../../../@types/user';
 interface Props {
   item: {
     name: string;
-    href: string;
+    href?: string;
     icon: React.ElementType;
     active: boolean;
     onclick: () => void;

@@ -21,6 +21,8 @@ export interface Organism {
   schedules: Schedule[];
   services: Service[];
   contacts: Contact[];
+  date_created: Date;
+  date_updated: Date;
 }
 
 export interface Contact {

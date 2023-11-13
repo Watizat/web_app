@@ -154,6 +154,8 @@ export const setAdminOrganism = createAsyncThunk(
             'services.contacts.phone',
             'services.contacts.visibility',
             'services.contacts.actualisation',
+            'date_created',
+            'date_updated',
           ].join(','),
           filter: {
             id,

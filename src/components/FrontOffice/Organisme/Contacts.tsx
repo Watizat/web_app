@@ -26,7 +26,7 @@ export default function Contact() {
         <h3 className="mb-3 ml-1 text-sm font-semibold text-slate-600/80">
           Contacts
         </h3>
-        <ul>
+        <ul className="flex flex-col gap-y-2">
           {organism.contacts
             .filter((contact) => contact.visibility === true)
             .map((contact) => (

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import {
   HomeIcon,
   UsersIcon,
@@ -9,6 +9,7 @@ import {
   ArrowRightOnRectangleIcon,
   UserCircleIcon,
   CircleStackIcon,
+  CommandLineIcon,
 } from '@heroicons/react/24/outline';
 
 import { useAppDispatch } from '../../../hooks/redux';
@@ -17,6 +18,7 @@ import { logout } from '../../../store/reducers/user';
 import Tablet from './SideTablet';
 import Desktop from './SideDesktop';
 import Widescreen from './SideWidescreen';
+import AppVersions from '../../Modals/AppVersions';
 
 interface Props {
   sidebarOpen: boolean;
@@ -24,6 +26,7 @@ interface Props {
 }
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
+  const [isOpenModalVersions, setIsOpenModalVersions] = useState(false);
   const dispatch = useAppDispatch();
 
   const memoizedNavigation = useMemo(() => {
@@ -102,6 +105,13 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
 
     return [
       {
+        name: 'Versions',
+        href: '#',
+        icon: CommandLineIcon,
+        active: true,
+        onclick: () => setIsOpenModalVersions(true),
+      },
+      {
         name: 'Mon profil',
         href: '/admin/profil',
         icon: UserCircleIcon,
@@ -120,6 +130,10 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
 
   return (
     <>
+      <AppVersions
+        isOpenModal={isOpenModalVersions}
+        setIsOpenModal={setIsOpenModalVersions}
+      />
       <Tablet
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}

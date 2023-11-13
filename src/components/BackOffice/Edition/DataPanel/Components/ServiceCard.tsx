@@ -10,6 +10,7 @@ import VerticalMenu from '../../../../components/VerticalMenu';
 import EditOrgaServices from '../../../SlideOvers/Edition/EditServices';
 import DeleteConfirmation from '../../../../Modals/DeleteConfirmation';
 import NewContact from '../../../SlideOvers/Edition/NewContact';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface Props {
   service: Service;
@@ -97,6 +98,28 @@ export default function ServiceCard({ service }: Props) {
           <VerticalMenu menuChoices={menuChoices} />
         </div>
         <div>
+          {service.translations[0].infos_alerte && (
+            <div className="px-4 py-2 rounded-md bg-yellow-50">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <ExclamationTriangleIcon
+                    className="w-5 h-5 text-yellow-400"
+                    aria-hidden="true"
+                  />
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-yellow-800">
+                    Alertes & infos
+                  </h3>
+                  <div className="mt-2 text-sm text-yellow-600">
+                    <div className="space-y-1 list-disc">
+                      <p>{service.translations[0].infos_alerte}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           <div className="flex flex-col gap-2 p-4 -mt-px text-sm divide-y divide-gray-100">
             <p className="items-center w-full pr-2 text-sm leading-normal text-justify truncate whitespace-normal align-middle font-base text-slate-500">
               {service.translations[0].description}

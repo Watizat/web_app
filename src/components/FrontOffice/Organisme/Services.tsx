@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Popover, Transition } from '@headlessui/react';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { useAppSelector } from '../../../hooks/redux';
 import { Service } from '../../../@types/organism';
 import Icon from '../../../ui/icon/icon';
@@ -35,6 +36,28 @@ export default function Services() {
                 {service.categorie_id.translations[0].name}
               </div>
             </div>
+            {service.translations[0].infos_alerte && (
+              <div className="px-4 py-2 rounded-md bg-yellow-50">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <ExclamationTriangleIcon
+                      className="w-5 h-5 text-yellow-500"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-yellow-800">
+                      Alertes & infos
+                    </h3>
+                    <div className="mt-2 text-sm text-yellow-600">
+                      <div className="space-y-1 list-disc">
+                        <p>{service.translations[0].infos_alerte}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="flex flex-col items-center justify-between w-full py-5 -my-3 text-sm leading-6 divide-y gap-y-3">
               <div className="flex flex-col items-center w-full px-4">
                 <p className="w-full text-left font-base text-slate-900">

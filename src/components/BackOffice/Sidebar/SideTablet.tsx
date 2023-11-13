@@ -17,7 +17,7 @@ interface NavigationItem {
 
 interface ActionItem {
   name: string;
-  href: string;
+  href?: string;
   icon: React.ElementType;
   active: boolean;
   onclick: () => void;
@@ -36,7 +36,6 @@ export default function Tablet({
   navigation,
   actions,
 }: Props) {
-
   return (
     <Transition.Root show={sidebarOpen} as={Fragment}>
       <Dialog
@@ -113,10 +112,7 @@ export default function Tablet({
                     <li className="mt-auto">
                       <ul>
                         {actions.map((item) => (
-                          <LinkLarge
-                            key={item.name}
-                            item={item}
-                          />
+                          <LinkLarge key={item.name} item={item} />
                         ))}
                       </ul>
                     </li>

@@ -13,7 +13,7 @@ interface NavigationItem {
 
 interface ActionItem {
   name: string;
-  href: string;
+  href?: string;
   icon: React.ElementType;
   active: boolean;
   onclick: () => void;

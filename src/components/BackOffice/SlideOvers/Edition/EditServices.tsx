@@ -120,6 +120,17 @@ export default function EditOrgaServices({
               }}
               formMethods={{ register, errors }}
             />
+            <Textarea
+              data={{
+                type: 'string',
+                label: 'Infos & alertes',
+                defaultValue: service.translations[0].infos_alerte,
+                register: 'infos_alerte',
+                required: false,
+                placeholder: 'ex : Service fermé durant les vacances de Noël',
+              }}
+              formMethods={{ register, errors }}
+            />
             <SchedulesTable
               data={{
                 schedules: service.schedules,
