@@ -57,7 +57,7 @@ const navigation = [
   },
   {
     name: 'Back-end',
-    href: 'https://watizat.lunalink.nl/',
+    href: 'https://api.watizat.app',
     descript: 'Back-end (Directus)',
     target: '_blank',
     icon: CircleStackIcon,
