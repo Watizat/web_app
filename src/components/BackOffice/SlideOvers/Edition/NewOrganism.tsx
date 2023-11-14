@@ -12,11 +12,11 @@ import {
   validatePhoneNumber,
 } from '../../../../utils/form/form';
 import { DirectusUser } from '../../../../@types/user';
-import Slide from '../components/Slide';
-import Header from '../components/Header';
+import Slide from '../coemponents/Slide';
+import Header from '../coemponents/Header';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
-import BtnCloseValid from '../components/BtnCloseValid';
+import BtnCloseValid from '../coemponents/BtnCloseValid';
 import { axiosInstance } from '../../../../utils/axios';
 import Checkbox from '../../components/ToggleEdit';
 import Textarea from '../../components/Textarea';

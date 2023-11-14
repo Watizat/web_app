@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../../../hooks/redux';
-import Card from './components/Card';
-import ServiceCard from './components/ServiceCard';
+import Card from './coemponents/Card';
+import ServiceCard from './coemponents/ServiceCard';
 import NewService from '../../SlideOvers/Edition/NewService';
 
 export default function Services() {

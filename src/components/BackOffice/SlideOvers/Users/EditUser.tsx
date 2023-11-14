@@ -9,12 +9,12 @@ import { editUser } from '../../../../store/reducers/user';
 import { axiosInstance } from '../../../../utils/axios';
 import { getUserDataFromLocalStorage } from '../../../../utils/user';
 import { validateEmail } from '../../../../utils/form/form';
-import Slide from '../components/Slide';
-import Header from '../components/Header';
+import Slide from '../coemponents/Slide';
+import Header from '../coemponents/Header';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
 
-import BtnCloseValid from '../components/BtnCloseValid';
+import BtnCloseValid from '../coemponents/BtnCloseValid';
 import DeleteConfirmation from '../../../Modals/DeleteConfirmation';
 
 interface Props {

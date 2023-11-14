@@ -8,7 +8,7 @@ import {
 } from '../../../../utils/format';
 
 import EditOrgaGeneral from '../../SlideOvers/Edition/EditGeneral';
-import Card from './components/Card';
+import Card from './coemponents/Card';
 import ArchiveOrganism from '../../../Modals/ArchiveOrganism';
 import ArchivedCard from './Visibility';
 

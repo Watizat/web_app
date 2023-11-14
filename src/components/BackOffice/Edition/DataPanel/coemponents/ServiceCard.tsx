@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { Service } from '../../../../../@types/organism';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 import { axiosInstance } from '../../../../../utils/axios';
@@ -10,7 +11,6 @@ import VerticalMenu from '../../../../components/VerticalMenu';
 import EditOrgaServices from '../../../SlideOvers/Edition/EditServices';
 import DeleteConfirmation from '../../../../Modals/DeleteConfirmation';
 import NewContact from '../../../SlideOvers/Edition/NewContact';
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface Props {
   service: Service;
