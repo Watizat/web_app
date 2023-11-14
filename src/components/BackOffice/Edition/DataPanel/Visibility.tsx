@@ -51,3 +51,7 @@ export default function ArchivedCard({
     </div>
   );
 }
+
+ArchivedCard.defaultProps = {
+  message: '',
+};

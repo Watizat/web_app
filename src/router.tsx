@@ -21,7 +21,6 @@ import MentionsLegales from './components/FrontOffice/StaticsPages/MentionsLegal
 import Organisme from './components/FrontOffice/Organisme/Organisme';
 import Resultats from './components/FrontOffice/Resultats/Resultats';
 import GuidesPapier from './components/FrontOffice/StaticsPages/GuidesPapier/GuidesPapier';
-import Versions from './components/Modals/AppVersions';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,7 +45,6 @@ const router = createBrowserRouter(
         <Route path="/admin/edition" element={<Edition />} />
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/profil" element={<Profil />} />
-        <Route path="/admin/versions" element={<Versions />} />
       </Route>
 
       {/* Errors page */}

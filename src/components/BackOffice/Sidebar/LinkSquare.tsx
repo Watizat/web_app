@@ -42,7 +42,7 @@ export default function LinkSquare({ item }: Props) {
   return (
     <li key={item.name}>
       <Link
-        to={item.href}
+        to={item.href || ''}
         onClick={item.onclick}
         className={`group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold
                         ${

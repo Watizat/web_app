@@ -41,7 +41,7 @@ export default function LinkLarge({ item }: Props) {
   return (
     <li key={item.name}>
       <Link
-        to={item.href}
+        to={item.href || ''}
         onClick={item.onclick}
         className={`group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold py-3 ${
           // eslint-disable-next-line no-nested-ternary

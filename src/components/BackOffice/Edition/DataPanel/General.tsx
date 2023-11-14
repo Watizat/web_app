@@ -15,7 +15,10 @@ import ArchivedCard from './Visibility';
 export default function General() {
   const [isOpenSlide, setIsOpenSlide] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [visibilityAnswer, setVisibilityAnswer] = useState(['', '']);
+  const [visibilityAnswer, setVisibilityAnswer] = useState<[string, string]>([
+    '',
+    '',
+  ]);
   const organism = useAppSelector((state) => state.admin.organism);
 
   if (organism === null) {
@@ -78,7 +81,7 @@ export default function General() {
       <ArchiveOrganism
         setIsOpenModal={setIsOpenModal}
         isOpenModal={isOpenModal}
-        visibiltyAnswer={visibilityAnswer}
+        visibilityAnswer={visibilityAnswer}
         organism={organism}
         confirmBtnText="Confirmer ma demande"
       />
@@ -87,7 +90,6 @@ export default function General() {
         <ArchivedCard
           message={organism.visible_comment}
           setIsOpenModal={setIsOpenModal}
-          visibilyAnswer={visibilityAnswer}
           setVisibilityAnswer={setVisibilityAnswer}
         />
       )}

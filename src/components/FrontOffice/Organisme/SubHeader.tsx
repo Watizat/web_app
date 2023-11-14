@@ -1,24 +1,19 @@
-import { Fragment } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, Transition } from '@headlessui/react';
-import { EllipsisVerticalIcon, PhoneIcon } from '@heroicons/react/24/solid';
+import { PhoneIcon } from '@heroicons/react/24/solid';
 import { MapIcon } from '@heroicons/react/24/outline';
 import { useAppSelector } from '../../../hooks/redux';
 import Icon from '../../../ui/icon/icon';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
 export default function SubHeader() {
   const navigate = useNavigate();
 
   const organism = useAppSelector((state) => state.organism.organism);
   const lastSearch = localStorage.getItem('last_search');
   const targetPath = lastSearch !== null ? lastSearch : '/';
-  const { services } = organism;
+  const services = organism?.services;
   const categoriesTagName = [
     ...new Set(
-      services.map((service) => {
+      services?.map((service) => {
         return {
           name: service.categorie_id.translations[0].name,
           tag: service.categorie_id.tag,

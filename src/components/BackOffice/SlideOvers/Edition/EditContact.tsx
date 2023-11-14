@@ -151,6 +151,7 @@ export default function EditOrgaContact({
           </div>
         </div>
         <BtnCloseValid
+          isSaving={isSaving}
           handleCloseSlide={handleCloseSlide}
           handleValidation={handleSubmit(onSubmit)}
         />

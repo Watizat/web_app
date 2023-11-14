@@ -18,7 +18,7 @@ import { useAppContext } from '../../context/BackOfficeContext';
 interface Props {
   setIsOpenModal: (open: boolean) => void;
   isOpenModal: boolean;
-  visibiltyAnswer: [string, string];
+  visibilityAnswer: [string, string];
   organism: Organism;
   confirmBtnText: string;
 }
@@ -26,7 +26,7 @@ interface Props {
 export default function ArchiveOrganism({
   setIsOpenModal,
   isOpenModal,
-  visibiltyAnswer,
+  visibilityAnswer,
   organism,
   confirmBtnText,
 }: Props) {
@@ -119,10 +119,10 @@ export default function ArchiveOrganism({
                 as="h3"
                 className="text-base font-semibold leading-6 text-gray-900"
               >
-                {visibiltyAnswer[0]}
+                {visibilityAnswer[0]}
               </Dialog.Title>
               <div className="mt-2">
-                <p className="text-sm text-gray-500">{visibiltyAnswer[1]}</p>
+                <p className="text-sm text-gray-500">{visibilityAnswer[1]}</p>
               </div>
             </div>
             <div className="pl-4 mt-4">
