@@ -43,6 +43,7 @@ export interface DirectusUser {
   role: string;
   zone: number;
   last_access: string;
+  status: string;
 }
 
 export type KeyOfloginCredentials = keyof UserState['loginCredentials'];

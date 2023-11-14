@@ -102,15 +102,15 @@ Schéma de l'organisation des branches et exemple de noms de branche sur le repo
 main 
 └── dev
     ├── 1.0.1
-    |       └── 1.0.1-docs-project_doc
+    |       └── docs-project_doc
     ├── 1.0.2
     |
     ├── 1.1.0 
-    |       └── 1.1.0-feature-versionning_modal
+    |       └── feature-versionning_modal
     ├── 1.2.0
     |
     ├── 2.0.0
-    |       └── 2.0.0-feature-translate_space
+    |       └── feature-translate_space
     └── 3.0.0
 ```
 
@@ -169,15 +169,15 @@ feature-translate_space
 | Si oui => pull-request
 │
 └──> 2.0.0
- | Roadmap complétée => Vérifications !
- │ Tout est ok ? Si oui => merge
- | 
-    └──> dev  
-  | Publication sur l'url de dev
+     | Roadmap complétée => Vérifications !
      │ Tout est ok ? Si oui => merge
-  | 
-     └──> main
-   | Mise en production
+     | 
+     └──> dev  
+          | Publication sur l'url de dev
+          │ Tout est ok ? Si oui => merge
+          | 
+          └──> main
+               | Mise en production
 ```
 
 ## Convention de codage
@@ -186,15 +186,21 @@ feature-translate_space
 
 Il s'agit d'un logiciel open source !
 Pensez aux personnes qui liront votre code, et faites en sorte qu'il soit agréable à lire pour eux.
-C'est un peu comme conduire une voiture : Vous aimez peut-être faire des beignets quand vous êtes seul, mais avec des passagers, l'objectif est de rendre la conduite aussi douce que possible.
+C'est un peu comme conduire une voiture : Vous aimez peut-être faire des dérapages quand vous êtes seul·e, c'est bien pour vous.
+Mais avec des passagers, l'objectif est de rendre la conduite aussi douce que possible.
 
 ### Lisibilité
 
 - Utiliser deux espaces pour l'indentation (tabulations douces).
-
 - Toujours utiliser des espaces après les éléments de liste et les paramètres de méthode ([1, 2, 3], et non [1,2,3]), autour des opérateurs (x += 1, et non x+=1), et autour des flèches de hachage.
+ 
+
+### Tailwind CSS
+- Préferer l'utilisation de flex et grid
+- Eviter les margins entre des element d'un même grope, et privilégier l'utilisation de gap
 
 ### Accessibilité
 
 - Placez toujours des "alt" sur l'ensemble de vos images
+- Place des balises span "sr-only" sur les boutons et liens comportant seulement une icône
 - ⚠️ **Besoin d'aide ici**

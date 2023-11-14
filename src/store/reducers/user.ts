@@ -5,7 +5,6 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import { Inputs } from '../../@types/formInputs';
 import {
   AuthResponse,
@@ -45,6 +44,7 @@ const initialState: UserState = {
 export const changeAdmin = createAction<boolean>('admin/check-admin');
 
 export const changeCity = createAction<string>('city/change-city');
+
 
 export const changeLoginCredentialsField = createAction<{
   field: KeyOfloginCredentials;
@@ -100,7 +100,7 @@ export const askPassword = createAsyncThunk(
   async (email: string) => {
     await axiosInstance.post('/auth/password/request', {
       email,
-      reset_url: 'https://watizat.aliceout.io/recover-password',
+      reset_url: 'https://guide.watizat.app/recover-password',
     });
   }
 );

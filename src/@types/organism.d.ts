@@ -10,6 +10,7 @@ export interface Organism {
   city: string;
   comment: string | undefined;
   visible: boolean;
+  visible_comment: string | undefined;
   pmr: boolean;
   animals: boolean;
   zone_id: Zone;
@@ -20,6 +21,8 @@ export interface Organism {
   schedules: Schedule[];
   services: Service[];
   contacts: Contact[];
+  date_created: Date;
+  date_updated: Date;
 }
 
 export interface Contact {
