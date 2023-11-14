@@ -126,4 +126,5 @@ export default function ContactCard({
 
 ContactCard.defaultProps = {
   serviceContact: false,
+  oneLine: false,
 };

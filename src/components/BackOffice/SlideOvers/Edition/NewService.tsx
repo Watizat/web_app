@@ -4,11 +4,11 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setAdminOrganism } from '../../../../store/reducers/admin';
 import { addService } from '../../../../store/reducers/crud';
 
-import Slide from '../coemponents/Slide';
-import Header from '../coemponents/Header';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
-import BtnCloseValid from '../coemponents/BtnCloseValid';
+import BtnCloseValid from '../components/BtnCloseValid';
 import Textarea from '../../components/Textarea';
 import SchedulesTable from '../../components/SchedulesTable';
 

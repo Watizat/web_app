@@ -12,10 +12,10 @@ import {
   validatePhoneNumber,
 } from '../../../../utils/form/form';
 import { Service } from '../../../../@types/organism';
-import Slide from '../coemponents/Slide';
-import Header from '../coemponents/Header';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
 import Input from '../../components/Input';
-import BtnCloseValid from '../coemponents/BtnCloseValid';
+import BtnCloseValid from '../components/BtnCloseValid';
 import Textarea from '../../components/Textarea';
 import ToggleEdit from '../../components/ToggleEdit';
 

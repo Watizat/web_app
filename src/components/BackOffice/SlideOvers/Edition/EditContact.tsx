@@ -8,11 +8,11 @@ import {
   validateEmail,
   validatePhoneNumber,
 } from '../../../../utils/form/form';
-import Slide from '../coemponents/Slide';
-import Header from '../coemponents/Header';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
 import Input from '../../components/Input';
 import Textarea from '../../components/Textarea';
-import BtnCloseValid from '../coemponents/BtnCloseValid';
+import BtnCloseValid from '../components/BtnCloseValid';
 import { editContact } from '../../../../store/reducers/crud';
 import ToggleEdit from '../../components/ToggleEdit';
 

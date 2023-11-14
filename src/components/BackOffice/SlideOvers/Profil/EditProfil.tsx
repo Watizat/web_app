@@ -9,9 +9,9 @@ import { Inputs } from '../../../../@types/formInputs';
 import { validateEmail } from '../../../../utils/form/form';
 import { editUser, logout } from '../../../../store/reducers/user';
 import DeleteConfirmation from '../../../Modals/DeleteConfirmation';
-import Slide from '../coemponents/Slide';
-import Header from '../coemponents/Header';
-import ValidationDouble from '../coemponents/BtnCloseValid';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
+import ValidationDouble from '../components/BtnCloseValid';
 import Input from '../../components/Input';
 
 interface Props {

@@ -5,13 +5,13 @@ import { Inputs } from '../../../../@types/formInputs';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setAdminOrganism } from '../../../../store/reducers/admin';
 import { editService } from '../../../../store/reducers/crud';
-import Slide from '../coemponents/Slide';
-import Header from '../coemponents/Header';
+import Slide from '../components/Slide';
+import Header from '../components/Header';
 import Input from '../../components/Input';
 import Textarea from '../../components/Textarea';
 import Select from '../../components/Select';
 import SchedulesTable from '../../components/SchedulesTable';
-import BtnCloseValid from '../coemponents/BtnCloseValid';
+import BtnCloseValid from '../components/BtnCloseValid';
 
 interface Props {
   isOpenSlide: boolean;

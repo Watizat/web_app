@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Contact } from '../../../../@types/organism';
 import NewContact from '../../SlideOvers/Edition/NewContact';
-import Card from './coemponents/Card';
-import ContactCard from './coemponents/ContactCard';
+import Card from './components/Card';
+import ContactCard from './components/ContactCard';
 
 interface Props {
   contacts: Contact[];
