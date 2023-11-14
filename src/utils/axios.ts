@@ -31,13 +31,10 @@ const authRefresh: {
 
     // Appel à l'API pour rafraîchir le token
     const refreshPromise = await axios
-      .post<{ data: AuthResponse }>(
-        'https://watizat.lunalink.nl/auth/refresh',
-        {
-          refresh_token: user.token.refresh_token,
-          mode: 'json',
-        }
-      )
+      .post<{ data: AuthResponse }>('https://api.watizat.app/auth/refresh', {
+        refresh_token: user.token.refresh_token,
+        mode: 'json',
+      })
       .then(({ data: response }) => {
         // Mettre à jour le token d'authentification et la session utilisateur
         const updatedUser = {
@@ -83,7 +80,7 @@ const authRefresh: {
 // Créer une instance d'axios avec la base URL
 /* eslint-disable import/prefer-default-export */
 export const axiosInstance = axios.create({
-  baseURL: 'https://watizat.lunalink.nl/',
+  baseURL: 'https://api.watizat.app',
 });
 
 // Interceptor pour les requêtes

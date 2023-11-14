@@ -1,0 +1,156 @@
+.leaflet-container {
+  width: 100%;
+  z-index: 0;
+}
+
+.leaflet-bottom.leaflet-left {
+  display: none;
+}
+
+.leaflet-top.leaflet-right {
+  display: none;
+}
+
+.leaflet-popup-close-button {
+  display: none;
+}
+
+.leaflet-popup-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-weight: 800;
+  min-width: 200px !important;
+
+  .popup-text {
+    @apply text-sky-500
+  }
+
+  .popup-button {
+    min-width: 50%;
+    // display: flex;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    @apply bg-watizat-500/70;
+    @apply text-white;
+    border: 1px solid;
+    @apply border-watizat-500;
+    border-radius: 20px;
+
+    &:hover {
+      @apply bg-white;
+      @apply text-watizat-500;
+      border: 1.5px solid;
+      @apply border-watizat-500;
+
+      .popup-button__text {
+        @apply text-watizat-500;
+      }
+    }
+
+    &__text {
+      @apply text-white;
+      margin: 0;
+      padding: 0.4rem 0rem;
+    }
+  }
+}
+
+.leaflet-top .leaflet-control,
+.leaflet-bottom .leaflet-control,
+.leaflet-left .leaflet-control,
+.leaflet-right .leaflet-control {
+  margin: 0;
+}
+
+.leaflet-top,
+.leaflet-left {
+  z-index: 1000;
+  margin: 0.75rem 1rem;
+  padding: 1rem 1.25rem;
+  // background-color: #fff9;
+  @apply bg-white/70;
+  border-radius: 12px;
+}
+
+.leaflet-bar a {
+  z-index: 100;
+    @apply bg-black;
+  @apply text-white;
+
+  &:hover {
+    @apply bg-black;
+    @apply text-white;
+  }
+}
+
+.leaflet-touch .leaflet-bar {
+  border: none;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-touch .leaflet-bar a:first-child {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.leaflet-control-zoom-out,
+.leaflet-touch .leaflet-bar a:last-child {
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.custom-icon,
+.custom-me {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
+  border-radius: 50%;
+  border: 4px solid;
+  @apply border-watizat-500;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transform-style: preserve-3d;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    /* Ajustez la valeur ici pour contrôler la position de la pointe vers le bas */
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 18px 14px 0;
+    @apply border-transparent;
+    @apply border-t-watizat-500;
+    transform: translateX(-50%) translateZ(-1px);
+  }
+}
+
+.custom-icon {
+  @apply bg-white;
+  @apply text-gray-800;
+}
+
+.custom-me {
+  @apply bg-watizat-500;
+  @apply text-white;
+
+  transform-style: preserve-3d;
+  background-image: url('../../../../assets/location.svg');
+  background-size: 100%;
+  /* Par exemple, 50% de la taille de la div */
+}
