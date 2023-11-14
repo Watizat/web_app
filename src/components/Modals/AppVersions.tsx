@@ -60,38 +60,36 @@ export default function Versions({ isOpenModal, setIsOpenModal }: Props) {
 
   return (
     <ModalBase isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal}>
-      <div className="py-2 sm:flex sm:items-start max-h-50 h-50">
-        <div className="flex flex-col flex-1 mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-          <Dialog.Title
-            as="h2"
-            className="flex justify-between flex-1 w-full mb-8 text-3xl font-medium leading-6 text-slate-700/80"
+      <div className="py-2 sm:flex sm:items-start max-h-[75vh]  m-auto flex flex-col flex-1 mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+        <Dialog.Title
+          as="h2"
+          className="flex justify-between flex-1 w-full mb-8 text-3xl font-medium leading-6 text-slate-700/80"
+        >
+          Quelles nouvelles ?
+          <button
+            type="button"
+            className="relative text-gray-500 hover:text-gray-500"
+            onClick={() => setIsOpenModal(false)}
           >
-            Quelles nouvelles ?
-            <button
-              type="button"
-              className="relative text-gray-500 hover:text-gray-500"
-              onClick={() => setIsOpenModal(false)}
-            >
-              <span className="absolute -inset-2.5" />
-              <span className="sr-only">Close panel</span>
-              <XMarkIcon className="w-6 h-6" aria-hidden="true" />
-            </button>
-          </Dialog.Title>
-          <ul className="flex flex-col gap-y-6">
-            {versions.map((version) => (
-              <li key={version.version} className="flex flex-col ">
-                <div className="text-xl font-semibold text-slate-600">
-                  {version.name} - {version.publishedAt}
-                </div>
-                <ReactMarkdown className={styles.markdown}>
-                  {version.body}
-                </ReactMarkdown>
-              </li>
-            ))}
-          </ul>
-        </div>
+            <span className="absolute -inset-2.5" />
+            <span className="sr-only">Close panel</span>
+            <XMarkIcon className="w-6 h-6" aria-hidden="true" />
+          </button>
+        </Dialog.Title>
+        <ul className="flex flex-col gap-y-6 overflow-auto flex-1 w-full">
+          {versions.map((version) => (
+            <li key={version.version} className="flex flex-col ">
+              <div className="text-xl font-semibold text-slate-600">
+                {version.name} - {version.publishedAt}
+              </div>
+              <ReactMarkdown className={styles.markdown}>
+                {version.body}
+              </ReactMarkdown>
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="flex justify-end mt-4">
+      <div className="flex justify-end mt-4 bg-white">
         <button
           type="button"
           className="inline-flex justify-center w-full px-3 py-2 mt-3 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
